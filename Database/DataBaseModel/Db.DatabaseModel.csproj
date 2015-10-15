@@ -45,9 +45,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\BlogBody.cs" />
+    <Compile Include="Models\BlogCalendar.cs" />
+    <Compile Include="Models\BlogHeader.cs" />
     <Compile Include="Models\FoodMenu.cs" />
+    <Compile Include="Models\FoodMenuType.cs" />
+    <Compile Include="Models\GameBody.cs" />
+    <Compile Include="Models\GameHeader.cs" />
+    <Compile Include="Models\Mapping\BlogBodyMap.cs" />
+    <Compile Include="Models\Mapping\BlogCalendarMap.cs" />
+    <Compile Include="Models\Mapping\BlogHeaderMap.cs" />
     <Compile Include="Models\Mapping\FoodMenuMap.cs" />
+    <Compile Include="Models\Mapping\FoodMenuTypeMap.cs" />
+    <Compile Include="Models\Mapping\GameBodyMap.cs" />
+    <Compile Include="Models\Mapping\GameHeaderMap.cs" />
+    <Compile Include="Models\Mapping\PhotoMap.cs" />
+    <Compile Include="Models\Mapping\PhotoTypeMap.cs" />
+    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
     <Compile Include="Models\PartyCafeDbContext.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\PhotoType.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

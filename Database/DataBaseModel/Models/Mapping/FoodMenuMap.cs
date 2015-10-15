@@ -11,8 +11,9 @@ namespace DataBase.Models.Mapping
             this.HasKey(t => t.IdRecord);
 
             // Properties
-            this.Property(t => t.IdPhoto)
-                .HasMaxLength(100);
+            this.Property(t => t.Name)
+                .IsRequired()
+                .HasMaxLength(300);
 
             this.Property(t => t.UserCreate)
                 .IsRequired()
@@ -34,6 +35,15 @@ namespace DataBase.Models.Mapping
             this.Property(t => t.UserCreate).HasColumnName("UserCreate");
             this.Property(t => t.DateUpdate).HasColumnName("DateUpdate");
             this.Property(t => t.UserUpdate).HasColumnName("UserUpdate");
+
+            // Relationships
+            this.HasRequired(t => t.FoodMenuType)
+                .WithMany(t => t.FoodMenus)
+                .HasForeignKey(d => d.IdType);
+            this.HasOptional(t => t.Photo)
+                .WithMany(t => t.FoodMenus)
+                .HasForeignKey(d => d.IdPhoto);
+
         }
     }
 }

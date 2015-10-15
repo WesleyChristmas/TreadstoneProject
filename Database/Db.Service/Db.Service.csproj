@@ -49,7 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entity\Db.Entity.csproj">
+    <ProjectReference Include="..\Db.Entity\Db.Entity.csproj">
       <Project>{ac5eb895-af19-4a0c-9847-5e4404b98e01}</Project>
       <Name>Db.Entity</Name>
     </ProjectReference>
