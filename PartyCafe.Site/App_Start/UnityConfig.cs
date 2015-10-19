@@ -1,6 +1,21 @@
 using System;
+using System.Data.Entity;
+using BusinessEntity;
+using BusinessInterface;
+using Db.Service;
+using Entity;
+using Entity.Model;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using PartyCafe.Site.Controllers;
+using PartyCafe.Site.Models;
+using Repository.Pattern.DataContext;
+using Repository.Pattern.Ef6;
+using Repository.Pattern.Repositories;
+using Repository.Pattern.UnitOfWork;
+using Service.Pattern;
 
 namespace PartyCafe.Site.App_Start
 {
@@ -38,6 +53,21 @@ namespace PartyCafe.Site.App_Start
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
 
+            container
+                .RegisterType<IDataContextAsync, PartyCafeDbContext>(new PerRequestLifetimeManager())
+                .RegisterType<IUnitOfWorkAsync, UnitOfWork>(new PerRequestLifetimeManager())
+                .RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager())
+                .RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager())
+                .RegisterType<AccountController>(new InjectionConstructor())
+
+                //Repositories
+
+                .RegisterType<IRepositoryAsync<FoodMenu>, Repository<FoodMenu>>()
+                .RegisterType<IRepositoryAsync<FoodMenuType>, Repository<FoodMenuType>>()
+
+                //Services
+
+                .RegisterType<IFoodMenuServiceBase, FoodMenuService>();
         }
     }
 }

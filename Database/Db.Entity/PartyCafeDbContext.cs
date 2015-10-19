@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity;
 using Entity.Mappings;
 using Entity.Model;
+using Repository.Pattern.DataContext;
+using Repository.Pattern.Ef6;
 
 namespace Entity
 {
-    public class PartyCafeDbContext : DbContext
+    public class PartyCafeDbContext : DataContext
     {
         static PartyCafeDbContext()
         {

@@ -1,0 +1,7 @@
+﻿input, textarea {
+    max-width: 100% !important;
+}
+
+textarea {
+    resize:none;
+}

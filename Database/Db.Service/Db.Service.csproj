@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Library\BusinessInterface\BusinessInterface.csproj">
+      <Project>{fa1bfb81-6408-4c61-a701-b77abc608486}</Project>
+      <Name>BusinessInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Db.Entity\Db.Entity.csproj">
       <Project>{ac5eb895-af19-4a0c-9847-5e4404b98e01}</Project>
       <Name>Db.Entity</Name>

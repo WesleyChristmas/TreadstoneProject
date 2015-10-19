@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Data.Entity.Infrastructure;
+using System.Web;
 using System.Web.Optimization;
 
 namespace PartyCafe.Site
