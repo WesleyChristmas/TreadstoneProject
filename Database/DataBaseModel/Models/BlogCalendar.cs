@@ -10,6 +10,5 @@ namespace DataBase.Models
         public Nullable<int> IdPhoto { get; set; }
         public string Header { get; set; }
         public virtual BlogHeader BlogHeader { get; set; }
-        public virtual Photo Photo { get; set; }
     }
 }

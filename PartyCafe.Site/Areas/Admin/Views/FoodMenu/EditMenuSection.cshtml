@@ -5,9 +5,9 @@
             Изображение раздела
         </th>
         <td>
-            <img ng-if="MenuType.PhotoLink != null" ng-src="MenuType.PhotoLink"/>
+            <img ng-src="{{MenuType.PhotoLink}}"/>
             <br/>
-            <input type="file" ng-model="MenuType.Image" />
+            <input type="file" onchange="angular.element(this).scope().AddFile(this.files)" />
         </td>
     </tr>
     <tr>

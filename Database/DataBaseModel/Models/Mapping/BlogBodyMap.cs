@@ -22,9 +22,6 @@ namespace DataBase.Models.Mapping
             this.HasRequired(t => t.BlogHeader)
                 .WithMany(t => t.BlogBodies)
                 .HasForeignKey(d => d.IdHeader);
-            this.HasOptional(t => t.Photo)
-                .WithMany(t => t.BlogBodies)
-                .HasForeignKey(d => d.IdPhoto);
 
         }
     }

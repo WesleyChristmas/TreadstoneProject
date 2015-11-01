@@ -19,6 +19,5 @@ namespace DataBase.Models
         public System.DateTime DateUpdate { get; set; }
         public string UserUpdate { get; set; }
         public virtual ICollection<GameBody> GameBodies { get; set; }
-        public virtual Photo Photo { get; set; }
     }
 }

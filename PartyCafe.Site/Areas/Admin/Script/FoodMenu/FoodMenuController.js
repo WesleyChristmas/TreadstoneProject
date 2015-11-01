@@ -66,20 +66,40 @@ foodMenuApp.controller("FoodMenuSectionEditController", function($scope, $http,$
 
     //Methods
     $scope.SaveChanges = function () {
+        var url;
+        var xhr = new XMLHttpRequest();
+        var fd = new FormData();
+
         if ($scope.isCreate) {
-            $http.post('FoodMenu/AddMenuType', { 'type': $scope.MenuType, 'File': $scope.MenuType.Image }).success(function (response) {
-                $location.path('/');
-            });
+            url = 'FoodMenu/AddMenuType';
         } else {
-            $http.post('FoodMenu/UpdateMenuType', { 'type': $scope.MenuType, 'File': $scope.MenuType.Image }).success(function (response) {
-                $location.path('/');
-            });
+            url = 'FoodMenu/UpdateMenuType';
+            fd.append('IdRecord', $scope.MenuType.IdRecord);
         }
+
+        if ($scope.MenuType.Image!=null) {
+            fd.append('file', $scope.MenuType.Image);
+            fd.append('filename', $scope.MenuType.Image.name);
+        }
+
+        fd.append('name', $scope.MenuType.Name);
+        fd.append('description', $scope.MenuType.Description);
+
+        xhr.upload.onload = function() {
+            $scope.$apply($location.path('/'));
+        }
+
+        xhr.open('POST', url, true);
+        xhr.send(fd);
     }
 
     $scope.DeleteMenuType = function () {
         $http.post('FoodMenu/DeleteMenuType', { 'idType': $scope.MenuType.IdRecord }).success(function (response) {
             $location.path('/');
         });
+    }
+
+    $scope.AddFile = function(file) {
+        $scope.MenuType.Image = file[0];
     }
 });

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="FoodMenuEntity.cs" />
     <Compile Include="FoodMenuTypeEntity.cs" />
+    <Compile Include="Models\ReceiveFileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

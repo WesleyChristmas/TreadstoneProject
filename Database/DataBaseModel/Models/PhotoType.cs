@@ -5,11 +5,6 @@ namespace DataBase.Models
 {
     public partial class PhotoType
     {
-        public PhotoType()
-        {
-            this.Photos = new List<Photo>();
-        }
-
         public int IdRecord { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -17,6 +12,5 @@ namespace DataBase.Models
         public string UserCreate { get; set; }
         public System.DateTime DateUpdate { get; set; }
         public string UserUpdate { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
     }
 }

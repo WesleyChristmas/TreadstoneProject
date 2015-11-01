@@ -11,9 +11,6 @@ namespace DataBase.Models.Mapping
             this.HasKey(t => t.IdRecord);
 
             // Properties
-            this.Property(t => t.IdRecord)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             this.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(300);

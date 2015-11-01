@@ -40,9 +40,6 @@ namespace DataBase.Models.Mapping
             this.HasRequired(t => t.GameHeader)
                 .WithMany(t => t.GameBodies)
                 .HasForeignKey(d => d.IdHeader);
-            this.HasOptional(t => t.Photo)
-                .WithMany(t => t.GameBodies)
-                .HasForeignKey(d => d.IdPhoto);
 
         }
     }

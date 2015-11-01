@@ -40,9 +40,6 @@ namespace DataBase.Models.Mapping
             this.HasRequired(t => t.FoodMenuType)
                 .WithMany(t => t.FoodMenus)
                 .HasForeignKey(d => d.IdType);
-            this.HasOptional(t => t.Photo)
-                .WithMany(t => t.FoodMenus)
-                .HasForeignKey(d => d.IdPhoto);
 
         }
     }

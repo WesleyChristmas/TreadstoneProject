@@ -3,6 +3,7 @@ using System.Data.Entity;
 using BusinessEntity;
 using BusinessInterface;
 using Db.Service;
+using Db.Service.PrivateServices;
 using Entity;
 using Entity.Model;
 using Microsoft.AspNet.Identity;
@@ -64,10 +65,14 @@ namespace PartyCafe.Site.App_Start
 
                 .RegisterType<IRepositoryAsync<FoodMenu>, Repository<FoodMenu>>()
                 .RegisterType<IRepositoryAsync<FoodMenuType>, Repository<FoodMenuType>>()
+                .RegisterType<IRepositoryAsync<Photo>,Repository<Photo>>()
+                .RegisterType<IRepositoryAsync<PhotoType>,Repository<PhotoType>>()
+                .RegisterType<IRepositoryAsync<SiteSetting>,Repository<SiteSetting>>()
 
                 //Services
 
-                .RegisterType<IFoodMenuServiceBase, FoodMenuService>();
+                .RegisterType<IFoodMenuServiceBase, FoodMenuService>()
+                .RegisterType<IImageService, ImageService>();
         }
     }
 }

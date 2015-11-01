@@ -2,7 +2,9 @@
 using System.Linq;
 using AutoMapper;
 using BusinessEntity;
+using BusinessEntity.Models;
 using BusinessInterface;
+using Db.Service.PrivateServices;
 using Entity.Model;
 using Repository.Pattern.Repositories;
 using Repository.Pattern.UnitOfWork;
@@ -17,24 +19,31 @@ namespace Db.Service
 
     public class FoodMenuService : Service<FoodMenu>, IFoodMenuService
     {
+        private readonly IImageService _imageService;
         private readonly IRepositoryAsync<FoodMenu> _repositoryMenu;
         private readonly IRepositoryAsync<FoodMenuType> _repositoryMenuType;
         private readonly IUnitOfWorkAsync _unitOfWork;
 
-        public FoodMenuService(IRepositoryAsync<FoodMenu> repositoryMenu,
+        private readonly string _weblink;
+
+        public FoodMenuService(IImageService imageService,
+            IRepositoryAsync<FoodMenu> repositoryMenu,
             IRepositoryAsync<FoodMenuType> repositoryMenuType,
             IUnitOfWorkAsync unitOfWork)
             : base(repositoryMenu)
         {
+            _imageService = imageService;
             _repositoryMenu = repositoryMenu;
             _repositoryMenuType = repositoryMenuType;
             _unitOfWork = unitOfWork;
+
+            _weblink = _imageService.GetWebLink();
 
             Mapper.CreateMap<FoodMenu, FoodMenuEntity>();
             Mapper.CreateMap<FoodMenuEntity, FoodMenu>();
 
             Mapper.CreateMap<FoodMenuType, FoodMenuTypeEntity>()
-                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => r.Photo.Link));
+                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => _weblink + r.Photo.Link));
             Mapper.CreateMap<FoodMenuTypeEntity, FoodMenuType>();
         }
 
@@ -46,16 +55,24 @@ namespace Db.Service
                 .ToList());
         }
 
-        public void AddFoodMenuType(FoodMenuTypeEntity type)
+        public void AddFoodMenuType(FoodMenuTypeEntity type, ReceiveFileModel image)
         {
-            _repositoryMenuType.Insert(Mapper.Map<FoodMenuTypeEntity,FoodMenuType>(type));
+            var dbtype = Mapper.Map<FoodMenuTypeEntity, FoodMenuType>(type);
+            if (image != null) dbtype.IdPhoto = _imageService.SaveImage(image);
+            _repositoryMenuType.Insert(dbtype);
             _unitOfWork.SaveChanges();
         }
 
-        public void UpdateMenuType(FoodMenuTypeEntity type)
+        public void UpdateMenuType(FoodMenuTypeEntity type, ReceiveFileModel image)
         {
            var updateType = _repositoryMenuType.Queryable().FirstOrDefault(x => x.IdRecord == type.IdRecord);
             if (updateType == null) return;
+
+            if (image != null)
+            {
+                if (updateType.IdPhoto.HasValue) _imageService.UpdateImage(image, updateType.IdPhoto.Value);
+                else updateType.IdPhoto = _imageService.SaveImage(image);
+            }
 
             updateType.Name = type.Name;
             updateType.Description = type.Description;
@@ -66,7 +83,13 @@ namespace Db.Service
 
         public bool DeleteMenuType(int idType)
         {
+            var type = _repositoryMenuType.Queryable().FirstOrDefault(x => x.IdRecord == idType);
+            if (type == null) return false;
+
             if (_repositoryMenu.Queryable().Count(x => x.IdType == idType) != 0) return false;
+
+            if (type.IdPhoto.HasValue) _imageService.DeleteImage(type.IdPhoto.Value);
+
             _repositoryMenuType.Delete(idType);
             _unitOfWork.SaveChanges();
             return true;

@@ -27,6 +27,7 @@ namespace Entity
         public DbSet<GameHeader> GameHeaders { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<PhotoType> PhotoTypes { get; set; }
+        public DbSet<SiteSetting> SiteSettings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,6 +40,7 @@ namespace Entity
             modelBuilder.Configurations.Add(new GameHeaderMap());
             modelBuilder.Configurations.Add(new PhotoMap());
             modelBuilder.Configurations.Add(new PhotoTypeMap());
+            modelBuilder.Configurations.Add(new SiteSettingMap());
         }
     }
 }

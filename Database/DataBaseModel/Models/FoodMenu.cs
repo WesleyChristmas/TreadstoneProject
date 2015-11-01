@@ -16,6 +16,5 @@ namespace DataBase.Models
         public System.DateTime DateUpdate { get; set; }
         public string UserUpdate { get; set; }
         public virtual FoodMenuType FoodMenuType { get; set; }
-        public virtual Photo Photo { get; set; }
     }
 }

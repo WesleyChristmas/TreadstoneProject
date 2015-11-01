@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C6C58F1A-1873-4ACA-80BF-17E485C388D9}</ProjectGuid>
+    <ProjectGuid>{B43B857F-EA5E-45C6-B855-DDADA37B5045}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Db.Repository</RootNamespace>
-    <AssemblyName>Db.Repository</AssemblyName>
+    <RootNamespace>ImageSaver</RootNamespace>
+    <AssemblyName>ImageSaver</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,18 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ImageSaver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataBaseModel\Db.DatabaseModel.csproj">
-      <Project>{59E4E9CB-0CEC-42FE-918D-CC1908B6657F}</Project>
-      <Name>Db.DatabaseModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Framework\Repository.Pattern\Repository.Pattern.csproj">
-      <Project>{6E682A14-C872-4813-B620-76E108DEA683}</Project>
-      <Name>Repository.Pattern</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

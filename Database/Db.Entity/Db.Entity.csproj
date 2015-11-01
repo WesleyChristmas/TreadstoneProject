@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Mappings\PhotoMap.cs" />
     <Compile Include="Mappings\PhotoTypeMap.cs" />
+    <Compile Include="Mappings\SiteSettingMap.cs" />
     <Compile Include="Model\BlogBody.cs" />
     <Compile Include="Model\BlogCalendar.cs" />
     <Compile Include="Model\BlogHeader.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Model\GameHeader.cs" />
     <Compile Include="Model\Photo.cs" />
     <Compile Include="Model\PhotoType.cs" />
+    <Compile Include="Model\SiteSetting.cs" />
     <Compile Include="PartyCafeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
