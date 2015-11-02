@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappings\BlogBodyMap.cs" />
+    <Compile Include="Mappings\BlogPhotoMap.cs" />
     <Compile Include="Mappings\BlogCalendarMap.cs" />
     <Compile Include="Mappings\BlogHeaderMap.cs" />
     <Compile Include="Mappings\FoodMenuMap.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="Mappings\PhotoMap.cs" />
     <Compile Include="Mappings\PhotoTypeMap.cs" />
     <Compile Include="Mappings\SiteSettingMap.cs" />
-    <Compile Include="Model\BlogBody.cs" />
+    <Compile Include="Model\BlogPhoto.cs" />
     <Compile Include="Model\BlogCalendar.cs" />
     <Compile Include="Model\BlogHeader.cs" />
     <Compile Include="Model\FoodMenu.cs" />

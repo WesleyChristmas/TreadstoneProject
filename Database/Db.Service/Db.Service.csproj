@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogCalendarService.cs" />
+    <Compile Include="BlogService.cs" />
     <Compile Include="FoodMenuService.cs" />
     <Compile Include="PrivateServices\ImageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

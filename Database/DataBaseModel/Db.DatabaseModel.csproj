@@ -45,16 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BlogBody.cs" />
     <Compile Include="Models\BlogCalendar.cs" />
     <Compile Include="Models\BlogHeader.cs" />
+    <Compile Include="Models\BlogPhoto.cs" />
     <Compile Include="Models\FoodMenu.cs" />
     <Compile Include="Models\FoodMenuType.cs" />
     <Compile Include="Models\GameBody.cs" />
     <Compile Include="Models\GameHeader.cs" />
-    <Compile Include="Models\Mapping\BlogBodyMap.cs" />
     <Compile Include="Models\Mapping\BlogCalendarMap.cs" />
     <Compile Include="Models\Mapping\BlogHeaderMap.cs" />
+    <Compile Include="Models\Mapping\BlogPhotoMap.cs" />
     <Compile Include="Models\Mapping\FoodMenuMap.cs" />
     <Compile Include="Models\Mapping\FoodMenuTypeMap.cs" />
     <Compile Include="Models\Mapping\GameBodyMap.cs" />

@@ -35,9 +35,7 @@ namespace Entity.Mappings
             Property(t => t.UserUpdate).HasColumnName("UserUpdate");
 
             // Relationships
-            HasOptional(t => t.Photo)
-                .WithMany(t => t.GameHeaders)
-                .HasForeignKey(d => d.IdPhoto);
+
 
         }
     }

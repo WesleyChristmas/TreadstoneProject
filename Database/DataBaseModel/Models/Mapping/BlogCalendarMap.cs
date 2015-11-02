@@ -18,14 +18,15 @@ namespace DataBase.Models.Mapping
             // Table & Column Mappings
             this.ToTable("BlogCalendar");
             this.Property(t => t.IdRecord).HasColumnName("IdRecord");
-            this.Property(t => t.IdHeader).HasColumnName("IdHeader");
+            this.Property(t => t.IdBlog).HasColumnName("IdBlog");
             this.Property(t => t.IdPhoto).HasColumnName("IdPhoto");
             this.Property(t => t.Header).HasColumnName("Header");
+            this.Property(t => t.EventDate).HasColumnName("EventDate");
 
             // Relationships
-            this.HasRequired(t => t.BlogHeader)
+            this.HasOptional(t => t.Photo)
                 .WithMany(t => t.BlogCalendars)
-                .HasForeignKey(d => d.IdHeader);
+                .HasForeignKey(d => d.IdPhoto);
 
         }
     }

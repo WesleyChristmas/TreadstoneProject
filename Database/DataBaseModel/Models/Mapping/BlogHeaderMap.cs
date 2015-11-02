@@ -11,8 +11,9 @@ namespace DataBase.Models.Mapping
             this.HasKey(t => t.IdRecord);
 
             // Properties
-            this.Property(t => t.Message)
-                .IsRequired();
+            this.Property(t => t.Header)
+                .IsRequired()
+                .HasMaxLength(300);
 
             this.Property(t => t.UserCreate)
                 .IsRequired()
@@ -25,8 +26,8 @@ namespace DataBase.Models.Mapping
             // Table & Column Mappings
             this.ToTable("BlogHeader");
             this.Property(t => t.IdRecord).HasColumnName("IdRecord");
+            this.Property(t => t.Header).HasColumnName("Header");
             this.Property(t => t.Message).HasColumnName("Message");
-            this.Property(t => t.EventDate).HasColumnName("EventDate");
             this.Property(t => t.DateCreate).HasColumnName("DateCreate");
             this.Property(t => t.UserCreate).HasColumnName("UserCreate");
             this.Property(t => t.DateUpdate).HasColumnName("DateUpdate");

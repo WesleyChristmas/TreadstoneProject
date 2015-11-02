@@ -7,6 +7,7 @@ namespace DataBase.Models
     {
         public Photo()
         {
+            this.BlogCalendars = new List<BlogCalendar>();
             this.FoodMenuTypes = new List<FoodMenuType>();
         }
 
@@ -18,6 +19,7 @@ namespace DataBase.Models
         public string UserCreate { get; set; }
         public System.DateTime DateUpdate { get; set; }
         public string UserUpdate { get; set; }
+        public virtual ICollection<BlogCalendar> BlogCalendars { get; set; }
         public virtual ICollection<FoodMenuType> FoodMenuTypes { get; set; }
     }
 }

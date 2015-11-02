@@ -37,7 +37,6 @@ namespace Entity.Mappings
             HasOptional(t => t.Photo)
                 .WithMany(t => t.FoodMenuTypes)
                 .HasForeignKey(d => d.IdPhoto);
-
         }
     }
 }

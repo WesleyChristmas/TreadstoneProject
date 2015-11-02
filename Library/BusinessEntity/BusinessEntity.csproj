@@ -39,8 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogCalendarEntity.cs" />
+    <Compile Include="BlogEntity.cs" />
     <Compile Include="FoodMenuEntity.cs" />
     <Compile Include="FoodMenuTypeEntity.cs" />
+    <Compile Include="Models\ReceiveCalendarModel.cs" />
     <Compile Include="Models\ReceiveFileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

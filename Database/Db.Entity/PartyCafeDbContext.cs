@@ -18,7 +18,7 @@ namespace Entity
         {
         }
 
-        public DbSet<BlogBody> BlogBodies { get; set; }
+        public DbSet<BlogPhoto> BlogBodies { get; set; }
         public DbSet<BlogCalendar> BlogCalendars { get; set; }
         public DbSet<BlogHeader> BlogHeaders { get; set; }
         public DbSet<FoodMenu> FoodMenus { get; set; }
@@ -31,7 +31,7 @@ namespace Entity
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new BlogBodyMap());
+            modelBuilder.Configurations.Add(new BlogPhotoMap());
             modelBuilder.Configurations.Add(new BlogCalendarMap());
             modelBuilder.Configurations.Add(new BlogHeaderMap());
             modelBuilder.Configurations.Add(new FoodMenuMap());
