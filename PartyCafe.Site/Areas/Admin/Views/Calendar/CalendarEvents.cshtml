@@ -1,0 +1,16 @@
+﻿
+<button class="btn btn-default">Добавить новое событие</button>
+<br/>
+<table class="table">
+    <tr ng-repeat="item in DataModel.Calendar">
+        <td>
+            <img ng-src="item.PhotoLink" />
+        </td>
+        <td>
+            {{item.Header}}
+        </td>
+        <td>
+            {{item.EventDateTime | CorrectDate}}
+        </td>
+    </tr>
+</table>

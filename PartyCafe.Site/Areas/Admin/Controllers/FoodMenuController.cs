@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using BusinessEntity;
-using BusinessEntity.Models;
 using BusinessInterface;
+using PartyCafe.Site.Areas.Admin.Core;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
@@ -41,48 +41,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
 
         [HttpPost]
         public void AddMenuType(FoodMenuTypeEntity type)
-        {           
-            ReceiveFileModel image = null;
-            if (Request.Files.Count == 1)
-            {
-                var file = Request.Files[0];
-                if (file != null && file.ContentLength > 0)
-                {
-                    var content = new byte[file.ContentLength];
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    image = new ReceiveFileModel
-                    {
-                        Data = content,
-                        FileName = file.FileName,
-                        IdSection = 1
-                    };
-                }
-            }
-            _menuService.AddFoodMenuType(type,image);
+        {
+            _menuService.AddFoodMenuType(type, ImageSaver.GetSingleImage(Request));
         }
 
         [HttpPost]
         public void UpdateMenuType(FoodMenuTypeEntity type)
         {
-            ReceiveFileModel image = null;
-            if (Request.Files.Count == 1)
-            {
-                var file = Request.Files[0];
-                if (file != null && file.ContentLength > 0)
-                {
-                    var content = new byte[file.ContentLength];
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    image = new ReceiveFileModel
-                    {
-                        Data = content,
-                        FileName = file.FileName,
-                        IdSection = 1
-                    };
-                }
-            }
-            _menuService.UpdateMenuType(type, image);
+            _menuService.UpdateMenuType(type, ImageSaver.GetSingleImage(Request));
         }
 
         [HttpPost]

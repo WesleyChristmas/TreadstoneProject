@@ -188,8 +188,10 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodMenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\EventCalendarController.cs" />
@@ -211,6 +213,9 @@
     <Content Include="Areas\Admin\Content\css\admin-style.css" />
     <Content Include="Areas\Admin\Content\delete.png" />
     <Content Include="Areas\Admin\Content\edit.png" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarClass.js" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarController.js" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarLibrary.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuClass.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
@@ -270,6 +275,10 @@
     <Content Include="Scripts\AngularJs\angular-animate.min.js.map" />
     <Content Include="Scripts\AngularJs\angular.min.js.map" />
     <Content Include="Areas\Admin\Views\FoodMenu\EditMenuSection.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\CalendarEvents.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\EditCalendarEvent.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
@@ -1072,7 +1081,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Blog\" />
     <Folder Include="Scripts\AngularControllers\" />
   </ItemGroup>
   <ItemGroup>

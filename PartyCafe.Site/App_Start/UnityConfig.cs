@@ -65,14 +65,16 @@ namespace PartyCafe.Site.App_Start
 
                 .RegisterType<IRepositoryAsync<FoodMenu>, Repository<FoodMenu>>()
                 .RegisterType<IRepositoryAsync<FoodMenuType>, Repository<FoodMenuType>>()
-                .RegisterType<IRepositoryAsync<Photo>,Repository<Photo>>()
-                .RegisterType<IRepositoryAsync<PhotoType>,Repository<PhotoType>>()
-                .RegisterType<IRepositoryAsync<SiteSetting>,Repository<SiteSetting>>()
+                .RegisterType<IRepositoryAsync<Photo>, Repository<Photo>>()
+                .RegisterType<IRepositoryAsync<PhotoType>, Repository<PhotoType>>()
+                .RegisterType<IRepositoryAsync<SiteSetting>, Repository<SiteSetting>>()
+                .RegisterType<IRepositoryAsync<BlogCalendar>,Repository<BlogCalendar>>()
 
                 //Services
 
                 .RegisterType<IFoodMenuServiceBase, FoodMenuService>()
-                .RegisterType<IImageService, ImageService>();
+                .RegisterType<IImageService, ImageService>()
+                .RegisterType<IBlogCalendarService, BlogCalendarService>();
         }
     }
 }
