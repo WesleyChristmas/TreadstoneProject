@@ -9,5 +9,7 @@ namespace DataBase.Models
         public int IdHeader { get; set; }
         public int IdPhoto { get; set; }
         public string Description { get; set; }
+        public virtual BlogHeader BlogHeader { get; set; }
+        public virtual Photo Photo { get; set; }
     }
 }

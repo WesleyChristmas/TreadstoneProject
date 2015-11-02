@@ -24,6 +24,9 @@ namespace DataBase.Models.Mapping
             this.Property(t => t.EventDate).HasColumnName("EventDate");
 
             // Relationships
+            this.HasOptional(t => t.BlogHeader)
+                .WithMany(t => t.BlogCalendars)
+                .HasForeignKey(d => d.IdBlog);
             this.HasOptional(t => t.Photo)
                 .WithMany(t => t.BlogCalendars)
                 .HasForeignKey(d => d.IdPhoto);

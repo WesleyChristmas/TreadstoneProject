@@ -16,6 +16,7 @@ namespace Entity.Model
         public string Link { get; set; }
         public ICollection<BlogCalendar> BlogCalendars { get; set; }
         public ICollection<FoodMenuType> FoodMenuTypes { get; set; }
+        public ICollection<BlogPhoto> BlogPhotos { get; set; }
         public PhotoType PhotoType { get; set; }
     }
 }

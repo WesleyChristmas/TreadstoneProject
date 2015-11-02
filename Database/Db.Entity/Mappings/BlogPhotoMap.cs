@@ -17,6 +17,14 @@ namespace Entity.Mappings
             Property(t => t.IdHeader).HasColumnName("IdHeader");
             Property(t => t.IdPhoto).HasColumnName("IdPhoto");
             Property(t => t.Description).HasColumnName("Message");
+
+            // Relationships
+            HasRequired(t => t.BlogHeader)
+                .WithMany(t => t.BlogPhotos)
+                .HasForeignKey(d => d.IdHeader);
+            HasRequired(t => t.Photo)
+                .WithMany(t => t.BlogPhotos)
+                .HasForeignKey(d => d.IdPhoto);
         }
     }
 }

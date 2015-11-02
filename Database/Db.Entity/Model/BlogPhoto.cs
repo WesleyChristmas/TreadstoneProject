@@ -7,5 +7,8 @@ namespace Entity.Model
         public int IdHeader { get; set; }
         public int IdPhoto { get; set; }
         public string Description { get; set; }
+
+        public BlogHeader BlogHeader { get; set; }
+        public Photo Photo { get; set; }
     }
 }

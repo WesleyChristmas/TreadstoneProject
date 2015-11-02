@@ -9,6 +9,7 @@ namespace Entity.Model
         public int? IdPhoto { get; set; }
         public string Header { get; set; }
         public DateTime EventDate { get; set; }
+
         public virtual BlogHeader BlogHeader { get; set; }
         public virtual Photo Photo { get; set; }
     }

@@ -17,6 +17,15 @@ namespace DataBase.Models.Mapping
             this.Property(t => t.IdHeader).HasColumnName("IdHeader");
             this.Property(t => t.IdPhoto).HasColumnName("IdPhoto");
             this.Property(t => t.Description).HasColumnName("Description");
+
+            // Relationships
+            this.HasRequired(t => t.BlogHeader)
+                .WithMany(t => t.BlogPhotoes)
+                .HasForeignKey(d => d.IdHeader);
+            this.HasRequired(t => t.Photo)
+                .WithMany(t => t.BlogPhotoes)
+                .HasForeignKey(d => d.IdPhoto);
+
         }
     }
 }

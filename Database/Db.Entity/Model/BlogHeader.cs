@@ -8,14 +8,14 @@ namespace Entity.Model
     {
         public BlogHeader()
         {
-            BlogBodies = new List<BlogPhoto>();
+            BlogPhotos = new List<BlogPhoto>();
             BlogCalendars = new List<BlogCalendar>();
         }
 
         public string Header { get; set; }
         public string Message { get; set; }
         public DateTime? EventDate { get; set; }
-        public ICollection<BlogPhoto> BlogBodies { get; set; }
         public ICollection<BlogCalendar> BlogCalendars { get; set; }
+        public ICollection<BlogPhoto> BlogPhotos { get; set; }
     }
 }
