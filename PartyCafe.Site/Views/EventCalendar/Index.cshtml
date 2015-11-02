@@ -2,6 +2,91 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .cal_child {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        outline: 1px solid;
+        text-align: center;
+        font-size: 16px;
+    }
+</style>
 
 <h2>Index</h2>
+<div id="calendar"></div>
+<script>
+    Date.prototype.monthDays = function () {
+        return new Date(this.getFullYear(), this.getMonth() + 1, 0).getDate();
+    }
 
+    window.onload = function () {
+        calendar();
+    };
+
+    function fillCalendar(obj) {
+        var calendar = document.getElementById('calendar'),
+            l = obj.length,
+            counter = 0,
+            _div = document.createElement('div'),
+            _childdiv = document.createElement('div');
+
+        for (var i = 0; i < l; i++) {
+            _childdiv = document.createElement('div');
+
+            if (counter == 6) {
+                _childdiv.className = 'cal_child';
+                _childdiv.textContent = obj[i];
+                _div.appendChild(_childdiv);
+                calendar.appendChild(_div);
+
+                _div = document.createElement('div');
+                counter = 0;
+            } else if (i == l-1) {
+                _childdiv.className = 'cal_child';
+                _childdiv.textContent = obj[i];
+                _div.appendChild(_childdiv);
+                calendar.appendChild(_div);
+
+                _div = document.createElement('div');
+                counter = 0;
+
+            } else {
+                _childdiv.className = 'cal_child';
+                _childdiv.textContent = obj[i];
+                _div.appendChild(_childdiv);
+                counter++;
+            }
+        }
+    }
+
+    function calendar() {
+        var date = new Date(),
+            m = date.getMonth(),
+            cal = [],
+            daysInMonth = date.monthDays(),
+                l = 30;
+
+        for (var i = 0; i < l; ++i) {
+            d = date.getDate();
+
+            if (d >= daysInMonth) {
+                cal[i] = d;
+
+                if (m != 13) {
+                    date.setMonth(m + 1);
+                    date.setDate(1);
+                    cal[i] = d;
+                }
+            }
+            else {
+                cal[i] = d;
+                date.setDate(d + 1);
+            }
+        }
+        //console.log(cal);
+        fillCalendar(cal);
+
+    }
+
+</script>
