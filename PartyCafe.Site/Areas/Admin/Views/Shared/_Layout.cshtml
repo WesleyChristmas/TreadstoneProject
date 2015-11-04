@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript" src="~/Scripts/AngularJs/angular.min.js"></script>
     <script type="text/javascript" src="~/Scripts/AngularJs/angular-route.min.js"></script>
@@ -26,6 +26,7 @@
                     <li><a href="/Admin/FoodMenu">Меню</a></li>
                     <li><a href="/Admin/Calendar">Календарь событий</a></li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
