@@ -5,10 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Party Cafe закрытая зона - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
+    <header class="header">
+        <nav id="navigation">
+            @Html.Partial("_Menu")
+        </nav>
+    </header>
+
+    <div class="wrap">
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="f-wrap">
+            <p>@DateTime.Now.Year &copy; All Rights reserved by <a href="/">Party-Cafe</a></p>
+        </div>
+    </footer>
+    
+    @*
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -39,6 +57,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderSection("scripts", required: false)*@
 </body>
 </html>
