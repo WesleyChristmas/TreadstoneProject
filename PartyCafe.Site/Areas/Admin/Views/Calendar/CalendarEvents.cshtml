@@ -1,16 +1,36 @@
 ﻿
-<button class="btn btn-default">Добавить новое событие</button>
+<button class="btn btn-default" ng-click="AddNewCalendarEvent()">Добавить новое событие</button>
+<br/>
 <br/>
 <table class="table">
+    <tr>
+        <th>
+            Изображение
+        </th>
+        <th>
+            Заголовок
+        </th>
+        <th>
+            Дата события
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
     <tr ng-repeat="item in DataModel.Calendar">
         <td>
-            <img ng-src="item.PhotoLink" />
+            <img ng-if="item.PhotoLink!=null" ng-src="{{item.PhotoLink}}" />
         </td>
         <td>
             {{item.Header}}
         </td>
         <td>
-            {{item.EventDateTime | CorrectDate}}
+            {{item.EventDate | CorrectDate}}
+        </td>
+        <td id="{{item.IdRecord}}.Edit" onclick="document.location = '#EditCalendarEvent/' + id.split('.')[0]">
+            <img src="~/Areas/Admin/Content/edit.png" />
+        </td>
+        <td id="{{item.IdRecord}}.Delete" ng-click="DeleteCalendarEvent(this)">
+            <img src="~/Areas/Admin/Content/delete.png" />
         </td>
     </tr>
 </table>

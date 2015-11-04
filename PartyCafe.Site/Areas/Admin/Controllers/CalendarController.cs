@@ -41,13 +41,13 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public void AddBlogCalendar(BlogCalendarEntity calendar)
         {
-            _calendarService.AddBlogCalendar(calendar, ImageSaver.GetSingleImage(Request));
+            _calendarService.AddBlogCalendar(calendar, ImageSaver.GetSingleImage(Request,2));
         }
 
         [HttpPost]
-        public void EditBlogCalendar(BlogCalendarEntity calendar)
+        public void UpdateBlogCalendar(BlogCalendarEntity calendar)
         {
-            _calendarService.EditBlogCalendar(calendar, ImageSaver.GetSingleImage(Request));
+            _calendarService.UpdateBlogCalendar(calendar, ImageSaver.GetSingleImage(Request,2));
         }
 
         [HttpPost]

@@ -60,6 +60,19 @@ namespace Db.Service
             return result;
         }
 
+        public ReceiveCalendarModel GetCalendarAll()
+        {
+            var result = new ReceiveCalendarModel();
+            var calendarDb = _repositoryCalendar.Query()
+                .Include(x => x.Photo)
+                .Select()
+                .ToList();
+
+            result.Calendar = Mapper.Map<List<BlogCalendar>, List<BlogCalendarEntity>>(calendarDb);
+
+            return result;
+        }
+
         public void AddBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image)
         {
             int? idImage = null;
@@ -74,7 +87,7 @@ namespace Db.Service
             _uof.SaveChanges();
         }
 
-        public void EditBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image)
+        public void UpdateBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image)
         {
             var updateCalendar = _repositoryCalendar.Queryable()
                 .FirstOrDefault(x => x.IdRecord == calendar.IdRecord);
@@ -88,7 +101,7 @@ namespace Db.Service
                     updateCalendar.IdPhoto = _imageService.SaveImage(image);
             }
             updateCalendar.Header = calendar.Header;
-            updateCalendar.EventDate = calendar.EventDateTime;
+            updateCalendar.EventDate = calendar.EventDate;
             
             _repositoryCalendar.Update(updateCalendar);
             _uof.SaveChanges();
