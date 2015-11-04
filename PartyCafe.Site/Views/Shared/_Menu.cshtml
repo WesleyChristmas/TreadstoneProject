@@ -10,30 +10,30 @@
         <ul id="menu-top-menu" class="menu">
             <li class="menu-item">
                 <div class="icons home"></div>
-                <a href="http://wp.wwwebinvader.com/Owl/">Главная</a>
+                @Html.ActionLink("Главная", "Index", "Home")
             </li>
             <li class="menu-item">
                 <div class="icons foodmenu"></div>
-                <a href="http://wp.wwwebinvader.com/Owl/">Меню</a>
+                @Html.ActionLink("Меню", "Index", "FoodMenu")
             </li>
             <li class="menu-item">
                 <div class="icons event"></div>
-                <a href="http://wp.wwwebinvader.com/Owl/">События</a>
+                @Html.ActionLink("События", "Index", "EventCalendar")
             </li>
             <li>
-                <a href="http://wp.wwwebinvader.com/Owl/" class="logo"><img src="~/Content/images/logo.png" width="110" height="110"></a>
+                <a href="/" class="logo"><img src="~/Content/images/logo.png" width="110" height="110"></a>
             </li>
             <li class="menu-item">
                 <div class="icons gallery"></div>
-                <a href="http://wp.wwwebinvader.com/Owl/page-with-sidebar/">Фотогалерея</a>
+                @Html.ActionLink("Фотогалерея", "Index", "PhotoGallery")
             </li>
             <li class="menu-item">
                 <div class="icons game"></div>
-                <a href="http://wp.wwwebinvader.com/Owl/?s=Post">Игры</a>
+                @Html.ActionLink("Игры", "Index", "Games")
             </li>
             <li class="menu-item">
                 <div class="icons blog"></div>
-                <a href="http://wp.wwwebinvader.com/Owl/author/bershadsky/">Блог</a>
+                @Html.ActionLink("Блог", "Index", "Blog")
             </li>
         </ul>
     </div>
