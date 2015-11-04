@@ -2,7 +2,7 @@ using Repository.Pattern.Ef6;
 
 namespace Entity.Model
 {
-    public class BlogPhoto : AuditableEntity<int>
+    public class BlogPhoto : Entity<int>
     {
         public int IdHeader { get; set; }
         public int IdPhoto { get; set; }

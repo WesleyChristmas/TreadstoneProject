@@ -5,7 +5,8 @@
             Изображение события
         </th>
         <td>
-            <input type="file"/>
+            <img ng-if="CurCalendarEvent.PhotoLink != null" ng-src="{{CurCalendarEvent.PhotoLink}}" />
+            <input type="file" onchange="angular.element(this).scope().AddFile(this.files)" />
         </td>
     </tr>
     <tr>
@@ -13,7 +14,7 @@
             Название события
         </th>
         <td>
-            <input type="text" class="form-control"/>
+            <input type="text" ng-model="CurCalendarEvent.Header" class="form-control"/>
         </td>
     </tr>
     <tr>
@@ -21,7 +22,20 @@
             Дата события
         </th>
         <td>
-            <input type="text" class="form-control"/>
+            <input type="text" ng-model="CurCalendarEvent.EventDate" class="form-control"/>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>
+            <button class="btn btn-default" ng-click="SaveChanges()">Сохранить</button>
+        </td>
+        <td>
+            <button class="btn btn-default" onclick="document.location = '#/'">Назад</button>
+        </td>
+        <td>
+            <button class="btn btn-default" ng-click="DeleteCalendarEvent()">Удалить</button>
         </td>
     </tr>
 </table>

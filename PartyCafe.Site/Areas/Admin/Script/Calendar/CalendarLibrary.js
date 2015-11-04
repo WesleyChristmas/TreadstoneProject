@@ -9,6 +9,7 @@ function Json2JsDateTime(datetime) {
 
 function CorrectDate(jsDate) {
     if (jsDate == undefined || jsDate == null) return null;
+    if (typeof (jsDate) == 'string') return jsDate;
     return CheckDateNumber(jsDate.getDate()) + '.' + CheckDateNumber(jsDate.getMonth() + 1) + '.' + jsDate.getFullYear();
 }
 

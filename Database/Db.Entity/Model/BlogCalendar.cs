@@ -3,7 +3,7 @@ using Repository.Pattern.Ef6;
 
 namespace Entity.Model
 {
-    public class BlogCalendar : AuditableEntity<int>
+    public class BlogCalendar : Entity<int>
     {
         public int? IdBlog { get; set; }
         public int? IdPhoto { get; set; }

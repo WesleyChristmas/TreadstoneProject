@@ -1,27 +1,40 @@
 ﻿
-function BaseClass($scope, $http, $location) {
+function BaseClass($scope, $http, $location,service) {
     this.scope = $scope;
     this.http = $http;
     this.location = $location;
+    this.service = service;
     this.DateTimeNow = null;
 }
 
 function DataModelClass() {
     this.Calendar = [];
 
-    this.FillCalendar = function() {
+    var s = this.scope;
+    var service = this.service;
+    this.FillCalendar = function () {
+        this.Calendar = [];
         this.http.get('/Calendar/GetCalendar').success(function(response) {
-            this.scope.Base.DateTimeNow = Json2JsDateTime(response.CurDate);
+            s.Base.DateTimeNow = Json2JsDateTime(response.CurDate);
             for (var i in response.Calendar) {
-                this.scope.DataModel.Calendar.push(new CalendarEntityClass(response.Calendar[i]));
+                s.DataModel.Calendar.push(new CalendarEntityClass(response.Calendar[i]));
             }
+            service.addData(s.DataModel.Calendar);
         });
     }
 }
 
 function CalendarEntityClass(entity) {
-    this.IdRecord = entity.IdRecord;
-    this.EventDateTime = Json2JsDateTime(entity.EventDateTime);
-    this.Header = entity.Header;
-    this.PhotoLink = entity.PhotoLink;
+    if (entity != null) {
+        this.IdRecord = entity.IdRecord;
+        this.EventDate = Json2JsDateTime(entity.EventDate);
+        this.Header = entity.Header;
+        this.PhotoLink = entity.PhotoLink;
+    } else {
+        this.IdRecord = null;
+        this.EventDate = null;
+        this.Header = null;
+        this.PhotoLink = null;
+    }
+    
 }

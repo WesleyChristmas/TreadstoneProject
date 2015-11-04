@@ -7,7 +7,7 @@ namespace BusinessInterface
     {
         ReceiveCalendarModel GetCalendar();
         void AddBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image);
-        void EditBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image);
+        void UpdateBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image);
         bool DeleteBlogCalendar(int idCalendar);
     }
 }

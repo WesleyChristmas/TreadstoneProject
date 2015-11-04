@@ -42,13 +42,13 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public void AddMenuType(FoodMenuTypeEntity type)
         {
-            _menuService.AddFoodMenuType(type, ImageSaver.GetSingleImage(Request));
+            _menuService.AddFoodMenuType(type, ImageSaver.GetSingleImage(Request,1));
         }
 
         [HttpPost]
         public void UpdateMenuType(FoodMenuTypeEntity type)
         {
-            _menuService.UpdateMenuType(type, ImageSaver.GetSingleImage(Request));
+            _menuService.UpdateMenuType(type, ImageSaver.GetSingleImage(Request,1));
         }
 
         [HttpPost]
