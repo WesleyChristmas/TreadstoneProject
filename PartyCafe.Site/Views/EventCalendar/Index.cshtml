@@ -19,6 +19,8 @@
         outline: 1px solid;
         text-align: center;
         font-size: 16px;
+        vertical-align: middle;
+        margin: 3px;
     }
     .calendar-title {
         text-align: center;
@@ -49,11 +51,6 @@
     }
 
     window.onload = function () {
-        var elem = document.querySelector('#calendar-wrap');
-        var iso = new Isotope(elem, {
-            itemSelector: '.event-day',
-            layoutMode: 'masonry'
-        });
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'GetCalendar', true);
@@ -66,7 +63,7 @@
     };
 
     function fillCalendar(obj) {
-        var calendar = document.getElementById('calendar'),
+        var calendar = document.getElementById('calendar-wrap'),
             l = obj.length,
             counter = 0,
             _week = document.createElement('div'),
@@ -110,6 +107,13 @@
                 counter++;
             }
         }
+
+        var elem = document.querySelector('#calendar-wrap');
+        var iso = new Isotope(elem, {
+            itemSelector: '.event-day',
+            layoutMode: 'masonry'
+        });
+
     }
 
     /*function calendar(obj, dcount) {
