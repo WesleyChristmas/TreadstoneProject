@@ -1,7 +1,7 @@
 ﻿var eventcalendarapp = new angular.module("eventcalendarapp", []);
 
 eventcalendarapp.controller("EventCalendar", function ($scope, $http) {
-    $scope.Events = {};
+    $scope.Events = [];
     getData($scope);
 });
 
@@ -29,6 +29,7 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
     var date = new Date(parseInt(curdate)),
         m = date.getMonth() + 1, daysInMonth = date.monthDays(),
         cal = [],
+        _month = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
         l = dcount;
 
     /* формирование календаря */
@@ -36,19 +37,20 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
         var d = date.getDate();
 
         if (d >= daysInMonth) {
-            var obj = setCalendaData(d, m);
+            var obj = setCalendaData(d, _month[m-1]);
             cal[i] = obj;
 
             if (m != 13) {
-                date.setMonth(m + 1);
                 date.setDate(1);
+                date.setMonth(date.getMonth() + 1);
 
-                var obj = setCalendaData(d, m);
+                var obj = setCalendaData(d, _month[m - 1]);
                 cal[i] = obj;
+                m = date.getMonth() + 1;
             }
         }
         else {
-            var obj = setCalendaData(d, m);
+            var obj = setCalendaData(d, _month[m - 1]);
 
             cal[i] = obj;
             date.setDate(d + 1);
@@ -73,6 +75,7 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
     }
     //console.log(cal);
     $scope.Events = cal;
+    $scope.$apply();
     //fillCalendar(cal);
 }
 
