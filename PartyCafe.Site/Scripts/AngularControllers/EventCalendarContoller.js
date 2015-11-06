@@ -29,7 +29,7 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
     var date = new Date(parseInt(curdate)),
         m = date.getMonth() + 1, daysInMonth = date.monthDays(),
         cal = [],
-        _month = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+        _month = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
         l = dcount;
 
     /* формирование календаря */
@@ -63,9 +63,11 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
         var _d = respons[i].EventDate.replace(/\D+/g, ""),
             date = new Date(parseInt(_d)),
             d = date.getDate(),
+            m = date.getMonth(),
             _calL = cal.length;
 
         for (var j = 0; j < _calL; j++) {
+            //if (cal[j].day === d && cal[j].month === m+1) {
             if (cal[j].day === d) {
                 var _obj = { header: respons[i].Header, photo: respons[i].PhotoLink }
                 cal[j].data = _obj;
@@ -73,10 +75,16 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
             }
         }
     }
-    //console.log(cal);
+    console.log(cal);
     $scope.Events = cal;
     $scope.$apply();
-    //fillCalendar(cal);
+
+    var elem = document.querySelector('#calendar-wrap');
+    var iso = new Isotope(elem, {
+        itemSelector: '.event-day',
+        layoutMode: 'masonry'
+    });
+
 }
 
 function fillCalendar(obj) {
@@ -116,11 +124,4 @@ function fillCalendar(obj) {
             counter++;
         }
     }
-
-    var elem = document.querySelector('#calendar-wrap');
-    var iso = new Isotope(elem, {
-        itemSelector: '.event-day',
-        layoutMode: 'masonry'
-    });
-
 }

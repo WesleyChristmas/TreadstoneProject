@@ -6,30 +6,22 @@
 <script src="~/Scripts/AngularJs/angular.min.js"></script>
 <script src="~/Scripts/AngularControllers/EventCalendarContoller.js"></script>
 
-<style>
-    #calendar {
-        max-width: 960px;
-        margin: 20px auto;
-    }
-    .event-week, .event-day {
-        display: inline-block;
-    }
-    .event-day {
-        display: inline-block;
-        width: 130px;
-        height: 130px;
-        outline: 1px solid;
-        text-align: center;
-        font-size: 16px;
-        vertical-align: middle;
-        margin: 3px;
-    }
-    .calendar-title {
-        text-align: center;
-        font-size: 25px;
-        margin-bottom: 20px;
-    }
-</style>
+<div class="bgvideo">
+    <video width="100%" height="100%" id="vplayer">
+        <source src="~/Content/video/video.mp4" type="video/mp4" />
+        <source src="~/Content/video/video.webm" type="video/webm" />
+        <source src="~/Content/video/video.ogv" type="video/ogg" />
+    </video>
+    <script>
+        function p() {
+            var video = document.getElementById('vplayer');
+            video.loop = true;
+            video.autoplay = true;
+            video.play();
+        }
+        p();
+    </script>
+</div>
 
 <div class="content">
     <div id="calendar" ng-app="eventcalendarapp" ng-controller="EventCalendar">
@@ -37,13 +29,13 @@
         <div id="calendar-wrap">
 
             <div class="event-day" ng-repeat="item in Events">
-                <a href="" class="">
-                    {{item.day}}<em>{{item.month}}</em>
-                    <!--<br>
-                    <strong>{{item.Header}}</strong>
-                    <span>
-                        <img src="{{item.Photo}}" class="" alt="">
-                    </span>-->
+                <a href="" class="ed-wrap">
+                    {{item.day}}<em class="ed-month">{{item.month}}</em>
+                    <br>
+                    <strong class="ed-title">{{item.data.header}}</strong>
+                    <span class="ed-imgwrap">
+                        <img src="{{item.data.photo}}" class="ed-image" alt="">
+                    </span>
                 </a>
             </div>
 
