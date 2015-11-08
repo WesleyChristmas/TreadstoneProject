@@ -150,64 +150,100 @@ img { border: 0; outline: 0; }
 .bgvideo {
     background: black;
     opacity:0.7;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+#vplayer {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    z-index: -100;
 }
 
 /* Calendar */
 #calendar { max-width: 960px; margin: 20px auto; }
-    .event-week, .event-day { display: inline-block; }
-    .event-day {
-        width: 130px;
-        height: 130px;
-        text-align: center;
-        font-size: 16px;
-        vertical-align: middle;
-        margin: 3px;
-        overflow: hidden;
-    }
-    .ed-wrap {
-        position: relative;
-        display: block;
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        font-size: 40px;
-    }
-    .ed-month, .ed-title { display: inline-block; text-transform: uppercase; padding-left: 6px; }
-    .ed-month { font-size: 16px; margin: 5px; font-style: normal; }
-    .ed-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 4px;
-        word-break: break-all;
-        padding-right: 8px;
-    }
-    .ed-imgwrap {
-        position: absolute;
-        display: block;
-        left: 0;
-        top: 0;
-        background: rgb(0, 0, 0);
-        z-index: -1;
-        opacity: 0;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-    .ed-image {
-        border: none;
-        height: auto;
-        width: auto;
-        max-width: 130px;
-        max-height: 130px;
-    }
-    .calendar-title { text-align: center; font-size: 25px; margin-bottom: 20px; }
-    .ed-wrap:hover .ed-imgwrap {
-        z-index:10;
-        opacity: 1;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        -o-transition: all 0.3s;
-        transition: all 0.3s;
-    }
+.calendar-title {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 0px 0px 5px #C222D5;
+}
+.event-week, .event-day { display: inline-block; }
+.event-day {
+    width: 130px;
+    height: 140px;
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    margin: 3px;
+    overflow: hidden;
+    border-top: 8px solid #ff2bb6;
+}
+.event-day:nth-child(10n+1) { border-top:8px solid #ff2bb6; }
+.event-day:nth-child(10n+2) { border-top:8px solid #1700fe; }
+.event-day:nth-child(10n+3) { border-top:8px solid #fff001; }
+.event-day:nth-child(10n+4) { border-top:8px solid #c104ff; }
+.event-day:nth-child(10n+5) { border-top:8px solid #2aff43; }
+.event-day:nth-child(10n+6) { border-top:8px solid #ff1200; }
+.event-day:nth-child(10n+7) { border-top:8px solid #1700fe; }
+.event-day:nth-child(10n+8) { border-top:8px solid #fff102; }
+.event-day:nth-child(10n+9) { border-top:8px solid #2bff44; }
+.event-day:nth-child(10n+10) { border-top:8px solid #00fff5; }
+
+.ed-wrap {
+    position: relative;
+    display: block;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    color: white;
+}
+.ed-month, .ed-title { display: inline-block; text-transform: uppercase; padding-left: 6px; }
+.ed-month { font-size: 16px; margin: 5px; font-style: normal; }
+.ed-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 4px;
+    word-break: break-all;
+    padding-right: 8px;
+}
+.ed-imgwrap {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    background: rgb(0, 0, 0);
+    z-index: -1;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.ed-image {
+    border: none;
+    height: auto;
+    width: auto;
+    max-width: 130px;
+    max-height: 140px;
+}
+.ed-wrap:hover .ed-imgwrap {
+    z-index:10;
+    opacity: 1;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
 
 /* Footer */
 .footer {

@@ -2,7 +2,7 @@
 
 eventcalendarapp.controller("EventCalendar", function ($scope, $http) {
     $scope.Events = [];
-    getData($scope);
+    getData($scope, $http);
 });
 
 Date.prototype.monthDays = function () {
@@ -12,17 +12,23 @@ function setCalendaData(_d, _m) {
     return { day: _d, month: _m, data: [] };
 }
 
-function getData($scope) {
-    var xhr = new XMLHttpRequest();
+function getData($scope, $http) {
+
+    $http.get("/EventCalendar/GetCalendar").success(function (data, status) {
+        Calendar('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
+    })
+
+    /*var xhr = new XMLHttpRequest();
 
     xhr.open('GET', 'GetCalendar', true);
     xhr.send();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             var result = JSON.parse(xhr.response);
-            Calendar('calendar-wrap', 30, result.Calendar, result.CurDate.replace(/\D+/g, ""), $scope);
+            console.log(result);
+           // Calendar('calendar-wrap', 30, result.Calendar, result.CurDate.replace(/\D+/g, ""), $scope);
         }
-    }
+    }*/
 }
 
 function Calendar(obj, dcount, respons, curdate, $scope) {

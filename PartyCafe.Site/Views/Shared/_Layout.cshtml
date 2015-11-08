@@ -9,24 +9,47 @@
 </head>
 <body>
 
-    <header class="header">
-        <nav id="navigation">
-            @Html.Partial("_Menu")
-        </nav>
-    </header>
-
-    <div class="wrap">
-        <div>
-            @RenderBody()
-        </div>
+    <!-- BG-VIDEO -->
+    <div class="bgvideo">
+    <video id="vplayer">
+        <source src="~/Content/video/video.mp4" type="video/mp4" />
+        <source src="~/Content/video/video.webm" type="video/webm" />
+        <source src="~/Content/video/video.ogv" type="video/ogg" />
+    </video>
+    <script>
+        function p() {
+            var video = document.getElementById('vplayer');
+            video.loop = true;
+            video.autoplay = true;
+            video.play();
+        }
+        p();
+    </script>
     </div>
+    <!--/ BG-VIDEO -->
 
-    <footer class="footer">
-        <div class="f-wrap">
-            <p>@DateTime.Now.Year &copy; All Rights reserved by <a href="/">Party-Cafe</a>
-            </p>
+    <!-- CONTENT -->
+    <div class="content">
+        <header class="header">
+            <nav id="navigation">
+                @Html.Partial("_Menu")
+            </nav>
+        </header>
+
+        <div class="wrap">
+            <div>
+                @RenderBody()
+            </div>
         </div>
-    </footer>
+
+        <footer class="footer">
+            <div class="f-wrap">
+                <p>@DateTime.Now.Year &copy; All Rights reserved by <a href="/">Party-Cafe</a></p>
+            </div>
+        </footer>
+    </div>
+    <!--/ CONTENT -->
+
 
 
 @*
