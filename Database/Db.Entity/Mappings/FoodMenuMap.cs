@@ -40,7 +40,9 @@ namespace Entity.Mappings
             HasRequired(t => t.FoodMenuType)
                 .WithMany(t => t.FoodMenus)
                 .HasForeignKey(d => d.IdType);
-
+            HasOptional(t => t.Photo)
+                .WithMany(t => t.FoodMenus)
+                .HasForeignKey(d => d.IdPhoto);
         }
     }
 }

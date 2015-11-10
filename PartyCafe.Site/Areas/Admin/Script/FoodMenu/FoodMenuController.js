@@ -9,11 +9,21 @@ foodMenuApp.config(function($routeProvider) {
         .when('/EditMenuSection/:idtype', {
             templateUrl: 'FoodMenu/EditMenuSection',
             controller: 'FoodMenuSectionEditController'
+        })
+        .when('/MenuItems/:idtype', {
+            templateUrl: 'FoodMenu/MenuItems',
+            controller: 'FoodMenuItemsController'
+        })
+        .when('/MenuItem', {
+            tempalteUrl: 'FoodMenu/MenuItemEdit',
+            controller: 'FoodMenuEditController'
         });
+
 });
 
 foodMenuApp.service("sharedDataService", function() {
     this.MenuTypes = [];
+    this.MenuItem = {};
 
     this.setMenuTypes = function(types) {
         this.MenuTypes = types;
@@ -22,12 +32,19 @@ foodMenuApp.service("sharedDataService", function() {
     this.getMenuTypes = function() {
         return this.MenuTypes;
     }
+
+    this.setItem = function(item) {
+        this.MenuItem = item;
+    }
+
+    this.getItem = function() {
+        return this.MenuItem;
+    }
 });
 
 foodMenuApp.controller("FoodMenuAdminController", function ($scope, $http) {
     
 });
-
 foodMenuApp.controller("FoodMenuSectionController", function($scope, $http,$location,sharedDataService) {
     $scope.Base = new BaseClass($scope, $http, sharedDataService);
     MenuTypesClass.prototype = $scope.Base;
@@ -47,7 +64,6 @@ foodMenuApp.controller("FoodMenuSectionController", function($scope, $http,$loca
         $location.path('EditMenuSection/0');
     }
 });
-
 foodMenuApp.controller("FoodMenuSectionEditController", function($scope, $http,$routeParams,$location,sharedDataService) {
     var types = sharedDataService.getMenuTypes();
     $scope.isCreate = false;
@@ -102,4 +118,14 @@ foodMenuApp.controller("FoodMenuSectionEditController", function($scope, $http,$
     $scope.AddFile = function(file) {
         $scope.MenuType.Image = file[0];
     }
+});
+foodMenuApp.controller("FoodMenuItemsController", function ($scope, $http, $location,$routeParams) {
+    var idType = $routeParams.idtype;
+    $scope.FoodMenuItems = null;
+    $http.post('FoodMenu/GetFoodMenu', { 'idType': idType }).success(function (response) {
+        $scope.FoodMenuItems = response;
+    });
+});
+foodMenuApp.controller("FoodMenuEditController", function($scope, $http, $location,sharedDataService) {
+    
 });

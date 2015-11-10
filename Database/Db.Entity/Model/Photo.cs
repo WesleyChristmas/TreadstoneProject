@@ -9,6 +9,7 @@ namespace Entity.Model
         {
             BlogCalendars = new List<BlogCalendar>();
             FoodMenuTypes = new List<FoodMenuType>();
+            FoodMenus = new List<FoodMenu>();
         }
 
         public int IdType { get; set; }
@@ -18,5 +19,6 @@ namespace Entity.Model
         public ICollection<FoodMenuType> FoodMenuTypes { get; set; }
         public ICollection<BlogPhoto> BlogPhotos { get; set; }
         public PhotoType PhotoType { get; set; }
+        public ICollection<FoodMenu> FoodMenus { get; set; }
     }
 }

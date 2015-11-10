@@ -9,6 +9,7 @@ namespace DataBase.Models
         {
             this.BlogCalendars = new List<BlogCalendar>();
             this.BlogPhotoes = new List<BlogPhoto>();
+            this.FoodMenus = new List<FoodMenu>();
             this.FoodMenuTypes = new List<FoodMenuType>();
         }
 
@@ -22,6 +23,7 @@ namespace DataBase.Models
         public string UserUpdate { get; set; }
         public virtual ICollection<BlogCalendar> BlogCalendars { get; set; }
         public virtual ICollection<BlogPhoto> BlogPhotoes { get; set; }
+        public virtual ICollection<FoodMenu> FoodMenus { get; set; }
         public virtual ICollection<FoodMenuType> FoodMenuTypes { get; set; }
     }
 }
