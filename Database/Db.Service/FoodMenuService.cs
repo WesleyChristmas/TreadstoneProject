@@ -39,13 +39,22 @@ namespace Db.Service
 
             _weblink = _imageService.GetWebLink();
 
+            #region Mapper
+
             Mapper.CreateMap<FoodMenu, FoodMenuEntity>();
             Mapper.CreateMap<FoodMenuEntity, FoodMenu>();
 
             Mapper.CreateMap<FoodMenuType, FoodMenuTypeEntity>()
                 .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => _weblink + r.Photo.Link));
             Mapper.CreateMap<FoodMenuTypeEntity, FoodMenuType>();
+            Mapper.CreateMap<FoodMenu, FoodMenuEntity>()
+                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => _weblink + r.Photo.Link));
+            Mapper.CreateMap<FoodMenuEntity, FoodMenu>();
+
+            #endregion
         }
+
+        #region FoodmenuTypes
 
         public List<FoodMenuTypeEntity> GetAllFoodMenuTypes()
         {
@@ -94,5 +103,53 @@ namespace Db.Service
             _unitOfWork.SaveChanges();
             return true;
         }
+
+        #endregion
+
+        #region FoodMenu
+
+        public List<FoodMenuEntity> GetFoodMenu(int idType)
+        {
+            var menu = _repositoryMenu.Query()
+                .Include(x => x.Photo)
+                .Select()
+                .Where(x => x.IdType == idType)
+                .ToList();
+
+
+           return Mapper.Map<List<FoodMenu>, List<FoodMenuEntity>>(menu);
+        }
+
+        public void AddFoodMenu(FoodMenuEntity menuItem, ReceiveFileModel image)
+        {
+            _repositoryMenu.Insert(Mapper.Map<FoodMenuEntity,FoodMenu>(menuItem));
+            _unitOfWork.SaveChanges();
+        }
+
+        public void UpdateFoodMenu(FoodMenuEntity menuItem,ReceiveFileModel image)
+        {
+            var dbfoodMenu = _repositoryMenu.Queryable().FirstOrDefault(x => x.IdRecord == menuItem.IdRecord);
+            if (dbfoodMenu == null) return;
+            if (image != null) dbfoodMenu.IdPhoto = _imageService.SaveImage(image);
+            dbfoodMenu.Name = menuItem.Name;
+            dbfoodMenu.Description = menuItem.Description;
+            dbfoodMenu.Price = menuItem.Price;
+            _repositoryMenu.Update(dbfoodMenu);
+            _unitOfWork.SaveChanges();
+        }
+
+        public bool DeleteFoodMenu(int idMenuItem)
+        {
+            var menuItem = _repositoryMenuType.Queryable().FirstOrDefault(x => x.IdRecord == idMenuItem);
+            if (menuItem == null) return false;
+
+            if (menuItem.IdPhoto.HasValue) _imageService.DeleteImage(menuItem.IdPhoto.Value);
+
+            _repositoryMenuType.Delete(idMenuItem);
+            _unitOfWork.SaveChanges();
+            return true;
+        }
+
+        #endregion
     }
 }

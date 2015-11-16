@@ -34,6 +34,12 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        public ActionResult MenuItems()
+        {
+            return View("FoodMenuItems");
+        }
+
+        [HttpGet]
         public JsonResult GetAllMenuTypes()
         {
             return Json(_menuService.GetAllFoodMenuTypes(), JsonRequestBehavior.AllowGet);
@@ -55,6 +61,30 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         public JsonResult DeleteMenuType(int idType)
         {
             return Json(_menuService.DeleteMenuType(idType), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetFoodMenu(int idType)
+        {
+            return Json(_menuService.GetFoodMenu(idType));
+        }
+
+        [HttpPost]
+        public void AddFoodMenu(FoodMenuEntity item)
+        {
+            _menuService.AddFoodMenu(item,ImageSaver.GetSingleImage(Request,2));
+        }
+
+        [HttpPost]
+        public void UpdateFoodMenu(FoodMenuEntity item)
+        {
+            _menuService.UpdateFoodMenu(item, ImageSaver.GetSingleImage(Request, 2));
+        }
+
+        [HttpPost]
+        public JsonResult DeleteFoodMenu(int idMenuItem)
+        {
+            return Json(_menuService.DeleteFoodMenu(idMenuItem));
         }
     }
 }

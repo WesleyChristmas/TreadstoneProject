@@ -17,7 +17,7 @@
         <th></th>
         <th></th>
     </tr>
-    <tr ng-repeat="item in MenuTypes.MenuSections">
+    <tr ng-repeat="item in MenuTypes.MenuSections" id="{{item.IdRecord}}" onclick="document.location='#MenuItems/' + id">
         <td>
             <img ng-src="{{item.PhotoLink}}" />
         </td>
@@ -28,7 +28,7 @@
             {{item.Description}}
         </td>
         <td id="{{item.IdRecord}}.Edit" onclick="document.location='#EditMenuSection/' + id.split('.')[0]">
-            <img src="~/Areas/Admin/Content/edit.png"/>
+            <img src="~/Areas/Admin/Content/edit.png" />
         </td>
         <td id="{{item.IdRecord}}.Delete" ng-click="DeleteMenuType(this)">
             <img src="~/Areas/Admin/Content/delete.png" />

@@ -295,6 +295,8 @@
     <Content Include="Areas\Admin\Views\Calendar\EditCalendarEvent.cshtml" />
     <Content Include="Content\video\video.ogv" />
     <Content Include="Content\video\video.webm" />
+    <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuItems.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuEdit.cshtml" />
     <None Include="Scripts\jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />

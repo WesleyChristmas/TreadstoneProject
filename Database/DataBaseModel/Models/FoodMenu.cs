@@ -9,12 +9,13 @@ namespace DataBase.Models
         public int IdType { get; set; }
         public Nullable<int> IdPhoto { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Description { get; set; }
+        public string Description { get; set; }
         public Nullable<double> Price { get; set; }
         public System.DateTime DateCreate { get; set; }
         public string UserCreate { get; set; }
         public System.DateTime DateUpdate { get; set; }
         public string UserUpdate { get; set; }
         public virtual FoodMenuType FoodMenuType { get; set; }
+        public virtual Photo Photo { get; set; }
     }
 }
