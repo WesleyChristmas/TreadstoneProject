@@ -85,13 +85,6 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
     console.log(cal);
     $scope.Events = cal;
     //$scope.$apply();
-
-    /*var elem = document.querySelector('#calendar-wrap');
-    var iso = new Isotope(elem, {
-        itemSelector: '.event-day',
-        layoutMode: 'masonry'
-    });
-
 }
 
 function fillCalendar(obj) {

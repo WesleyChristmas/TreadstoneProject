@@ -247,7 +247,6 @@ img { border: 0; outline: 0; }
 
 /* Footer */
 .footer {
-    position: absolute;
     padding: 5px;
     bottom: 0;
     height: 50px;
