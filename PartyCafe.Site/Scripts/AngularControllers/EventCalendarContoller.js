@@ -29,8 +29,8 @@ function setCalendaData(_d, _m) {
 function getData($scope, $http) {
     $http.get("/EventCalendar/GetCalendar").success(function (data, status) {
         Calendar('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
-    })
-        }
+    });
+}
 
 function Calendar(obj, dcount, respons, curdate, $scope) {
     var date = new Date(parseInt(curdate)),

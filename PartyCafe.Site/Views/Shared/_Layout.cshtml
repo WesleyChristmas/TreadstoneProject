@@ -10,22 +10,7 @@
 <body>
 
     <!-- BG-VIDEO -->
-    <div class="bgvideo">
-        <video id="vplayer">
-            <source src="~/Content/video/video.mp4" type="video/mp4" />
-            <source src="~/Content/video/video.webm" type="video/webm" />
-            <source src="~/Content/video/video.ogv" type="video/ogg" />
-        </video>
-        <script>
-            function p() {
-                var video = document.getElementById('vplayer');
-                video.loop = true;
-                video.autoplay = true;
-                video.play();
-            }
-            p();
-        </script>
-    </div>
+    @Html.Partial("_BgVideo")
     <!--/ BG-VIDEO -->
 
     <!-- CONTENT -->
