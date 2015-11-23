@@ -43,7 +43,7 @@
     <Compile Include="BlogEntity.cs" />
     <Compile Include="FoodMenuEntity.cs" />
     <Compile Include="FoodMenuTypeEntity.cs" />
-    <Compile Include="Models\ReceiveCalendarModel.cs" />
+    <Compile Include="Models\SendCalendarModel.cs" />
     <Compile Include="Models\ReceiveFileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

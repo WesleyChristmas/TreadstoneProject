@@ -48,19 +48,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public void AddMenuType(FoodMenuTypeEntity type)
         {
-            _menuService.AddFoodMenuType(type, ImageSaver.GetSingleImage(Request,1));
+            _menuService.AddFoodMenuType(type, ImageSaver.GetSingleImage(Request, 1, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
         public void UpdateMenuType(FoodMenuTypeEntity type)
         {
-            _menuService.UpdateMenuType(type, ImageSaver.GetSingleImage(Request,1));
+            _menuService.UpdateMenuType(type, ImageSaver.GetSingleImage(Request, 1, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
         public JsonResult DeleteMenuType(int idType)
         {
-            return Json(_menuService.DeleteMenuType(idType), JsonRequestBehavior.AllowGet);
+            return Json(_menuService.DeleteMenuType(idType, HttpContext.Server.MapPath("/")), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -72,19 +72,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public void AddFoodMenu(FoodMenuEntity item)
         {
-            _menuService.AddFoodMenu(item,ImageSaver.GetSingleImage(Request,2));
+            _menuService.AddFoodMenu(item, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
         public void UpdateFoodMenu(FoodMenuEntity item)
         {
-            _menuService.UpdateFoodMenu(item, ImageSaver.GetSingleImage(Request, 2));
+            _menuService.UpdateFoodMenu(item, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
         public JsonResult DeleteFoodMenu(int idMenuItem)
         {
-            return Json(_menuService.DeleteFoodMenu(idMenuItem));
+            return Json(_menuService.DeleteFoodMenu(idMenuItem, HttpContext.Server.MapPath("/")));
         }
     }
 }

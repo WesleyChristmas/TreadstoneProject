@@ -9,11 +9,11 @@ namespace BusinessInterface
         List<FoodMenuTypeEntity> GetAllFoodMenuTypes();
         void AddFoodMenuType(FoodMenuTypeEntity type, ReceiveFileModel image);
         void UpdateMenuType(FoodMenuTypeEntity type, ReceiveFileModel image);
-        bool DeleteMenuType(int idType);
+        bool DeleteMenuType(int idType, string serverPath);
 
         List<FoodMenuEntity> GetFoodMenu(int idType);
         void AddFoodMenu(FoodMenuEntity menuItem, ReceiveFileModel image);
         void UpdateFoodMenu(FoodMenuEntity menuItem, ReceiveFileModel image);
-        bool DeleteFoodMenu(int idMenuItem);
+        bool DeleteFoodMenu(int idMenuItem, string serverPath);
     }
 }

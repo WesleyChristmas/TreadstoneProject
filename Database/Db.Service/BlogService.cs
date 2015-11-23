@@ -21,7 +21,6 @@ namespace Db.Service
         private readonly IRepositoryAsync<BlogPhoto> _repositoryPhoto;
         private readonly IUnitOfWorkAsync _uof;
 
-        private readonly string _weblink;
         private const int PageSize = 10;
 
         public BlogService(IImageService imageService,
@@ -33,8 +32,6 @@ namespace Db.Service
             _repositoryHeader = repositoryHeader;
             _repositoryPhoto = repositoryPhoto;
             _uof = uof;
-
-            _weblink = _imageService.GetWebLink();
         }
 
         public List<BlogEntity> GetBlogsPage(int page)
@@ -62,7 +59,7 @@ namespace Db.Service
                             {
                                 IdRecord = r.IdRecord,
                                 Description = r.Description,
-                                PhotoLink = _weblink + r.Photo.Link
+                               // PhotoLink = _weblink + r.Photo.Link
                             });
                         });
                     blog.Photos = photos;
@@ -114,7 +111,7 @@ namespace Db.Service
             }
         }
 
-        public void RemovePhotoFromBLog(List<int> idRecord)
+        public void RemovePhotoFromBLog(List<int> idRecord,string serverPath)
         {
             var photo2Del = _repositoryPhoto.Queryable().Where(x => idRecord.Contains(x.IdRecord))
                 .ToList();
@@ -122,12 +119,12 @@ namespace Db.Service
 
             photo2Del.ForEach(x =>
             {
-                _imageService.DeleteImage(x.IdPhoto);
+                _imageService.DeleteImage(x.IdPhoto,serverPath);
                 _repositoryPhoto.Delete(x.IdRecord);
             });
         }
 
-        public void DeleteBlog(int idBLog)
+        public void DeleteBlog(int idBLog,string serverPath)
         {
            var delBLog =  _repositoryHeader.Queryable().FirstOrDefault(x => x.IdRecord == idBLog);
             if (delBLog == null) return;
@@ -138,7 +135,7 @@ namespace Db.Service
             {
                 delBlogPhotoId.ForEach(x =>
                 {
-                    _imageService.DeleteImage(x.IdPhoto);
+                    _imageService.DeleteImage(x.IdPhoto,serverPath);
                     _repositoryPhoto.Delete(x.IdRecord);
                 });
             }

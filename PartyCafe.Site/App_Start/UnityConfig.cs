@@ -1,6 +1,4 @@
 using System;
-using System.Data.Entity;
-using BusinessEntity;
 using BusinessInterface;
 using Db.Service;
 using Db.Service.PrivateServices;
@@ -9,14 +7,12 @@ using Entity.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 using PartyCafe.Site.Controllers;
 using PartyCafe.Site.Models;
 using Repository.Pattern.DataContext;
 using Repository.Pattern.Ef6;
 using Repository.Pattern.Repositories;
 using Repository.Pattern.UnitOfWork;
-using Service.Pattern;
 
 namespace PartyCafe.Site.App_Start
 {
@@ -67,7 +63,6 @@ namespace PartyCafe.Site.App_Start
                 .RegisterType<IRepositoryAsync<FoodMenuType>, Repository<FoodMenuType>>()
                 .RegisterType<IRepositoryAsync<Photo>, Repository<Photo>>()
                 .RegisterType<IRepositoryAsync<PhotoType>, Repository<PhotoType>>()
-                .RegisterType<IRepositoryAsync<SiteSetting>, Repository<SiteSetting>>()
                 .RegisterType<IRepositoryAsync<BlogCalendar>,Repository<BlogCalendar>>()
 
                 //Services

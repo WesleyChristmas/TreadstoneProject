@@ -41,19 +41,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public void AddBlogCalendar(BlogCalendarEntity calendar)
         {
-            _calendarService.AddBlogCalendar(calendar, ImageSaver.GetSingleImage(Request,2));
+            _calendarService.AddBlogCalendar(calendar, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
         public void UpdateBlogCalendar(BlogCalendarEntity calendar)
         {
-            _calendarService.UpdateBlogCalendar(calendar, ImageSaver.GetSingleImage(Request,2));
+            _calendarService.UpdateBlogCalendar(calendar, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
         public JsonResult DeleteBlogCalendar(int idCalendar)
         {
-           return Json(_calendarService.DeleteBlogCalendar(idCalendar));
+            return Json(_calendarService.DeleteBlogCalendar(idCalendar, HttpContext.Server.MapPath("/")));
         }
 
     }

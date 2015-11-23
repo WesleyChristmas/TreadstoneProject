@@ -12,24 +12,20 @@ namespace Db.Service.PrivateServices
     {
         int SaveImage(ReceiveFileModel image);
         void UpdateImage(ReceiveFileModel image, int idPhoto);
-        void DeleteImage(int idPhoto);
-        string GetWebLink();
+        void DeleteImage(int idPhoto,string serverPath);
     }
     public class ImageService : Service<Photo>, IImageService
     {
         private readonly IRepositoryAsync<Photo> _photoRepository;
         private readonly IRepositoryAsync<PhotoType> _photoTypeRepository;
-        private readonly IRepositoryAsync<SiteSetting> _setting; 
         private readonly IUnitOfWorkAsync _uof;
 
         public ImageService(IRepositoryAsync<Photo> photoRepository,
             IRepositoryAsync<PhotoType> photoTypeRepository,
-            IRepositoryAsync<SiteSetting> setting,
             IUnitOfWorkAsync uof) : base(photoRepository)
         {
             _photoRepository = photoRepository;
             _photoTypeRepository = photoTypeRepository;
-            _setting = setting;
             _uof = uof;
         }
 
@@ -38,12 +34,9 @@ namespace Db.Service.PrivateServices
             var imgtype = _photoTypeRepository.Queryable().FirstOrDefault(x => x.IdRecord == image.IdSection);
             if (imgtype == null) return -1;
 
-            var ways2Img = _setting.Queryable().FirstOrDefault();
-            if (ways2Img == null) return -1;
-
-            var curDir = ways2Img.ImageDataDrive + "\\";
+            var curDir = image.ServerPath + "/";
             if (!Directory.Exists(curDir + imgtype.Name)) Directory.CreateDirectory(curDir + imgtype.Name);
-            File.WriteAllBytes(ways2Img.ImageDataDrive + "/" + imgtype.Name + "/" + image.FileName, image.Data);
+            File.WriteAllBytes(image.ServerPath + "/" + imgtype.Name + "/" + image.FileName, image.Data);
 
             var photo = new Photo
             {
@@ -65,37 +58,25 @@ namespace Db.Service.PrivateServices
                 .FirstOrDefault(x => x.IdRecord == idPhoto);
             if (photo == null) return;
 
-            var ways2Img = _setting.Queryable().FirstOrDefault();
-            if (ways2Img == null) return;
-
             var imgtype = _photoTypeRepository.Queryable().FirstOrDefault(x => x.IdRecord == image.IdSection);
             if (imgtype == null) return;
 
-            File.Delete(ways2Img.ImageDataDrive + photo.Link);
+            File.Delete(image.ServerPath + photo.Link);
 
-            File.WriteAllBytes(ways2Img.ImageDataDrive + "/" + imgtype.Name + "/" + image.FileName, image.Data);
+            File.WriteAllBytes(image.ServerPath + "/" + imgtype.Name + "/" + image.FileName, image.Data);
             photo.Link = "/" + imgtype.Name + "/" + image.FileName;
             _photoRepository.Update(photo);
             _uof.SaveChanges();
         }
 
-        public void DeleteImage(int idPhoto)
+        public void DeleteImage(int idPhoto,string serverPath)
         {
             var photo = _photoRepository.Queryable().FirstOrDefault(x => x.IdRecord == idPhoto);
             if (photo == null) return;
 
-            var ways2Img = _setting.Queryable().FirstOrDefault();
-            if (ways2Img == null) return;
-
-            var driveWay = ways2Img.ImageDataDrive + photo.Link;
+            var driveWay = serverPath + photo.Link;
             File.Delete(driveWay);
             _photoRepository.Delete(idPhoto);
-        }
-
-        public string GetWebLink()
-        {
-            var setting = _setting.Queryable().FirstOrDefault();
-            return setting == null ? null : setting.ImageDataWeb;
         }
     }
 }

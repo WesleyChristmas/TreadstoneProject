@@ -5,9 +5,9 @@ namespace BusinessInterface
 {
     public interface IBlogCalendarServiceBase
     {
-        ReceiveCalendarModel GetCalendar();
+        SendCalendarModel GetCalendar();
         void AddBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image);
         void UpdateBlogCalendar(BlogCalendarEntity calendar, ReceiveFileModel image);
-        bool DeleteBlogCalendar(int idCalendar);
+        bool DeleteBlogCalendar(int idCalendar,string serverPath);
     }
 }

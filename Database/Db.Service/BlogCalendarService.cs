@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using AutoMapper;
 using BusinessEntity;
 using BusinessEntity.Models;
@@ -24,7 +23,6 @@ namespace Db.Service
         private readonly IImageService _imageService; 
         private readonly IRepositoryAsync<BlogCalendar> _repositoryCalendar;
         private readonly IUnitOfWorkAsync _uof;
-        private readonly string _weblink;
 
         public BlogCalendarService(IRepositoryAsync<BlogCalendar> repositoryCalendar,
             IImageService imageSerivce,
@@ -35,16 +33,15 @@ namespace Db.Service
             _repositoryCalendar = repositoryCalendar;
             _uof = uof;
 
-            _weblink = _imageService.GetWebLink();
 
             Mapper.CreateMap<BlogCalendar, BlogCalendarEntity>()
-                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => _weblink + r.Photo.Link));
+                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => r.Photo.Link));
             Mapper.CreateMap<BlogCalendarEntity, BlogCalendar>();
         }
 
-        public ReceiveCalendarModel GetCalendar()
+        public SendCalendarModel GetCalendar()
         {
-            var result = new ReceiveCalendarModel
+            var result = new SendCalendarModel
             {
                 CurDate = DateTime.Now.Date
             };
@@ -60,9 +57,9 @@ namespace Db.Service
             return result;
         }
 
-        public ReceiveCalendarModel GetCalendarAll()
+        public SendCalendarModel GetCalendarAll()
         {
-            var result = new ReceiveCalendarModel();
+            var result = new SendCalendarModel();
             var calendarDb = _repositoryCalendar.Query()
                 .Include(x => x.Photo)
                 .Select()
@@ -107,13 +104,13 @@ namespace Db.Service
             _uof.SaveChanges();
         }
 
-        public bool DeleteBlogCalendar(int idCalendar)
+        public bool DeleteBlogCalendar(int idCalendar,string serverPath)
         {
             var delCalendar = _repositoryCalendar.Queryable().FirstOrDefault(x => x.IdRecord == idCalendar);
             if (delCalendar == null || delCalendar.IdBlog.HasValue) return false;
 
             if(delCalendar.IdPhoto.HasValue)
-                _imageService.DeleteImage(delCalendar.IdPhoto.Value);
+                _imageService.DeleteImage(delCalendar.IdPhoto.Value, serverPath);
 
             _repositoryCalendar.Delete(idCalendar);
             _uof.SaveChanges();

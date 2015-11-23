@@ -5,7 +5,7 @@ namespace PartyCafe.Site.Areas.Admin.Core
 {
     public static class ImageSaver
     {
-        public static ReceiveFileModel GetSingleImage(HttpRequestBase request,int section)
+        public static ReceiveFileModel GetSingleImage(HttpRequestBase request, int section, string serverPath)
         {
             ReceiveFileModel image = null;
             if (request.Files.Count == 1)
@@ -20,7 +20,8 @@ namespace PartyCafe.Site.Areas.Admin.Core
                     {
                         Data = content,
                         FileName = file.FileName,
-                        IdSection = section
+                        IdSection = section,
+                        ServerPath = serverPath
                     };
                 }
             }

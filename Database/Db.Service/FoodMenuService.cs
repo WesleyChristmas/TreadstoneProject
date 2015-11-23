@@ -24,8 +24,6 @@ namespace Db.Service
         private readonly IRepositoryAsync<FoodMenuType> _repositoryMenuType;
         private readonly IUnitOfWorkAsync _unitOfWork;
 
-        private readonly string _weblink;
-
         public FoodMenuService(IImageService imageService,
             IRepositoryAsync<FoodMenu> repositoryMenu,
             IRepositoryAsync<FoodMenuType> repositoryMenuType,
@@ -37,18 +35,16 @@ namespace Db.Service
             _repositoryMenuType = repositoryMenuType;
             _unitOfWork = unitOfWork;
 
-            _weblink = _imageService.GetWebLink();
-
             #region Mapper
 
             Mapper.CreateMap<FoodMenu, FoodMenuEntity>();
             Mapper.CreateMap<FoodMenuEntity, FoodMenu>();
 
             Mapper.CreateMap<FoodMenuType, FoodMenuTypeEntity>()
-                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => _weblink + r.Photo.Link));
+                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => r.Photo.Link));
             Mapper.CreateMap<FoodMenuTypeEntity, FoodMenuType>();
             Mapper.CreateMap<FoodMenu, FoodMenuEntity>()
-                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => _weblink + r.Photo.Link));
+                .ForMember(x => x.PhotoLink, opt => opt.MapFrom(r => r.Photo.Link));
             Mapper.CreateMap<FoodMenuEntity, FoodMenu>();
 
             #endregion
@@ -90,14 +86,14 @@ namespace Db.Service
             _unitOfWork.SaveChanges();
         }
 
-        public bool DeleteMenuType(int idType)
+        public bool DeleteMenuType(int idType,string serverPath)
         {
             var type = _repositoryMenuType.Queryable().FirstOrDefault(x => x.IdRecord == idType);
             if (type == null) return false;
 
             if (_repositoryMenu.Queryable().Count(x => x.IdType == idType) != 0) return false;
 
-            if (type.IdPhoto.HasValue) _imageService.DeleteImage(type.IdPhoto.Value);
+            if (type.IdPhoto.HasValue) _imageService.DeleteImage(type.IdPhoto.Value, serverPath);
 
             _repositoryMenuType.Delete(idType);
             _unitOfWork.SaveChanges();
@@ -138,12 +134,12 @@ namespace Db.Service
             _unitOfWork.SaveChanges();
         }
 
-        public bool DeleteFoodMenu(int idMenuItem)
+        public bool DeleteFoodMenu(int idMenuItem, string serverPath)
         {
             var menuItem = _repositoryMenuType.Queryable().FirstOrDefault(x => x.IdRecord == idMenuItem);
             if (menuItem == null) return false;
 
-            if (menuItem.IdPhoto.HasValue) _imageService.DeleteImage(menuItem.IdPhoto.Value);
+            if (menuItem.IdPhoto.HasValue) _imageService.DeleteImage(menuItem.IdPhoto.Value, serverPath);
 
             _repositoryMenuType.Delete(idMenuItem);
             _unitOfWork.SaveChanges();
