@@ -9,10 +9,6 @@
 </head>
 <body>
 
-    <!-- BG-VIDEO -->
-    @Html.Partial("_BgVideo")
-    <!--/ BG-VIDEO -->
-
     <!-- CONTENT -->
     <div class="content">
         <header class="header">
@@ -21,10 +17,18 @@
             </nav>
         </header>
 
+        <!-- BG-VIDEO -->
+        @Html.Partial("_BgVideo")
+        <!--/ BG-VIDEO -->
+
         <div class="wrap">
             <div>
                 @RenderBody()
             </div>
+        </div>
+
+        <div>
+            @Html.Partial("_InstaGallery")
         </div>
 
         <footer class="footer">

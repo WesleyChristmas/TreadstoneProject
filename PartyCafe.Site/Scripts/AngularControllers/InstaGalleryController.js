@@ -12,9 +12,13 @@ function getPhoto($scope, $http) {
     },
     url = 'https://api.instagram.com/v1/users/' + settings.userId + '/media/recent/?access_token=' + settings.token;
 
-    $http.jsonp(url + '&callback=JSON_CALLBACK').success(function (data, status) {
+    $http.jsonp(url + '&callback=JSON_CALLBACK').success(function (result, status) {
         //SetGallery('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
-       console.log(data);
-        $scope.Gallery = data.data;
+        console.log(result);
+        if (result.data.length > 9) {
+            $scope.Gallery = data.data.slice(0, 9);
+        } else {
+            $scope.Gallery = data.data;
+        }
     });
 }
