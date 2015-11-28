@@ -65,8 +65,8 @@ img { border: 0; outline: 0; }
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
 }
-.menu a:after { content: ''; position: absolute; z-index: -1; }
-.menu a:before {
+.mi-link-home:after, .mi-link-gallery:after, .mi-link-event:after, .mi-link-game:after, .mi-link-blog:after, .mi-link-foodmenu:after { content: ''; position: absolute; z-index: -1; }
+.mi-link-home:before, .mi-link-gallery:before, .mi-link-event:before, .mi-link-game:before, .mi-link-blog:before, .mi-link-foodmenu:before {
     content: '';
     position: absolute;
     height: 100%;
@@ -74,12 +74,13 @@ img { border: 0; outline: 0; }
     left: 0;
     top: -100%;
 }
-.mi-link-home:before { background: url(../images/home.png) center no-repeat white; background-size: 24px 24px; }
-.mi-link-gallery:before { background: url(../images/gallery.png) center no-repeat white; background-size: 24px 24px; }
-.mi-link-event:before { background: url(../images/event.png) center no-repeat white; background-size: 24px 24px; }
-.mi-link-game:before { background: url(../images/game.png) center no-repeat white; background-size: 24px 24px; }
-.mi-link-blog:before { background: url(../images/blog.png) center no-repeat white; background-size: 24px 24px; }
-.mi-link-foodmenu:before { background: url(../images/menu.png) center no-repeat white; background-size: 24px 24px; }
+
+.mi-link-home:before { background: url(../images/home.png) center no-repeat; background-size: 35px 35px; }
+.mi-link-gallery:before { background: url(../images/gallery.png) center no-repeat; background-size: 35px 35px; }
+.mi-link-event:before { background: url(../images/event.png) center no-repeat; background-size: 35px 35px; }
+.mi-link-game:before { background: url(../images/game.png) center no-repeat; background-size: 35px 35px; }
+.mi-link-blog:before { background: url(../images/blog.png) center no-repeat; background-size: 35px 35px; }
+.mi-link-foodmenu:before { background: url(../images/menu.png) center no-repeat; background-size: 35px 35px; }
 
 .menu a:hover:before { top: 0; }
 .menu a:hover .mi-link-title {
@@ -88,7 +89,6 @@ img { border: 0; outline: 0; }
     -ms-transform: translateY(100%);
     transform: translateY(100%);
 }
-
 
 /*
 .menu a {
@@ -176,18 +176,10 @@ img { border: 0; outline: 0; }
     top: 3%;
     left: 18%;
     z-index: -1;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
 }
 .logo:hover:before {
-    height: 51%;
+    height: 54%;
     background: #E2E3E4;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
 }
 
 /* Background video */
