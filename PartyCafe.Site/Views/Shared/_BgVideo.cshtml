@@ -2,7 +2,7 @@
     string path = HttpContext.Current.Request.Url.AbsolutePath.Replace("/", "").Trim();
 }
 
-@if (path == "" || path == "EventCalendar")
+@if (path == "" || path == "EventCalendar" || path == "Games")
 {
     <div class="bgvideo">
         <video id="vplayer">
