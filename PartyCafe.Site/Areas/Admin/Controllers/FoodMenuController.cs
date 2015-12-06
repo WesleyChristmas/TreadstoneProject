@@ -5,7 +5,7 @@ using PartyCafe.Site.Areas.Admin.Core;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     public class FoodMenuController : Controller
     {
         private readonly IFoodMenuServiceBase _menuService;

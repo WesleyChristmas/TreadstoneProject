@@ -2,7 +2,7 @@
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         // GET: Admin/Home
