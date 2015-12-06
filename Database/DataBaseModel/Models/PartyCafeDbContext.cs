@@ -25,7 +25,6 @@ namespace DataBase.Models
         public DbSet<GameHeader> GameHeaders { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<PhotoType> PhotoTypes { get; set; }
-        public DbSet<SiteSetting> SiteSettings { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -39,7 +38,6 @@ namespace DataBase.Models
             modelBuilder.Configurations.Add(new GameHeaderMap());
             modelBuilder.Configurations.Add(new PhotoMap());
             modelBuilder.Configurations.Add(new PhotoTypeMap());
-            modelBuilder.Configurations.Add(new SiteSettingMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
         }
     }

@@ -1,0 +1,17 @@
+﻿<div>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Заголовок</th>
+        </tr>
+        <tr ng-repeat="item in Blogs" ng-click="SelectBlog(this)">
+            <td>
+                <img ng-if="item.PhotoLink != null" ng-src="{{item.PhotoLink}}" />
+            </td>
+            <td>
+                {{item.Header}}
+            </td>
+        </tr>
+    </table>
+</div>
+

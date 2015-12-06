@@ -32,6 +32,12 @@ namespace DataBase.Models.Mapping
             this.Property(t => t.UserCreate).HasColumnName("UserCreate");
             this.Property(t => t.DateUpdate).HasColumnName("DateUpdate");
             this.Property(t => t.UserUpdate).HasColumnName("UserUpdate");
+
+            // Relationships
+            this.HasRequired(t => t.PhotoType)
+                .WithMany(t => t.Photos)
+                .HasForeignKey(d => d.IdType);
+
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Entity.Mappings
             Property(t => t.IdRecord).HasColumnName("IdRecord");
             Property(t => t.IdHeader).HasColumnName("IdHeader");
             Property(t => t.IdPhoto).HasColumnName("IdPhoto");
-            Property(t => t.Description).HasColumnName("Message");
+            Property(t => t.Description).HasColumnName("Description");
 
             // Relationships
             HasRequired(t => t.BlogHeader)

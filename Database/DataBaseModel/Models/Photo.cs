@@ -25,5 +25,6 @@ namespace DataBase.Models
         public virtual ICollection<BlogPhoto> BlogPhotoes { get; set; }
         public virtual ICollection<FoodMenu> FoodMenus { get; set; }
         public virtual ICollection<FoodMenuType> FoodMenuTypes { get; set; }
+        public virtual PhotoType PhotoType { get; set; }
     }
 }

@@ -6,11 +6,12 @@ namespace BusinessInterface
 {
     public interface IBlogServiceBase
     {
-        List<BlogEntity> GetBlogsPage(int page);
+        List<BlogEntityLight> GetBlogs();
+        BlogEntity GetBlogDetails(int idBlog);
         void AddBlog(BlogEntity blog, List<ReceiveFileModel> images);
         void EditBlog(BlogEntity blog);
         void AddPhoto2BLog(List<ReceiveFileModel> images, int idBlog);
-        void RemovePhotoFromBLog(List<int> idRecord);
-        void DeleteBlog(int idBLog);
+        void RemovePhotoFromBLog(List<int> idRecord, string serverPath);
+        void DeleteBlog(int idBLog, string serverPath);
     }
 }

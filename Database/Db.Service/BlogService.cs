@@ -2,6 +2,7 @@
 using System.Linq;
 using BusinessEntity;
 using BusinessEntity.Models;
+using BusinessInterface;
 using Db.Service.PrivateServices;
 using Entity.Model;
 using Repository.Pattern.Repositories;
@@ -10,7 +11,7 @@ using Service.Pattern;
 
 namespace Db.Service
 {
-    public interface IBlogService : IService<BlogHeader>
+    public interface IBlogService : IService<BlogHeader>, IBlogServiceBase
     {
         
     }
@@ -20,8 +21,6 @@ namespace Db.Service
         private readonly IRepositoryAsync<BlogHeader> _repositoryHeader;
         private readonly IRepositoryAsync<BlogPhoto> _repositoryPhoto;
         private readonly IUnitOfWorkAsync _uof;
-
-        private const int PageSize = 10;
 
         public BlogService(IImageService imageService,
             IRepositoryAsync<BlogPhoto> repositoryPhoto
@@ -34,36 +33,51 @@ namespace Db.Service
             _uof = uof;
         }
 
-        public List<BlogEntity> GetBlogsPage(int page)
+        public List<BlogEntityLight> GetBlogs()
         {
-            var result = new List<BlogEntity>();
-           _repositoryHeader.Query()
-                .Include(x => x.BlogPhotos.Select(r => r.Photo))
+            var result = new List<BlogEntityLight>();
+
+            _repositoryHeader.Query()
+                .Include(x => x.BlogPhotos.Select(r=>r.Photo))
                 .Select()
-                .Skip(page*PageSize)
-                .Take(PageSize)
                 .ToList()
                 .ForEach(x =>
+            {
+                var photo = x.BlogPhotos.FirstOrDefault();
+                result.Add(new BlogEntityLight
                 {
-                    var blog = new BlogEntity
-                    {
-                        IdRecord = x.IdRecord,
-                        Header = x.Header,
-                        Message = x.Message,
-                    };
-                    var photos = new List<BlogPhotoEntity>();
-                    x.BlogPhotos.ToList()
-                        .ForEach(r =>
-                        {
-                            photos.Add(new BlogPhotoEntity
-                            {
-                                IdRecord = r.IdRecord,
-                                Description = r.Description,
-                               // PhotoLink = _weblink + r.Photo.Link
-                            });
-                        });
-                    blog.Photos = photos;
+                    IdRecord = x.IdRecord,
+                    Header = x.Header,
+                    PhotoLink = photo != null ? photo.Photo.Link : null
                 });
+            });
+
+            return result;
+        }
+
+        public BlogEntity GetBlogDetails(int idBlog)
+        {
+            var blog = _repositoryHeader.Query()
+                .Include(x => x.BlogPhotos.Select(r => r.Photo))
+                .Select()
+                .FirstOrDefault(x => x.IdRecord == idBlog);
+            if (blog == null) return null;
+
+            var result = new BlogEntity
+            {
+                Header = blog.Header,
+                Message = blog.Message,
+            };
+
+            blog.BlogPhotos.ToList().ForEach(x =>
+            {
+                result.Photos.Add(new BlogPhotoEntity
+                {
+                    Description = x.Description,
+                    IdRecord = x.IdRecord,
+                    PhotoLink = x.Photo.Link
+                });
+            });
 
             return result;
         }

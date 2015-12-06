@@ -1,7 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Блоги";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<script src="~/Areas/Admin/Script/Blog/BlogController.js"></script>
+
+<div ng-app="BlogApp" ng-controller="BlogController">
+    <div ng-view></div>
+</div>
 
