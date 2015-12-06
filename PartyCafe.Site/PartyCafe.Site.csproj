@@ -254,6 +254,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Scripts\AngularControllers\EventCalendarContoller.js" />
+    <Content Include="Scripts\AngularControllers\InstaGalleryController.js" />
     <Content Include="Scripts\AngularJs\angular-animate.js" />
     <Content Include="Scripts\AngularJs\angular-animate.min.js" />
     <Content Include="Scripts\AngularJs\angular-aria.js" />
@@ -309,6 +310,7 @@
     <Content Include="Areas\Admin\Views\Blog\BlogTable.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\BlogEdit.cshtml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\instafeed.min.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.min.map" />
@@ -1069,7 +1071,10 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Shared\_BgVideo.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1111,6 +1116,7 @@
     <Content Include="Views\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_InstaGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

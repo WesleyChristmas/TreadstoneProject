@@ -1,7 +1,46 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Фотогалерея";
 }
 
-<h2>Index</h2>
+<script src="~/Scripts/isotop/isotope.pkgd.min.js"></script>
+<script src="~/Scripts/AngularJs/angular.min.js"></script>
+<script src="~/Scripts/AngularControllers/InstaGalleryController.js"></script>
+
+<script src="~/Scripts/instafeed.min.js"></script>
+<script>
+    var feed = new Instafeed({
+        get: 'user',
+        userId: '2284394077',
+        accessToken: '2284394077.8c76a05.841864c045494c31a8b3a6e0137e672a',
+        resolution: 'low_resolution'
+    });
+    //feed.run();
+
+</script>
+
+<style>
+    #gallery { max-width: 960px; margin: 20px auto; outline: 1px solid gray; }
+    .gallery-title {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 20px;
+        color: black;
+    }
+    .gallery-item {
+        display: inline-block;
+        margin: 2px;
+    }
+</style>
+
+<div id="gallery" ng-app="instagalleryapp" ng-controller="InstaGallery">
+    <div class="gallery-title">Ближайшие события</div>
+    <div id="instafeed"></div>
+    <div>
+        <div class="gallery-item" note ng-repeat="item in Gallery">
+            <a href="{{item.link}}" class="gallery-wrap" data-url="{{item.images.standart_resolution.url}}">
+                <img ng-src="{{item.images.low_resolution.url}}" class="gallery-image" alt="">
+            </a>
+        </div>
+    </div>
+</div>
 

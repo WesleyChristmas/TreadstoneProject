@@ -1,0 +1,22 @@
+﻿@{
+    string path = HttpContext.Current.Request.Url.AbsolutePath.Replace("/", "").Trim();
+}
+
+@if (path == "" || path == "EventCalendar" || path == "Games")
+{
+    <div class="bgvideo">
+        <video id="vplayer">
+            <source src="~/Content/video/video.mp4" type="video/mp4" />
+            <source src="~/Content/video/video.webm" type="video/webm" />
+            <source src="~/Content/video/video.ogv" type="video/ogg" />
+        </video>
+        <script>
+            (function() {
+                var video = document.getElementById('vplayer');
+                video.loop = true;
+                video.autoplay = true;
+                video.play();
+            })();
+        </script>
+    </div>
+}

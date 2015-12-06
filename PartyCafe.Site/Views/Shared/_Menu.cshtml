@@ -1,39 +1,38 @@
 ﻿<div class="h-wrap">
-    <!--<div id="top-social">
-        <a href="https://www.facebook.com/wwwebinvader" target="_blank"><i class="fa fa-facebook"></i> <span>Facebook</span></a>
-        <a href="https://twitter.com/BBershadsky" target="_blank"><i class="fa fa-twitter"></i> <span>Twitter</span></a>
-        <a href="https://instagram.com/bershadsky.bogdan/" target="_blank"><i class="fa fa-instagram"></i> <span>Instagram</span></a>
-        <a href="https://plus.google.com/+BogdanBershadsky/" target="_blank"><i class="fa fa-google-plus"></i> <span>Google Plus</span></a>
-        <a href="https://vk.com/b.bershadsky" target="_blank"><i class="fa fa-vk"></i> <span>Vkontakte</span></a>
-    </div>-->
     <div id="navigation-wrapper">
         <ul id="menu-top-menu" class="menu">
             <li class="menu-item">
-                <div class="icons home"></div>
-                @Html.ActionLink("Главная", "Index", "Home")
+                <a href="/" class="mi-link-home">
+                    <span class="mi-link-title">Главная</span>
+                </a>
             </li>
             <li class="menu-item">
-                <div class="icons foodmenu"></div>
-                @Html.ActionLink("Меню", "Index", "FoodMenu")
+                <a href="/FoodMenu" class="mi-link-foodmenu">
+                    <span class="mi-link-title">Меню</span>
+                </a>
             </li>
             <li class="menu-item">
-                <div class="icons event"></div>
-                @Html.ActionLink("События", "Index", "EventCalendar")
+                <a href="/EventCalendar" class="mi-link-event">
+                    <span class="mi-link-title">События</span>
+                </a>
             </li>
             <li>
                 <a href="/" class="logo"><img src="~/Content/images/logo.png" width="110" height="110"></a>
             </li>
             <li class="menu-item">
-                <div class="icons gallery"></div>
-                @Html.ActionLink("Фотогалерея", "Index", "PhotoGallery")
+                <a href="/PhotoGallery" class="mi-link-gallery">
+                    <span class="mi-link-title">Фотогалерея</span>
+                </a>
             </li>
             <li class="menu-item">
-                <div class="icons game"></div>
-                @Html.ActionLink("Игры", "Index", "Games")
+                <a href="/Games" class="mi-link-game">
+                    <span class="mi-link-title">Игры</span>
+                </a>
             </li>
             <li class="menu-item">
-                <div class="icons blog"></div>
-                @Html.ActionLink("Блог", "Index", "Blog")
+                <a href="/Blog" class="mi-link-blog">
+                    <span class="mi-link-title">Блог</span>
+                </a>
             </li>
         </ul>
     </div>

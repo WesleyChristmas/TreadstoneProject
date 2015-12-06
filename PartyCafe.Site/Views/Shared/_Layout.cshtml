@@ -6,27 +6,9 @@
     <title>Party Cafe закрытая зона - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/AngularJs/angular.min.js"></script>
 </head>
 <body>
-
-    <!-- BG-VIDEO -->
-    <div class="bgvideo">
-        <video id="vplayer">
-            <source src="~/Content/video/video.mp4" type="video/mp4" />
-            <source src="~/Content/video/video.webm" type="video/webm" />
-            <source src="~/Content/video/video.ogv" type="video/ogg" />
-        </video>
-        <script>
-            function p() {
-                var video = document.getElementById('vplayer');
-                video.loop = true;
-                video.autoplay = true;
-                video.play();
-            }
-            p();
-        </script>
-    </div>
-    <!--/ BG-VIDEO -->
 
     <!-- CONTENT -->
     <div class="content">
@@ -36,10 +18,18 @@
             </nav>
         </header>
 
+        <!-- BG-VIDEO -->
+        @Html.Partial("_BgVideo")
+        <!--/ BG-VIDEO -->
+
         <div class="wrap">
             <div>
                 @RenderBody()
             </div>
+        </div>
+
+        <div class="iw-wrap">
+            @Html.Partial("_InstaGallery")
         </div>
 
         <footer class="footer">
