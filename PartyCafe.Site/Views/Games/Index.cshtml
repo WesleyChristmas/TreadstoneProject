@@ -6,319 +6,217 @@
 <link href="~/Content/css/owl.carousel.css" rel="stylesheet" type="text/css" />
 
 <style>
-    .container_24 {
-        width: 960px;
-        /*display: block;
-        position: absolute;
-        zoom: 1;*/
-        margin: 20px auto;
-        outline: 1px solid white;
+    .main {
+        width: 792px;
+        margin: 0 auto;
+        background-color: rgba(0,0,0,0.5);
     }
-    .grid_24 {
-        /*display: inline;
-        float: left;*/
-        position:relative;
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 950px;
+    .clearall {
+        clear: both;
+        height: 1px;
+        margin-bottom: -1px;
+        overflow: hidden;
     }
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: white;
-        text-shadow: 0px 0px 5px #C222D5;
-    }
-    .centr {
-        color: white;
-    }
-    .jcarousel-skin-tango3 .jcarousel-container-horizontal {
-        width: 950px;
+    .gridViewport {
+        overflow: hidden;
         position: relative;
-        display: block;
     }
-    .jcarousel-skin-tango3 .jcarousel-clip-horizontal {
-        width: 880px;
-        margin-left: 37px;
+    .cellGridGameStandard{
+        width: 130px;
+        height: 235px;
+        margin: 0 29px 29px 0;
+        display: inline-block;
+        vertical-align: top;
+        zoom: 1;
         overflow: hidden;
     }
 
-    #mycarousel { padding: 0 50px; }
-    #mycarousel .item {
-        margin: 3px;
-        text-align: center;
-        max-width: 200px;
-        padding: 15px 0;
+    .cellCtnr {
+        width: 124px;
+        height: 264px;
     }
-    .carusel { position: relative; margin: 20px;}
-    .controll-carusel {
-        position: absolute;
-        width: 100%;
-        top: 30%;
+    .thumbPane {
+        width: 124px;
+        height: 124px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
     }
-    .btn-prev { float: left; }
-    .btn-next { float: right; }
-    #prev, #next { display: block; width: 40px; height: 40px; }
-    #prev { background: url(/Content/images/prev.png) no-repeat; }
-    #next { background: url(/Content/images/next.png) no-repeat; }
+    .thumbPane img {
+        width: 124px;
+        height: 124px;
+    }
+
+    .rgba .cellGrid .thumbPane, .rgba .cellGridGameStandard .thumbPane, .rgba .cellGridVideoStandard .thumbPane, .rgba .familyCellGridStandard .thumbPane {
+        background: rgba(60,60,60,0.7);
+    }
+    .infoPaneContainer {
+        background: rgba(60,60,60,0.7);
+    }
+    .infoPane {
+        margin: 0 8px;
+        padding: 8px 0;
+    }
+    .cellTitle {
+        height: 64px;
+        overflow: hidden;
+        text-align: left;
+        font-family: OpenSans !important;
+        float: none;
+        font-size: 12px;
+        line-height: 16px;
+        width: 108px;
+        word-wrap: break-word;
+        white-space: normal;
+        color: #F5F5F5;
+        font-weight: normal;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+    }
+    .type, .pforms {
+        font-size: 12px;
+        line-height: 16px;
+        height: 16px;
+        opacity: 0.5;
+        white-space: nowrap;
+        color: #F5F5F5;
+        font-weight: normal;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+    }
 
 </style>
 
-<div class="container_24">
-    <div class="grid_24">
-        <h2 class="centr">Игры настольные и не только</h2>
-        <div class="line-1 marg1"></div>
-        <p class="centr marg2">
-            Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget lorem ipsum
-            condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.
-        </p>
-        <p class="centr">Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque.</p>
-        
-        <div class="carusel">
-            <div class="controll-carusel">
-                <div class="btn-prev"><a id="prev"></a></div>
-                <div class="btn-next"><a id="next"></a></div>
-            </div>
-            <div id="mycarousel" class="owl-carousel owl-theme">
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>200 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>210 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>220 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>230 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>240 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>250 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>260 руб.</div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="/Content/images/img01.png" alt="">
-                    <div>
-                        <div>Dragon Age: Inquizition</div>
-                        <div>270 руб.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-<!--
-        <div class="jcarousel">
-            <ul>
-                <li>
-                    <a class="fancyPic2" rel="Appendix" href="images/image-blank.png">
-                        <span class="zoomSp2" style="opacity: 0;"></span>
-                        <img src="/Content/images/img01.png" alt="">
-                    </a>
-                    <div class="marg12 centr">
-                        <p class="dateparty pad4">Sep1</p>
-                        <a href="#" class="link2">Student Day</a>
-                        <p class="color-3">Sed consequat, leo eget bibdum <a href="#!/pageMore" class="partydots">...</a></p>
-                    </div>
-                </li>
-                <li>
-                    <a class="fancyPic2" rel="Appendix" href="images/image-blank.png">
-                        <span class="zoomSp2" style="opacity: 0;"></span>
-                        <img src="/Content/images/img01.png" alt="">
-                    </a>
-                    <div class="marg12 centr">
-                        <p class="dateparty pad4">Sep1</p>
-                        <a href="#" class="link2">Student Day</a>
-                        <p class="color-3">Sed consequat, leo eget bibdum <a href="#!/pageMore" class="partydots">...</a></p>
-                    </div>
-                </li>
-                <li>
-                    <a class="fancyPic2" rel="Appendix" href="images/image-blank.png">
-                        <span class="zoomSp2" style="opacity: 0;"></span>
-                        <img src="/Content/images/img01.png" alt="">
-                    </a>
-                    <div class="marg12 centr">
-                        <p class="dateparty pad4">Sep1</p>
-                        <a href="#" class="link2">Student Day</a>
-                        <p class="color-3">Sed consequat, leo eget bibdum <a href="#!/pageMore" class="partydots">...</a></p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        -->
-<!--        
-        <div class=" jcarousel-skin-tango3">
-            <div class="jcarousel-container jcarousel-container-horizontal" style="position: relative; display: block;">
-                <div class="jcarousel-clip jcarousel-clip-horizontal" style="position: relative;">
-                    <ul id="mycarousel-3" class="jcarousel-list jcarousel-list-horizontal" style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: -447px; width: 1888px;">
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal" jcarouselindex="1" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Sep1</p>
-                                <a href="#" class="link2">Student Day</a>
-                                <p class="color-3">Sed consequat, leo eget bibdum <a href="#!/pageMore" class="partydots">...</a></p>
+<div class="main">
+    <div class="panelGrid">
+        <div class="gridViewport">
+            <div>
+                <ul>
+                    <li class="cellGridGameStandard">
+                        <div class="cellCtnr">
+                            <div class="cellBorderCtnr">
+                                <div class="thumbPane">
+                                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/999/EP4497-CUSA01440_00-0000000000000004/1455704902000/image?_version=00_09_000&amp;platform=chihiro&amp;w=124&amp;h=124&amp;bg_color=000000&amp;opacity=100" alt="Ведьмак 3: Дикая Охота">
+                                </div>
+                                <div class="infoPaneContainer">
+                                    <div class="infoPane">
+                                        <div>
+                                            <h3 class="cellTitle">Ведьмак 3: Дикая Охота</h3>
+                                        </div>
+                                        <div>
+                                            <h4 class="pforms">PS4</h4>
+                                            <div class="clearall"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-2 jcarousel-item-2-horizontal" jcarouselindex="2" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Oct3</p>
-                                <a href="#" class="link2">girls night</a>
-                                <p class="color-3">Cras ultricies mi nisi turpis hendrerit <a href="#!/pageMore" class="partydots">...</a></p>
+                        </div>
+                    </li>
+                    <li class="cellGridGameStandard">
+                        <div class="cellCtnr">
+                            <div class="cellBorderCtnr">
+                                <div class="thumbPane">
+                                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/999/EP0002-CUSA00433_00-D3ULTIMATEEVIL00/1454547088000/image?_version=00_09_000&amp;platform=chihiro&amp;w=124&amp;h=124&amp;bg_color=000000&amp;opacity=100" alt="Diablo III: Reaper of Souls - Ultimate Evil Edition  - EFIGS">
+                                </div>
+                                <div class="infoPaneContainer">
+                                    <div class="infoPane">
+                                        <div>
+                                            <h3 class="cellTitle">Diablo III: Reaper of Souls - Ultimate Evil Edition  - EFIGS</h3>
+                                        </div>
+                                        <div>
+                                            <h4 class="pforms">PS4</h4>
+                                            <div class="clearall"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-3 jcarousel-item-3-horizontal" jcarouselindex="3" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Oct15</p>
-                                <a href="#" class="link2">Rock Tuesday</a>
-                                <p class="color-3">Integer ante arcu, sit  accumsan eget <a href="#!/pageMore" class="partydots">...</a></p>
+                        </div>
+                    </li>
+                    <li class="cellGridGameStandard">
+                        <div class="cellCtnr">
+                            <div class="cellBorderCtnr">
+                                <div class="thumbPane">
+                                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/999/EP2186-CUSA00903_00-DFSXBUYBUNDLE000/1454089936000/image?_version=00_09_000&amp;platform=chihiro&amp;w=124&amp;h=124&amp;bg_color=000000&amp;opacity=100" alt="Dragon Fin Soup">
+                                </div>
+                                <div class="infoPaneContainer">
+                                    <div class="infoPane">
+                                        <div>
+                                            <h3 class="cellTitle">Dragon Fin Soup</h3>
+                                        </div>
+                                        <div>
+                                            <h4 class="pforms">PS3|PS4|PS Vita</h4>
+                                            <div class="clearall"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-4 jcarousel-item-4-horizontal" jcarouselindex="4" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Nov2</p>
-                                <a href="#" class="link2">djs fight</a>
-                                <p class="color-3">Vestibulum volutpat pretium libero <a href="#!/pageMore" class="partydots">...</a></p>
+                        </div>
+                    </li>
+                    <li class="cellGridGameStandard">
+                        <div class="cellCtnr">
+                            <div class="cellBorderCtnr">
+                                <div class="thumbPane">
+                                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/999/EP0006-NPEB00503_00-MASSEFFECT200000/1455757033000/image?_version=00_09_000&amp;platform=chihiro&amp;w=124&amp;h=124&amp;bg_color=000000&amp;opacity=100" alt="Mass Effect™ 2">
+                                </div>
+                                <div class="infoPaneContainer">
+                                    <div class="infoPane">
+                                        <div>
+                                            <h3 class="cellTitle">Mass Effect™ 2</h3>
+                                        </div>
+                                        <div>
+                                            <h4 class="pforms">PS3</h4>
+                                            <div class="clearall"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-5 jcarousel-item-5-horizontal" jcarouselindex="5" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Nov10</p>
-                                <a href="#" class="link2">Pink night</a>
-                                <p class="color-3"> Aenean posuere, dui tortor cursus <a href="#!/pageMore" class="partydots">...</a></p>
+                        </div>
+                    </li>
+                    <li class="cellGridGameStandard">
+                        <div class="cellCtnr">
+                            <div class="cellBorderCtnr">
+                                <div class="thumbPane">
+                                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/999/EP4133-CUSA02762_00-DIVINITYPS4BUNDL/1454547076000/image?_version=00_09_000&amp;platform=chihiro&amp;w=124&amp;h=124&amp;bg_color=000000&amp;opacity=100" alt="DIVINITY ORIGINAL SIN - ENHANCED EDITION">
+                                </div>
+                                <div class="infoPaneContainer">
+                                    <div class="infoPane">
+                                        <div>
+                                            <h3 class="cellTitle">DIVINITY ORIGINAL SIN - ENHANCED EDITION</h3>
+                                        </div>
+                                        <div>
+                                            <h4 class="pforms">PS4</h4>
+                                            <div class="clearall"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-6 jcarousel-item-6-horizontal" jcarouselindex="6" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Nov26</p>
-                                <a href="#" class="link2">fire party</a>
-                                <p class="color-3">Ut varius tincidunt et libero phasellus <a href="#!/pageMore" class="partydots">...</a></p>
+                        </div>
+                    </li>
+                    <li class="cellGridGameStandard">
+                        <div class="cellCtnr">
+                            <div class="cellBorderCtnr">
+                                <div class="thumbPane">
+                                    <img src="https://store.playstation.com/store/api/chihiro/00_09_000/container/RU/ru/999/EP9000-NPEA00252_00-GINFAMOUSX000001/1455800834000/image?_version=00_09_000&amp;platform=chihiro&amp;w=124&amp;h=124&amp;bg_color=000000&amp;opacity=100" alt="inFAMOUS™">
+                                </div>
+                                <div class="infoPaneContainer">
+                                    <div class="infoPane">
+                                        <div>
+                                            <h3 class="cellTitle">inFAMOUS™</h3>
+                                        </div>
+                                        <div>
+                                            <h4 class="pforms">PS3</h4>
+                                            <div class="clearall"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="clear"></div>
-                        </li>
-
-
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-7 jcarousel-item-7-horizontal" jcarouselindex="7" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Sep1</p>
-                                <a href="#" class="link2">Student Day</a>
-                                <p class="color-3">Sed consequat, leo eget bibdum <a href="#!/pageMore" class="partydots">...</a></p>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-8 jcarousel-item-8-horizontal" jcarouselindex="8" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Oct3</p>
-                                <a href="#" class="link2">girls night</a>
-                                <p class="color-3">Cras ultricies mi nisi turpis hendrerit <a href="#!/pageMore" class="partydots">...</a></p>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-9 jcarousel-item-9-horizontal" jcarouselindex="9" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Oct15</p>
-                                <a href="#" class="link2">Rock Tuesday</a>
-                                <p class="color-3">Integer ante arcu, sit  accumsan eget <a href="#!/pageMore" class="partydots">...</a></p>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-10 jcarousel-item-10-horizontal" jcarouselindex="10" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Nov2</p>
-                                <a href="#" class="link2">djs fight</a>
-                                <p class="color-3">Vestibulum volutpat pretium libero <a href="#!/pageMore" class="partydots">...</a></p>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-11 jcarousel-item-11-horizontal" jcarouselindex="11" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Nov10</p>
-                                <a href="#" class="link2">Pink night</a>
-                                <p class="color-3"> Aenean posuere, dui tortor cursus <a href="#!/pageMore" class="partydots">...</a></p>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-12 jcarousel-item-12-horizontal" jcarouselindex="12" style="float: left; list-style: none;">
-                            <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span class="zoomSp2" style="opacity: 0;"></span><img src="/Content/images/img01.png" alt=""></a>
-                            <div class="marg12 centr">
-                                <p class="dateparty pad4">Nov26</p>
-                                <a href="#" class="link2">fire party</a>
-                                <p class="color-3">Ut varius tincidunt et libero phasellus <a href="#!/pageMore" class="partydots">...</a></p>
-                            </div>
-                            <div class="clear"></div>
-                        </li>
-                    </ul>
-                </div><div class="jcarousel-prev jcarousel-prev-horizontal" style="display: block;"></div><div class="jcarousel-next jcarousel-next-horizontal" style="display: block;"></div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
-    -->
     </div>
-
-    <div class="clear"></div>
+    <div class="clearall"></div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $("#mycarousel").owlCarousel({
-            autoPlay: 5000,
-            items: 5,
-            itemsDesktop: [1199, 3],
-            itemsDesktopSmall: [979, 3]
-        });
-
-        $("#next").on('click', function () {
-            $("#mycarousel").trigger('owl.next');
-        })
-        $("#prev").on('click', function () {
-            $("#mycarousel").trigger('owl.prev');
-        })
-    });
-</script>

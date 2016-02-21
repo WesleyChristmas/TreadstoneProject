@@ -13,7 +13,7 @@ function getPhoto($scope, $http) {
     url = 'https://api.instagram.com/v1/users/' + settings.userId + '/media/recent/?access_token=' + settings.token;
 
     $http.jsonp(url + '&callback=JSON_CALLBACK').success(function (result, status) {
-        console.log(result);
+        //console.log(result);
         if (result.data.length > 9) {
             $scope.Gallery = result.data.slice(0, 9);
         } else {

@@ -5,7 +5,7 @@
 </div>
 <ul class="iw-list" ng-app="instagalleryapp" ng-controller="InstaGallery">
     <li ng-repeat="item in Gallery">
-        <a href="{{item.link}}" target="_blank">
+        <a href="{{item.link}}" target="_blank" title="{{item.caption.text}}">
             <img ng-src="{{item.images.standard_resolution.url}}">
         </a>
     </li>
