@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodMenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GamesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -309,6 +310,7 @@
     <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\BlogTable.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\BlogEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Games\Index.cshtml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\instafeed.min.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.js" />
