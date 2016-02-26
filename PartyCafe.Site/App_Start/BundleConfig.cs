@@ -30,6 +30,22 @@ namespace PartyCafe.Site
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/style.css"));
+
+            /* GAMMA GALLERY */
+            bundles.Add(new ScriptBundle("~/bundles/gammagalleryJS").Include(
+                    "~/Scripts/GammaGallery/modernizr.custom.70736.js",
+                    "~/Scripts/GammaGallery/jquery.masonry.min.js",
+                    "~/Scripts/GammaGallery/jquery.history.js",
+                    "~/Scripts/GammaGallery/js-url.min.js",
+                    "~/Scripts/GammaGallery/jquerypp.custom.js",
+                    "~/Scripts/GammaGallery/gamma.js"
+            ));
+            bundles.Add(new StyleBundle("~/bundles/gammagalleryCSS").Include(
+                    "~/Content/css/GammaGallery/style.css",
+                    "~/Content/css/GammaGallery/noJS.css",
+                    "~/Content/css/GammaGallery/demo.css"
+            ));
+
         }
     }
 }

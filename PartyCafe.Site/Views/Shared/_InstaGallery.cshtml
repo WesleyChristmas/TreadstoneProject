@@ -1,12 +1,19 @@
-﻿<script src="~/Scripts/AngularControllers/InstaGalleryController.js"></script>
+﻿@{
+    string path = HttpContext.Current.Request.Url.AbsolutePath.Replace("/", "").Trim();
+}
 
-<div class="iw-link_wrap">
-    <h3 class="iw-link_title">#PARTYCAFE ON INSTAGRAM</h3>
-</div>
-<ul class="iw-list" ng-app="instagalleryapp" ng-controller="InstaGallery">
-    <li ng-repeat="item in Gallery">
-        <a href="{{item.link}}" target="_blank" title="{{item.caption.text}}">
-            <img ng-src="{{item.images.standard_resolution.url}}">
-        </a>
-    </li>
-</ul>
+@if (path != "EventCalendar")
+{
+    <script src="~/Scripts/AngularControllers/InstaGalleryController.js"></script>
+
+    <div class="iw-link_wrap">
+        <h3 class="iw-link_title">#PARTYCAFE ON INSTAGRAM</h3>
+    </div>
+    <ul class="iw-list" ng-app="instagalleryapp" ng-controller="InstaGallery">
+        <li ng-repeat="item in Gallery">
+            <a href="{{item.link}}" target="_blank" title="{{item.caption.text}}">
+                <img ng-src="{{item.images.standard_resolution.url}}">
+            </a>
+        </li>
+    </ul>
+}

@@ -21,12 +21,15 @@ img { border: 0; outline: 0; }
 
 /* Top menu */
 #navigation {
-    background: #000;
+    //background: #22272a;
+    position: fixed;
+    z-index: 999;
+    background: url(../images/head_line.jpg) center 0 no-repeat;
     height: auto;
     width: 100%;
     -webkit-backface-visibility: hidden;
 }
-.h-wrap { position: relative; margin: 0 auto; width: 525px; }
+.h-wrap { position: relative; margin: 0 auto; width: 645px; }
 .h-wrap a, .h-wrap span { color: rgb(200,200,200); }
 .top-social { position: relative; width: 35%; float: left; }
 #navigation-wrapper { padding: 1%; }
@@ -38,6 +41,7 @@ img { border: 0; outline: 0; }
     margin: 0px 8px;
     padding: 0px 4px;
     cursor: pointer;
+    float: left;
 }
 .menu a {
     position: relative;
@@ -51,6 +55,8 @@ img { border: 0; outline: 0; }
     -o-transition: 0.3s;
     -moz-transition: 0.3s;
     -webkit-transition: 0.3s;
+    z-index: 0;
+    overflow: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -70,7 +76,7 @@ img { border: 0; outline: 0; }
     top: 50%;
     width: 0px;
     height: 2px;
-    margin-top: -2px;
+    margin-top: -4px;
     background: #ffffff;
     z-index: 1;
     -webkit-transition: all 0.3s;
@@ -341,3 +347,86 @@ img { border: 0; outline: 0; }
     .h-wrap { width: auto; }
 
 }
+
+/* GAMES */
+
+   .main {
+        width: 792px;
+        margin: 0 auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .clearall {
+        clear: both;
+        height: 1px;
+        margin-bottom: -1px;
+        overflow: hidden;
+    }
+    .gridViewport {
+        overflow: hidden;
+        position: relative;
+    }
+    .cellGridGameStandard{
+        width: 130px;
+        height: 235px;
+        margin: 0 29px 29px 0;
+        display: inline-block;
+        vertical-align: top;
+        zoom: 1;
+        overflow: hidden;
+    }
+
+    .cellCtnr {
+        width: 124px;
+        height: 264px;
+    }
+    .thumbPane {
+        width: 124px;
+        height: 124px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .thumbPane img {
+        width: 124px;
+        height: 124px;
+    }
+
+    .rgba .cellGrid .thumbPane, .rgba .cellGridGameStandard .thumbPane, .rgba .cellGridVideoStandard .thumbPane, .rgba .familyCellGridStandard .thumbPane {
+        background: rgba(60,60,60,0.7);
+    }
+    .infoPaneContainer {
+        background: rgba(60,60,60,0.7);
+    }
+    .infoPane {
+        margin: 0 8px;
+        padding: 8px 0;
+    }
+    .cellTitle {
+        height: 64px;
+        overflow: hidden;
+        text-align: left;
+        font-family: OpenSans !important;
+        float: none;
+        font-size: 12px;
+        line-height: 16px;
+        width: 108px;
+        word-wrap: break-word;
+        white-space: normal;
+        color: #F5F5F5;
+        font-weight: normal;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+    }
+    .type, .pforms {
+        font-size: 12px;
+        line-height: 16px;
+        height: 16px;
+        opacity: 0.5;
+        white-space: nowrap;
+        color: #F5F5F5;
+        font-weight: normal;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+    }

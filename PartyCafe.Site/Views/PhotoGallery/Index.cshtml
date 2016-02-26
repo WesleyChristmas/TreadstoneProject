@@ -2,45 +2,136 @@
     ViewBag.Title = "Фотогалерея";
 }
 
-<script src="~/Scripts/isotop/isotope.pkgd.min.js"></script>
-<script src="~/Scripts/AngularJs/angular.min.js"></script>
-<script src="~/Scripts/AngularControllers/InstaGalleryController.js"></script>
-
-<script src="~/Scripts/instafeed.min.js"></script>
-<script>
-    var feed = new Instafeed({
-        get: 'user',
-        userId: '2284394077',
-        accessToken: '2284394077.8c76a05.841864c045494c31a8b3a6e0137e672a',
-        resolution: 'low_resolution'
-    });
-    //feed.run();
-
-</script>
-
 <style>
-    #gallery { max-width: 960px; margin: 20px auto; outline: 1px solid gray; }
-    .gallery-title {
-        text-align: center;
-        font-size: 30px;
-        margin-bottom: 20px;
-        color: black;
+    .mosaicflow__column {
+        float:left;
     }
-    .gallery-item {
-        display: inline-block;
-        margin: 2px;
+    .mosaicflow__item img {
+        display:block;
+        height:auto;
     }
 </style>
 
-<div id="gallery" ng-app="instagalleryapp" ng-controller="InstaGallery">
-    <div class="gallery-title">Ближайшие события</div>
-    <div id="instafeed"></div>
-    <div>
-        <div class="gallery-item" note ng-repeat="item in Gallery">
-            <a href="{{item.link}}" class="gallery-wrap" data-url="{{item.images.standart_resolution.url}}">
-                <img ng-src="{{item.images.low_resolution.url}}" class="gallery-image" alt="">
-            </a>
-        </div>
-    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+@Styles.Render("~/bundles/gammagalleryCSS")
+@Scripts.Render("~/bundles/gammagalleryJS")
+
+<div class="gamma-container gamma-loading" id="gamma-container">
+    <ul class="gamma-gallery">
+        <li>
+            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+                <div data-src="/Content/images/gallery/1.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/1.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/1.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/1.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/1.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/1.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/1.jpg"></div>
+                <noscript><img src="/Content/images/gallery/1.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+        <li>
+            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+                <div data-src="/Content/images/gallery/2.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/2.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/2.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/2.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/2.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/2.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/2.jpg"></div>
+                <noscript><img src="/Content/images/gallery/2.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+        <li>
+            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+                <div data-src="/Content/images/gallery/3.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/3.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/3.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/3.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/3.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/3.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/3.jpg"></div>
+                <noscript><img src="/Content/images/gallery/3.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+        <li>
+            <div data-alt="img03" data-max-width="1800" data-max-height="1350" data-description="<h3>Sky high</h3>">
+                <div data-src="/Content/images/gallery/4.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/4.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/4.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/4.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/4.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/4.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/4.jpg"></div>
+                <noscript><img src="/Content/images/gallery/4.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+        <li>
+            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+                <div data-src="/Content/images/gallery/5.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/5.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/5.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/5.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/5.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/5.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/5.jpg"></div>
+                <noscript><img src="/Content/images/gallery/5.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+        <li>
+            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+                <div data-src="/Content/images/gallery/6.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/6.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/6.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/6.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/6.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/6.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/6.jpg"></div>
+                <noscript><img src="/Content/images/gallery/6.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+        <li>
+            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
+                <div data-src="/Content/images/gallery/7.jpg" data-min-width="1300"></div>
+                <div data-src="/Content/images/gallery/7.jpg" data-min-width="1000"></div>
+                <div data-src="/Content/images/gallery/7.jpg" data-min-width="700"></div>
+                <div data-src="/Content/images/gallery/7.jpg" data-min-width="300"></div>
+                <div data-src="/Content/images/gallery/7.jpg" data-min-width="200"></div>
+                <div data-src="/Content/images/gallery/7.jpg" data-min-width="140"></div>
+                <div data-src="/Content/images/gallery/7.jpg"></div>
+                <noscript><img src="/Content/images/gallery/7.jpg" alt="img03" /></noscript>
+            </div>
+        </li>
+    </ul>
+    <div class="gamma-overlay"></div>
+    <div id="loadmore" class="loadmore">Example for loading more items...</div>
+
+    <script type="text/javascript">
+        $(function () {
+            var GammaSettings = {
+                viewport: [{
+                    width: 1200,
+                    columns: 5
+                }, {
+                    width: 900,
+                    columns: 4
+                }, {
+                    width: 500,
+                    columns: 3
+                }, {
+                    width: 320,
+                    columns: 2
+                }, {
+                    width: 0,
+                    columns: 2
+                }]
+            };
+            Gamma.init(GammaSettings);
+        });
+    </script>
+
+
+
 </div>
 

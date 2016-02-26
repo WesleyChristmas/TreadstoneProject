@@ -231,6 +231,9 @@
     </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\GammaGallery\demo.css" />
+    <Content Include="Content\css\GammaGallery\noJS.css" />
+    <Content Include="Content\css\GammaGallery\style.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\owl.transitions.css" />
@@ -241,7 +244,15 @@
     <Content Include="Content\images\event.png" />
     <Content Include="Content\images\events.png" />
     <Content Include="Content\images\gallery.png" />
+    <Content Include="Content\images\gallery\1.jpg" />
+    <Content Include="Content\images\gallery\2.jpg" />
+    <Content Include="Content\images\gallery\3.jpg" />
+    <Content Include="Content\images\gallery\4.jpg" />
+    <Content Include="Content\images\gallery\5.jpg" />
+    <Content Include="Content\images\gallery\6.jpg" />
+    <Content Include="Content\images\gallery\7.jpg" />
     <Content Include="Content\images\game.png" />
+    <Content Include="Content\images\head_line.jpg" />
     <Content Include="Content\images\home.png" />
     <Content Include="Content\images\img01.png" />
     <Content Include="Content\images\logo.png" />
@@ -251,6 +262,7 @@
     <Content Include="Content\images\prev.png" />
     <Content Include="Content\video\video.mp4" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\entypo-selected.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
@@ -311,7 +323,16 @@
     <Content Include="Areas\Admin\Views\Blog\BlogTable.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\BlogEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Games\Index.cshtml" />
+    <Content Include="fonts\entypo-selected.eot" />
+    <Content Include="fonts\entypo-selected.ttf" />
+    <Content Include="fonts\entypo-selected.woff" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\GammaGallery\gamma.js" />
+    <Content Include="Scripts\GammaGallery\jquery.history.js" />
+    <Content Include="Scripts\GammaGallery\jquery.masonry.min.js" />
+    <Content Include="Scripts\GammaGallery\jquerypp.custom.js" />
+    <Content Include="Scripts\GammaGallery\js-url.min.js" />
+    <Content Include="Scripts\GammaGallery\modernizr.custom.70736.js" />
     <Content Include="Scripts\instafeed.min.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.min.js" />
@@ -1062,7 +1083,6 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\isotop\isotope.pkgd.min.js" />
     <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery\jquery.jcarousel.min.js" />
     <Content Include="Scripts\jquery\jquery.validate.js" />
     <Content Include="Scripts\jquery\jquery.validate.min.js" />
     <Content Include="Scripts\jquery\jquery.validate.unobtrusive.js" />

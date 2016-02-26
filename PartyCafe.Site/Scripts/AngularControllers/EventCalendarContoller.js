@@ -27,9 +27,66 @@ function setCalendaData(_d, _m) {
 }
 
 function getData($scope, $http) {
-    $http.get("/EventCalendar/GetCalendar").success(function (data, status) {
+    var respons = [
+        { EventDate: '2016,02,08', Header: 'Международный женский день', PhotoLink: '' }
+    ];
+    CalendarJOPA('calendar-wrap', 30, respons, $scope);
+    /*$http.get("/EventCalendar/GetCalendar").success(function (data, status) {
         Calendar('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
-    });
+    });*/
+}
+
+function CalendarJOPA(obj, dcount, respons, $scope) {
+    var date = new Date(),
+        m = date.getMonth() + 1, daysInMonth = date.monthDays(),
+        cal = [],
+        _month = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
+        l = dcount;
+
+    /* формирование календаря */
+    for (var i = 0; i < l; ++i) {
+        var d = date.getDate();
+
+        if (d >= daysInMonth) {
+            var obj = setCalendaData(d, _month[m - 1]);
+            cal[i] = obj;
+
+            if (m != 13) {
+                date.setDate(1);
+                date.setMonth(date.getMonth() + 1);
+
+                var obj = setCalendaData(d, _month[m - 1]);
+                cal[i] = obj;
+                m = date.getMonth() + 1;
+            }
+        }
+        else {
+            var obj = setCalendaData(d, _month[m - 1]);
+
+            cal[i] = obj;
+            date.setDate(d + 1);
+        }
+    }
+
+    /* Заполнение календаря событиями */
+    l = respons.length;
+    for (var i = 0; i < l; i++) {
+        var _d = respons[i].EventDate,
+            date = new Date(_d),
+            d = date.getDate(),
+            m = date.getMonth(),
+            _calL = cal.length;
+
+        for (var j = 0; j < _calL; j++) {
+            if (cal[j].day === d) {
+                var _obj = { header: respons[i].Header, photo: respons[i].PhotoLink }
+                cal[j].data = _obj;
+                break;
+            }
+        }
+    }
+    $scope.Events = cal;
+
 }
 
 function Calendar(obj, dcount, respons, curdate, $scope) {
