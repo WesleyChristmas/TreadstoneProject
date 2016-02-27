@@ -183,7 +183,7 @@ img { border: 0; outline: 0; }
 /* GAMES */
 
    .main {
-        width: 792px;
+        max-width: 80%;
         margin: 0 auto;
         background-color: rgba(0,0,0,0.5);
     }
@@ -193,9 +193,13 @@ img { border: 0; outline: 0; }
         margin-bottom: -1px;
         overflow: hidden;
     }
+    .panelGrid { overflow: hidden; }
     .gridViewport {
         overflow: hidden;
         position: relative;
+        overflow-y: scroll;
+        height: 680px;
+        margin-right: -20px;
     }
     .cellGridGameStandard{
         width: 130px;
@@ -273,13 +277,20 @@ img { border: 0; outline: 0; }
     top: 100px;
     bottom: 0;
 }
-#calendar { max-width: 960px; min-height: 100%; margin: 20px auto; }
+#calendar { max-width: 68%; min-height: 100%; margin: 20px auto; overflow: hidden; }
 .calendar-title {
     text-align: center;
     font-size: 25px;
     margin-bottom: 20px;
     color: white;
     text-shadow: 0px 0px 5px #C222D5;
+}
+#calendar-wrap {
+    max-height: 600px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    margin-right: -20px;
 }
 .event-week, .event-day { display: inline-block; }
 .event-day {
@@ -478,6 +489,12 @@ img { border: 0; outline: 0; }
 
 
 /* Media */
+@media only screen and (max-width: 950px) {
+    #calendar {
+        margin-left: 5%;
+    }
+    .main { max-width: 535px; }
+}
 @media only screen and (max-width: 780px) {
     .iw-link_title { font-size: 25px; margin-top: 15px; }
     #navigation-wrapper { padding: initial; }
@@ -499,9 +516,10 @@ img { border: 0; outline: 0; }
     .logo:hover:before{ content: none; }
     .h-wrap { width: auto; }
 }
-@media (max-width: 640px) {
+@media only screen and (max-width: 640px) {
     .iw-list li { width: 50%; }
     .iw-link_title { font-size: 36px; margin-top: -4px; }
+    .main { max-width: 365px; }
 }
 
 
