@@ -196,6 +196,7 @@
     <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\EventCalendarController.cs" />
     <Compile Include="Controllers\FoodMenuController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
@@ -232,6 +233,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\fonts.css" />
     <Content Include="Content\css\GammaGallery\demo.css" />
     <Content Include="Content\css\GammaGallery\noJS.css" />
     <Content Include="Content\css\GammaGallery\style.css" />
@@ -332,6 +334,10 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\ss-social-regular.ttf" />
+    <Content Include="fonts\ss-social-regular.woff" />
+    <Content Include="fonts\ss-standard.ttf" />
+    <Content Include="fonts\ss-standard.woff" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />
@@ -1149,6 +1155,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_InstaGallery.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

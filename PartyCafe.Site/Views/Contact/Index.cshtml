@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Наши контакты";
+}
+<script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
+<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/css/animate.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/css/fonts.css" type="text/css" rel="stylesheet" />
+
+<div class="map_wrap">
+    <ul class="list-icon-items">
+        <li class="grid-3 secondary alpha">
+            <a href="/cdn-cgi/l/email-protection#0e666b6262614e6c7b67627a6c776c7b68686f6261206d6163">
+                <i class="circ large tertiary ss-icon ss-standard">&#x2709;<i class="circ pulse"></i></i>
+                <h4 class="secondary">Email</h4>
+                <p>Text us</p>
+            </a>
+        </li>
+        <li class="grid-3 secondary">
+            <a href="/cdn-cgi/l/email-protection#0e666b6262614e6c7b67627a6c776c7b68686f6261206d6163">
+                <i class="circ large tertiary ss-icon ss-standard">&#x1F4F1;<i class="circ pulse"></i></i>
+                <h4 class="secondary">Instagram</h4>
+                <p>watch us</p>
+            </a>
+        </li>
+        <li class="grid-3 secondary">
+            <a href="http://twitter.com/builtbybuffalo">
+                <i class="circ large tertiary ss-icon ss-social">&#xF611;<i class="circ pulse"></i></i>
+                <h4 class="secondary">Twitter</h4>
+                <p><span class="pseudo-link">Follow us</span></p>
+            </a>
+        </li>
+        <li class="grid-3 secondary omega">
+            <a href="skype:builtbybuffalo?call">
+                <i class="circ large tertiary ss-icon ss-social">&#xF6A0;<i class="circ pulse"></i></i>
+                <h4 class="secondary">Skype</h4>
+                <p><span class="pseudo-link">Call us</span></p>
+            </a>
+        </li>
+    </ul>
+    <hr class="center" />
+    <h2>Find us</h2>
+    <div id='map'></div>
+    <div class="adress_wrap">
+        <h2 class="adress_title">Our adress</h2>
+        <div>
+            <ul class="adress">
+                <li>Red Sqare 1</li>
+                <li>Metro Ohotniy ryad</li>
+                <li>kak voydesh napravo</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    L.mapbox.accessToken = 'pk.eyJ1Ijoid2VzbGV5YnVybndvb2QiLCJhIjoiY2lsNTNvaWNxMDBmY3c5bTBuNnhyb2R4NSJ9.MY590yZ-rkPWcJUfbUjAUw';
+    var map = L.mapbox.map('map', 'mapbox.streets').setView([55.7970734, 37.7310959], 16);
+    L.mapbox.featureLayer({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [
+              55.7970734,
+              37.7310959
+            ]
+        },
+        properties: {
+            title: 'Zакрытая Территория',
+            description: 'Большая черкизовская тыры пыры',
+            'marker-size': 'large',
+            'marker-color': '#BE9A6B',
+            'marker-symbol': 'cafe'
+        }
+    }).addTo(map);
+    map.scrollWheelZoom.disable();
+</script>
+
+
+
