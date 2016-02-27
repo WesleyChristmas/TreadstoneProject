@@ -6,7 +6,7 @@ eventcalendarapp.directive('note', function ($timeout) {
             $timeout(function () {
                 var iso = new Isotope(document.querySelector('#calendar-wrap'), {
                     itemSelector: '.event-day',
-                    layoutMode: 'masonry'
+                    layoutMode: 'fitRows'
                 });
             }, 100);
         }
@@ -28,7 +28,8 @@ function setCalendaData(_d, _m) {
 
 function getData($scope, $http) {
     var respons = [
-        { EventDate: '2016,02,08', Header: 'Международный женский день', PhotoLink: '' }
+        { EventDate: '2016,02,08', Header: 'Международный женский день', PhotoLink: '/Content/images/logo.png' },
+        { EventDate: '2016,02,19', Header: 'Пенная вечеринка', PhotoLink: '/Content/images/logo.png' }
     ];
     CalendarJOPA('calendar-wrap', 30, respons, $scope);
     /*$http.get("/EventCalendar/GetCalendar").success(function (data, status) {

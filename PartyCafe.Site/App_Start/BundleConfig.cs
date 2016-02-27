@@ -9,7 +9,7 @@ namespace PartyCafe.Site
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/bundles/mainJS").Include(
                         "~/Scripts/jquery/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,7 +28,7 @@ namespace PartyCafe.Site
                       "~/Content/css/bootstrap.css",
                       "~/Content/css/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/styles").Include(
                       "~/Content/css/style.css"));
 
             /* GAMMA GALLERY */
@@ -45,7 +45,6 @@ namespace PartyCafe.Site
                     "~/Content/css/GammaGallery/noJS.css",
                     "~/Content/css/GammaGallery/demo.css"
             ));
-
         }
     }
 }

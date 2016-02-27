@@ -13,9 +13,15 @@
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
-@Styles.Render("~/bundles/gammagalleryCSS")
-@Scripts.Render("~/bundles/gammagalleryJS")
+<link href="~/Content/css/GammaGallery/style.css" rel="stylesheet" />
+<link href="~/Content/css/GammaGallery/noJS.css" rel="stylesheet" />
+<link href="~/Content/css/GammaGallery/demo.css" rel="stylesheet" />
+<script src="~/Scripts/GammaGallery/modernizr.custom.70736.js"></script>
+<script src="~/Scripts/GammaGallery/jquery.masonry.min.js"></script>
+<script src="~/Scripts/GammaGallery/jquery.history.js"></script>
+<script src="~/Scripts/GammaGallery/js-url.min.js"></script>
+<script src="~/Scripts/GammaGallery/jquerypp.custom.js"></script>
+<script src="~/Scripts/GammaGallery/gamma.js"></script>
 
 <div class="gamma-container gamma-loading" id="gamma-container">
     <ul class="gamma-gallery">
@@ -125,13 +131,12 @@
                 }, {
                     width: 0,
                     columns: 2
-                }]
+                }],
+                keyboard: true,
+                swipe: true
             };
             Gamma.init(GammaSettings);
         });
     </script>
-
-
-
 </div>
 

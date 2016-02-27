@@ -11,8 +11,15 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    line-height: auto;
+    color: #fff!important;}
 a { text-decoration: none; }
 ul { list-style: none; }
 img { border: 0; outline: 0; }
@@ -22,14 +29,14 @@ img { border: 0; outline: 0; }
 /* Top menu */
 #navigation {
     //background: #22272a;
-    position: fixed;
+    position: absolute;
     z-index: 999;
     background: url(../images/head_line.jpg) center 0 no-repeat;
     height: auto;
     width: 100%;
     -webkit-backface-visibility: hidden;
 }
-.h-wrap { position: relative; margin: 0 auto; width: 645px; }
+.h-wrap { position: relative; margin: 0 auto; width: 610px; }
 .h-wrap a, .h-wrap span { color: rgb(200,200,200); }
 .top-social { position: relative; width: 35%; float: left; }
 #navigation-wrapper { padding: 1%; }
@@ -86,20 +93,30 @@ img { border: 0; outline: 0; }
 }
 .menu-item:hover:after { width:100%; }
 
+/* Mobile */
+.mobile-wrap { display: none; }
+.mobile-menu {
+    margin: 0; padding: 0; display: none;
+}
+
+
 /* logo */
+.logo {
+    height: 80px;
+}
 .logo:before {
     content: '';
     position: absolute;
-    width: 65%;
+    width: 84%;
     height: 0%;
     background: black;
     display: block;
     top: 3%;
-    left: 18%;
+    left: 8%;
     z-index: -1;
 }
 .logo:hover:before {
-    height: 54%;
+    height: 89%;
     background: #E2E3E4;
 }
 
@@ -128,13 +145,132 @@ img { border: 0; outline: 0; }
     z-index: -100;
 }
 
+/* Govnoslider */
+.slider {
+    width: 45%;
+    margin: 0 auto;
+}
+.slide {
+        width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.content-block {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
+    text-transform: uppercase;
+}
+.content-block h1 {
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-size: 80px;
+    font-weight: 600;
+    line-height: auto;
+    text-align: center;
+    opacity: 0;
+    color: #fff;
+}
+.content-block h1 span { color: #1fb8b2; }
+.container h1 {
+    font-size: 48px;
+}
+
+/* GAMES */
+
+   .main {
+        width: 792px;
+        margin: 0 auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+    .clearall {
+        clear: both;
+        height: 1px;
+        margin-bottom: -1px;
+        overflow: hidden;
+    }
+    .gridViewport {
+        overflow: hidden;
+        position: relative;
+    }
+    .cellGridGameStandard{
+        width: 130px;
+        height: 235px;
+        margin: 0 29px 29px 0;
+        display: inline-block;
+        vertical-align: top;
+        zoom: 1;
+        overflow: hidden;
+    }
+
+    .cellCtnr {
+        width: 124px;
+        height: 264px;
+    }
+    .thumbPane {
+        width: 124px;
+        height: 124px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .thumbPane img {
+        width: 124px;
+        height: 124px;
+    }
+
+    .rgba .cellGrid .thumbPane, .rgba .cellGridGameStandard .thumbPane, .rgba .cellGridVideoStandard .thumbPane, .rgba .familyCellGridStandard .thumbPane {
+        background: rgba(60,60,60,0.7);
+    }
+    .infoPaneContainer {
+        background: rgba(60,60,60,0.7);
+    }
+    .infoPane {
+        margin: 0 8px;
+        padding: 8px 0;
+    }
+    .cellTitle {
+        height: 64px;
+        overflow: hidden;
+        text-align: left;
+        font-family: OpenSans !important;
+        float: none;
+        font-size: 12px;
+        line-height: 16px;
+        width: 108px;
+        word-wrap: break-word;
+        white-space: normal;
+        color: #F5F5F5;
+        font-weight: normal;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+    }
+    .type, .pforms {
+        font-size: 12px;
+        line-height: 16px;
+        height: 16px;
+        opacity: 0.5;
+        white-space: nowrap;
+        color: #F5F5F5;
+        font-weight: normal;
+        vertical-align: baseline;
+        margin: 0;
+        padding: 0;
+    }
+
+
 /* Calendar */
 .wrap {
     margin: auto;
     position: absolute;
     left: 0;
     right: 0;
-    top: 200px;
+    top: 100px;
     bottom: 0;
 }
 #calendar { max-width: 960px; min-height: 100%; margin: 20px auto; }
@@ -293,7 +429,11 @@ img { border: 0; outline: 0; }
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
-
+.container{
+    margin: 0 auto;
+    width: 30%;
+    text-align: center;
+}
 
 
 /* Footer */
@@ -338,95 +478,30 @@ img { border: 0; outline: 0; }
 
 
 /* Media */
-@media (max-width: 780px) {
+@media only screen and (max-width: 780px) {
     .iw-link_title { font-size: 25px; margin-top: 15px; }
+    #navigation-wrapper { padding: initial; }
+    .menu { display: none; }
+    .mobile-wrap { display:block; }
+    .show { display: block; }
+    .mobile-menu {
+        margin: 0;
+        padding: 0;
+        margin-top: -4px;
+    }
+    .mobile-menu a {
+        display: block;
+        text-align: center;
+        padding: 12px 0;
+        background: rgb(16, 16, 16);
+    }
+    .logo:before { content: none; }
+    .logo:hover:before{ content: none; }
+    .h-wrap { width: auto; }
 }
 @media (max-width: 640px) {
     .iw-list li { width: 50%; }
     .iw-link_title { font-size: 36px; margin-top: -4px; }
-    .h-wrap { width: auto; }
-
 }
 
-/* GAMES */
 
-   .main {
-        width: 792px;
-        margin: 0 auto;
-        background-color: rgba(0,0,0,0.5);
-    }
-    .clearall {
-        clear: both;
-        height: 1px;
-        margin-bottom: -1px;
-        overflow: hidden;
-    }
-    .gridViewport {
-        overflow: hidden;
-        position: relative;
-    }
-    .cellGridGameStandard{
-        width: 130px;
-        height: 235px;
-        margin: 0 29px 29px 0;
-        display: inline-block;
-        vertical-align: top;
-        zoom: 1;
-        overflow: hidden;
-    }
-
-    .cellCtnr {
-        width: 124px;
-        height: 264px;
-    }
-    .thumbPane {
-        width: 124px;
-        height: 124px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    .thumbPane img {
-        width: 124px;
-        height: 124px;
-    }
-
-    .rgba .cellGrid .thumbPane, .rgba .cellGridGameStandard .thumbPane, .rgba .cellGridVideoStandard .thumbPane, .rgba .familyCellGridStandard .thumbPane {
-        background: rgba(60,60,60,0.7);
-    }
-    .infoPaneContainer {
-        background: rgba(60,60,60,0.7);
-    }
-    .infoPane {
-        margin: 0 8px;
-        padding: 8px 0;
-    }
-    .cellTitle {
-        height: 64px;
-        overflow: hidden;
-        text-align: left;
-        font-family: OpenSans !important;
-        float: none;
-        font-size: 12px;
-        line-height: 16px;
-        width: 108px;
-        word-wrap: break-word;
-        white-space: normal;
-        color: #F5F5F5;
-        font-weight: normal;
-        vertical-align: baseline;
-        margin: 0;
-        padding: 0;
-    }
-    .type, .pforms {
-        font-size: 12px;
-        line-height: 16px;
-        height: 16px;
-        opacity: 0.5;
-        white-space: nowrap;
-        color: #F5F5F5;
-        font-weight: normal;
-        vertical-align: baseline;
-        margin: 0;
-        padding: 0;
-    }

@@ -1,6 +1,52 @@
 ﻿<div class="h-wrap">
     <div id="navigation-wrapper">
-        <!--<div style="text-align:center;"><a href="/" class="logo"><img src="/Content/images/logo.png" width="110" height="110"></a></div>-->
+        <div class="mobile-wrap">
+            <div style="text-align:center; margin: 5px 0 0 2px; display: inline-block;"><a href="/" class="logo"><img src="/Content/images/logo.png" width="80" height="80"></a></div>
+            <div style="    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: 15px;
+    right: 10px;">
+                <a href="javascript:void(0);" class="slicknav_btn slicknav_collapsed" style="display: block;
+    width: 100%;
+    height: 100%;
+    outline: 1px solid white;">
+                    <script>
+                        $('.slicknav_btn').on('click', function () {
+                            var mobile = $('.mobile-menu');
+                            if (mobile.hasClass('show'))
+                            {
+                                mobile.removeClass('show');
+                            } else {
+                                mobile.addClass('show');
+                            }
+                        })
+                    </script>
+                    <i class="fa fa-bars slicknav_icon-bar"></i>
+                    <span class="slicknav_menutxt"></span>
+                </a>
+            </div>
+            <ul id="menu-top-menu" class="mobile-menu">
+                <li>
+                    <a href="/" class="mi-link-home">Главная</a>
+                </li>
+                <li>
+                    <a href="/FoodMenu" class="mi-link-foodmenu">Меню</a>
+                </li>
+                <li>
+                    <a href="/EventCalendar" class="mi-link-event">События</a>
+                </li>
+                <li>
+                    <a href="/PhotoGallery" class="mi-link-gallery">Фотогалерея</a>
+                </li>
+                <li>
+                    <a href="/Games" class="mi-link-game">Игры</a>
+                </li>
+                <li>
+                    <a href="/Blog" class="mi-link-blog">Блог</a>
+                </li>
+            </ul>
+        </div>
 
         <ul id="menu-top-menu" class="menu">
             <li class="menu-item">
@@ -13,7 +59,7 @@
                 <a href="/EventCalendar" class="mi-link-event">События</a>
             </li>
             <li class="menu-logo">
-                <div style="text-align:center;"><a href="/" class="logo"><img src="/Content/images/logo.png" width="110" height="110"></a></div>
+                <div style="text-align:center;"><a href="/" class="logo"><img src="/Content/images/logo.png" width="80" height="80"></a></div>
             </li>
             <li class="menu-item">
                 <a href="/PhotoGallery" class="mi-link-gallery">Фотогалерея</a>
