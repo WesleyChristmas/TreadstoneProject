@@ -2,16 +2,6 @@
     ViewBag.Title = "Фотогалерея";
 }
 
-<style>
-    .mosaicflow__column {
-        float:left;
-    }
-    .mosaicflow__item img {
-        display:block;
-        height:auto;
-    }
-</style>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <link href="~/Content/css/GammaGallery/style.css" rel="stylesheet" />
 <link href="~/Content/css/GammaGallery/noJS.css" rel="stylesheet" />
@@ -116,22 +106,23 @@
     <script type="text/javascript">
         $(function () {
             var GammaSettings = {
-                viewport: [{
-                    width: 1200,
-                    columns: 5
-                }, {
-                    width: 900,
-                    columns: 4
-                }, {
-                    width: 500,
-                    columns: 3
-                }, {
-                    width: 320,
-                    columns: 2
-                }, {
-                    width: 0,
-                    columns: 2
-                }],
+                viewport: [
+                    {
+                        width: 1200, columns: 5
+                    },
+                    {
+                        width: 900, columns: 4
+                    },
+                    {
+                        width: 500, columns: 3
+                    },
+                    {
+                        width: 320, columns: 2
+                    },
+                    {
+                        width: 0, columns: 2
+                    }
+                ],
                 keyboard: true,
                 swipe: true
             };

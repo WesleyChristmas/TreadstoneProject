@@ -92,6 +92,13 @@ img { border: 0; outline: 0; }
 /* Mobile */
 .mobile-wrap { display: none; }
 .mobile-menu { margin: 0; padding: 0; display: none; }
+.mobile-nav {
+    display: block;
+    width: 100%;
+    height: 100%;
+    outline: 1px solid #5F5F5F;
+    padding: 8px 10px;
+}
 
 /* logo */
 .logo { height: 80px; }
@@ -192,12 +199,8 @@ img { border: 0; outline: 0; }
     overflow: hidden;
 }
 .thumbPane img { width: 124px; height: 124px; }
-.rgba .cellGrid .thumbPane, .rgba .cellGridGameStandard .thumbPane, .rgba .cellGridVideoStandard .thumbPane, .rgba .familyCellGridStandard .thumbPane {
-    background: rgba(60,60,60,0.7);
-}
-.infoPaneContainer {
-    background: rgba(60,60,60,0.7);
-}
+.rgba .cellGrid .thumbPane, .rgba .cellGridGameStandard .thumbPane, .rgba .cellGridVideoStandard .thumbPane, .rgba .familyCellGridStandard .thumbPane { background: rgba(60,60,60,0.7); }
+.infoPaneContainer { background: rgba(60,60,60,0.7); }
 .infoPane { margin: 0 8px; padding: 8px 0; }
 .cellTitle {
     height: 64px;
@@ -228,6 +231,141 @@ img { border: 0; outline: 0; }
     margin: 0;
     padding: 0;
 }
+
+
+/* Food */
+.ajaxLink {
+    visibility: hidden;
+    border-bottom: 0 none;
+    position: relative;
+    width: 205px;
+    text-decoration: none;
+    border-bottom: 1px dotted #fff;
+}
+.main {
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    display: block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.h1 {
+    background: url("https://www.harats.ru/gfx/images/spriteHor.png") 0 -160px repeat-x;
+    background: url("https://www.harats.ru/gfx/images/darkBg.png") 0 0 repeat;
+    background: rgba(0,0,0,0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-family: 'PT Sans', Arial;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 10px 10px 10px 21px;
+    border-radius: 5px 5px 0 0;
+    zoom: 1;
+    -webkit-box-shadow: inset 0 40px 20px -20px rgba(255,255,255,0.2);
+    box-shadow: inset 0 40px 20px -20px rgba(255,255,255,0.2);
+}
+.darkArea {
+    background: url('https://www.harats.ru/gfx/images/darkBg.png') 0 0 repeat;
+    padding: 14px 13px 20px 21px;
+    border-radius: 0 0 5px 5px;
+    min-height: 100px;
+}
+.barMenu { overflow: hidden; padding-bottom: 10px; }
+.barMenuLine { position: relative; overflow: hidden; padding: 0 10px 0 0; }
+.barMenuLeft {
+    /*position: absolute;
+    left: 32px;
+    top: 30px;
+    width: 220px;*/
+}
+.barMenuLeft span { display: inline-block; }
+.barMenuLeft a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+}
+.barMenuLeft a u { color: #fff; text-decoration: none; border-bottom: 1px dotted; }
+.barMenuContent {
+    overflow: hidden;
+    height: 570px;
+    width: 1065px;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+    padding-left: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.column-second {
+    float: left;
+    width: 280px;
+    font-size: 1.8em;
+    padding: 14px 10px 0 10px;
+    margin: 9px 8% 0 0;
+    border-right: 2px solid #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+.column-second ul li {
+    display: table;
+    margin: 0 0 9px;
+    background: none;
+    padding: 0;
+}
+.column-second ul li span.img { width: 35px; text-align: center; }
+.column-second ul li span { display: table-cell; vertical-align: middle; }
+.column-second ul li span.title { line-height: 31px; padding: 0 0 0 16px; width: 195px; }
+.column-second ul li span { display: table-cell; vertical-align: middle; }
+.column-second ul li a {
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px dotted #d9d7d6;
+        margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+.barMenu__wrap { border-top: 1px solid transparent; }
+.barMenu__wrap .dish-item:not(.dish-alco-item) { background: url("https://www.harats.ru/gfx/images/sep.png") 50% 100% no-repeat; padding-bottom: 25px; margin-bottom: 12px; }
+.barMenu__wrap .dish-item { position: relative; }
+.barMenuContent .dish-item {
+    margin-bottom: 20px;
+    min-height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+.barMenu .dish-item > img {
+    border-radius: 5px;
+    display: block;
+    margin: 0;
+    width: 225px;
+    float: left;
+    margin-right: 20px;
+}
+.barMenu .dish-item h3 { font-size: 26px; }
+.barMenu .dish-item p { padding-bottom: 8px; }
+.barMenu .dish-item .weight { font-style: italic; }
+.barMenu .dish-item p { padding-bottom: 8px; }
+.barMenu .dish-item .price { font-weight: 700; font-size: 18px; margin-top: -2px; }
+
+
+/*Gallery*/
+.mosaicflow__column { float:left; }
+.mosaicflow__item img { display:block; height:auto; }
+
 
 /* Calendar */
 .wrap {
