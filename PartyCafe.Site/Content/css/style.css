@@ -256,11 +256,11 @@ img { border: 0; outline: 0; }
 .event-week, .event-day { display: inline-block; }
 .event-day {
     width: 130px;
-    height: 140px;
+    height: 127px;
     text-align: center;
     font-size: 16px;
     vertical-align: middle;
-    margin: 3px;
+    margin-left: 6px;
     overflow: hidden;
     border-top: 8px solid #ff2bb6;
 }
@@ -280,12 +280,20 @@ img { border: 0; outline: 0; }
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     font-size: 40px;
     color: white;
+    width: 129px;
+    height: 130px;
+    padding-left: 6px;
 }
-.ed-month, .ed-title { display: inline-block; text-transform: uppercase; padding-left: 6px; }
-.ed-month { font-size: 16px; margin: 5px; font-style: normal; }
+.ed-month, .ed-title { display: inline-block; text-transform: uppercase; }
+.ed-month {
+    font-size: 16px;
+    margin-top: 5px;
+    font-style: normal;
+    padding-left: 3px;
+}
 .ed-title {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 400;
     margin-top: 4px;
     word-break: break-all;
     padding-right: 8px;
@@ -294,10 +302,7 @@ img { border: 0; outline: 0; }
     position: absolute;
     display: block;
     left: 0;
-    top: 0;
-    background: rgb(0, 0, 0);
-    z-index: -1;
-    opacity: 0;
+    top: -130px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
@@ -305,14 +310,11 @@ img { border: 0; outline: 0; }
 }
 .ed-image {
     border: none;
-    height: auto;
-    width: auto;
-    max-width: 130px;
-    max-height: 140px;
+    background: transparent;
+    margin: 0; padding:0;
 }
 .ed-wrap:hover .ed-imgwrap {
-    z-index:10;
-    opacity: 1;
+    top: 0;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
@@ -520,7 +522,7 @@ img { border: 0; outline: 0; }
 
 /* Media */
 @media only screen and (max-width: 950px) {
-    #calendar { margin-left: 5%; }
+    #calendar { max-width: 600px }
     .main { max-width: 535px; }
 }
 @media only screen and (max-width: 780px) {
@@ -542,11 +544,13 @@ img { border: 0; outline: 0; }
     .list-icon-items { width: 575px; }
     .list-icon-items a { width: 140px; }
     .circ { width: 100px; height: 100px; line-height: 107px;}
+    #calendar { max-width: 410px; }
 }
 @media only screen and (max-width: 640px) {
     .iw-list li { width: 50%; }
     .iw-link_title { font-size: 36px; margin-top: -4px; }
-    .main { max-width: 265px; }
+    .main { max-width: 205px; }
     .list-icon-items { width: 285px; padding-top: initial; }
     .circ { width: 70px; height: 70px; line-height: 77px; font-size: 26px; }
+    #calendar { max-width: 280px; }
 }

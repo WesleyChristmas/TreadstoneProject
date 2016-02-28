@@ -28,8 +28,8 @@ function setCalendaData(_d, _m) {
 
 function getData($scope, $http) {
     var respons = [
-        { EventDate: '2016,02,08', Header: 'Международный женский день', PhotoLink: '/Content/images/logo.png' },
-        { EventDate: '2016,02,19', Header: 'Пенная вечеринка', PhotoLink: '/Content/images/logo.png' }
+        { EventDate: '2016,02,08', Header: 'Международный женский день', PhotoLink: 'http://themes.fxoffice.net/site_night/site_with_video_bg/images/page5events_21.jpg' },
+        { EventDate: '2016,02,19', Header: 'Пенная вечеринка', PhotoLink: 'http://themes.fxoffice.net/site_night/site_with_video_bg/images/page5events_9.jpg' }
     ];
     CalendarJOPA('calendar-wrap', 30, respons, $scope);
     /*$http.get("/EventCalendar/GetCalendar").success(function (data, status) {
