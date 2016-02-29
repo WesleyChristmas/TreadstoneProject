@@ -142,7 +142,7 @@ img { border: 0; outline: 0; }
 /* Govnoslider */
 .slider { width: 45%; margin: 0 auto; }
 .slide { width: 100%; margin: 0 auto; text-align: center; }
-.content-block {
+/*.content-block {
     position: absolute;
     top: 50%;
     width: 100%;
@@ -151,7 +151,9 @@ img { border: 0; outline: 0; }
     transform: translateY(-50%);
     text-align: center;
     text-transform: uppercase;
-}
+}*/
+.owl-container { margin: 0 auto; width: 400px; text-align: center; }
+.owl-container h1 { font-size: 48px; }
 .content-block h1 {
     margin: 0 auto;
     margin-bottom: 50px;
@@ -159,11 +161,9 @@ img { border: 0; outline: 0; }
     font-weight: 600;
     line-height: auto;
     text-align: center;
-    opacity: 0;
     color: #fff;
 }
 .content-block h1 span { color: #1fb8b2; }
-.container h1 { font-size: 48px; }
 
 /* GAMES */
 .main { max-width: 80%; margin: 0 auto; background-color: rgba(0,0,0,0.5); }
