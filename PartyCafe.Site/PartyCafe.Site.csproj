@@ -74,6 +74,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Web.DynamicData" />
@@ -203,6 +204,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
+    <Compile Include="DBUtils\EventUtils.cs" />
+    <Compile Include="DBUtils\MainUtils.cs" />
+    <Compile Include="DBUtils\PartyCafeClasses.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PartyCafeClasses.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -338,6 +346,11 @@
     <Content Include="fonts\ss-social-regular.woff" />
     <Content Include="fonts\ss-standard.ttf" />
     <Content Include="fonts\ss-standard.woff" />
+    <Content Include="DBUtils\PartyCafeClasses.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>PartyCafeClasses.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />
@@ -1197,6 +1210,14 @@
       <Project>{FA1BFB81-6408-4C61-A701-B77ABC608486}</Project>
       <Name>BusinessInterface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBUtils\PartyCafeClasses.dbml.layout">
+      <DependentUpon>PartyCafeClasses.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

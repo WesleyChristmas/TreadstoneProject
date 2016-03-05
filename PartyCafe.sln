@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyCafe.Site", "PartyCafe.Site\PartyCafe.Site.csproj", "{9AA9CC58-E10A-45EA-A010-6F2D4A159DA1}"
 EndProject
@@ -35,6 +35,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DbFile", "DbFile", "{EE00BDC7-584E-4F74-850B-3C64EA9428EB}"
 	ProjectSection(SolutionItems) = preProject
 		Database\Db.File\PartyCafeDb.mdf = Database\Db.File\PartyCafeDb.mdf
+		Database\Db.File\PartyCafeDB_2.mdf = Database\Db.File\PartyCafeDB_2.mdf
+		Database\Db.File\PartyCafeDB_2_log.ldf = Database\Db.File\PartyCafeDB_2_log.ldf
 		Database\Db.File\PartyCafeDb_log.ldf = Database\Db.File\PartyCafeDb_log.ldf
 	EndProjectSection
 EndProject
