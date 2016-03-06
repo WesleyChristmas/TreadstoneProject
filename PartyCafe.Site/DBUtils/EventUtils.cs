@@ -5,6 +5,11 @@ using System.Web;
 
 namespace PartyCafe.Site.DBUtils
 {
+    public class EventResult
+    {
+        public DateTime CurDate;
+        public List<PartyCafeEvent> Calendar;
+    }
     public class PartyCafeEvent
     {
         public int idRecord;
@@ -20,7 +25,7 @@ namespace PartyCafe.Site.DBUtils
 
     public static class EventUtils
     {
-        public static List<PartyCafeEvent> GetAll()
+        public static EventResult GetAll()
         {
             var dbContext = MainUtils.GetDBContext();
             var events = (from e in dbContext.Events
@@ -40,11 +45,15 @@ namespace PartyCafe.Site.DBUtils
           
                 resultList.Add(pcEvent);
             }
+            EventResult er = new EventResult();
+            er.Calendar = resultList;
+            er.CurDate = DateTime.Now;
 
-            return resultList;
+            return er;
+            //return resultList;
         }
 
-        public static List<PartyCafeEvent> GetNearEvents()
+        public static EventResult GetNearEvents()
         {
             var dbContext = MainUtils.GetDBContext();
             var events = (from e in dbContext.Events
@@ -65,8 +74,12 @@ namespace PartyCafe.Site.DBUtils
 
                 resultList.Add(pcEvent);
             }
+            EventResult er = new EventResult();
+            er.Calendar = resultList;
+            er.CurDate = DateTime.Now;
 
-            return resultList;
+            return er;
+            //return resultList;
         }
 
         public static void DelEvent(int idRecord)

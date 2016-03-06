@@ -72,7 +72,7 @@ function CalendarJOPA(obj, dcount, respons, $scope) {
     /* Заполнение календаря событиями */
     l = respons.length;
     for (var i = 0; i < l; i++) {
-        var _d = respons[i].EventDate,
+        var _d = respons[i].DateEvent,
             date = new Date(_d),
             d = date.getDate(),
             m = date.getMonth(),
@@ -80,7 +80,7 @@ function CalendarJOPA(obj, dcount, respons, $scope) {
 
         for (var j = 0; j < _calL; j++) {
             if (cal[j].day === d) {
-                var _obj = { header: respons[i].Header, photo: respons[i].PhotoLink }
+                var _obj = { header: respons[i].name, photo: respons[i].PhotoPath }
                 cal[j].data = _obj;
                 break;
             }
@@ -125,7 +125,7 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
     /* Заполнение календаря событиями */
     l = respons.length;
     for (var i = 0; i < l; i++) {
-        var _d = respons[i].EventDate.replace(/\D+/g, ""),
+        var _d = respons[i].DateEvent.replace(/\D+/g, ""),
             date = new Date(parseInt(_d)),
             d = date.getDate(),
             m = date.getMonth(),
@@ -134,7 +134,7 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
         for (var j = 0; j < _calL; j++) {
             //if (cal[j].day === d && cal[j].month === m+1) {
             if (cal[j].day === d) {
-                var _obj = { header: respons[i].Header, photo: respons[i].PhotoLink }
+                var _obj = { header: respons[i].name, photo: respons[i].PhotoPath }
                 cal[j].data = _obj;
                 break;
             }
