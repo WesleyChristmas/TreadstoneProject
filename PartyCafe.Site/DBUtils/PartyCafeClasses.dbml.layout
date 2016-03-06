@@ -2,10 +2,55 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="PartyCafeClasses">
   <DataContextMoniker Name="/PartyCafeClassesDataContext" />
   <nestedChildShapes>
-    <classShape Id="0c634a05-f9f4-4bdc-85a8-e11cf0a2935f" absoluteBounds="0.5, 0.5, 2, 2.0822371419270831">
+    <classShape Id="f5f2d098-af8c-45e0-a611-ba8b44bee900" absoluteBounds="0.75, 0.625, 2, 2.0822371419270831">
       <DataClassMoniker Name="/PartyCafeClassesDataContext/Events" />
       <nestedChildShapes>
-        <elementListCompartment Id="094da4ff-aa64-4ad2-ae3a-1a797b7f962c" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="49fd5d63-d0c2-45d1-aef9-86f32c3858e3" absoluteBounds="0.765, 1.085, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e3a5097f-42e2-469a-8fe0-c9b05b338ab1" absoluteBounds="3.125, 0.625, 2, 2.0822371419270831">
+      <DataClassMoniker Name="/PartyCafeClassesDataContext/Gallery" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cfd45ea4-c356-46be-8fd3-78619e8b61d7" absoluteBounds="3.1399999999999997, 1.085, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bdea38f9-3d79-4c5b-a393-51c704626f94" absoluteBounds="5.625, 0.625, 2, 2.24658447265625">
+      <DataClassMoniker Name="/PartyCafeClassesDataContext/Games" />
+      <nestedChildShapes>
+        <elementListCompartment Id="02c50c2a-f768-4290-8147-a381e984a49a" absoluteBounds="5.64, 1.085, 1.9700000000000002, 1.68658447265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="17a48599-caeb-461f-92cb-a7f052cf25fe" absoluteBounds="0.75, 3.125, 2, 1.75354248046875">
+      <DataClassMoniker Name="/PartyCafeClassesDataContext/Photos" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c80e84cb-1b43-4bd1-b6c3-303eb4864f1f" absoluteBounds="0.76500000000000012, 3.585, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 3.125); (1.75 : 2.70723714192708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PartyCafeClassesDataContext/Photos/Photos_Events" />
+      <nodes>
+        <classShapeMoniker Id="17a48599-caeb-461f-92cb-a7f052cf25fe" />
+        <classShapeMoniker Id="f5f2d098-af8c-45e0-a611-ba8b44bee900" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.125); (3.125 : 2.70723714192708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PartyCafeClassesDataContext/Photos/Photos_Gallery" />
+      <nodes>
+        <classShapeMoniker Id="17a48599-caeb-461f-92cb-a7f052cf25fe" />
+        <classShapeMoniker Id="e3a5097f-42e2-469a-8fe0-c9b05b338ab1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.3750025); (6.625 : 3.3750025); (6.625 : 2.87158447265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PartyCafeClassesDataContext/Photos/Photos_Games" />
+      <nodes>
+        <classShapeMoniker Id="17a48599-caeb-461f-92cb-a7f052cf25fe" />
+        <classShapeMoniker Id="bdea38f9-3d79-4c5b-a393-51c704626f94" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8d02631b-bacf-4485-85b6-880f1406ecd8" absoluteBounds="3.375, 3.625, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/PartyCafeClassesDataContext/Users" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1932e689-e001-4a7c-bafb-041ac6ac0fb9" absoluteBounds="3.3899999999999997, 4.085, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

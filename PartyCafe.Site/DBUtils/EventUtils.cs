@@ -9,12 +9,13 @@ namespace PartyCafe.Site.DBUtils
     {
         public int idRecord;
         public string name;
-        public Guid userCreate;
-        public Guid userUpdate;
-        public DateTime DateCreate;
-        public DateTime DateUpdate;
-        public DateTime DateEvent;
         public int IdPhoto;
+        public string PhotoPath;
+        public DateTime DateEvent;
+        //public DateTime DateCreate;
+        //public DateTime DateUpdate;
+        //public string userCreate;
+        //public string userUpdate;
     }
 
     public static class EventUtils
@@ -23,20 +24,20 @@ namespace PartyCafe.Site.DBUtils
         {
             var dbContext = MainUtils.GetDBContext();
             var events = (from e in dbContext.Events
-                      select e);
+                          join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
+                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
 
             List <PartyCafeEvent> resultList = new List<PartyCafeEvent>();
             foreach (var e in events)
             {
                 PartyCafeEvent pcEvent = new PartyCafeEvent();
+
                 pcEvent.idRecord = e.IdRecord;
                 pcEvent.name = e.Name;
-                pcEvent.userCreate = (e.UserCreate.HasValue) ? e.UserCreate.Value : new Guid();
-                pcEvent.userUpdate = (e.UserUpdate.HasValue) ? e.UserUpdate.Value : new Guid();
-                pcEvent.DateCreate = e.DateCreate;
-                pcEvent.DateUpdate = (e.DateUpdate.HasValue) ? e.DateUpdate.Value : new DateTime();
-                pcEvent.DateEvent = e.EventDate;
                 pcEvent.IdPhoto = e.IdPhoto;
+                pcEvent.PhotoPath = e.Path;
+                pcEvent.DateEvent = e.EventDate;
+          
                 resultList.Add(pcEvent);
             }
 
@@ -47,62 +48,63 @@ namespace PartyCafe.Site.DBUtils
         {
             var dbContext = MainUtils.GetDBContext();
             var events = (from e in dbContext.Events
+                          join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
                           where e.EventDate <= DateTime.Now.AddDays(15) && e.EventDate >= DateTime.Now.AddDays(-15)
-                          select e);
+                          select new { e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
 
             List<PartyCafeEvent> resultList = new List<PartyCafeEvent>();
             foreach (var e in events)
             {
                 PartyCafeEvent pcEvent = new PartyCafeEvent();
+
                 pcEvent.idRecord = e.IdRecord;
                 pcEvent.name = e.Name;
-                pcEvent.userCreate = (e.UserCreate.HasValue) ? e.UserCreate.Value : new Guid();
-                pcEvent.userUpdate = (e.UserUpdate.HasValue) ? e.UserUpdate.Value : new Guid();
-                pcEvent.DateCreate = e.DateCreate;
-                pcEvent.DateUpdate = (e.DateUpdate.HasValue) ? e.DateUpdate.Value : new DateTime();
-                pcEvent.DateEvent = e.EventDate;
                 pcEvent.IdPhoto = e.IdPhoto;
+                pcEvent.PhotoPath = e.Path;
+                pcEvent.DateEvent = e.EventDate;
+
                 resultList.Add(pcEvent);
             }
 
             return resultList;
         }
 
-        public static void DelEvent(PartyCafeEvent partyEvent)
+        public static void DelEvent(int idRecord)
         {
             var dbContext = MainUtils.GetDBContext();
             var curEvent = (from e in dbContext.Events
-                          where e.IdRecord == partyEvent.idRecord
-                          select e).First();
+                          where e.IdRecord == idRecord
+                            select e).SingleOrDefault();
             dbContext.Events.DeleteOnSubmit(curEvent);
             dbContext.SubmitChanges();
         }
 
-        public static void EditEvent(PartyCafeEvent partyEvent)
+        public static void EditEvent(PartyCafeEvent partyEvent, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curEvent = (from e in dbContext.Events
                             where e.IdRecord == partyEvent.idRecord
-                            select e).First();
+                            select e).SingleOrDefault();
 
             curEvent.Name = partyEvent.name;
             curEvent.EventDate = partyEvent.DateEvent;
-            curEvent.UserCreate = partyEvent.userCreate;
-            curEvent.UserUpdate = partyEvent.userUpdate;
-            curEvent.DateUpdate = DateTime.Now;
             curEvent.IdPhoto = partyEvent.IdPhoto;
+
+            curEvent.DateUpdate = DateTime.Now;
+            curEvent.UserUpdate = userUpdate;
 
             dbContext.SubmitChanges();
         }
 
-        public static void InsertEvent(PartyCafeEvent partyEvent)
+        public static void InsertEvent(PartyCafeEvent partyEvent, string userCreate)
         {
             var newEvent = new Events();
             newEvent.Name = partyEvent.name;
             newEvent.IdPhoto = partyEvent.IdPhoto;
             newEvent.EventDate = partyEvent.DateEvent;
+
             newEvent.DateCreate = DateTime.Now;
-            newEvent.UserCreate = partyEvent.userCreate;
+            newEvent.UserCreate = userCreate;
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Events.InsertOnSubmit(newEvent);
