@@ -37,16 +37,16 @@ calendarApp.controller("CalendarEventsController", function($scope, $http, $loca
 
     $scope.DataModel.FillCalendar();
 
-   /* $scope.SelectCalendarEvent = function(obj) {
-        $location.path('/EditCalendarEvent/' + obj.item.IdRecord);
-    }*/
+   $scope.SelectCalendarEvent = function(obj) {
+        $location.path('/EditCalendarEvent/' + obj.item.idRecord);
+    }
 
     $scope.AddNewCalendarEvent = function() {
         $location.path('/EditCalendarEvent/0');
     }
 
     $scope.DeleteCalendarEvent = function (obj) {
-        $http.post('Calendar/DeleteBlogCalendar', { 'idCalendar': obj.item.IdRecord }).success(function (response) {
+        $http.post('Calendar/DeleteBlogCalendar', { 'idCalendar': obj.item.idRecord }).success(function (response) {
             $scope.DataModel.FillCalendar();
         });
     }
@@ -62,9 +62,9 @@ calendarApp.controller("EditCalendarEventController", function($scope, $http,$lo
         $scope.isCreate = true;
     } else {
         for (var i in calendars) {
-            if (calendars[i].IdRecord == id) {
+            if (calendars[i].idRecord == id) {
                 $scope.CurCalendarEvent = calendars[i];
-                $scope.CurCalendarEvent.EventDate = CorrectDate($scope.CurCalendarEvent.EventDate);
+                $scope.CurCalendarEvent.DateEvent = CorrectDate($scope.CurCalendarEvent.DateEvent);
                 $scope.isCreate = false;
             }
         }
@@ -72,15 +72,15 @@ calendarApp.controller("EditCalendarEventController", function($scope, $http,$lo
 
     //Methods
     $scope.SaveChanges = function() {
-        var url;
-        var xhr = new XMLHttpRequest();
-        var fd = new FormData();
+        var url,
+        xhr = new XMLHttpRequest(),
+        fd = new FormData();
 
         if ($scope.isCreate) {
             url = 'Calendar/AddBlogCalendar';
         } else {
             url = 'Calendar/UpdateBlogCalendar';
-            fd.append('IdRecord', $scope.CurCalendarEvent.IdRecord);
+            fd.append('idRecord', $scope.CurCalendarEvent.idRecord);
         }
 
         if ($scope.Image != null) {
@@ -88,8 +88,8 @@ calendarApp.controller("EditCalendarEventController", function($scope, $http,$lo
             fd.append('filename', $scope.Image.name);
         }
 
-        fd.append('Header', $scope.CurCalendarEvent.Header);
-        fd.append('EventDate', $scope.CurCalendarEvent.EventDate);
+        fd.append('name', $scope.CurCalendarEvent.Header);
+        fd.append('DateEvent', $scope.CurCalendarEvent.EventDate);
 
         xhr.upload.onload = function() {
             $scope.$apply($location.path('/'));

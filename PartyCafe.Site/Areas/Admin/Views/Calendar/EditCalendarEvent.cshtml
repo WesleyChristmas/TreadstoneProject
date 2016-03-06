@@ -1,29 +1,19 @@
 ﻿
 <table class="table">
     <tr>
-        <th>
-            Изображение события
-        </th>
+        <th>Изображение события</th>
         <td>
-            <img ng-if="CurCalendarEvent.PhotoLink != null" ng-src="{{CurCalendarEvent.PhotoLink}}" />
+            <img ng-if="CurCalendarEvent.PhotoPath != null" ng-src="{{CurCalendarEvent.PhotoPath}}" />
             <input type="file" onchange="angular.element(this).scope().AddFile(this.files)" />
         </td>
     </tr>
     <tr>
-        <th>
-            Название события
-        </th>
-        <td>
-            <input type="text" ng-model="CurCalendarEvent.Header" class="form-control"/>
-        </td>
+        <th>Название события</th>
+        <td><input type="text" ng-model="CurCalendarEvent.name" class="form-control"/></td>
     </tr>
     <tr>
-        <th>
-            Дата события
-        </th>
-        <td>
-            <input type="text" ng-model="CurCalendarEvent.EventDate" class="form-control"/>
-        </td>
+        <th>Дата события</th>
+        <td><input type="text" ng-model="CurCalendarEvent.DateEvent" class="form-control" /></td>
     </tr>
 </table>
 <table>

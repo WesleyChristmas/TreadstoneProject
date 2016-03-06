@@ -4,32 +4,20 @@
 <br/>
 <table class="table">
     <tr>
-        <th>
-            Изображение
-        </th>
-        <th>
-            Заголовок
-        </th>
-        <th>
-            Дата события
-        </th>
+        <th>Изображение</th>
+        <th>Заголовок</th>
+        <th>Дата события</th>
         <th></th>
         <th></th>
     </tr>
     <tr ng-repeat="item in DataModel.Calendar">
-        <td>
-            <img ng-if="item.PhotoLink!=null" ng-src="{{item.PhotoLink}}" />
-        </td>
-        <td>
-            {{item.Header}}
-        </td>
-        <td>
-            {{item.EventDate | CorrectDate}}
-        </td>
-        <td id="{{item.IdRecord}}.Edit" onclick="document.location = '#EditCalendarEvent/' + id.split('.')[0]">
+        <td><img ng-if="item.PhotoPath!=null" ng-src="{{item.PhotoPath}}" /></td>
+        <td>{{item.name}}</td>
+        <td>{{item.DateEvent | CorrectDate}}</td>
+        <td id="{{item.idRecord}}.Edit" onclick="document.location = '#EditCalendarEvent/' + id.split('.')[0]">
             <img src="~/Areas/Admin/Content/edit.png" />
         </td>
-        <td id="{{item.IdRecord}}.Delete" ng-click="DeleteCalendarEvent(this)">
+        <td id="{{item.idRecord}}.Delete" ng-click="DeleteCalendarEvent(this)">
             <img src="~/Areas/Admin/Content/delete.png" />
         </td>
     </tr>

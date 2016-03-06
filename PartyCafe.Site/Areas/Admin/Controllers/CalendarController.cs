@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using BusinessEntity;
 using Db.Service;
+using PartyCafe.Site.DBUtils;
 using PartyCafe.Site.Areas.Admin.Core;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
@@ -35,7 +36,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetCalendar()
         {
-            return Json(_calendarService.GetCalendar(), JsonRequestBehavior.AllowGet);
+            return Json(EventUtils.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

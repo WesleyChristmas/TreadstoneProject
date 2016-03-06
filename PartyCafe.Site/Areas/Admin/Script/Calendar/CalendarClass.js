@@ -26,15 +26,15 @@ function DataModelClass() {
 
 function CalendarEntityClass(entity) {
     if (entity != null) {
-        this.IdRecord = entity.IdRecord;
-        this.EventDate = Json2JsDateTime(entity.EventDate);
-        this.Header = entity.Header;
-        this.PhotoLink = entity.PhotoLink;
+        this.idRecord = entity.idRecord;
+        this.DateEvent = Json2JsDateTime(entity.DateEvent);
+        this.name = entity.name;
+        this.PhotoPath = entity.PhotoPath;
     } else {
-        this.IdRecord = null;
-        this.EventDate = null;
-        this.Header = null;
-        this.PhotoLink = null;
+        this.idRecord = null;
+        this.DateEvent = null;
+        this.name = null;
+        this.PhotoPath = null;
     }
     
 }
