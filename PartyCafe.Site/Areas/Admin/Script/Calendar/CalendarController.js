@@ -87,6 +87,10 @@ calendarApp.controller("EditCalendarEventController", function($scope, $http,$lo
             fd.append('file', $scope.Image);
             fd.append('filename', $scope.Image.name);
         }
+        else
+        {
+            fd.append('file', $scope.Image);
+        }
 
         fd.append('name', $scope.CurCalendarEvent.Header);
         fd.append('DateEvent', $scope.CurCalendarEvent.EventDate);
