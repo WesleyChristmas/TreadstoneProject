@@ -39,34 +39,48 @@
         </li>
     </ul>
     <hr class="center" />
-    <h2>Find us</h2>
-    <div id='map'></div>
-    <div class="adress_wrap">
-        <h2 class="adress_title">Our adress</h2>
+
+    <div class="adress_wrap_mobile">
+        <h2 class="adress_title">Наш адресс</h2>
         <div>
-            <ul class="adress">
-                <li>Red Sqare 1</li>
-                <li>Metro Ohotniy ryad</li>
-                <li>kak voydesh napravo</li>
+            <ul class="adress_mobile">
+                <li>г.Москва, Большая Черкизовская 24 А, стр. 1</li>
+                <li>Тел +7 916 99999 80</li>
+                <li>Почта hello@partycafe.ru</li>
             </ul>
         </div>
     </div>
+    
+    <div id='map'></div>
+    
+    <div class="adress_wrap">
+        <h2 class="adress_title">Наш адресс</h2>
+        <div>
+            <ul class="adress">
+                <li>г.Москва</li>
+                <li>Большая Черкизовская 24 А, стр. 1</li>
+                <li>Тел +7 916 99999 80</li>
+                <li>Почта hello@partycafe.ru</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 <script>
     L.mapbox.accessToken = 'pk.eyJ1Ijoid2VzbGV5YnVybndvb2QiLCJhIjoiY2lsNTNvaWNxMDBmY3c5bTBuNnhyb2R4NSJ9.MY590yZ-rkPWcJUfbUjAUw';
-    var map = L.mapbox.map('map', 'mapbox.streets').setView([55.7970734, 37.7310959], 16);
+    var map = L.mapbox.map('map', 'mapbox.streets').setView([55.7972157, 37.7320033], 16);
     L.mapbox.featureLayer({
         type: 'Feature',
         geometry: {
             type: 'Point',
             coordinates: [
-                37.7310959,
-                55.7970734
+                37.7320033,
+                55.7972157
             ]
         },
         properties: {
             title: 'Zакрытая Территория',
-            description: 'Большая черкизовская тыры пыры',
+            description: 'Москва, Большая Черкизовская 24 А, стр. 1<br>Тел +7 916 99999 80<br>Почта hello@partycafe.ru',
             'marker-size': 'large',
             'marker-color': '#BE9A6B',
             'marker-symbol': 'cafe'
