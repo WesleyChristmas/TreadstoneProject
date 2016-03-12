@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Db.Service;
 using PartyCafe.Site.DBUtils;
+using System;
 
 namespace PartyCafe.Site.Controllers
 {
@@ -21,7 +22,11 @@ namespace PartyCafe.Site.Controllers
         [HttpGet]
         public JsonResult GetCalendar()
         {
-            return Json(EventUtils.GetNearEvents(), JsonRequestBehavior.AllowGet);
+            EventResult er = new EventResult();
+            er.Calendar = EventUtils.GetNearEvents();
+            er.CurDate = DateTime.Now;
+            
+            return Json(er, JsonRequestBehavior.AllowGet);
         }
     }
 }

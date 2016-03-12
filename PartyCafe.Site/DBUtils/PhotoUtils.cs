@@ -7,7 +7,7 @@ using System.IO;
 
 namespace PartyCafe.Site.DBUtils
 {
-    public class Photo
+    public class PCPhoto
     {
         public string fileName;
         public byte[] data;
@@ -31,7 +31,7 @@ namespace PartyCafe.Site.DBUtils
             return result;
         }
 
-        private static string SavePhoto(Photo image)
+        private static string SavePhoto(PCPhoto image)
         {
             const string ServerPath = "./Content/photos/";
 
@@ -42,8 +42,8 @@ namespace PartyCafe.Site.DBUtils
             return fullPath;
         }
 
-        public static int InsertImage(Photo image, string userCreate)
-        {
+        public static int InsertImage(PCPhoto image, string userCreate)
+        {   
             var db = MainUtils.GetDBContext();
             var photo = new Photos();
 
@@ -58,7 +58,7 @@ namespace PartyCafe.Site.DBUtils
             return photo.IdRecord;
         }
 
-        public static void EditImage(int id, Photo image, string userUpdate)
+        public static void EditImage(int id, PCPhoto image, string userUpdate)
         {
             var db = MainUtils.GetDBContext();
             var curPhoto = (from p in db.Photos
@@ -75,9 +75,17 @@ namespace PartyCafe.Site.DBUtils
             db.SubmitChanges();
         }
 
-        public static void DelImage(int Id)
+        public static void DelImage(int id)
         {
-            throw new NotImplementedException();
+            var db = MainUtils.GetDBContext();
+            var curPhoto = (from p in db.Photos
+                            where p.IdRecord == id
+                            select p).SingleOrDefault();
+
+            File.Delete(curPhoto.Path);
+            db.Photos.DeleteOnSubmit(curPhoto);
+
+            db.SubmitChanges();
         }
     }
 }
