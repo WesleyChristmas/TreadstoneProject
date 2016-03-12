@@ -46,9 +46,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public void UpdateBlogCalendar(BlogCalendarEntity calendar)
+        public void UpdateBlogCalendar(PartyCafeEvent calendar)
         {
-            _calendarService.UpdateBlogCalendar(calendar, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
+
+            EventUtils.EditEvent(calendar, "admin");
+            //_calendarService.UpdateBlogCalendar(calendar, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
         }
 
         [HttpPost]
