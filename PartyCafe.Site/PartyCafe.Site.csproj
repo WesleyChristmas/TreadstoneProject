@@ -211,6 +211,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PartyCafeClasses.dbml</DependentUpon>
     </Compile>
+    <Compile Include="DBUtils\PhotoUtils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1173,6 +1174,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\photos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -10,6 +10,7 @@ namespace PartyCafe.Site.DBUtils
         public DateTime CurDate;
         public List<PartyCafeEvent> Calendar;
     }
+
     public class PartyCafeEvent
     {
         public int idRecord;
@@ -17,10 +18,6 @@ namespace PartyCafe.Site.DBUtils
         public int IdPhoto;
         public string PhotoPath;
         public DateTime DateEvent;
-        //public DateTime DateCreate;
-        //public DateTime DateUpdate;
-        //public string userCreate;
-        //public string userUpdate;
     }
 
     public static class EventUtils
@@ -92,7 +89,7 @@ namespace PartyCafe.Site.DBUtils
             dbContext.SubmitChanges();
         }
 
-        public static void EditEvent(PartyCafeEvent partyEvent, string userUpdate)
+        public static void EditEvent(PartyCafeEvent partyEvent, string userUpdate, byte[] image)
         {
             var dbContext = MainUtils.GetDBContext();
             var curEvent = (from e in dbContext.Events
@@ -109,7 +106,7 @@ namespace PartyCafe.Site.DBUtils
             dbContext.SubmitChanges();
         }
 
-        public static void InsertEvent(PartyCafeEvent partyEvent, string userCreate)
+        public static void InsertEvent(PartyCafeEvent partyEvent, string userCreate, byte[] image)
         {
             var newEvent = new Events();
             newEvent.Name = partyEvent.name;
