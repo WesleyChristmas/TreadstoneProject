@@ -5,12 +5,6 @@ using System.Web;
 
 namespace PartyCafe.Site.DBUtils
 {
-    public class EventResult
-    {
-        public DateTime CurDate;
-        public List<PCEvent> Calendar;
-    }
-
     public class PCEvent
     {
         public int idRecord;
@@ -22,7 +16,7 @@ namespace PartyCafe.Site.DBUtils
 
     public static class EventUtils
     {
-        public static EventResult GetAll()
+        public static List<PCEvent> GetAll()
         {
             var dbContext = MainUtils.GetDBContext();
             var events = (from e in dbContext.Events
@@ -42,12 +36,8 @@ namespace PartyCafe.Site.DBUtils
           
                 resultList.Add(pcEvent);
             }
-            EventResult er = new EventResult();
-            er.Calendar = resultList;
-            er.CurDate = DateTime.Now;
 
-            return er;
-            //return resultList;
+            return resultList;
         }
 
         public static List<PCEvent> GetNearEvents()
@@ -71,9 +61,6 @@ namespace PartyCafe.Site.DBUtils
 
                 resultList.Add(pcEvent);
             }
-            
-
-            //return er;
             return resultList;
         }
 
@@ -119,8 +106,15 @@ namespace PartyCafe.Site.DBUtils
         {
             var newEvent = new Events();
             newEvent.Name = partyEvent.name;
-            newEvent.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
             newEvent.EventDate = partyEvent.DateEvent;
+            if (image != null)
+            {
+                newEvent.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
+            }
+            else
+            {
+                newEvent.IdPhoto = 0;
+            }
 
             newEvent.DateCreate = DateTime.Now;
             newEvent.UserCreate = userCreate;

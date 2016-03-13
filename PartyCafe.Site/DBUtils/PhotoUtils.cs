@@ -33,7 +33,7 @@ namespace PartyCafe.Site.DBUtils
 
         private static string SavePhoto(PCPhoto image)
         {
-            const string ServerPath = "./Content/photos/";
+            const string ServerPath = "/Content/photos/";
 
             if (!Directory.Exists(ServerPath)) { Directory.CreateDirectory(ServerPath); };
             string fileName = GetRandomFileName();

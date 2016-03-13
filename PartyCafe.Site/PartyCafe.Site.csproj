@@ -205,6 +205,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="DBUtils\EventUtils.cs" />
+    <Compile Include="DBUtils\GalleryUtils.cs" />
+    <Compile Include="DBUtils\GameUtils.cs" />
     <Compile Include="DBUtils\MainUtils.cs" />
     <Compile Include="DBUtils\PartyCafeClasses.designer.cs">
       <AutoGen>True</AutoGen>
