@@ -44,8 +44,8 @@ namespace PartyCafe.Site.DBUtils
         public static void InsertGallery(PCGallery gallery, string userCreate, PCPhoto image)
         {
             var newGallery = new Gallery();
-            newGallery.Name = gallery.name;
-            newGallery.Description = gallery.description;
+            newGallery.Name = gallery.name != null ? gallery.name : String.Empty;
+            newGallery.Description = gallery.description != null ? gallery.description : String.Empty; ;
             if (image != null)
             {
                 newGallery.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
@@ -70,19 +70,22 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == gallery.idRecord
                             select e).SingleOrDefault();
 
-            curGallery.Name = gallery.name;
-            curGallery.Description = gallery.description;
+            curGallery.Name = gallery.name != null ? gallery.name : String.Empty;
+            curGallery.Description = gallery.name != null ? gallery.name : String.Empty;
 
             curGallery.DateUpdate = DateTime.Now;
             curGallery.UserUpdate = userUpdate;
 
-            if (curGallery.IdPhoto > 0)
-            {
-                PhotoUtils.EditImage(curGallery.IdPhoto, image, userUpdate);
-            }
-            else
-            {
-                curGallery.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+            if (image != null)
+            { 
+                if (curGallery.IdPhoto > 0)
+                {
+                    PhotoUtils.EditImage(curGallery.IdPhoto, image, userUpdate);
+                }
+                else
+                {
+                    curGallery.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                }
             }
 
             dbContext.SubmitChanges();

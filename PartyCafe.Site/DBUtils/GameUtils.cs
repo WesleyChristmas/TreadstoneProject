@@ -45,9 +45,10 @@ namespace PartyCafe.Site.DBUtils
         public static void InsertGame(PCGame game, string userCreate, PCPhoto image)
         {
             var newGame = new Games();
-            newGame.Name = game.name;
-            newGame.Description = game.description;
-            newGame.Platform = game.platform;
+            newGame.Name = game.name != null ? game.name : "";
+            newGame.Description = game.description != null ? game.description : "";
+            newGame.Platform = game.platform != null ? game.platform : "";
+
             if (image != null)
             {
                 newGame.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
@@ -72,20 +73,21 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == game.idRecord
                             select e).SingleOrDefault();
 
-            curGame.Name = game.name;
-            curGame.Description = game.description;
-            curGame.Platform = game.platform;
+            curGame.Name = game.name != null ? game.name : "";
+            curGame.Description = game.description != null ? game.description : "";
+            curGame.Platform = game.platform != null ? game.platform : "";
 
             curGame.DateUpdate = DateTime.Now;
             curGame.UserUpdate = userUpdate;
 
-            if (curGame.IdPhoto > 0)
+            if (image != null)
             {
-                PhotoUtils.EditImage(curGame.IdPhoto, image, userUpdate);
-            }
-            else
-            {
-                curGame.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                if (curGame.IdPhoto > 0)
+                {
+                    PhotoUtils.EditImage(curGame.IdPhoto, image, userUpdate);
+                } else {
+                    curGame.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                }
             }
 
             dbContext.SubmitChanges();

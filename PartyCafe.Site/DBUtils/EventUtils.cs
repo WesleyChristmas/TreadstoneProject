@@ -84,18 +84,20 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == partyEvent.idRecord
                             select e).SingleOrDefault();
 
-            curEvent.Name = partyEvent.name;
-            curEvent.EventDate = partyEvent.DateEvent;
+            curEvent.Name = partyEvent.name != null ? partyEvent.name : "";
+            curEvent.EventDate = partyEvent.DateEvent != null ? partyEvent.DateEvent : DateTime.Now;
 
             curEvent.DateUpdate = DateTime.Now;
             curEvent.UserUpdate = userUpdate;
 
-            if (curEvent.IdPhoto > 0)
-            {
-                PhotoUtils.EditImage(curEvent.IdPhoto, image, userUpdate);
-            } else
-            {
-                curEvent.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+            if (image != null)
+            { 
+                if (curEvent.IdPhoto > 0)
+                {
+                    PhotoUtils.EditImage(curEvent.IdPhoto, image, userUpdate);
+                } else {
+                    curEvent.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                }
             }
 
             dbContext.SubmitChanges();
@@ -105,8 +107,9 @@ namespace PartyCafe.Site.DBUtils
         public static void InsertEvent(PCEvent partyEvent, string userCreate, PCPhoto image)
         {
             var newEvent = new Events();
-            newEvent.Name = partyEvent.name;
-            newEvent.EventDate = partyEvent.DateEvent;
+            newEvent.Name = partyEvent.name != null ? partyEvent.name : "";
+            newEvent.EventDate = partyEvent.DateEvent != null ? partyEvent.DateEvent : DateTime.Now;
+
             if (image != null)
             {
                 newEvent.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
