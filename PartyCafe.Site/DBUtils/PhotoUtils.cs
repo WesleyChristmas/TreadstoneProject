@@ -26,14 +26,15 @@ namespace PartyCafe.Site.DBUtils
 
             while (i < FileNameLength)
             {
-                result += chars[random.Next(8)]; 
+                result += chars[random.Next(chars.Length)];
+                i++;
             }
             return result;
         }
 
         private static string SavePhoto(PCPhoto image)
         {
-            const string ServerPath = "/Content/photos/";
+            const string ServerPath = @"/Git/PartyCafe/PartyCafe.Site/Content/photos/";
 
             if (!Directory.Exists(ServerPath)) { Directory.CreateDirectory(ServerPath); };
             string fileName = GetRandomFileName();

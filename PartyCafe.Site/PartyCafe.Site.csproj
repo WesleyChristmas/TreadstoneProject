@@ -76,7 +76,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1211,7 +1210,7 @@
       <Name>BusinessEntity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Library\BusinessInterface\BusinessInterface.csproj">
-      <Project>{FA1BFB81-6408-4C61-A701-B77ABC608486}</Project>
+      <Project>{fa1bfb81-6408-4c61-a701-b77abc608486}</Project>
       <Name>BusinessInterface</Name>
     </ProjectReference>
   </ItemGroup>
@@ -1226,6 +1225,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -1247,6 +1249,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:64898/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

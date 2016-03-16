@@ -1,7 +1,4 @@
 using System;
-using BusinessInterface;
-using Db.Service;
-using Db.Service.PrivateServices;
 using Entity;
 using Entity.Model;
 using Microsoft.AspNet.Identity;
@@ -64,15 +61,16 @@ namespace PartyCafe.Site.App_Start
                 .RegisterType<IRepositoryAsync<Photo>, Repository<Photo>>()
                 .RegisterType<IRepositoryAsync<PhotoType>, Repository<PhotoType>>()
                 .RegisterType<IRepositoryAsync<BlogCalendar>, Repository<BlogCalendar>>()
-                .RegisterType<IRepositoryAsync<BlogHeader>,Repository<BlogHeader>>()
-                .RegisterType<IRepositoryAsync<BlogPhoto>,Repository<BlogPhoto>>()
+                .RegisterType<IRepositoryAsync<BlogHeader>, Repository<BlogHeader>>()
+                .RegisterType<IRepositoryAsync<BlogPhoto>, Repository<BlogPhoto>>();
 
                     //Services
-
+/*
                 .RegisterType<IFoodMenuServiceBase, FoodMenuService>()
                 .RegisterType<IImageService, ImageService>()
                 .RegisterType<IBlogCalendarService, BlogCalendarService>()
                 .RegisterType<IBlogService, BlogService>();
+*/
         }
     }
 }
