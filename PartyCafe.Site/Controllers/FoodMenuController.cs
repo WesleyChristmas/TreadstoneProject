@@ -7,11 +7,11 @@ namespace PartyCafe.Site.Controllers
 {
     public class FoodMenuController : Controller
     {
-        private readonly IFoodMenuServiceBase _menuService;
+        /*private readonly IFoodMenuServiceBase _menuService;
         public FoodMenuController(IFoodMenuServiceBase menuService)
         {
             _menuService = menuService;
-        }
+        }               */
 
         // GET: FoodMenu
         public ActionResult Index()
@@ -22,13 +22,13 @@ namespace PartyCafe.Site.Controllers
         [HttpGet]
         public JsonResult GetAllMenuTypes()
         {
-            return Json(_menuService.GetAllFoodMenuTypes(), JsonRequestBehavior.AllowGet);
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult GetFoodMenu(int idType)
         {
-            return Json(_menuService.GetFoodMenu(idType));
+            return Json(null);
         }
 
     }
