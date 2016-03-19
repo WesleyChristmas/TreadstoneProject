@@ -11,6 +11,10 @@ namespace PartyCafe.Site.DBUtils
         public string name;
         public string price;
         public string photoPath;
+        public string description;
+        public string Weight;
+        public string Country;
+        public string Platform;
     }
 
     public class MenuGroupView
@@ -110,10 +114,14 @@ namespace PartyCafe.Site.DBUtils
                 if (item.idGroup == idGroup)
                 {
                     MenuItemView elem = new MenuItemView();
+                    elem.idRecord = item.idRecord;
                     elem.name = item.name;
                     elem.photoPath = item.photoPath;
                     elem.price = item.price.ToString();
-                    elem.idRecord = item.idRecord;
+                    elem.Country = item.Country;
+                    elem.description = item.description;
+                    elem.Platform = item.Platform;
+                    elem.Weight = item.Weight;
 
                     result.Add(elem);
                 }
@@ -147,6 +155,7 @@ namespace PartyCafe.Site.DBUtils
                 id.price = item.Price;
                 id.Weight = item.Weight;
                 id.description = item.description;
+                id.Country = item.Country;
                 id.idGroup = item.IdGroup;
 
                 itemsData.Add(id);
