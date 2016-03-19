@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PartyCafeDB_2" Class="PartyCafeClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=WWVNOTEBOOK;Initial Catalog=PartyCafeDB_2;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PartyCafeDB_2ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=WWVNOTEBOOK;Initial Catalog=PartyCafeDB_2;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PartyCafeDbContext" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Events" Member="Events">
     <Type Name="Events">
       <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -63,6 +63,43 @@
       <Association Name="Photos_Events" Member="Events" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Events" />
       <Association Name="Photos_Gallery" Member="Gallery" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Gallery" />
       <Association Name="Photos_Games" Member="Games" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Games" />
+      <Association Name="Photos_MenuGroups" Member="MenuGroups" ThisKey="IdRecord" OtherKey="IdPhoto" Type="MenuGroups" />
+      <Association Name="Photos_MenuItems" Member="MenuItems" ThisKey="IdRecord" OtherKey="IdPhoto" Type="MenuItems" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MenuGroups" Member="MenuGroups">
+    <Type Name="MenuGroups">
+      <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GroupName" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IdParent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserCreate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserUpdate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IdPhoto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MenuGroups_MenuGroups" Member="MenuGroups2" ThisKey="IdRecord" OtherKey="IdParent" Type="MenuGroups" />
+      <Association Name="MenuGroups_MenuItems" Member="MenuItems" ThisKey="IdRecord" OtherKey="IdGroup" Type="MenuItems" />
+      <Association Name="MenuGroups_MenuGroups" Member="MenuGroups1" ThisKey="IdParent" OtherKey="IdRecord" Type="MenuGroups" IsForeignKey="true" />
+      <Association Name="Photos_MenuGroups" Member="Photos" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photos" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MenuItems" Member="MenuItems">
+    <Type Name="MenuItems">
+      <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IdPhoto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Platform" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="UserCreate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserUpdate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IdGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MenuGroups_MenuItems" Member="MenuGroups" ThisKey="IdGroup" OtherKey="IdRecord" Type="MenuGroups" IsForeignKey="true" />
+      <Association Name="Photos_MenuItems" Member="Photos" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photos" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

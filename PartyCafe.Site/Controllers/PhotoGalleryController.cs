@@ -62,6 +62,12 @@ namespace PartyCafe.Site.Controllers
             TestEvents();
             TestGames();
             TestGallery();
+            TestMenu();
+        }
+
+        private void TestMenu()
+        {
+            var x = MenuUtils.GetAll();
         }
 
         private void TestGallery()
