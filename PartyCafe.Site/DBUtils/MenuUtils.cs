@@ -22,29 +22,29 @@ namespace PartyCafe.Site.DBUtils
         public List<MenuGroupView> subGroups;
     }
 
-    public class MenuItemData
-    {
-        public int idRecord;
-        public int idGroup;
-        public string name;
-        public decimal price;
-        public string photoPath;
-        public string description;
-        public string Weight;
-        public string Country;
-        public string Platform;
-    }
-
-    public class MenuGroupData
-    {
-        public int idRecord;
-        public string name;
-        public int idParent;
-        public string photoPath;
-    }
-
     public static class MenuUtils
     {
+        private class MenuItemData
+        {
+            public int idRecord;
+            public int idGroup;
+            public string name;
+            public decimal price;
+            public string photoPath;
+            public string description;
+            public string Weight;
+            public string Country;
+            public string Platform;
+        }
+
+        private class MenuGroupData
+        {
+            public int idRecord;
+            public string name;
+            public int idParent;
+            public string photoPath;
+        }
+
         private static List<MenuItemData> itemsData;
         private static List<MenuGroupData> groupsData;
 
