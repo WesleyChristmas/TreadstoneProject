@@ -4,21 +4,28 @@
 
 <div class="main">
     <div class="main-wrap">
+
         <script type="text/javascript">
             $(function() {
                 $('.barMenuLeft a').on('click', function() {
                     $('.barMenuLeft a.active').removeClass('active');
                     $(this).addClass('active');
-                    if ($(this).attr('rel')=='32') { // если алоголь
+                    if ($(this).attr('rel') == '32') { // если алоголь
+                        $('.column-lunch').hide();
                         showAlcoSections();
-                        //раскомментировал - начало
+
                         $('.column-second').fadeIn();
                         $('.column-second li').removeClass('active');
                         $('.column-second li a[rel="68"]').addClass('active');
                         $('.column-second li a[rel="68"]').parents('li').addClass('active');
-                        //раскомментировал - конец
-
-                    }else{
+                    } else if ($(this).attr('rel') == '29') {
+                        showLunchSections();
+                        $('.column-lunch').fadeIn();
+                        $('.column-lunch li').removeClass('active');
+                        $('.column-lunch li a[rel="68"]').addClass('active');
+                        $('.column-lunch li a[rel="68"]').parents('li').addClass('active');
+                    }
+                    else {
                         showDishes();
                     };
                 });
@@ -42,6 +49,21 @@
                     showAlcoDishes();
                 });
             });
+            /* Lunch */
+            function showLunchSections() {
+                var pubId = $('.cityInH1').data('selected');
+                $('.column-lunch').fadeIn();
+                $('.barMenuLeft a').hide();
+                $('.barMenuLeft a.sect-pub-' + pubId).show();
+                if ($('.barMenuLeft a.active').is(':hidden')) {
+                    $('.barMenuLeft a').removeClass('active');
+                    $('.barMenuLeft a:visible:eq(0)').addClass('active');
+                }
+
+                showAlcoDishes();
+                $('.column-lunch .title a[rel="68"]').trigger('click');
+            }
+
 
             function showAlcoSections (){
                 var pubId = $('.cityInH1').data('selected');
@@ -59,6 +81,7 @@
                 $('.column-second .title a[rel="68"]').trigger('click');
                 //раскомментировал - конец
             }
+
             function showAlcoCountriesAndBrands (){
                 var brand='',
                     brand_prev='',
@@ -101,6 +124,7 @@
                 //console.log('showDishes');
 
                 $('.column-second').hide();
+                $('.column-lunch').hide();
                 $('.barMenuLeft a').hide();
                 $('.barMenuLeft a.sect-pub-'+pubId).show();
 
@@ -171,15 +195,153 @@
                 <div class="barMenu">
                     <div class="barMenuLine" style="min-height:400px;">
                         <div class="barMenuLeft">
-                            <span><a href="javascript:void(0)" rel="28" class="sect-pub-602 active"><u>Горячие блюда</u></a></span>
-                            <span><a href="javascript:void(0)" rel="32" class="sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602 sect-pub-602"><u>Барная карта</u></a></span>
-                            <span><a href="javascript:void(0)" rel="24" class="sect-pub-602"><u>Горячие закуски</u></a></span>
+                            <span><a href="javascript:void(0)" rel="28" class="sect-pub-602 active"><u>Основное меню</u></a></span>
+                            <span><a href="javascript:void(0)" rel="29" class="sect-pub-602"><u>Деловые обеды</u></a></span>
+                            <span><a href="javascript:void(0)" rel="32" class="sect-pub-602"><u>Барная карта</u></a></span>
+                            <span><a href="javascript:void(0)" rel="32" class="sect-pub-602"><u>Кальянная карта</u></a></span>
+                            <span><a href="javascript:void(0)" rel="32" class="sect-pub-602"><u>Игровое меню</u></a></span>
+                            
+                            <!--<span><a href="javascript:void(0)" rel="24" class="sect-pub-602"><u>Горячие закуски</u></a></span>
                             <span><a href="javascript:void(0)" rel="22" class="sect-pub-602"><u>Закуски</u></a></span>
                             <span><a href="javascript:void(0)" rel="23" class="sect-pub-602"><u>Салаты</u></a></span>
                             <span><a href="javascript:void(0)" rel="26" class="sect-pub-602"><u>Гарниры</u></a></span>
-                            <span><a href="javascript:void(0)" rel="27" class="sect-pub-602"><u>Десерты</u></a></span>
+                            <span><a href="javascript:void(0)" rel="27" class="sect-pub-602"><u>Десерты</u></a></span>-->
                         </div>
+
                         <div class="barMenuContent">
+                            <!-- Main menu -->
+                            <div class="column-mainfood" style="display:none;">
+                                <ul>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/19c/19c94918e7123391f1aa788f3722267f.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="68" class="sect-pub-602" data-menu="">Чай</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/e82/e822932251976d118721feb14fcdf53b.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="53" class="sect-pub-602" data-menu="">Кофе</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Завтраки</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Супы</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Салаты</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Горячее</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Гарниры</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Десерты</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Мороженное</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Соки</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Вода</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Соусы</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /Main menu -->
+                            <!-- Lunch -->
+                            <div class="column-lunch" style="display:none;">
+                                <ul>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/19c/19c94918e7123391f1aa788f3722267f.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="68" class="sect-pub-602" data-menu="">Обед 1</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/e82/e822932251976d118721feb14fcdf53b.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="53" class="sect-pub-602" data-menu="">Обед 2</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Обед 3</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /Lunch -->
+                            <!-- Винная карта -->
                             <div class="column-second" style="display:none;">
                                 <ul>
                                     <li class="drink-item">
@@ -188,6 +350,22 @@
                                         </span>
                                         <span class="title">
                                             <a rel="68" class="sect-pub-602" data-menu="">Пиво</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/e82/e822932251976d118721feb14fcdf53b.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="53" class="sect-pub-602" data-menu="">Вино</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="55" class="sect-pub-602" data-menu="">Ликер</a>
                                         </span>
                                     </li>
                                     <li class="drink-item">
@@ -208,14 +386,6 @@
                                     </li>
                                     <li class="drink-item">
                                         <span class="img">
-                                            <img src="https://www.harats.ru/upload/iblock/ee1/ee1bd48ac80a725c2eb8647b5faea6a4.png" alt="">
-                                        </span>
-                                        <span class="title">
-                                            <a rel="35" class="sect-pub-602" data-menu="">Текила</a>
-                                        </span>
-                                    </li>
-                                    <li class="drink-item">
-                                        <span class="img">
                                             <img src="https://www.harats.ru/upload/iblock/3d4/3d4c7c66d39f65710181dd5305dc1334.png" alt="">
                                         </span>
                                         <span class="title">
@@ -224,26 +394,18 @@
                                     </li>
                                     <li class="drink-item">
                                         <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/ee1/ee1bd48ac80a725c2eb8647b5faea6a4.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="35" class="sect-pub-602" data-menu="">Текила</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
                                             <img src="https://www.harats.ru/upload/iblock/c74/c746b87e64e1634bfc56ecab408b5111.png" alt="">
                                         </span>
                                         <span class="title">
-                                            <a rel="52" class="sect-pub-602" data-menu="">Коньяк, бренди</a>
-                                        </span>
-                                    </li>
-                                    <li class="drink-item">
-                                        <span class="img">
-                                            <img src="https://www.harats.ru/upload/iblock/e82/e822932251976d118721feb14fcdf53b.png" alt="">
-                                        </span>
-                                        <span class="title">
-                                            <a rel="53" class="sect-pub-602" data-menu="">Вино, порто</a>
-                                        </span>
-                                    </li>
-                                    <li class="drink-item">
-                                        <span class="img">
-                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
-                                        </span>
-                                        <span class="title">
-                                            <a rel="55" class="sect-pub-602" data-menu="">Ликеры</a>
+                                            <a rel="52" class="sect-pub-602" data-menu="">Коньяк</a>
                                         </span>
                                     </li>
                                     <li class="drink-item">
@@ -254,33 +416,103 @@
                                             <a rel="46" class="sect-pub-602" data-menu="">Коктейли</a>
                                         </span>
                                     </li>
+                                </ul>
+                            </div>
+                            <!-- /Buhlo menu -->
+                            <!-- Kolyan -->
+                            <div class="column-kolyan" style="display:none;">
+                                <ul>
                                     <li class="drink-item">
                                         <span class="img">
-                                            <img src="https://www.harats.ru/upload/iblock/913/91305abe091f65132fc10c2ec3a54c33.png" alt="">
+                                            <img src="https://www.harats.ru/upload/iblock/19c/19c94918e7123391f1aa788f3722267f.png" alt="">
                                         </span>
                                         <span class="title">
-                                            <a rel="36" class="sect-pub-602" data-menu="">Чай</a>
+                                            <a rel="68" class="sect-pub-602" data-menu="">Кальян на воде</a>
                                         </span>
                                     </li>
                                     <li class="drink-item">
                                         <span class="img">
-                                            <img src="https://www.harats.ru/upload/iblock/761/761616e59a4cdb2f42bf7a6faa360db0.png" alt="">
+                                            <img src="https://www.harats.ru/upload/iblock/e82/e822932251976d118721feb14fcdf53b.png" alt="">
                                         </span>
                                         <span class="title">
-                                            <a rel="37" class="sect-pub-602" data-menu="">Кофе</a>
+                                            <a rel="53" class="sect-pub-602" data-menu="">Кальян на фрукте</a>
                                         </span>
                                     </li>
                                     <li class="drink-item">
                                         <span class="img">
-                                            <img src="https://www.harats.ru/upload/iblock/c63/c632d4406ae86638f0a9e422cece05d1.png" alt="">
+                                            <img src="https://www.harats.ru/upload/iblock/f9b/f9b4e5053828ecf138cae0c5551661d4.png" alt="">
                                         </span>
                                         <span class="title">
-                                            <a rel="42" class="sect-pub-602" data-menu="">Напитки, соки</a>
+                                            <a rel="55" class="sect-pub-602" data-menu="">Кальян на фрукте и алкоголе</a>
                                         </span>
                                     </li>
                                 </ul>
                             </div>
+                            <!-- /Kolyan -->
+                            <!-- Kolyan -->
+                            <div class="column-kolyan" style="display:none;">
+                                <ul>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/19c/19c94918e7123391f1aa788f3722267f.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="68" class="sect-pub-602" data-menu="">Настольные игры</a>
+                                        </span>
+                                    </li>
+                                    <li class="drink-item">
+                                        <span class="img">
+                                            <img src="https://www.harats.ru/upload/iblock/e82/e822932251976d118721feb14fcdf53b.png" alt="">
+                                        </span>
+                                        <span class="title">
+                                            <a rel="53" class="sect-pub-602" data-menu="">Видео игры</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /Kolyan -->
+
                             <div class="barMenu__wrap">
+                                <div class="dish-item dish-section-29 dish-pub-602 visible">
+                                    <img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg" width="200px">
+                                    <div class="right-part">
+                                        <h3>Дублин</h3>
+                                        <p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p>
+                                        <p class="weight">350&nbsp;гр.</p>
+                                        <div class="price">
+                                            <span class="price-in-pub-602">420</span>
+                                            <span class="price-currency-rub"><i class="fa fa-rub"></i></span>
+                                            <span class="price-currency-tenge" style="display:none;">тенге</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dish-item dish-section-29 dish-pub-602 visible">
+                                    <img src="https://www.harats.ru/upload/iblock/018/01826ca58f56bc8488ace2a792cf1182.jpg" width="200px">
+                                    <div class="right-part">
+                                        <h3>Эскалоп</h3>
+                                        <p>сочная свинина, жаренная на гриле. Подаётся с яйцом, картофелем фри и соусом «Барбекю»</p>
+                                        <p class="weight">100/100/30&nbsp;гр.</p>
+                                        <div class="price">
+                                            <span class="price-in-pub-602">320</span>
+                                            <span class="price-currency-rub"><i class="fa fa-rub"></i></span>
+                                            <span class="price-currency-tenge" style="display:none;">тенге</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dish-item dish-section-29 dish-pub-602 visible">
+                                    <img src="https://www.harats.ru/upload/iblock/5ba/5ba3196650c07ce6b801e104aa4506af.JPG" width="200px">
+                                    <div class="right-part">
+                                        <h3>Бифштекс</h3>
+                                        <p>сочная котлета из рубленого мяса. Подаётся с томатами и сливочно-грибным соусом</p>
+                                        <p class="weight">250/115/40&nbsp;гр.</p>
+                                        <div class="price">
+                                            <span class="price-in-pub-602">360</span>
+                                            <span class="price-currency-rub"><i class="fa fa-rub"></i></span>
+                                            <span class="price-currency-tenge" style="display:none;">тенге</span>
+                                        </div>
+                                    </div>
+                                </div>
+
 
                                 <div class="dish-item dish-section-23 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/9c9/9c9edd353ceb725179789d2d1db1cf08.jpg" width="200px">
@@ -296,7 +528,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-24 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/340/3404821c58afb4dfa94646666f40e0b9.jpg" width="200px">
                                     <div class="right-part">
@@ -311,7 +542,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-26 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/dde/dde063cd78cd011813f7650bf96ee206.jpg" width="200px">
                                     <div class="right-part">
@@ -326,7 +556,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-27 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/f99/f99acfc3bdeb8376dd2d899c1ef8d27e.jpg" width="200px">
                                     <div class="right-part">
@@ -341,7 +570,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-26 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/bb1/bb14cfd7d49c566e4ba2862561656acd.jpg" width="200px">
                                     <div class="right-part">
@@ -356,7 +584,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-24 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/f19/f1973424f6ab84dc4e2eca9068bad122.jpg" width="200px">
                                     <div class="right-part">
@@ -371,7 +598,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-22 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/c85/c85382391b6a18eea883b4e5ca0bbd42.jpg" width="200px">
                                     <div class="right-part">
@@ -386,7 +612,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-23 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/eb1/eb1f9f995c3af154867ce28c66c3b725.jpg" width="200px">
                                     <div class="right-part">
@@ -401,7 +626,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-28 dish-pub-602 visible">
                                     <img src="https://www.harats.ru/upload/iblock/bed/bed23cf30b04287307dbea61b20cfe45.jpg" width="200px">
                                     <div class="right-part">
@@ -416,7 +640,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-22 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/238/238dd85e671fb3ddaf0cf819f37f4a7b.jpg" width="200px">
                                     <div class="right-part">
@@ -431,7 +654,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-24 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/af8/af8c72e5ac1ce727c10960175a0e2062.jpg" width="200px">
                                     <div class="right-part">
@@ -446,7 +668,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-28 dish-pub-602 visible">
                                     <img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg" width="200px">
                                     <div class="right-part">
@@ -461,7 +682,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-24 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/384/3843b58f736a8cc0d448dc2ece3e18c2.jpg" width="200px">
                                     <div class="right-part">
@@ -476,7 +696,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-24 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/dc1/dc1398a6d3252d0da8697b89c4969aca.jpg" width="200px">
                                     <div class="right-part">
@@ -491,7 +710,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-22 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/ee7/ee7a76b54919776355690966355d125b.jpg" width="200px">
                                     <div class="right-part">
@@ -506,7 +724,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-22 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/fc9/fc9ac1c3fc8110dbc34e51e96bc4cf08.jpg" width="200px">
                                     <div class="right-part">
@@ -521,7 +738,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-27 dish-pub-602" style="display: none">
                                     <img src="https://www.harats.ru/upload/iblock/533/5333321ab7ffb295f25a1b96cb9c47f4.jpg" width="200px">
                                     <div class="right-part">
@@ -536,7 +752,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-28 dish-pub-602 visible">
                                     <img src="https://www.harats.ru/upload/iblock/018/01826ca58f56bc8488ace2a792cf1182.jpg" width="200px">
                                     <div class="right-part">
@@ -551,7 +766,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-28 dish-pub-602 visible">
                                     <img src="https://www.harats.ru/upload/iblock/5ba/5ba3196650c07ce6b801e104aa4506af.JPG" width="200px">
                                     <div class="right-part">
@@ -566,7 +780,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-28 dish-pub-602 visible">
                                     <img src="https://www.harats.ru/upload/iblock/7a5/7a5bd6fe846ae48ffa9ca1b94fe54652.jpg" width="200px">
                                     <div class="right-part">
@@ -581,7 +794,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -601,7 +813,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -621,7 +832,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -641,7 +851,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -661,7 +870,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -681,7 +889,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -701,7 +908,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -721,7 +927,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -741,7 +946,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -760,7 +964,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
@@ -779,7 +982,6 @@
                                         <div class="alco-item-text"></div>
                                     </div>
                                 </div>
-
                                 <div class="dish-item dish-section-33 dish-alco-item clearfix1 dish-pub-602" style="display: none">
                                     <div class="dish-alco-item-country">
                                         <img src="https://www.harats.ru/gfx/menu/i/flag_ireland.png">
