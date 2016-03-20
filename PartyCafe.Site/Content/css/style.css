@@ -337,7 +337,7 @@ img { border: 0; outline: 0; }
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.column-second {
+.column-second, .column-lunch {
     float: left;
     width: 280px;
     font-size: 1.8em;
@@ -349,17 +349,16 @@ img { border: 0; outline: 0; }
     position: relative;
     z-index: 1;
 }
-.column-second ul li {
+.column-second li, .column-lunch li {
     display: table;
     margin: 0 0 9px;
     background: none;
     padding: 0;
 }
-.column-second ul li span.img { width: 35px; text-align: center; }
-.column-second ul li span { display: table-cell; vertical-align: middle; }
-.column-second ul li span.title { line-height: 31px; padding: 0 0 0 16px; width: 195px; }
-.column-second ul li span { display: table-cell; vertical-align: middle; }
-.column-second ul li a {
+.column-second ul li span.img, .column-lunch .img { width: 35px; text-align: center; }
+.column-second ul li span.title, .column-lunch .title { line-height: 31px; padding: 0 0 0 16px; width: 195px; }
+.column-second ul li span, .column-lunch span { display: table-cell; vertical-align: middle; }
+.column-second ul li a, .column-lunch a {
     cursor: pointer;
     text-decoration: none;
     border-bottom: 1px dotted #d9d7d6;
@@ -369,7 +368,7 @@ img { border: 0; outline: 0; }
     vertical-align: baseline;
     background: transparent;
 }
-.barMenu__wrap { border-top: 1px solid transparent; }
+.barMenu__wrap { border-top: 1px solid transparent; display: inline-block; }
 .barMenu__wrap .dish-item:not(.dish-alco-item) { background: url("https://www.harats.ru/gfx/images/sep.png") 50% 100% no-repeat; padding-bottom: 25px; margin-bottom: 12px; }
 .barMenu__wrap .dish-item { position: relative; }
 .barMenuContent .dish-item {
