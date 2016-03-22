@@ -281,6 +281,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Scripts\AngularControllers\EventCalendarContoller.js" />
+    <Content Include="Scripts\AngularControllers\FoodMenuController.js" />
     <Content Include="Scripts\AngularControllers\InstaGalleryController.js" />
     <Content Include="Scripts\AngularJs\angular-animate.js" />
     <Content Include="Scripts\AngularJs\angular-animate.min.js" />

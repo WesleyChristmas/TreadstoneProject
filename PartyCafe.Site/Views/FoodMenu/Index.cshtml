@@ -2,407 +2,266 @@
     ViewBag.Title = "Меню";
 }
 
+<script src="~/Scripts/AngularControllers/FoodMenuController.js"></script>
+
 <div class="main">
-    <div class="main-wrap">
+    <div class="main-wrap" ng-app="foodmenuapp">
 
-        <script type="text/javascript">
-            $(function () {
-                $('.barMenuLeft a').on('click', function () {
-                    $('.barMenuLeft a.active').removeClass('active');
-                    $(this).addClass('active');
-                    if ($(this).attr('rel') == '32') { // если алоголь
-                        $('.column-lunch').hide();
-                        showAlcoSections();
-
-                        $('.column-second').fadeIn();
-                        $('.column-second li').removeClass('active');
-                        $('.column-second li a[rel="68"]').addClass('active');
-                        $('.column-second li a[rel="68"]').parents('li').addClass('active');
-                    } else if ($(this).attr('rel') == '29') {
-                        showLunchSections();
-                        $('.column-lunch').fadeIn();
-                        $('.column-lunch li').removeClass('active');
-                        $('.column-lunch li a[rel="68"]').addClass('active');
-                        $('.column-lunch li a[rel="68"]').parents('li').addClass('active');
-                    }
-                    else {
-                        showDishes();
-                    };
-                });
-                $('.cityH1Menu a').on('click', function () {
-                    $('.cityInH1 span').text($(this).text());
-                    $('.cityInH1').data('selected', $(this).attr('rel'));
-                    if ($('.barMenuLeft a.active').attr('rel') == '32') {
-                        showAlcoDishes();
-                    } else {
-                        showDishes();
-                    };
-
-                });
-                $('.column-second .title a').on('click', function () {
-                    //раскомментировал - начало
-                    //$('.cityInH1 span').text($(this).text());
-                    //$('.cityInH1').data('selected', $(this).attr('rel'));
-                    //раскомментировал - конец
-                    $('.column-second li').removeClass('active');
-                    $(this).parents('li').addClass('active');
-                    showAlcoDishes();
-                });
-            });
-            /* Lunch */
-            function showLunchSections() {
-                var pubId = $('.cityInH1').data('selected');
-                $('.column-lunch').fadeIn();
-                $('.barMenuLeft a').hide();
-                $('.barMenuLeft a.sect-pub-' + pubId).show();
-                if ($('.barMenuLeft a.active').is(':hidden')) {
-                    $('.barMenuLeft a').removeClass('active');
-                    $('.barMenuLeft a:visible:eq(0)').addClass('active');
-                }
-
-                showAlcoDishes();
-                $('.column-lunch .title a[rel="68"]').trigger('click');
-            }
-
-
-            function showAlcoSections() {
-                var pubId = $('.cityInH1').data('selected');
-                $('.column-second').fadeIn();
-                $('.barMenuLeft a').hide();
-                $('.barMenuLeft a.sect-pub-' + pubId).show();
-                if ($('.barMenuLeft a.active').is(':hidden')) {
-                    $('.barMenuLeft a').removeClass('active');
-                    $('.barMenuLeft a:visible:eq(0)').addClass('active');
-                }
-
-                showAlcoDishes();
-                //раскомментировал - начало
-                //$('.column-second li').removeClass('active');
-                $('.column-second .title a[rel="68"]').trigger('click');
-                //раскомментировал - конец
-            }
-
-            function showAlcoCountriesAndBrands() {
-                var brand = '',
-                    brand_prev = '',
-                    country = '',
-                    country_prev = '';
-                $('.dish-alco-item-country, .dish-alco-item-brand').show();
-
-                items_in_brand = 0;
-                cnt = $('.dish-alco-item:visible').length;
-                $('.dish-alco-item:visible').each(function (i) {
-                    brand = $(this).find('.dish-alco-item-brand').text();
-                    // console.log(i);
-                    if (brand == brand_prev && i != cnt) {
-                        $(this).find('.dish-alco-item-brand').hide();
-                        items_in_brand++;
-                    } else {
-                        if (i == cnt) {
-                            $(this).find('.dish-alco-item-brand').hide();
-                            items_in_brand++;
-                        };
-                        if (typeof $first_brand !== 'undefined') {
-                            $first_brand.find(".css-before").height(52 + 36 * (items_in_brand + 1));
-                        };
-                        items_in_brand = 0;
-                        $first_brand = $(this);
-                    };
-                    brand_prev = brand;
-
-                    country = $(this).find('.dish-alco-item-country').text();
-                    if (country == country_prev) {
-                        $(this).find('.dish-alco-item-country').hide();
-                    };
-                    country_prev = country;
-                });
-            }
-
-            function showDishes() {
-                var pubId = $('.cityInH1').data('selected');
-
-                //console.log('showDishes');
-
-                $('.column-second').hide();
-                $('.column-lunch').hide();
-                $('.barMenuLeft a').hide();
-                $('.barMenuLeft a.sect-pub-' + pubId).show();
-
-                if ($('.barMenuLeft a.active').is(':hidden')) {
-                    $('.barMenuLeft a').removeClass('active');
-                    $('.barMenuLeft a:visible:eq(0)').addClass('active');
-                }
-
-                var sectId = $('.barMenuLeft a.active').attr('rel');
-                var showDishes = $('.dish-section-' + sectId + '.dish-pub-' + pubId);
-
-                $('.dish-item').not(showDishes).hide().removeClass('visible');
-                $(showDishes).fadeIn().addClass('visible');
-
-                $('.dish-item .price span').not('.price-in-pub-all').hide();
-                $('.dish-item .price-in-pub-' + pubId).fadeIn();
-                $(".dish-item .price-currency-tenge, .dish-item .price-currency-rub").hide();
-                if (pubId == '576319') {
-                    $('.dish-item .price-currency-tenge').show();
-                } else {
-                    $('.dish-item .price-currency-rub').show();
-                };
-
-            }
-
-            function showAlcoDishes() {
-                var pubId = $('.cityInH1').data('selected');
-
-                $('.column-second li').hide();
-                $('.column-second li .title a.sect-pub-' + pubId).parents('li').show();
-                if ($('.column-second li.active').is(':hidden')) {
-                    $('.column-second li').removeClass('active');
-                    $('.column-second li:visible:eq(0)').addClass('active');
-                }
-
-                var sectId = $('.column-second li.active .title a').attr('rel');
-                var showDishes = $('.dish-section-' + sectId + '.dish-pub-' + pubId);
-
-                $('.dish-item').not(showDishes).hide();
-                $(showDishes).fadeIn();
-
-                $('.dish-item .price span').not('.price-in-pub-all').hide();
-                $('.dish-item .price-in-pub-' + pubId).fadeIn();
-
-                $(".dish-item .price-currency-tenge, .dish-item .price-currency-rub").hide();
-                if (pubId == '576319') {
-                    $('.dish-item .price-currency-tenge').show();
-                } else {
-                    $('.dish-item .price-currency-rub').show();
-                };
-
-                showAlcoCountriesAndBrands();
-            }
-
-            $(function () {
-                // showDishes();
-                // showAlcoDishes();
-                showAlcoCountriesAndBrands();
-            })
-        </script>
-
-        <div class="h1">
-            Наше меню в &nbsp; кафе
-            <div class="cityH1Menu popupBody">
-                <a href="javascript:void(0);" class="ajaxLink cityInH1" data-selected="602"><span>На Страстном</span><b></b></a>
-            </div>
+        <div class="h1" ng-controller="FoodMenuCt">
+            {{title}}
             <div class="darkArea">
                 <div class="barMenu">
                     <div class="barMenuLine" style="min-height:400px;">
-                        <div class="barMenuLeft"></div>
+                        <div class="barMenuLeft">
+                            <span ng-repeat="item in Food"><a href="javascript:void(0)" data-id="{{item.idRecord}}" ng-click="ShowSubMenu($index)"><u>{{item.name}}</u></a></span>
+                        </div>
+                        <div class="barMenuLeft-mobile">
+                            <a href="javascript:void(0);" class="fm-mobile">
+                                <script>
+                                    $('.fm-mobile').on('click', function () {
+                                        var mobile = $('.barMenuLeft');
+                                        if (mobile.hasClass('show')) {
+                                            mobile.removeClass('show');
+                                        } else {
+                                            mobile.addClass('show');
+                                        }
+                                    });
+                                    $(window).resize(function () {
+                                        if ($('.barMenuLeft').hasClass('show')) {
+                                            $('.barMenuLeft').removeClass('show');
+                                        }
+                                    });
+                                </script>
+                                <i class="fa fa-bars"></i>
+                                <span class="slicknav_menutxt"></span>
+                            </a>
+                        </div>
                         <div class="barMenuContent">
-                            <div class="barMenu__wrap"></div>
+                            <div class='food-col' ng-repeat="item in Food">
+                                <ul>
+                                    <li ng-repeat="subitem in item.subGroups">
+                                        <span class='img'><img src=''></span>
+                                        <span class='title'>
+                                            <a data-parent='idrecordparent'>{{subitem.name}}</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                                    <div id="accordion">
+                                        <h3>Основное меню - Горячее</h3>
+                                        <div>
+                                            <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
+                                            <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
+                                            <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
+                                        </div>
+                                        <h3>Section 2</h3>
+                                        <div>
+                                            <p>
+                                                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                                                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                                                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                                                suscipit faucibus urna.
+                                            </p>
+                                        </div>
+                                        <h3>Section 3</h3>
+                                        <div>
+                                            <p>
+                                                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                                                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                                                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                                                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                                            </p>
+                                            <ul>
+                                                <li>List item one</li>
+                                                <li>List item two</li>
+                                                <li>List item three</li>
+                                            </ul>
+                                        </div>
+                                        <h3>Section 4</h3>
+                                        <div>
+                                            <p>
+                                                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                                                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                                                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                                                mauris vel est.
+                                            </p>
+                                            <p>
+                                                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                                                inceptos himenaeos.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="barMenu__wrap"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="clear"></div>
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
-    </div>
-</div>
 
 <script>
-    function GetAllMenu() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/FoodMenu/GetAllMenu");
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var jsonResponse = JSON.parse(xhr.responseText);
-                FillMenu(jsonResponse);
-                console.log(jsonResponse);
+            $(function () {
+                $("#accordion").accordion({ collapsible: true, active: false });
+            });
+            /* function GetAllMenu() {
+                 var xhr = new XMLHttpRequest();
+                 xhr.open("GET", "/FoodMenu/GetAllMenu");
+                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                 xhr.onreadystatechange = function () {
+                     if (xhr.readyState == 4 && xhr.status == 200) {
+                         var jsonResponse = JSON.parse(xhr.responseText);
+                         //FillMenu(jsonResponse);
+                         console.log(jsonResponse);
+                     }
+                 }
+                 xhr.send();
+             }
+            GetAllMenu();*/
+
+            function createTopMenu(item, main) {
+                var _span = document.createElement('span'),
+                    _a = document.createElement('a'),
+                    _u = document.createElement('u');
+
+                _u.textContent = item.name;
+                _a.setAttribute('href', 'javascript:void(0)');
+                _a.setAttribute('data-id', item.idRecord);
+                _a.onclick = (function (opt) {
+                    return function () {
+                        var fc = document.getElementsByClassName('food-col'),
+                            fcId = document.getElementById('fc' + opt.idRecord),
+                            l = fc.length;
+
+                        for (var i = 0; i < l; ++i) {
+                            if (fc[i].className.replace(/[\n\t]/g, "").indexOf('fmactive') > -1) {
+                                fc[i].className = fc[i].className.replace(/\bfmactive\b/, '').trim();
+                            }
+                        }
+
+                        if (main.className.replace(/[\n\t]/g, "").indexOf('show') > -1) {
+                            main.className = main.className.replace(/\bshow\b/, '').trim();
+                        }
+
+                        fcId.className += ' fmactive';
+                    };
+                })(item);
+                _a.appendChild(_u);
+                _span.appendChild(_a)
+                main.appendChild(_span);
             }
-        }
-        xhr.send();
-    }
-    GetAllMenu();
+            function creatSubMenu(list, item, parentitem) {
+                var _li = document.createElement('li'),
+                    _simg = document.createElement('span'),
+                    _stitle = document.createElement('span'),
+                    _a = document.createElement('a'),
+                    _i = document.createElement('img');
 
-    function createTopMenu(item, main) {
-        var _span = document.createElement('span'),
-            _a = document.createElement('a'),
-            _u = document.createElement('u');
+                _i.setAttribute('src', item.photoPath);
+                _simg.className = 'img';
+                //_simg.appendChild(_i);
 
-        _u.textContent = item.name;
-        _a.setAttribute('href', 'javascript:void(0)');
-        _a.setAttribute('data-id', item.idRecord);
-        _a.onclick = (function (opt) {
-            return function () {
-                var fc = document.getElementsByClassName('food-col'),
-                    fcId = document.getElementById('fc' + opt.idRecord),
-                    l = fc.length;
+                _li.appendChild(_simg);
+
+                _a.setAttribute('data-parent', parentitem.idRecord);
+                _a.setAttribute('data-item', item.idRecord);
+                _a.innerHTML = item.name;
+                _a.onclick = (function (opt) {
+                    return function () {
+                        var di = document.getElementsByClassName('dish-item'),
+                            diId = document.getElementById('di' + opt.idRecord),
+                            l = di.length;
+
+                        for (var i = 0; i < l; ++i) {
+                            if (di[i].className.replace(/[\n\t]/g, "").indexOf('smactive') > -1) {
+                                di[i].className = di[i].className.replace(/\bsmactive\b/, '').trim();
+                            }
+                        }
+
+                        for (var i = 0; i < l; ++i) {
+                            if (di[i].dataset.parent == opt.idRecord) {
+                                di[i].className += ' smactive';
+                            }
+                        }
+                    };
+                })(item);
+
+                _stitle.className = 'title';
+                _stitle.appendChild(_a);
+
+                _li.appendChild(_stitle);
+                list.appendChild(_li);
+            }
+            function creatItems(itemmenu, item, parentitem) {
+                var _dp = document.createElement('div'),
+                    _dch = document.createElement('div'),
+                    _dprice = document.createElement('div'),
+                    _img = document.createElement('img'),
+                    _h3 = document.createElement('h3'),
+                    _pweight = document.createElement('p'),
+                    _pdesc = document.createElement('p'),
+                    _s = document.createElement('span'),
+                    _i = document.createElement('i');
+
+                _i.className = 'fa fa-rub';
+                _s.textContent = parseInt(item.price);
+                _s.className = 'fc-price';
+                _s.appendChild(_i);
+
+                _dprice.appendChild(_s);
+
+                _h3.textContent = item.name;
+                _pdesc.textContent = item.description;
+                _pweight.textContent = item.Platform === null ? item.Weight : item.Platform;
+
+                _dch.appendChild(_h3);
+                _dch.appendChild(_pdesc);
+                _dch.appendChild(_pweight);
+                _dch.appendChild(_dprice);
+
+                _img.setAttribute('src', item.photoPath);
+
+                _dp.className = 'dish-item';
+                _dp.setAttribute('data-parent', parentitem.idRecord);
+                _dp.setAttribute('data-item', item.idRecord);
+                _dp.id = 'di' + parentitem.idRecord;
+                _dp.appendChild(_img);
+                _dp.appendChild(_dch);
+
+                itemmenu.appendChild(_dp);
+            }
+
+            function FillMenu(obj) {
+                var l = obj.length,
+                    topmenu = document.getElementsByClassName('barMenuLeft')[0],
+                    submenu = document.getElementsByClassName('barMenuContent')[0],
+                    itemmenu = document.getElementsByClassName('barMenu__wrap')[0];
 
                 for (var i = 0; i < l; ++i) {
-                    if (fc[i].className.replace(/[\n\t]/g, " ").indexOf('fmactive') > -1) {
-                        fc[i].className = fc[i].className.replace(/\bfmactive\b/, '');
+                    var item = obj[i].subGroups,
+                        itemL = obj[i].subGroups.length,
+                        _d = document.createElement('div'),
+                        _ul = document.createElement('ul');
+
+                    createTopMenu(obj[i], topmenu);
+
+                    for (var j = 0; j < itemL; ++j) {
+                        creatSubMenu(_ul, item[j], obj[i]);
+
+                        var _item = item[j].items,
+                            _itemL = _item.length;
+
+                        for (var k = 0; k < _itemL; ++k) {
+                            creatItems(itemmenu, _item[k], item[j]);
+                        }
                     }
-                }
-                fcId.className += ' fmactive';
-            };
-        })(item);
-        _a.appendChild(_u);
-        _span.appendChild(_a)
-        main.appendChild(_span);
-    }
-    function creatSubMenu(list, item, parentitem) {
-        var _li = document.createElement('li'),
-            _simg = document.createElement('span'),
-            _stitle = document.createElement('span'),
-            _a = document.createElement('a'),
-            _i = document.createElement('img');
-
-        _i.setAttribute('src', item.photoPath);
-        _simg.className = 'img';
-        //_simg.appendChild(_i);
-
-        _li.appendChild(_simg);
-
-        _a.setAttribute('data-parent', parentitem.idRecord);
-        _a.setAttribute('data-item', item.idRecord);
-        _a.innerHTML = item.name;
-        _a.onclick = (function (opt) {
-            return function () {
-                var di = document.getElementsByClassName('dish-item'),
-                    diId = document.getElementById('di' + opt.idRecord),
-                    l = di.length;
-
-                for (var i = 0; i < l; ++i) {
-                    if (di[i].className.replace(/[\n\t]/g, " ").indexOf('smactive') > -1) {
-                        di[i].className = di[i].className.replace(/\bsmactive\b/, '');
-                    }
-                }
-
-                for (var i = 0; i < l; ++i) {
-                    if (di[i].dataset.parent == opt.idRecord) {
-                        di[i].className += ' smactive';
-                    }
-                }
-            };
-        })(item);
-
-        _stitle.className = 'title';
-        _stitle.appendChild(_a);
-
-        _li.appendChild(_stitle);
-        list.appendChild(_li);
-    }
-    function creatItems(itemmenu, item, parentitem) {
-        var _dp = document.createElement('div'),
-            _dch = document.createElement('div'),
-            _dprice = document.createElement('div'),
-            _img = document.createElement('img'),
-            _h3 = document.createElement('h3'),
-            _pweight = document.createElement('p'),
-            _pdesc = document.createElement('p'),
-            _s = document.createElement('span'),
-            _i = document.createElement('i');
-
-        _i.className = 'fa fa-rub';
-        _s.textContent = parseInt(item.price);
-        _s.className = 'fc-price';
-        _s.appendChild(_i);
-
-        _dprice.appendChild(_s);
-
-        _h3.textContent = item.name;
-        _pdesc.textContent = item.description;
-        _pweight.textContent = item.Platform === null ? item.Weight : item.Platform;
-
-        _dch.appendChild(_h3);
-        _dch.appendChild(_pdesc);
-        _dch.appendChild(_pweight);
-        _dch.appendChild(_dprice);
-
-        _img.setAttribute('src', item.photoPath);
-
-        _dp.className = 'dish-item';
-        _dp.setAttribute('data-parent', parentitem.idRecord);
-        _dp.setAttribute('data-item', item.idRecord);
-        _dp.id = 'di' + parentitem.idRecord;
-        _dp.appendChild(_img);
-        _dp.appendChild(_dch);
-
-        itemmenu.appendChild(_dp);
-    }
-
-    function FillMenu(obj) {
-        var l = obj.length,
-            topmenu = document.getElementsByClassName('barMenuLeft')[0],
-            submenu = document.getElementsByClassName('barMenuContent')[0],
-            itemmenu = document.getElementsByClassName('barMenu__wrap')[0];
-
-        for (var i = 0; i < l; ++i) {
-            var item = obj[i].subGroups,
-                itemL = obj[i].subGroups.length,
-                _d = document.createElement('div'),
-                _ul = document.createElement('ul');
-
-            createTopMenu(obj[i], topmenu);
-
-            for (var j = 0; j < itemL; ++j) {
-                creatSubMenu(_ul, item[j], obj[i]);
-
-                var _item = item[j].items,
-                    _itemL = _item.length;
-
-                for (var k = 0; k < _itemL; ++k) {
-                    creatItems(itemmenu, _item[k], item[j]);
+                    _d.className = 'food-col';
+                    _d.id = 'fc' + obj[i].idRecord;
+                    _d.appendChild(_ul);
+                    submenu.appendChild(_d);
                 }
             }
-            _d.className = 'food-col';
-            _d.id = 'fc' + obj[i].idRecord;
-            _d.appendChild(_ul);
-            submenu.appendChild(_d);
-        }
-    }
 </script>
-<style>
-    .food-col {
-        float: left;
-        width: 280px;
-        font-size: 1.8em;
-        padding: 14px 10px 0 10px;
-        margin: 9px 8% 0 0;
-        border-right: 2px solid #fff;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        position: relative;
-        z-index: 1;
-        display: none;
-    }
-    .food-col ul { margin: 0; padding: 0 0 18px 0; }
-    .food-col li {
-        display: table;
-        margin: 0 0 9px;
-        background: none;
-        padding: 0;
-    }
-    .img { width: 35px; text-align: center; height: 53px; }
-    .title { line-height: 31px; padding: 0 0 0 16px; width: 195px; }
-    .food-col span { display: table-cell; vertical-align: middle; }
-    .food-col a {
-        cursor: pointer;
-        text-decoration: none;
-        border-bottom: 1px dotted #d9d7d6;
-        margin: 0;
-        padding: 0;
-        font-size: 60%;
-        vertical-align: baseline;
-        background: transparent;
-    }
-    .dish-item { display: none; max-width: 630px; }
-    .dish-item img {
-        border-radius: 5px;
-        display: block;
-        margin: 0;
-        width: 225px;
-        float: left;
-        margin-right: 20px;
-    }
-    .fmactive { display: block; }
-    .smactive { display: block; }
-</style>

@@ -25,6 +25,8 @@ ul { list-style: none; }
 img { border: 0; outline: 0; }
 
 /* Top menu */
+.show { display: block!important; }
+.hide { display: none!important; }
 #navigation {
     position: absolute;
     z-index: 999;
@@ -34,7 +36,7 @@ img { border: 0; outline: 0; }
     -webkit-backface-visibility: hidden;
 }
 .h-wrap { position: relative; margin: 0 auto; max-width: 1040px; }
-.h-wrap a, .h-wrap span { color: rgb(200,200,200); }
+.h-wrap a, .h-wrap span, .barMenuLeft-mobile a { color: rgb(200,200,200); }
 .top-social { position: relative; width: 35%; float: left; }
 .menu { display: inline-block; padding: 0; margin: 0;}
 .menu li {
@@ -103,21 +105,22 @@ img { border: 0; outline: 0; }
 /* Mobile */
 .mobile-wrap { display: none; }
 .mobile-menu { margin: 0; padding: 0; display: none; }
-.mobile-nav {
+.mobile-nav, .fm-mobile {
     display: block;
     width: 100%;
     height: 100%;
     outline: 1px solid #5F5F5F;
     padding: 8px 10px;
 }
-.mobile-menu-btn {
+.mobile-menu-btn, .barMenuLeft-mobile {
     position: absolute;
     height: auto;
     width: 46px;
     top: 10px;
     right: 10px;
 }
-.mobile-menu-btn i { font-size: 30px; }
+.mobile-menu-btn i, .barMenuLeft-mobile i { font-size: 30px; }
+.barMenuLeft-mobile { display: none; }
 
 /* logo */
 .logo { height: 80px; }
@@ -303,7 +306,7 @@ img { border: 0; outline: 0; }
 }
 .darkArea {
     background: url('https://www.harats.ru/gfx/images/darkBg.png') 0 0 repeat;
-    padding: 14px 13px 20px 21px;
+    padding: 14px 13px 20px 0;
     border-radius: 0 0 5px 5px;
     min-height: 100px;
 }
@@ -314,6 +317,7 @@ img { border: 0; outline: 0; }
     left: 32px;
     top: 30px;
     width: 220px;*/
+    text-align: center;
 }
 .barMenuLeft span { display: inline-block; }
 .barMenuLeft a {
@@ -330,10 +334,9 @@ img { border: 0; outline: 0; }
 .barMenuContent {
     overflow: hidden;
     height: 570px;
-    width: 1065px;
+    width: 1140px;
     overflow-y: scroll;
     padding-bottom: 20px;
-    padding-left: 15px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
@@ -368,7 +371,7 @@ img { border: 0; outline: 0; }
     vertical-align: baseline;
     background: transparent;
 }
-.barMenu__wrap { border-top: 1px solid transparent; display: inline-block; }
+.barMenu__wrap { border-top: 1px solid transparent; display: inline-block; padding-top: 15px; }
 .barMenu__wrap .dish-item:not(.dish-alco-item) { background: url("https://www.harats.ru/gfx/images/sep.png") 50% 100% no-repeat; padding-bottom: 25px; margin-bottom: 12px; }
 .barMenu__wrap .dish-item { position: relative; }
 .barMenuContent .dish-item {
@@ -376,14 +379,6 @@ img { border: 0; outline: 0; }
     min-height: 100px;
     position: relative;
     overflow: hidden;
-}
-.barMenu .dish-item > img {
-    border-radius: 5px;
-    display: block;
-    margin: 0;
-    width: 225px;
-    float: left;
-    margin-right: 20px;
 }
 .barMenu .dish-item h3 { font-size: 26px; }
 .barMenu .dish-item p { padding-bottom: 8px; }
@@ -488,6 +483,53 @@ img { border: 0; outline: 0; }
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
+
+/* Food menu */
+#accordion { display: none; }
+.food-col {
+    float: left;
+    width: auto;
+    font-size: 1.8em;
+    padding: 0 20px 0 0;
+    margin: 9px 8% 0 0;
+    border-right: 2px solid #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    display: none;
+}
+.food-col ul { margin: 0; padding: 0 0 18px 0; }
+.food-col li {
+    display: table;
+    margin: 0 0 9px;
+    background: none;
+    padding: 0;
+}
+.img { width: 35px; text-align: center; height: 53px; }
+.title { line-height: 31px; padding: 0 0 0 16px; max-width: 200px; }
+.food-col span { display: table-cell; vertical-align: middle; }
+.food-col a {
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: 1px dotted #d9d7d6;
+    margin: 0;
+    padding: 0;
+    font-size: 60%;
+    vertical-align: baseline;
+    background: transparent;
+}
+.dish-item { display: none; max-width: 770px; }
+.dish-item img {
+    border-radius: 5px;
+    display: block;
+    margin: 0;
+    width: 225px;
+    float: left;
+    margin-right: 20px;
+}
+.fmactive { display: block; }
+.smactive { display: block; }
 
 /* Contact */
 .map_wrap { position: relative; height: 700px; }
@@ -700,11 +742,13 @@ img { border: 0; outline: 0; }
 }
 @media only screen and (max-width: 1170px) and (min-width: 942px) {
     .h-wrap { max-width: 940px; }
+    .dish-item { max-width:630px; }
 }
 @media only screen and (max-width: 960px) {
     .h-wrap { max-width: 720px; }
     .mobile-wrap { display:block; }
     .mm-wrap { display: none; }
+    .dish-item { max-width:630px; }
     #top-social {
         float: none;
         position: absolute;
@@ -718,23 +762,20 @@ img { border: 0; outline: 0; }
         padding: 12px 0;
         background: rgb(16, 16, 16);
     }
-    .logo-text {
-        float: none;
-        width: 20%;
-        display: inline-block;
-    }
-    #top-social {
-        width: 60%;
-        text-align: center;
-        display: inline-block;
-    }
+    .barMenuLeft-mobile { display: block; }
+    #accordion { display: block; margin-top: 70px; }
+    .logo-text { float: none; width: 20%; display: inline-block; }
+    #top-social { width: 60%; text-align: center; display: inline-block; }
+    .darkArea { padding-top: 0; }
+    .barMenuLeft { width: 770px; display:none; }
+    .barMenuLeft span { display: block; text-align: center; }
+    .barMenu__wrap { display: none; }
 }
 @media only screen and (max-width: 780px) {
     .iw-link_title { font-size: 25px; margin-top: 15px; }
     #navigation-wrapper { padding: initial; }
     .menu { display: none; }
     .mobile-wrap { display:block; }
-    .show { display: block; }
     .mobile-menu { margin: 0; padding: 0; margin-top: -4px; }
     .mobile-menu a {
         display: block;
