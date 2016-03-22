@@ -3,7 +3,8 @@
 foodmenuapp.controller("FoodMenuCt", function ($scope, $http) {
     $scope.Food = [];
     $scope.title = 'Наше меню в кафе';
-    $scope.ShowSubMenu = function (obj) { ShowSubMenu(); }
+    $scope.selectedIndex = '';
+    $scope.ShowSubMenu = function (obj) { $scope.selectedIndex = obj; }
 
     GetAllMenu($scope, $http);
 });

@@ -37,7 +37,7 @@
                             </a>
                         </div>
                         <div class="barMenuContent">
-                            <div class='food-col' ng-repeat="item in Food">
+                            <div class='food-col' ng-repeat="item in Food" ng-class="{fmactive: $index === selectedIndex}">
                                 <ul>
                                     <li ng-repeat="subitem in item.subGroups">
                                         <span class='img'><img src=''></span>
@@ -48,7 +48,7 @@
                                 </ul>
                             </div>
 
-                                    <div id="accordion">
+                            <div id="accordion">
                                         <h3>Основное меню - Горячее</h3>
                                         <div>
                                             <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
@@ -93,15 +93,15 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="barMenu__wrap"></div>
-                                </div>
-                            </div>
+                            <div class="barMenu__wrap"></div>
                         </div>
                     </div>
-                    <div class="clear"></div>
                 </div>
             </div>
+            <div class="clear"></div>
         </div>
+    </div>
+</div>
 
 <script>
             $(function () {
