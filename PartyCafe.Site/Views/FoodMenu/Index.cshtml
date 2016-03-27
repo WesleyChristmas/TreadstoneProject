@@ -4,7 +4,7 @@
 
 <script src="~/Scripts/AngularControllers/FoodMenuController.js"></script>
 
-<div class="main">
+<div class="">
     <div class="main-wrap" ng-app="foodmenuapp">
 
         <div class="h1" ng-controller="FoodMenuCt">
@@ -13,8 +13,9 @@
                 <div class="barMenu">
                     <div class="barMenuLine" style="min-height:400px;">
                         <div class="barMenuLeft">
-                            <span ng-repeat="item in Food"><a href="javascript:void(0)" data-id="{{item.idRecord}}" ng-click="ShowSubMenu($index)"><u>{{item.name}}</u></a></span>
+                            <span ng-repeat="item in Food"><a href="javascript:void(0)" data-id="{{item.idRecord}}" ng-click="ShowSubMenu($index, item)"><u>{{item.name}}</u></a></span>
                         </div>
+
                         <div class="barMenuLeft-mobile">
                             <a href="javascript:void(0);" class="fm-mobile">
                                 <script>
@@ -36,64 +37,56 @@
                                 <span class="slicknav_menutxt"></span>
                             </a>
                         </div>
+                        
                         <div class="barMenuContent">
-                            <div class='food-col' ng-repeat="item in Food" ng-class="{fmactive: $index === selectedIndex}">
+                            <div class='food-col' ng-class="{fmactive: true === selected}">
                                 <ul>
-                                    <li ng-repeat="subitem in item.subGroups">
+                                    <li ng-repeat="subitem in FoodSub">
                                         <span class='img'><img src=''></span>
                                         <span class='title'>
-                                            <a data-parent='idrecordparent'>{{subitem.name}}</a>
+                                            <a href="javascript:void(0)" data-id="subitem.idRecord" ng-click="ShowSubMenuItem($index, subitem)">{{subitem.name}}</a>
                                         </span>
                                     </li>
                                 </ul>
                             </div>
 
-                            <div id="accordion">
-                                        <h3>Основное меню - Горячее</h3>
-                                        <div>
-                                            <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
-                                            <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
-                                            <div class="dish-item smactive" data-parent="12" data-item="21" id="di12"><img src="https://www.harats.ru/upload/iblock/153/153c8fb2bb8f6d379bc279a018e9c6cf.jpg"><div><h3>Дублин</h3><p>жаркое из колбасок, свежих овощей в мясном соусе. Подаётся на сковороде</p><p>350 гр.</p><div><span class="fc-price">420<i class="fa fa-rub"></i></span></div></div></div>
-                                        </div>
-                                        <h3>Section 2</h3>
-                                        <div>
-                                            <p>
-                                                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                                                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                                                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                                                suscipit faucibus urna.
-                                            </p>
-                                        </div>
-                                        <h3>Section 3</h3>
-                                        <div>
-                                            <p>
-                                                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-                                                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-                                                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-                                                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-                                            </p>
-                                            <ul>
-                                                <li>List item one</li>
-                                                <li>List item two</li>
-                                                <li>List item three</li>
-                                            </ul>
-                                        </div>
-                                        <h3>Section 4</h3>
-                                        <div>
-                                            <p>
-                                                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-                                                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-                                                mauris vel est.
-                                            </p>
-                                            <p>
-                                                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-                                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-                                                inceptos himenaeos.
-                                            </p>
+                            <div id="accordion" class="accordion">
+                                <div class="accordion-section" ng-repeat="subitem in FoodSub">
+                                    <a href="javscript:void(0);" class="accordion-section-title" ng-class="{accactive: $index === selectedItem}" ng-click="ShowSubMenuItem($index, subitem)">{{subitem.name}}</a>
+                                    <div id="accordion-{{$index}}" class="accordion-section-content">
+                                        <div ng-repeat="subitems in FoodSubItem" ng-class="{smactive: true === selectedItems}" class='dish-item'>
+                                            <img src="{{subitems.photoPath}}">
+                                            <div>
+                                                <h3>{{subitems.name}}</h3>
+                                                <p class="desc">{{subitems.description}}</p>
+                                                <span class="platformweight">{{subitems.Platform === null ? subitems.Weight : subitems.Platform}}</span>
+                                                <div class="price-wrap">
+                                                    <span class='fc-price'>
+                                                        {{subitems.price | pricefilter}}<i class='fa fa-rub'></i>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                            <div class="barMenu__wrap"></div>
+                                </div>
+                            </div>
+
+                            <div class="barMenu__wrap">
+                                <div ng-repeat="subitems in FoodSubItem" ng-class="{smactive: true === selectedItem}" class='dish-item'>
+                                    <img src="{{subitems.photoPath}}">
+                                    <div>
+                                        <h3>{{subitems.name}}</h3>
+                                        <p>{{subitems.description}}</p>
+                                        <p>{{subitems.Platform === null ? subitems.Weight : subitems.Platform}}</p>
+                                        <div>
+                                            <span class='fc-price'>
+                                                {{subitems.price | pricefilter}}<i class='fa fa-rub'></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -105,7 +98,25 @@
 
 <script>
             $(function () {
-                $("#accordion").accordion({ collapsible: true, active: false });
+                //$("#accordion").accordion({ collapsible: true, active: false });
+               /* function close_accordion_section() {
+                    $('.accordion .accordion-section-title').removeClass('active');
+                    $('.accordion .accordion-section-content').slideUp(0).removeClass('open');
+                }
+
+                $('.accordion-section-title').click(function (e) {
+                    var currentAttrValue = $(this).attr('href');
+
+                    if ($(e.target).is('.active')) {
+                        close_accordion_section();
+                    } else {
+                        close_accordion_section();
+                        $(this).addClass('active');
+                        $('.accordion ' + currentAttrValue).slideDown(0).addClass('open');
+                    }
+
+                    e.preventDefault();
+                });*/
             });
             /* function GetAllMenu() {
                  var xhr = new XMLHttpRequest();
@@ -265,3 +276,35 @@
                 }
             }
 </script>
+
+
+<style>
+   .accordion, .accordion * {
+    -webkit-box-sizing:border-box; 
+    -moz-box-sizing:border-box; 
+    box-sizing:border-box;
+}
+ 
+.accordion {
+    overflow:hidden;
+    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
+    border-radius:3px;
+    //background:#f7f7f7;
+}
+ 
+
+.accordion-section-title {
+    width:100%;
+    padding:15px;
+    display:inline-block;
+    border-bottom:1px solid #1a1a1a;
+    background:#333;
+    transition:all linear 0.15s;
+    font-size:1.200em;
+    text-shadow:0px 1px 0px #1a1a1a;
+    color:#fff;
+}
+.accactive, .accordion-section-title:hover { text-decoration:none; }
+.accordion-section:last-child .accordion-section-title { border-bottom:none; }
+.accordion-section-content { padding:15px; display:none; }
+</style>

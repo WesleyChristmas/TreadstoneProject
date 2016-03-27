@@ -274,6 +274,7 @@
     <Content Include="Content\images\menu1.png" />
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\prev.png" />
+    <Content Include="Content\photo\NoPhoto.jpg" />
     <Content Include="Content\video\video.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\entypo-selected.svg" />
@@ -1177,7 +1178,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\photos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
