@@ -2,7 +2,7 @@
     string path = HttpContext.Current.Request.Url.AbsolutePath.Replace("/", "").Trim();
 }
 
-@if (path != "EventCalendar")
+@if (path != "EventCalendar" && path != "FoodMenu")
 {
     <script src="~/Scripts/AngularControllers/InstaGalleryController.js"></script>
 

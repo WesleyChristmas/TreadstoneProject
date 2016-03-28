@@ -274,6 +274,7 @@
     <Content Include="Content\images\menu1.png" />
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\prev.png" />
+    <Content Include="Content\photo\NoPhoto.jpg" />
     <Content Include="Content\video\video.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\entypo-selected.svg" />
@@ -281,6 +282,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Scripts\AngularControllers\EventCalendarContoller.js" />
+    <Content Include="Scripts\AngularControllers\FoodMenuController.js" />
     <Content Include="Scripts\AngularControllers\InstaGalleryController.js" />
     <Content Include="Scripts\AngularJs\angular-animate.js" />
     <Content Include="Scripts\AngularJs\angular-animate.min.js" />
@@ -1176,7 +1178,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\photos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

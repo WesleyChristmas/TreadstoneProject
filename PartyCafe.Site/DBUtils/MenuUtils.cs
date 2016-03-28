@@ -78,6 +78,7 @@ namespace PartyCafe.Site.DBUtils
                 el.subGroups = GetGroups(el.idRecord);
             }
 
+            
             return menu;
         }
 
