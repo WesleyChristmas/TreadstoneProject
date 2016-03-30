@@ -214,6 +214,7 @@
       <DependentUpon>PartyCafeClasses.dbml</DependentUpon>
     </Compile>
     <Compile Include="DBUtils\PhotoUtils.cs" />
+    <Compile Include="DBUtils\ServiceUtils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
