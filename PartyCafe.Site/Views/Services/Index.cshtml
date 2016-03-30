@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Услуги";
+}
+
+<script src="~/Scripts/AngularControllers/ServicesContoller.js"></script>
+
+<div class="">
+    <div class="services-wrap" ng-app="servicesapp" ng-controller="ServicesCt">
+        <div class="post-entry">
+            <div class="services-wrapper">
+                <div class="tiled-gallery-item" ng-repeat="item in Services">
+                    <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;">
+                        <span class="sg-title">{{item.name}}</span>
+                        <!--<img src="{{item.photoPath}}" title="{{item.name}}">-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
