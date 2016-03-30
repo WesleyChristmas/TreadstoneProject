@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="DBUtils\EventUtils.cs" />
     <Compile Include="DBUtils\GalleryUtils.cs" />
     <Compile Include="DBUtils\GameUtils.cs" />
@@ -285,6 +286,7 @@
     <Content Include="Scripts\AngularControllers\EventCalendarContoller.js" />
     <Content Include="Scripts\AngularControllers\FoodMenuController.js" />
     <Content Include="Scripts\AngularControllers\InstaGalleryController.js" />
+    <Content Include="Scripts\AngularControllers\ServicesContoller.js" />
     <Content Include="Scripts\AngularJs\angular-animate.js" />
     <Content Include="Scripts\AngularJs\angular-animate.min.js" />
     <Content Include="Scripts\AngularJs\angular-aria.js" />
@@ -1175,6 +1177,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_InstaGallery.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
