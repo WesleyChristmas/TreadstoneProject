@@ -3,7 +3,6 @@
 servicesapp.controller("ServicesCt", function ($scope, $http) {
     $scope.Services = [];
     $scope.FoodSub = [];
-    $scope.title = 'Наше меню в кафе';
     $scope.selectedItem = '';
     $scope.selectedLast = 0;
     $scope.ShowSubMenu = function (id, obj) {
@@ -46,7 +45,7 @@ servicesapp.controller("ServicesCt", function ($scope, $http) {
 });
 
 function GetAllServices($scope, $http) {
-    var tem = [
+    /*var tem = [
         {
             idRecord: 1, name: 'Кафе', photoPath: 'http://wp.wwwebinvader.com/Owl/wp-content/uploads/2015/07/car-6902751.jpg'
         },
@@ -83,7 +82,10 @@ function GetAllServices($scope, $http) {
         {
             idRecord: 12, name: 'Аренда VIP комнат', photoPath: 'http://wp.wwwebinvader.com/Owl/wp-content/uploads/2015/07/girl-6917121.jpg'
         }
-    ];
+    ];*/
 
-    $scope.Services = tem;
+    $http.get("/Services/GetAllServices").success(function (data, status) {
+        $scope.Services = data;
+        console.log(data);
+    });
 }
