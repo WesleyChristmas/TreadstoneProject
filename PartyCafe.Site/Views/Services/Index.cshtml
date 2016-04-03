@@ -3,18 +3,59 @@
     ViewBag.Title = "Услуги";
 }
 
+<link href="~/Content/css/jquery.ui.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.theme.css" rel="stylesheet" />
 <script src="~/Scripts/AngularControllers/ServicesContoller.js"></script>
 
 <div class="">
     <div class="services-wrap" ng-app="servicesapp" ng-controller="ServicesCt">
         <div class="post-entry">
             <div class="services-wrapper">
-                <div class="tiled-gallery-item" ng-repeat="item in Services">
-                    <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;">
-                        <span class="sg-title">{{item.name}}</span>
-                        <!--<img src="{{item.photoPath}}" title="{{item.name}}">-->
-                    </a>
+
+                <div ng-show="serviceBloks">
+                    <div class="tiled-gallery-item" ng-repeat="item in Services">
+                        <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
+                            <span class="sg-title">{{item.name}}</span>
+                            <!--<img src="{{item.photoPath}}" title="{{item.name}}">-->
+                        </a>
+                    </div>
                 </div>
+
+                <div ng-show="serviceMore">
+                    <div ng-model="ServicesMore" class="services-more_content">
+                        <h3 class="smore-title">{{ServicesMore.name}}</h3>
+                        <div class="smore-text">{{ServicesMore.description}}</div>
+                        <div class="smore-images">
+                            <div ng-repeat="itemphoto in ServicesMore.photos">
+                                <a class="smore-images_item" href="javascript:void(0);" style="background: url('{{itemphoto.photoPath}}') no-repeat center center; background-size: cover;">
+                                    <span class="sg-title">{{itemphoto.name}}</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="smore-blank">
+                            <form mathod="post" novalidate ng-show="serviceOrderForm" name="myForm" class="smore-form">
+                                <p>Имя*:</p>
+                                <input type="text" value="" name="user" ng-model="services.User" required class="smore-form_tb">
+                                <span style="color:red" ng-show="!myForm.user.$pristine && myForm.user.$invalid">
+                                    <span ng-show="myForm.user.$error.required">Данное поле является обазятельным</span>
+                                </span>
+                                <p>Телефон*:</p>
+                                <input type="text" value="" name="phone"class="smore-form_tb" ng-pattern="/^\d{10}$/" placeholder="+712345678" ng-model="services.Phone">
+                                <span style="color:red" ng-show="myForm.phone.$pristine && myForm.phone.$invalid">
+                                    <span ng-show="myForm.phone.$error.required">Данное поле является обазятельным</span>
+                                    <span ng-show="myForm.phone.$error.pattern">Не правильно указан номер телефона</span>
+                                </span>
+                                <p>Дата*:</p>
+                                <input type="text" value="" class="smore-form_tb" ng-model="services.Date" placeholder="11/02/2015" jqdatepicker>
+                                <p>Время*:</p>
+                                <input type="text" ng-model="services.Time" value="" class="smore-form_tb" maxlength="5" onkeyup="SetTime(this)" placeholder="17:00">
+                                <input type="button" value="Заказать" class="smore-form_order" ng-click="formOrder()">
+                            </form>
+                            <input type="button" class="smore-order" ng-show="serviceOrder" value="Хочу заказать" ng-click="Oreder()">
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

@@ -412,7 +412,7 @@ img { border: 0; outline: 0; }
     float: left;
     margin: 0;
     position: relative;
-    margin: 2px;
+    margin: 0 2px;
 }
 .tiled-gallery-item a {
     background: transparent;
@@ -427,17 +427,71 @@ img { border: 0; outline: 0; }
     height: 300px;
     width: 300px;
     background-size: cover;
+    overflow: hidden;
 }
 .sg-title{
     display: inline-block;
     font-size: 25px;
     position: absolute;
-    bottom: 0;
+    bottom: -90px;
     width: 100%;
     text-align: center;
     padding: 15px;
     background: rgba(0, 0, 0, 0.6);
     color: white;
+}
+.tiled-gallery-item a:hover .sg-title { bottom: 0; }
+.services-more_content { height: 100%; background: rgba(0,0,0,0.7); padding: 15px; }
+.smore-title { text-align: center; font-size: 30px; }
+.smore-text {
+    margin: 20px 0;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+.smore-images { margin-bottom: 30px; }
+.smore-images_item {
+    border: none;
+    color: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    width: auto;
+    position: relative;
+    display: inline-block;
+    height: 300px;
+    width: 300px;
+    background-size: cover;
+    overflow: hidden;
+}
+.smore-images_item:hover .sg-title { bottom: 0; }
+.smore-blank { width: 93%; }
+.smore-order, .smore-form_order {
+    margin-top: 30px;
+    background: #000000;
+    padding: 14px 24px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    border: none;
+    text-align:center;
+    width: 100%;
+    font-size: 20px;
+    outline: 1px solid #4C4C4C;
+}
+.smore-form { margin-top: 30px; width: 460px; margin: 0 auto; }
+.smore-form p { margin-bottom: 10px; margin-top: 15px; }
+.smore-form_tb {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    outline: 1px solid #fff;
+    background: rgba(255,255,255,.00);
+    color: white;
+    border: none;
+    width: 100%;
+    margin-bottom: 3px;
 }
 
 
@@ -872,7 +926,7 @@ img { border: 0; outline: 0; }
     .services-wrap { max-width: 540px; padding-left: 0; padding-right: 0; }
     .services-wrapper { height: 690px; width: 600px; }
     .tiled-gallery-item a { height: 176px; width: 176px; }
-    .sg-title { font-size: 18px; }
+    .sg-title { font-size: 18px; bottom: 0; }
 }
 @media only screen and (max-width: 640px) {
     .iw-list li { width: 50%; }

@@ -1,44 +1,30 @@
 ﻿var servicesapp = new angular.module("servicesapp", []);
+servicesapp.directive('jqdatepicker', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModelCtrl) {
+            $(function () {
+                element.datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    onSelect: function (date) {
+                        scope.$apply(function () {
+                            ngModelCtrl.$setViewValue(date);
+                        });
+                    }
+                });
+            });
+        }
+    };
+});
 
 servicesapp.controller("ServicesCt", function ($scope, $http) {
     $scope.Services = [];
-    $scope.FoodSub = [];
-    $scope.selectedItem = '';
-    $scope.selectedLast = 0;
-    $scope.ShowSubMenu = function (id, obj) {
-        $scope.selected = true;
-        $scope.FoodSub = obj.subGroups;
-        if ($('.barMenuLeft').hasClass('show')) {
-            $('.barMenuLeft').removeClass('show');
-        }
-    }
-    $scope.ShowSubMenuItem = function (id, obj) {
-        if ($('.accordion').css('display') == 'block') {
-            $scope.FoodSubItem = obj.items;
-
-            if ($scope.selectedLast == id) {
-                if ($scope.selectedItems) {
-                    $scope.selectedItems = false;
-                    $('.accordion-section-content').slideUp(0).removeClass('open');
-                } else {
-                    $scope.selectedItems = true;
-                    $('.accordion-section-content').slideUp(0).removeClass('open');
-                    $('#accordion-' + id).slideDown(0).addClass('open');
-                }
-            } else {
-                $('.accordion-section-content').slideUp(0).removeClass('open');
-                $('#accordion-' + id).slideDown(0).addClass('open');
-
-                $scope.selectedItem = id;
-                $scope.selectedItems = true;
-                $scope.FoodSubItem = obj.items;
-            }
-        } else {
-            $scope.selectedItem = id;
-            $scope.selectedItem = true;
-            $scope.FoodSubItem = obj.items;
-        }
-        $scope.selectedLast = id;
+    $scope.ServicesMore = [];
+    $scope.More = function (id) { More($scope, id); }
+    $scope.Oreder = function () {
+        $scope.serviceOrder = false;
+        $scope.serviceOrderForm = true;
     }
 
     GetAllServices($scope, $http);
@@ -86,6 +72,37 @@ function GetAllServices($scope, $http) {
 
     $http.get("/Services/GetAllServices").success(function (data, status) {
         $scope.Services = data;
+        $scope.serviceBloks = true;
         console.log(data);
     });
+}
+
+function More($scope, id) {
+    $scope.serviceMore = true;
+    $scope.serviceOrder = true;
+    $scope.serviceBloks = false;
+    $scope.ServicesMore = $scope.Services[id];
+    console.log($scope.ServicesMore);
+}
+
+/* Helpers */
+function SetTime(obj) {
+    var v = obj.value;
+    if (v.length > 2 && v.length <= 5) {
+        if (v.indexOf(":") === -1) {
+            var fval = v.substr(0, 2),
+                sval = v.substr(2, 2);
+            obj.value = fval + ":" + sval;
+            return obj.value;
+        } else {
+            if (obj.value.length > 5) {
+                return obj.substr(-1);
+            } else {
+                return obj.value;
+            }
+        }
+    } else {
+        v = v.replace(/[^0-9:]+/g, '');
+        return v;
+    }
 }
