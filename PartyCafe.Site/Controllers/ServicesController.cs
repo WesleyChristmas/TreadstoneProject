@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Controllers
@@ -20,6 +21,20 @@ namespace PartyCafe.Site.Controllers
         {
             var result = ServiceUtils.GetAll();
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public Task<JsonResult> NewOrder(Order _order)
+        {
+            return null;
+        }
+
+        public class Order
+        {
+            string user { get; set; }
+            string phone { get; set; }
+            string date { get; set; }
+            string time { get; set; }
         }
     }
 }

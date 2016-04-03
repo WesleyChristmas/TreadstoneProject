@@ -26,6 +26,7 @@ servicesapp.controller("ServicesCt", function ($scope, $http) {
         $scope.serviceOrder = false;
         $scope.serviceOrderForm = true;
     }
+    $scope.formOrder = function () { ServiceNewOrder($scope, $http); }
 
     GetAllServices($scope, $http);
 });
@@ -82,7 +83,18 @@ function More($scope, id) {
     $scope.serviceOrder = true;
     $scope.serviceBloks = false;
     $scope.ServicesMore = $scope.Services[id];
-    console.log($scope.ServicesMore);
+}
+
+function ServiceNewOrder($scope, $http) {
+    var newSO = {
+        user: $scope.services.User,
+        phone: $scope.services.PhoneNumber,
+        date: $scope.services.Date,
+        time: $scope.services.Time
+    };
+    $http.post("Services/NewOrder", { _order: newSO }).success(function (data) {
+        console.log(data);
+    });
 }
 
 /* Helpers */

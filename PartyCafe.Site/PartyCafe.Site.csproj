@@ -386,6 +386,7 @@
     <Content Include="Scripts\GammaGallery\js-url.min.js" />
     <Content Include="Scripts\GammaGallery\modernizr.custom.70736.js" />
     <Content Include="Scripts\instafeed.min.js" />
+    <Content Include="Scripts\jquery\datepicker-ru.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery\jquery-2.1.4.min.map" />
