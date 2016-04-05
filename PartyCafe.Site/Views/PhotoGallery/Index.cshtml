@@ -2,132 +2,15 @@
     ViewBag.Title = "Фотогалерея";
 }
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<link href="~/Content/css/GammaGallery/style.css" rel="stylesheet" />
-<link href="~/Content/css/GammaGallery/noJS.css" rel="stylesheet" />
-<link href="~/Content/css/GammaGallery/demo.css" rel="stylesheet" />
-<script src="~/Scripts/GammaGallery/modernizr.custom.70736.js"></script>
-<script src="~/Scripts/GammaGallery/jquery.masonry.min.js"></script>
-<script src="~/Scripts/GammaGallery/jquery.history.js"></script>
-<script src="~/Scripts/GammaGallery/js-url.min.js"></script>
-<script src="~/Scripts/GammaGallery/jquerypp.custom.js"></script>
-<script src="~/Scripts/GammaGallery/gamma.js"></script>
+<script src="~/Scripts/AngularControllers/PhotoGalleryController.js"></script>
 
-<div class="gamma-container gamma-loading" id="gamma-container">
-    <ul class="gamma-gallery">
-        <li>
-            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
-                <div data-src="/Content/images/gallery/1.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/1.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/1.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/1.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/1.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/1.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/1.jpg"></div>
-                <noscript><img src="/Content/images/gallery/1.jpg" alt="img03" /></noscript>
+<div class="photogallery-wrap" ng-app="photogalleryapp" ng-controller="PhotoGallery">
+    <div class="post-entry">
+        <div class="photogallery-wrapper">
+            <div class="tiled-gallery-item" ng-repeat="item in PhotoGallery">
+                <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></a>
             </div>
-        </li>
-        <li>
-            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
-                <div data-src="/Content/images/gallery/2.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/2.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/2.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/2.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/2.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/2.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/2.jpg"></div>
-                <noscript><img src="/Content/images/gallery/2.jpg" alt="img03" /></noscript>
-            </div>
-        </li>
-        <li>
-            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
-                <div data-src="/Content/images/gallery/3.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/3.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/3.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/3.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/3.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/3.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/3.jpg"></div>
-                <noscript><img src="/Content/images/gallery/3.jpg" alt="img03" /></noscript>
-            </div>
-        </li>
-        <li>
-            <div data-alt="img03" data-max-width="1800" data-max-height="1350" data-description="<h3>Sky high</h3>">
-                <div data-src="/Content/images/gallery/4.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/4.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/4.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/4.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/4.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/4.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/4.jpg"></div>
-                <noscript><img src="/Content/images/gallery/4.jpg" alt="img03" /></noscript>
-            </div>
-        </li>
-        <li>
-            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
-                <div data-src="/Content/images/gallery/5.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/5.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/5.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/5.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/5.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/5.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/5.jpg"></div>
-                <noscript><img src="/Content/images/gallery/5.jpg" alt="img03" /></noscript>
-            </div>
-        </li>
-        <li>
-            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
-                <div data-src="/Content/images/gallery/6.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/6.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/6.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/6.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/6.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/6.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/6.jpg"></div>
-                <noscript><img src="/Content/images/gallery/6.jpg" alt="img03" /></noscript>
-            </div>
-        </li>
-        <li>
-            <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800" data-max-height="1350">
-                <div data-src="/Content/images/gallery/7.jpg" data-min-width="1300"></div>
-                <div data-src="/Content/images/gallery/7.jpg" data-min-width="1000"></div>
-                <div data-src="/Content/images/gallery/7.jpg" data-min-width="700"></div>
-                <div data-src="/Content/images/gallery/7.jpg" data-min-width="300"></div>
-                <div data-src="/Content/images/gallery/7.jpg" data-min-width="200"></div>
-                <div data-src="/Content/images/gallery/7.jpg" data-min-width="140"></div>
-                <div data-src="/Content/images/gallery/7.jpg"></div>
-                <noscript><img src="/Content/images/gallery/7.jpg" alt="img03" /></noscript>
-            </div>
-        </li>
-    </ul>
-    <div class="gamma-overlay"></div>
-    <div id="loadmore" class="loadmore">Example for loading more items...</div>
-
-    <script type="text/javascript">
-        $(function () {
-            var GammaSettings = {
-                viewport: [
-                    {
-                        width: 1200, columns: 5
-                    },
-                    {
-                        width: 900, columns: 4
-                    },
-                    {
-                        width: 500, columns: 3
-                    },
-                    {
-                        width: 320, columns: 2
-                    },
-                    {
-                        width: 0, columns: 2
-                    }
-                ],
-                keyboard: true,
-                swipe: true
-            };
-            Gamma.init(GammaSettings);
-        });
-    </script>
+        </div>
+    </div>
 </div>
 

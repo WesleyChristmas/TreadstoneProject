@@ -92,7 +92,8 @@ function ServiceNewOrder($scope, $http) {
         date: $scope.services.Date,
         time: $scope.services.Time
     };
-    $http.post("Services/NewOrder", { _order: newSO }).success(function (data) {
+
+    $http.post("Services/NewOrder", { user: newSO.user, phone: newSO.phone, date: newSO.date, time:newSO.time }).success(function (data) {
         console.log(data);
     });
 }

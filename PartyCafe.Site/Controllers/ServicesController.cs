@@ -24,7 +24,7 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpPost]
-        public Task<JsonResult> NewOrder(Order _order)
+        public async Task<JsonResult> NewOrder(string user, string phone, string date, string time)
         {
             return null;
         }

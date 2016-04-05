@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "О кафе";
+}
+
+<script src="~/Scripts/AngularControllers/AboutUsController.js"></script>
+
+<div>
+    <div class="about-wrap" ng-app="aboutusapp" ng-controller="AboutUs">
+
+        <div class="post-entry">
+            <div class="about-wrapper">
+
+                <div ng-show="aboutusBloks">
+                    <div class="tiled-gallery-item" ng-repeat="item in AboutUs">
+                        <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
+                            <span class="sg-title">{{item.name}}</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

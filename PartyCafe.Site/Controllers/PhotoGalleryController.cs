@@ -10,7 +10,7 @@ namespace PartyCafe.Site.Controllers
         public ActionResult Index()
         {
             // тут можно сделать тесты всех классов
-            TestAllClasses();
+            //TestAllClasses();
             return View();
         }
 
