@@ -21,6 +21,7 @@ servicesapp.directive('jqdatepicker', function () {
 servicesapp.controller("ServicesCt", function ($scope, $http) {
     $scope.Services = [];
     $scope.ServicesMore = [];
+    $scope.services = {};
     $scope.More = function (id) { More($scope, id); }
     $scope.Oreder = function () {
         $scope.serviceOrder = false;
@@ -83,6 +84,7 @@ function More($scope, id) {
     $scope.serviceOrder = true;
     $scope.serviceBloks = false;
     $scope.ServicesMore = $scope.Services[id];
+    $scope.services.Service = console.log($scope.Services[id].name);
 }
 
 function ServiceNewOrder($scope, $http) {
@@ -90,11 +92,31 @@ function ServiceNewOrder($scope, $http) {
         user: $scope.services.User,
         phone: $scope.services.PhoneNumber,
         date: $scope.services.Date,
-        time: $scope.services.Time
+        time: $scope.services.Time,
+        service: $scope.services.Service
     };
 
-    $http.post("Services/NewOrder", { user: newSO.user, phone: newSO.phone, date: newSO.date, time:newSO.time }).success(function (data) {
-        console.log(data);
+    $http.post("Services/NewOrder",
+        {
+            user: newSO.user,
+            phone: newSO.phone,
+            date: newSO.date,
+            time: newSO.time,
+            service: newSO.service
+        }).success(function (data) {
+            if (data == 'good') {
+                $scope.formResult = true;
+                $scope.result = "Спасибо за заказ! В ближайшее время наш менеджер с вами свяжется.";
+                $scope.serviceOrderForm = false;
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.serviceOrder = true;
+                        $scope.formResult = false;
+                    });
+                }, 3500);
+            } else {
+                $scope.result = "Что-то пошло не так. Попробуйте еще раз или позвоните на наш контактный номер.";
+            }
     });
 }
 
