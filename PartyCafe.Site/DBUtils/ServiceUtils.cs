@@ -12,23 +12,30 @@ namespace PartyCafe.Site.DBUtils
         public string photoPath;
     }
 
+    public static class ServiceType
+    {
+        public static int originService = 0;
+        public static int aboutService = 1;
+    }
+
     public class PCService
     {
         public int idRecord;
         public string name;
         public string photoPath;
-        public string title;
         public string description;
+        public int serviceType;
         public List<PCServicePhoto> photos;
     }
 
     public static class ServiceUtils
     {
-        public static List<PCService> GetAll()
+        public static List<PCService> GetAll(int serviceType = 0)
         {
             var db = MainUtils.GetDBContext();
             var services = (from s in db.Services
                             join p in db.Photos on s.IdPhoto equals p.IdRecord
+                            where s.serviceType == serviceType
                             select new { s.IdRecord, s.Name, s.Text, p.Path }).ToList();
 
             var servicePhotos = (from sp in db.ServicePhotos
@@ -68,6 +75,7 @@ namespace PartyCafe.Site.DBUtils
             var newService = new Services();
             newService.Name = partyService.name != null ? partyService.name : String.Empty;
             newService.Text = partyService.description != null ? partyService.description : String.Empty;
+            newService.serviceType = partyService.serviceType;
 
             if (image != null)
             {
@@ -95,6 +103,7 @@ namespace PartyCafe.Site.DBUtils
 
             curService.Name = partyService.name != null ? partyService.name : String.Empty;
             curService.Text = partyService.description != null ? partyService.description : String.Empty;
+            curService.serviceType = partyService.serviceType;
 
             curService.DateUpdate = DateTime.Now;
             curService.UserUpdate = userUpdate;
