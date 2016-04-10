@@ -10,8 +10,9 @@
     <div id="calendar-wrap">
         <div class="event-day" note ng-repeat="item in Events">
             <a href="" class="ed-wrap">
-                {{item.day}}<em class="ed-month">{{item.month}}</em>
-                <br>
+                <div class="ed-week">{{item.week}}</div>
+                <div clas="ed-day">{{item.day}}</div>
+                <em class="ed-month">{{item.month}}</em>
                 <strong class="ed-title">{{item.data.header}}</strong>
                 <span class="ed-imgwrap">
                     <img ng-src="{{item.data.photo}}" class="ed-image" alt="">

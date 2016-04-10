@@ -248,9 +248,6 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\fonts.css" />
-    <Content Include="Content\css\GammaGallery\demo.css" />
-    <Content Include="Content\css\GammaGallery\noJS.css" />
-    <Content Include="Content\css\GammaGallery\style.css" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\jquery-ui.min.css" />
     <Content Include="Content\css\jquery-ui.structure.css" />
@@ -258,6 +255,7 @@
     <Content Include="Content\css\jquery-ui.theme.css" />
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\css\jquery.ui.css" />
+    <Content Include="Content\css\lightbox.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\owl.transitions.css" />
@@ -279,6 +277,13 @@
     <Content Include="Content\images\head_line.jpg" />
     <Content Include="Content\images\home.png" />
     <Content Include="Content\images\img01.png" />
+    <Content Include="Content\images\lightbox\blank.gif" />
+    <Content Include="Content\images\lightbox\close.png" />
+    <Content Include="Content\images\lightbox\loading.gif" />
+    <Content Include="Content\images\lightbox\next.png" />
+    <Content Include="Content\images\lightbox\next1.png" />
+    <Content Include="Content\images\lightbox\prev.png" />
+    <Content Include="Content\images\lightbox\prev1.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\menu.png" />
     <Content Include="Content\images\menu1.png" />
@@ -1146,6 +1151,7 @@
     <Content Include="Scripts\jquery\jquery.validate.min.js" />
     <Content Include="Scripts\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lightbox.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
