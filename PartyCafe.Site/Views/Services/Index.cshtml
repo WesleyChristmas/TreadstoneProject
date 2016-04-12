@@ -47,18 +47,18 @@
                                 <input type="text" name="phone" class="smore-form_tb" ng-pattern="/[0-9]{10}$/" ng-maxlength="10" placeholder="9869986868" ng-model="services.PhoneNumber">
                                 <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
                                     <span ng-show="myForm.phone.$error.required">Данное поле является обазятельным</span>
-                                    <span ng-show="myForm.phone.$error.pattern">Не верно указан номер телефона</span>
+                                    <span ng-show="myForm.phone.$error.pattern">Неверно указан номер телефона</span>
                                 </span>
                                 <p>Дата*:</p>
                                 <input type="text" value="" name="date" class="smore-form_tb" ng-model="services.Date" placeholder="11.02.2015" jqdatepicker>
-                                <span style="color:red" ng-show="myForm.date.$dirty && myForm.phone.$invalid">
+                                <span style="color:red" ng-show="myForm.date.$dirty && myForm.date.$invalid">
                                     <span ng-show="myForm.date.$error.required">Данное поле является обазятельным</span>
                                 </span>
                                 <p>Время*:</p>
                                 <input type="text" ng-model="services.Time" value="" name="time" class="smore-form_tb" maxlength="5" onkeyup="SetTime(this)" ng-pattern="/[0-9]{2}[:]{1}[0-9]{2}$/" placeholder="17:00">
                                 <span style="color:red" ng-show="myForm.time.$dirty && myForm.time.$invalid">
                                     <span ng-show="myForm.time.$error.required">Данное поле является обазятельным</span>
-                                    <span ng-show="myForm.time.$error.pattern">Не верно указано время</span>
+                                    <span ng-show="myForm.time.$error.pattern">Неверно указано время</span>
                                 </span>
                                 <input type="hidden" ng-model="services.Service" value="">
                                 <input type="button" value="Заказать" class="smore-form_order" ng-click="formOrder()" ng-disabled="(myForm.user.$pristine || myForm.user.$dirty && myForm.user.$invalid) || (myForm.phone.$pristine || myForm.user.$dirty && myForm.user.$invalid) || (myForm.date.$pristine || myForm.date.$dirty && myForm.date.$invalid) || (myForm.time.$pristine || myForm.time.$dirty && myForm.time.$invalid)">
