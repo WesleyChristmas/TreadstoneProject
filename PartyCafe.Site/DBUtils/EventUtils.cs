@@ -12,6 +12,7 @@ namespace PartyCafe.Site.DBUtils
         public int IdPhoto;
         public string PhotoPath;
         public DateTime DateEvent;
+        public TimeSpan TimeEvent;
     }
 
     public static class EventUtils
@@ -32,7 +33,8 @@ namespace PartyCafe.Site.DBUtils
                 pcEvent.name = e.Name;
                 pcEvent.IdPhoto = e.IdPhoto;
                 pcEvent.PhotoPath = e.Path;
-                pcEvent.DateEvent = e.EventDate;
+                pcEvent.DateEvent = e.EventDate.Date;
+                pcEvent.TimeEvent = e.EventDate.TimeOfDay;
           
                 resultList.Add(pcEvent);
             }
@@ -42,11 +44,13 @@ namespace PartyCafe.Site.DBUtils
 
         public static List<PCEvent> GetNearEvents()
         {
+            const int DayInterval = 15;
+
             var dbContext = MainUtils.GetDBContext();
             var events = (from e in dbContext.Events
                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
-                          where e.EventDate <= DateTime.Now.AddDays(15) && e.EventDate >= DateTime.Now.AddDays(-15)
-                          select new { e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
+                          where e.EventDate <= DateTime.Now.AddDays(DayInterval) && e.EventDate >= DateTime.Now.AddDays(-DayInterval)
+                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
 
             List<PCEvent> resultList = new List<PCEvent>();
             foreach (var e in events)
@@ -57,7 +61,8 @@ namespace PartyCafe.Site.DBUtils
                 pcEvent.name = e.Name;
                 pcEvent.IdPhoto = e.IdPhoto;
                 pcEvent.PhotoPath = e.Path;
-                pcEvent.DateEvent = e.EventDate;
+                pcEvent.DateEvent = e.EventDate.Date;
+                pcEvent.TimeEvent = e.EventDate.TimeOfDay;
 
                 resultList.Add(pcEvent);
             }
@@ -85,7 +90,20 @@ namespace PartyCafe.Site.DBUtils
                             select e).SingleOrDefault();
 
             curEvent.Name = partyEvent.name != null ? partyEvent.name : "";
-            curEvent.EventDate = partyEvent.DateEvent != null ? partyEvent.DateEvent : DateTime.Now;
+            
+            if (partyEvent.DateEvent != null)
+            {
+                DateTime newDate = partyEvent.DateEvent;
+                if (partyEvent.TimeEvent != null)
+                {
+                    newDate.AddSeconds(partyEvent.TimeEvent.Seconds);
+                }
+                curEvent.EventDate = newDate;
+            }
+            else
+            {
+                curEvent.EventDate = DateTime.Now;
+            }
 
             curEvent.DateUpdate = DateTime.Now;
             curEvent.UserUpdate = userUpdate;
@@ -108,7 +126,20 @@ namespace PartyCafe.Site.DBUtils
         {
             var newEvent = new Events();
             newEvent.Name = partyEvent.name != null ? partyEvent.name : "";
-            newEvent.EventDate = partyEvent.DateEvent != null ? partyEvent.DateEvent : DateTime.Now;
+
+            if (partyEvent.DateEvent != null)
+            {
+                DateTime newDate = partyEvent.DateEvent;
+                if (partyEvent.TimeEvent != null)
+                {
+                    newDate.AddSeconds(partyEvent.TimeEvent.Seconds);
+                }
+                newEvent.EventDate = newDate;
+            }
+            else
+            {
+                newEvent.EventDate = DateTime.Now;
+            }
 
             if (image != null)
             {

@@ -2633,6 +2633,8 @@ namespace PartyCafe.Site.DBUtils
 		
 		private string _Name;
 		
+		private string _Title;
+		
 		private int _IdPhoto;
 		
 		private string _Text;
@@ -2659,6 +2661,8 @@ namespace PartyCafe.Site.DBUtils
     partial void OnIdRecordChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
     partial void OnIdPhotoChanging(int value);
     partial void OnIdPhotoChanged();
     partial void OnTextChanging(string value);
@@ -2718,6 +2722,26 @@ namespace PartyCafe.Site.DBUtils
 					this._Name = value;
 					this.SendPropertyChanged("Name");
 					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
 				}
 			}
 		}

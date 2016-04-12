@@ -24,6 +24,7 @@ namespace PartyCafe.Site.DBUtils
         public string name;
         public string photoPath;
         public string description;
+        public string title;
         public int serviceType;
         public List<PCServicePhoto> photos;
     }
@@ -36,7 +37,7 @@ namespace PartyCafe.Site.DBUtils
             var services = (from s in db.Services
                             join p in db.Photos on s.IdPhoto equals p.IdRecord
                             where s.serviceType == serviceType
-                            select new { s.IdRecord, s.Name, s.Text, p.Path }).ToList();
+                            select new { s.IdRecord, s.Name, s.Text, s.Title, p.Path }).ToList();
 
             var servicePhotos = (from sp in db.ServicePhotos
                                  join p in db.Photos on sp.IdPhoto equals p.IdRecord
@@ -51,6 +52,7 @@ namespace PartyCafe.Site.DBUtils
                 newItem.name = item.Name;
                 newItem.photoPath = item.Path;
                 newItem.description = item.Text;
+                newItem.title = item.Title;
 
                 newItem.photos = new List<PCServicePhoto>();
                 foreach (var p in servicePhotos)
@@ -76,6 +78,7 @@ namespace PartyCafe.Site.DBUtils
             newService.Name = partyService.name != null ? partyService.name : String.Empty;
             newService.Text = partyService.description != null ? partyService.description : String.Empty;
             newService.serviceType = partyService.serviceType;
+            newService.Title = partyService.title;
 
             if (image != null)
             {
@@ -103,7 +106,7 @@ namespace PartyCafe.Site.DBUtils
 
             curService.Name = partyService.name != null ? partyService.name : String.Empty;
             curService.Text = partyService.description != null ? partyService.description : String.Empty;
-            curService.serviceType = partyService.serviceType;
+            curService.Title = partyService.title != null ? partyService.title : String.Empty;
 
             curService.DateUpdate = DateTime.Now;
             curService.UserUpdate = userUpdate;

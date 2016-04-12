@@ -118,6 +118,7 @@
     <Type Name="Services">
       <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="IdPhoto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="serviceType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
