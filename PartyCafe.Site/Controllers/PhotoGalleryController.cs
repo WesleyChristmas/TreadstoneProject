@@ -115,5 +115,12 @@ namespace PartyCafe.Site.Controllers
                 }
             }
         }
+
+        [HttpGet]
+        public JsonResult GetAllPhotos()
+        {
+            var result = GalleryUtils.GetAll();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
