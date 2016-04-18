@@ -3,6 +3,9 @@
     ViewBag.Title = "Услуги";
 }
 
+<link href="~/Content/css/lightbox.css" rel="stylesheet" />
+<script src="~/Scripts/lightbox.js"></script>
+
 <script src="~/Scripts/jquery/datepicker-ru.js"></script>
 <link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
 <link href="~/Content/css/jquery-ui.theme.min.css" rel="stylesheet" />
@@ -27,7 +30,7 @@
                         <div class="smore-text">{{ServicesMore.description}}</div>
                         <div class="smore-images">
                             <div class="smore-images_wrap" ng-repeat="itemphoto in ServicesMore.photos">
-                                <a class="smore-images_item" href="javascript:void(0);" data-lightbox="gallery" data-title="{{itemphoto.name}}" style="background: url('{{itemphoto.photoPath}}') no-repeat center center; background-size: cover;"></a>
+                                <a class="smore-images_item" href="{{itemphoto.photoPath}}" data-lightbox="gallery" data-title="{{itemphoto.name}}" style="background: url('{{itemphoto.photoPath}}') no-repeat center center; background-size: cover;"></a>
                             </div>
                         </div>
                         <div ng-show="formResult" style="color:white; font-size:20px; text-align:center;">

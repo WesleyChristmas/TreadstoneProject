@@ -47,6 +47,13 @@ function More($scope, id) {
     $scope.serviceBloks = false;
     $scope.ServicesMore = $scope.Services[id];
     $scope.services.Service = console.log($scope.Services[id].name);
+
+        lightbox.option({
+            'alwaysShowNavOnTouchDevices': true,
+            'resizeDuration': 0,
+            'wrapAround': true,
+            'disableScrolling': true,
+        });
 }
 
 function ServiceNewOrder($scope, $http) {
