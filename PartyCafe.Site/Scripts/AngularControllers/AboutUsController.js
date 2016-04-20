@@ -17,7 +17,6 @@ function GetAllAboutUs($scope, $http) {
     $http.get("/AboutUs/GetAllUs").success(function (data, status) {
         $scope.AboutUs = data;
         $scope.serviceBloks = true;
-        console.log(data);
     });
 }
 
@@ -25,5 +24,12 @@ function More($scope, id) {
     $scope.aboutusMore = true;
     $scope.aboutusOrder = true;
     $scope.aboutusBloks = false;
-    $scope.aboutusMore = $scope.AboutUs[id];
+    $scope.aboutusMore = $scope.AboutUs[id].photos;
+
+    lightbox.option({
+        'alwaysShowNavOnTouchDevices': true,
+        'resizeDuration': 0,
+        'wrapAround': true,
+        'disableScrolling': true,
+    });
 }
