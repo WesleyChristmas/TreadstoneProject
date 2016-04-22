@@ -57,6 +57,9 @@ namespace PartyCafe.Site.DBUtils
     partial void InsertServices(Services instance);
     partial void UpdateServices(Services instance);
     partial void DeleteServices(Services instance);
+    partial void InsertEventPhotos(EventPhotos instance);
+    partial void UpdateEventPhotos(EventPhotos instance);
+    partial void DeleteEventPhotos(EventPhotos instance);
     #endregion
 		
 		public PartyCafeClassesDataContext() : 
@@ -160,6 +163,14 @@ namespace PartyCafe.Site.DBUtils
 				return this.GetTable<Services>();
 			}
 		}
+		
+		public System.Data.Linq.Table<EventPhotos> EventPhotos
+		{
+			get
+			{
+				return this.GetTable<EventPhotos>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Events")]
@@ -183,6 +194,8 @@ namespace PartyCafe.Site.DBUtils
 		private System.DateTime _DateCreate;
 		
 		private System.Nullable<System.DateTime> _DateUpdate;
+		
+		private EntitySet<EventPhotos> _EventPhotos;
 		
 		private EntityRef<Photos> _Photos;
 		
@@ -210,6 +223,7 @@ namespace PartyCafe.Site.DBUtils
 		
 		public Events()
 		{
+			this._EventPhotos = new EntitySet<EventPhotos>(new Action<EventPhotos>(this.attach_EventPhotos), new Action<EventPhotos>(this.detach_EventPhotos));
 			this._Photos = default(EntityRef<Photos>);
 			OnCreated();
 		}
@@ -378,6 +392,19 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhotos", Storage="_EventPhotos", ThisKey="IdRecord", OtherKey="IdEvent")]
+		public EntitySet<EventPhotos> EventPhotos
+		{
+			get
+			{
+				return this._EventPhotos;
+			}
+			set
+			{
+				this._EventPhotos.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_Events", Storage="_Photos", ThisKey="IdPhoto", OtherKey="IdRecord", IsForeignKey=true)]
 		public Photos Photos
 		{
@@ -430,6 +457,18 @@ namespace PartyCafe.Site.DBUtils
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_EventPhotos(EventPhotos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Events = this;
+		}
+		
+		private void detach_EventPhotos(EventPhotos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Events = null;
 		}
 	}
 	
@@ -1239,6 +1278,8 @@ namespace PartyCafe.Site.DBUtils
 		
 		private EntitySet<Services> _Services;
 		
+		private EntitySet<EventPhotos> _EventPhotos;
+		
     #region Определения метода расширяемости
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1268,6 +1309,7 @@ namespace PartyCafe.Site.DBUtils
 			this._MenuItems = new EntitySet<MenuItems>(new Action<MenuItems>(this.attach_MenuItems), new Action<MenuItems>(this.detach_MenuItems));
 			this._ServicePhotos = new EntitySet<ServicePhotos>(new Action<ServicePhotos>(this.attach_ServicePhotos), new Action<ServicePhotos>(this.detach_ServicePhotos));
 			this._Services = new EntitySet<Services>(new Action<Services>(this.attach_Services), new Action<Services>(this.detach_Services));
+			this._EventPhotos = new EntitySet<EventPhotos>(new Action<EventPhotos>(this.attach_EventPhotos), new Action<EventPhotos>(this.detach_EventPhotos));
 			OnCreated();
 		}
 		
@@ -1502,6 +1544,19 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_EventPhotos", Storage="_EventPhotos", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<EventPhotos> EventPhotos
+		{
+			get
+			{
+				return this._EventPhotos;
+			}
+			set
+			{
+				this._EventPhotos.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1601,6 +1656,18 @@ namespace PartyCafe.Site.DBUtils
 		}
 		
 		private void detach_Services(Services entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photos = null;
+		}
+		
+		private void attach_EventPhotos(EventPhotos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photos = this;
+		}
+		
+		private void detach_EventPhotos(EventPhotos entity)
 		{
 			this.SendPropertyChanging();
 			entity.Photos = null;
@@ -2967,6 +3034,222 @@ namespace PartyCafe.Site.DBUtils
 		{
 			this.SendPropertyChanging();
 			entity.Services = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="u0103018_partycafe_user.EventPhotos")]
+	public partial class EventPhotos : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdRecord;
+		
+		private int _IdEvent;
+		
+		private int _IdPhoto;
+		
+		private string _name;
+		
+		private EntityRef<Events> _Events;
+		
+		private EntityRef<Photos> _Photos;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdRecordChanging(int value);
+    partial void OnIdRecordChanged();
+    partial void OnIdEventChanging(int value);
+    partial void OnIdEventChanged();
+    partial void OnIdPhotoChanging(int value);
+    partial void OnIdPhotoChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public EventPhotos()
+		{
+			this._Events = default(EntityRef<Events>);
+			this._Photos = default(EntityRef<Photos>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRecord", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdRecord
+		{
+			get
+			{
+				return this._IdRecord;
+			}
+			set
+			{
+				if ((this._IdRecord != value))
+				{
+					this.OnIdRecordChanging(value);
+					this.SendPropertyChanging();
+					this._IdRecord = value;
+					this.SendPropertyChanged("IdRecord");
+					this.OnIdRecordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdEvent", DbType="Int NOT NULL")]
+		public int IdEvent
+		{
+			get
+			{
+				return this._IdEvent;
+			}
+			set
+			{
+				if ((this._IdEvent != value))
+				{
+					if (this._Events.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdEventChanging(value);
+					this.SendPropertyChanging();
+					this._IdEvent = value;
+					this.SendPropertyChanged("IdEvent");
+					this.OnIdEventChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPhoto", DbType="Int NOT NULL")]
+		public int IdPhoto
+		{
+			get
+			{
+				return this._IdPhoto;
+			}
+			set
+			{
+				if ((this._IdPhoto != value))
+				{
+					if (this._Photos.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdPhotoChanging(value);
+					this.SendPropertyChanging();
+					this._IdPhoto = value;
+					this.SendPropertyChanged("IdPhoto");
+					this.OnIdPhotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhotos", Storage="_Events", ThisKey="IdEvent", OtherKey="IdRecord", IsForeignKey=true)]
+		public Events Events
+		{
+			get
+			{
+				return this._Events.Entity;
+			}
+			set
+			{
+				Events previousValue = this._Events.Entity;
+				if (((previousValue != value) 
+							|| (this._Events.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Events.Entity = null;
+						previousValue.EventPhotos.Remove(this);
+					}
+					this._Events.Entity = value;
+					if ((value != null))
+					{
+						value.EventPhotos.Add(this);
+						this._IdEvent = value.IdRecord;
+					}
+					else
+					{
+						this._IdEvent = default(int);
+					}
+					this.SendPropertyChanged("Events");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_EventPhotos", Storage="_Photos", ThisKey="IdPhoto", OtherKey="IdRecord", IsForeignKey=true)]
+		public Photos Photos
+		{
+			get
+			{
+				return this._Photos.Entity;
+			}
+			set
+			{
+				Photos previousValue = this._Photos.Entity;
+				if (((previousValue != value) 
+							|| (this._Photos.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Photos.Entity = null;
+						previousValue.EventPhotos.Remove(this);
+					}
+					this._Photos.Entity = value;
+					if ((value != null))
+					{
+						value.EventPhotos.Add(this);
+						this._IdPhoto = value.IdRecord;
+					}
+					else
+					{
+						this._IdPhoto = default(int);
+					}
+					this.SendPropertyChanged("Photos");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

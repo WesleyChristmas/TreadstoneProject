@@ -5,6 +5,13 @@ using System.Web;
 
 namespace PartyCafe.Site.DBUtils
 {
+    public class PCEventPhoto
+    {
+        public int idRecord;
+        public string name;
+        public string photoPath;
+    }
+
     public class PCEvent
     {
         public int idRecord;
@@ -13,18 +20,24 @@ namespace PartyCafe.Site.DBUtils
         public string PhotoPath;
         public DateTime DateEvent;
         public TimeSpan TimeEvent;
+        public List<PCEventPhoto> photos;
     }
 
     public static class EventUtils
     {
         public static List<PCEvent> GetAll()
         {
-            var dbContext = MainUtils.GetDBContext();
-            var events = (from e in dbContext.Events
-                          join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
+            var db = MainUtils.GetDBContext();
+            var events = (from e in db.Events
+                          join p in db.Photos on e.IdPhoto equals p.IdRecord
                           select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
 
-            List <PCEvent> resultList = new List<PCEvent>();
+            var eventPhotos = (from ep in db.EventPhotos
+                            join p in db.Photos on ep.IdPhoto equals p.IdRecord
+                            select new { ep.IdRecord, ep.IdEvent, p.Path, ep.name }).ToList();
+
+
+            List<PCEvent> resultList = new List<PCEvent>();
             foreach (var e in events)
             {
                 PCEvent pcEvent = new PCEvent();
@@ -35,7 +48,20 @@ namespace PartyCafe.Site.DBUtils
                 pcEvent.PhotoPath = e.Path;
                 pcEvent.DateEvent = e.EventDate.Date;
                 pcEvent.TimeEvent = e.EventDate.TimeOfDay;
-          
+
+                pcEvent.photos = new List<PCEventPhoto>();
+                foreach(var item in eventPhotos)
+                {
+                    if (item.IdEvent == pcEvent.idRecord)
+                    {
+                        var newPhoto = new PCEventPhoto();
+                        newPhoto.idRecord = item.IdRecord;
+                        newPhoto.photoPath = item.Path;
+                        newPhoto.name = item.name;
+                        pcEvent.photos.Add(newPhoto);
+                    }
+                }
+
                 resultList.Add(pcEvent);
             }
 
@@ -156,6 +182,27 @@ namespace PartyCafe.Site.DBUtils
             var dbContext = MainUtils.GetDBContext();
             dbContext.Events.InsertOnSubmit(newEvent);
             dbContext.SubmitChanges();
+        }
+
+        public static void AddPhoto(int IdEvent, string name, PCPhoto image, string userCreate)
+        {
+            var db = MainUtils.GetDBContext();
+            EventPhotos ep = new EventPhotos();
+            ep.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
+            ep.IdEvent = IdEvent;
+            ep.name = name;
+            db.EventPhotos.InsertOnSubmit(ep);
+            db.SubmitChanges();
+        }
+
+        public static void DelPhoto(int IdEvent)
+        {
+            var db = MainUtils.GetDBContext();
+            var x = (from sp in db.EventPhotos
+                     where sp.IdPhoto == IdEvent
+                     select sp).SingleOrDefault();
+            db.EventPhotos.DeleteOnSubmit(x);
+            db.SubmitChanges();
         }
     }
 }
