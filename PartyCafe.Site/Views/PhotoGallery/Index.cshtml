@@ -3,14 +3,24 @@
 }
 
 <script src="~/Scripts/AngularControllers/PhotoGalleryController.js"></script>
+<link href="~/Content/css/lightbox.css" rel="stylesheet" />
+<script src="~/Scripts/lightbox.js"></script>
 
 <div class="photogallery-wrap" ng-app="photogalleryapp" ng-controller="PhotoGallery">
     <div class="post-entry">
         <div class="photogallery-wrapper">
-            <div class="tiled-gallery-item" ng-repeat="item in PhotoGallery">
-                <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></a>
+            <div class="tiled-gallery-item" ng-repeat="item in PhotoGallery" id="links">
+                <a href="{{item.photoPath}}" class="fancybox" rel="group" data-lightbox="gallery" data-title="{{item.name}}" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></a>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    lightbox.option({
+        'alwaysShowNavOnTouchDevices': true,
+        'resizeDuration': 0,
+        'wrapAround': true,
+        'disableScrolling': true,
+    });
+</script>

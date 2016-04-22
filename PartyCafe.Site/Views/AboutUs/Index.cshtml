@@ -3,23 +3,31 @@
 }
 
 <script src="~/Scripts/AngularControllers/AboutUsController.js"></script>
+<link href="~/Content/css/lightbox.css" rel="stylesheet" />
+<script src="~/Scripts/lightbox.js"></script>
 
-<div>
-    <div class="about-wrap" ng-app="aboutusapp" ng-controller="AboutUs">
-
-        <div class="post-entry">
-            <div class="about-wrapper">
-
-                <div ng-show="aboutusBloks">
-                    <div class="tiled-gallery-item" ng-repeat="item in AboutUs">
-                        <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
-                            <span class="sg-title">{{item.name}}</span>
-                        </a>
+<div class="about-wrap" ng-app="aboutusapp" ng-controller="AboutUs">
+    <div class="post-entry">
+        <div class="about-wrapper">
+            <div ng-show="aboutusBloks">
+                <div class="tiled-gallery-item" ng-repeat="item in AboutUs">
+                    <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
+                        <span class="sg-title">{{item.name}}</span>
+                    </a>
+                </div>
+            </div>
+            <div ng-show="aboutusMore">
+                <div class="photogallery-wrap">
+                    <div class="post-entry">
+                        <div class="photogallery-wrapper">
+                            <div class="tiled-gallery-item" ng-repeat="item in aboutusMore" id="links">
+                                <a href="{{item.photoPath}}" class="fancybox" rel="group" data-lightbox="gallery" data-title="{{item.name}}" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 </div>
+

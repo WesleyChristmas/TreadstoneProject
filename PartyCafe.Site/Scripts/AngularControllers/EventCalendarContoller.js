@@ -22,8 +22,8 @@ eventcalendarapp.controller("EventCalendar", function ($scope, $http) {
 Date.prototype.monthDays = function () {
     return new Date(this.getFullYear(), this.getMonth() + 1, 0).getDate();
 }
-function setCalendaData(_d, _m) {
-    return { day: _d, month: _m, data: [] };
+function setCalendaData(_d, _w, _m) {
+    return { day: _d, week: _w, month: _m, data: [] };
 }
 
 function getData($scope, $http) {
@@ -42,6 +42,8 @@ function CalendarJOPA(obj, dcount, respons, $scope) {
         m = date.getMonth() + 1, daysInMonth = date.monthDays(),
         cal = [],
         _month = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
+        weekShort = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"],
+        weekFull = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"],
         l = dcount;
 
     /* формирование календаря */
@@ -95,6 +97,8 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
         m = date.getMonth() + 1, daysInMonth = date.monthDays(),
         cal = [],
         _month = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
+        weekShort = ["ВС","ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"],
+        weekFull = ["Воскресенье","Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
         l = dcount;
 
     /* формирование календаря */
@@ -102,20 +106,20 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
         var d = date.getDate();
 
         if (d >= daysInMonth) {
-            var obj = setCalendaData(d, _month[m-1]);
+            var obj = setCalendaData(d, weekFull[date.getDay()], _month[m - 1]);
             cal[i] = obj;
 
             if (m != 13) {
                 date.setDate(1);
                 date.setMonth(date.getMonth() + 1);
 
-                var obj = setCalendaData(d, _month[m - 1]);
+                var obj = setCalendaData(d, weekFull[date.getDay()], _month[m - 1]);
                 cal[i] = obj;
                 m = date.getMonth() + 1;
             }
         }
         else {
-            var obj = setCalendaData(d, _month[m - 1]);
+            var obj = setCalendaData(d, weekFull[date.getDay()], _month[m - 1]);
 
             cal[i] = obj;
             date.setDate(d + 1);
