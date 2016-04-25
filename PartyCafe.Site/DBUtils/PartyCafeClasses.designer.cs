@@ -30,9 +30,6 @@ namespace PartyCafe.Site.DBUtils
 		
     #region Определения метода расширяемости
     partial void OnCreated();
-    partial void InsertEvents(Events instance);
-    partial void UpdateEvents(Events instance);
-    partial void DeleteEvents(Events instance);
     partial void InsertGallery(Gallery instance);
     partial void UpdateGallery(Gallery instance);
     partial void DeleteGallery(Gallery instance);
@@ -60,6 +57,9 @@ namespace PartyCafe.Site.DBUtils
     partial void InsertEventPhotos(EventPhotos instance);
     partial void UpdateEventPhotos(EventPhotos instance);
     partial void DeleteEventPhotos(EventPhotos instance);
+    partial void InsertEvents(Events instance);
+    partial void UpdateEvents(Events instance);
+    partial void DeleteEvents(Events instance);
     #endregion
 		
 		public PartyCafeClassesDataContext() : 
@@ -90,14 +90,6 @@ namespace PartyCafe.Site.DBUtils
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Events> Events
-		{
-			get
-			{
-				return this.GetTable<Events>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Gallery> Gallery
@@ -171,304 +163,13 @@ namespace PartyCafe.Site.DBUtils
 				return this.GetTable<EventPhotos>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Events")]
-	public partial class Events : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdRecord;
-		
-		private string _Name;
-		
-		private System.DateTime _EventDate;
-		
-		private int _IdPhoto;
-		
-		private string _UserCreate;
-		
-		private string _UserUpdate;
-		
-		private System.DateTime _DateCreate;
-		
-		private System.Nullable<System.DateTime> _DateUpdate;
-		
-		private EntitySet<EventPhotos> _EventPhotos;
-		
-		private EntityRef<Photos> _Photos;
-		
-    #region Определения метода расширяемости
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdRecordChanging(int value);
-    partial void OnIdRecordChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnEventDateChanging(System.DateTime value);
-    partial void OnEventDateChanged();
-    partial void OnIdPhotoChanging(int value);
-    partial void OnIdPhotoChanged();
-    partial void OnUserCreateChanging(string value);
-    partial void OnUserCreateChanged();
-    partial void OnUserUpdateChanging(string value);
-    partial void OnUserUpdateChanged();
-    partial void OnDateCreateChanging(System.DateTime value);
-    partial void OnDateCreateChanged();
-    partial void OnDateUpdateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateUpdateChanged();
-    #endregion
-		
-		public Events()
-		{
-			this._EventPhotos = new EntitySet<EventPhotos>(new Action<EventPhotos>(this.attach_EventPhotos), new Action<EventPhotos>(this.detach_EventPhotos));
-			this._Photos = default(EntityRef<Photos>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRecord", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdRecord
+		public System.Data.Linq.Table<Events> Events
 		{
 			get
 			{
-				return this._IdRecord;
+				return this.GetTable<Events>();
 			}
-			set
-			{
-				if ((this._IdRecord != value))
-				{
-					this.OnIdRecordChanging(value);
-					this.SendPropertyChanging();
-					this._IdRecord = value;
-					this.SendPropertyChanged("IdRecord");
-					this.OnIdRecordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventDate", DbType="DateTime NOT NULL")]
-		public System.DateTime EventDate
-		{
-			get
-			{
-				return this._EventDate;
-			}
-			set
-			{
-				if ((this._EventDate != value))
-				{
-					this.OnEventDateChanging(value);
-					this.SendPropertyChanging();
-					this._EventDate = value;
-					this.SendPropertyChanged("EventDate");
-					this.OnEventDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPhoto", DbType="Int NOT NULL")]
-		public int IdPhoto
-		{
-			get
-			{
-				return this._IdPhoto;
-			}
-			set
-			{
-				if ((this._IdPhoto != value))
-				{
-					if (this._Photos.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdPhotoChanging(value);
-					this.SendPropertyChanging();
-					this._IdPhoto = value;
-					this.SendPropertyChanged("IdPhoto");
-					this.OnIdPhotoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserCreate", DbType="VarChar(50)")]
-		public string UserCreate
-		{
-			get
-			{
-				return this._UserCreate;
-			}
-			set
-			{
-				if ((this._UserCreate != value))
-				{
-					this.OnUserCreateChanging(value);
-					this.SendPropertyChanging();
-					this._UserCreate = value;
-					this.SendPropertyChanged("UserCreate");
-					this.OnUserCreateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserUpdate", DbType="VarChar(50)")]
-		public string UserUpdate
-		{
-			get
-			{
-				return this._UserUpdate;
-			}
-			set
-			{
-				if ((this._UserUpdate != value))
-				{
-					this.OnUserUpdateChanging(value);
-					this.SendPropertyChanging();
-					this._UserUpdate = value;
-					this.SendPropertyChanged("UserUpdate");
-					this.OnUserUpdateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreate", DbType="DateTime NOT NULL")]
-		public System.DateTime DateCreate
-		{
-			get
-			{
-				return this._DateCreate;
-			}
-			set
-			{
-				if ((this._DateCreate != value))
-				{
-					this.OnDateCreateChanging(value);
-					this.SendPropertyChanging();
-					this._DateCreate = value;
-					this.SendPropertyChanged("DateCreate");
-					this.OnDateCreateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateUpdate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateUpdate
-		{
-			get
-			{
-				return this._DateUpdate;
-			}
-			set
-			{
-				if ((this._DateUpdate != value))
-				{
-					this.OnDateUpdateChanging(value);
-					this.SendPropertyChanging();
-					this._DateUpdate = value;
-					this.SendPropertyChanged("DateUpdate");
-					this.OnDateUpdateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhotos", Storage="_EventPhotos", ThisKey="IdRecord", OtherKey="IdEvent")]
-		public EntitySet<EventPhotos> EventPhotos
-		{
-			get
-			{
-				return this._EventPhotos;
-			}
-			set
-			{
-				this._EventPhotos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_Events", Storage="_Photos", ThisKey="IdPhoto", OtherKey="IdRecord", IsForeignKey=true)]
-		public Photos Photos
-		{
-			get
-			{
-				return this._Photos.Entity;
-			}
-			set
-			{
-				Photos previousValue = this._Photos.Entity;
-				if (((previousValue != value) 
-							|| (this._Photos.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Photos.Entity = null;
-						previousValue.Events.Remove(this);
-					}
-					this._Photos.Entity = value;
-					if ((value != null))
-					{
-						value.Events.Add(this);
-						this._IdPhoto = value.IdRecord;
-					}
-					else
-					{
-						this._IdPhoto = default(int);
-					}
-					this.SendPropertyChanged("Photos");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_EventPhotos(EventPhotos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Events = this;
-		}
-		
-		private void detach_EventPhotos(EventPhotos entity)
-		{
-			this.SendPropertyChanging();
-			entity.Events = null;
 		}
 	}
 	
@@ -1264,8 +965,6 @@ namespace PartyCafe.Site.DBUtils
 		
 		private System.Nullable<System.DateTime> _DateUpdate;
 		
-		private EntitySet<Events> _Events;
-		
 		private EntitySet<Gallery> _Gallery;
 		
 		private EntitySet<Games> _Games;
@@ -1279,6 +978,8 @@ namespace PartyCafe.Site.DBUtils
 		private EntitySet<Services> _Services;
 		
 		private EntitySet<EventPhotos> _EventPhotos;
+		
+		private EntitySet<Events> _Events;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -1302,7 +1003,6 @@ namespace PartyCafe.Site.DBUtils
 		
 		public Photos()
 		{
-			this._Events = new EntitySet<Events>(new Action<Events>(this.attach_Events), new Action<Events>(this.detach_Events));
 			this._Gallery = new EntitySet<Gallery>(new Action<Gallery>(this.attach_Gallery), new Action<Gallery>(this.detach_Gallery));
 			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
 			this._MenuGroups = new EntitySet<MenuGroups>(new Action<MenuGroups>(this.attach_MenuGroups), new Action<MenuGroups>(this.detach_MenuGroups));
@@ -1310,6 +1010,7 @@ namespace PartyCafe.Site.DBUtils
 			this._ServicePhotos = new EntitySet<ServicePhotos>(new Action<ServicePhotos>(this.attach_ServicePhotos), new Action<ServicePhotos>(this.detach_ServicePhotos));
 			this._Services = new EntitySet<Services>(new Action<Services>(this.attach_Services), new Action<Services>(this.detach_Services));
 			this._EventPhotos = new EntitySet<EventPhotos>(new Action<EventPhotos>(this.attach_EventPhotos), new Action<EventPhotos>(this.detach_EventPhotos));
+			this._Events = new EntitySet<Events>(new Action<Events>(this.attach_Events), new Action<Events>(this.detach_Events));
 			OnCreated();
 		}
 		
@@ -1453,19 +1154,6 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_Events", Storage="_Events", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<Events> Events
-		{
-			get
-			{
-				return this._Events;
-			}
-			set
-			{
-				this._Events.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_Gallery", Storage="_Gallery", ThisKey="IdRecord", OtherKey="IdPhoto")]
 		public EntitySet<Gallery> Gallery
 		{
@@ -1557,6 +1245,19 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_Events", Storage="_Events", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<Events> Events
+		{
+			get
+			{
+				return this._Events;
+			}
+			set
+			{
+				this._Events.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1575,18 +1276,6 @@ namespace PartyCafe.Site.DBUtils
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Events(Events entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photos = this;
-		}
-		
-		private void detach_Events(Events entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photos = null;
 		}
 		
 		private void attach_Gallery(Gallery entity)
@@ -1668,6 +1357,18 @@ namespace PartyCafe.Site.DBUtils
 		}
 		
 		private void detach_EventPhotos(EventPhotos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photos = null;
+		}
+		
+		private void attach_Events(Events entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photos = this;
+		}
+		
+		private void detach_Events(Events entity)
 		{
 			this.SendPropertyChanging();
 			entity.Photos = null;
@@ -3051,9 +2752,9 @@ namespace PartyCafe.Site.DBUtils
 		
 		private string _name;
 		
-		private EntityRef<Events> _Events;
-		
 		private EntityRef<Photos> _Photos;
+		
+		private EntityRef<Events> _Events;
 		
     #region Определения метода расширяемости
     partial void OnLoaded();
@@ -3071,8 +2772,8 @@ namespace PartyCafe.Site.DBUtils
 		
 		public EventPhotos()
 		{
-			this._Events = default(EntityRef<Events>);
 			this._Photos = default(EntityRef<Photos>);
+			this._Events = default(EntityRef<Events>);
 			OnCreated();
 		}
 		
@@ -3164,40 +2865,6 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhotos", Storage="_Events", ThisKey="IdEvent", OtherKey="IdRecord", IsForeignKey=true)]
-		public Events Events
-		{
-			get
-			{
-				return this._Events.Entity;
-			}
-			set
-			{
-				Events previousValue = this._Events.Entity;
-				if (((previousValue != value) 
-							|| (this._Events.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Events.Entity = null;
-						previousValue.EventPhotos.Remove(this);
-					}
-					this._Events.Entity = value;
-					if ((value != null))
-					{
-						value.EventPhotos.Add(this);
-						this._IdEvent = value.IdRecord;
-					}
-					else
-					{
-						this._IdEvent = default(int);
-					}
-					this.SendPropertyChanged("Events");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_EventPhotos", Storage="_Photos", ThisKey="IdPhoto", OtherKey="IdRecord", IsForeignKey=true)]
 		public Photos Photos
 		{
@@ -3232,6 +2899,40 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhotos", Storage="_Events", ThisKey="IdEvent", OtherKey="IdRecord", IsForeignKey=true)]
+		public Events Events
+		{
+			get
+			{
+				return this._Events.Entity;
+			}
+			set
+			{
+				Events previousValue = this._Events.Entity;
+				if (((previousValue != value) 
+							|| (this._Events.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Events.Entity = null;
+						previousValue.EventPhotos.Remove(this);
+					}
+					this._Events.Entity = value;
+					if ((value != null))
+					{
+						value.EventPhotos.Add(this);
+						this._IdEvent = value.IdRecord;
+					}
+					else
+					{
+						this._IdEvent = default(int);
+					}
+					this.SendPropertyChanged("Events");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3250,6 +2951,329 @@ namespace PartyCafe.Site.DBUtils
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Events")]
+	public partial class Events : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdRecord;
+		
+		private string _Name;
+		
+		private System.DateTime _EventDate;
+		
+		private int _IdPhoto;
+		
+		private string _UserCreate;
+		
+		private string _UserUpdate;
+		
+		private System.DateTime _DateCreate;
+		
+		private System.Nullable<System.DateTime> _DateUpdate;
+		
+		private string _description;
+		
+		private EntitySet<EventPhotos> _EventPhotos;
+		
+		private EntityRef<Photos> _Photos;
+		
+    #region Определения метода расширяемости
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdRecordChanging(int value);
+    partial void OnIdRecordChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnEventDateChanging(System.DateTime value);
+    partial void OnEventDateChanged();
+    partial void OnIdPhotoChanging(int value);
+    partial void OnIdPhotoChanged();
+    partial void OnUserCreateChanging(string value);
+    partial void OnUserCreateChanged();
+    partial void OnUserUpdateChanging(string value);
+    partial void OnUserUpdateChanged();
+    partial void OnDateCreateChanging(System.DateTime value);
+    partial void OnDateCreateChanged();
+    partial void OnDateUpdateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateUpdateChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    #endregion
+		
+		public Events()
+		{
+			this._EventPhotos = new EntitySet<EventPhotos>(new Action<EventPhotos>(this.attach_EventPhotos), new Action<EventPhotos>(this.detach_EventPhotos));
+			this._Photos = default(EntityRef<Photos>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRecord", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdRecord
+		{
+			get
+			{
+				return this._IdRecord;
+			}
+			set
+			{
+				if ((this._IdRecord != value))
+				{
+					this.OnIdRecordChanging(value);
+					this.SendPropertyChanging();
+					this._IdRecord = value;
+					this.SendPropertyChanged("IdRecord");
+					this.OnIdRecordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EventDate", DbType="DateTime NOT NULL")]
+		public System.DateTime EventDate
+		{
+			get
+			{
+				return this._EventDate;
+			}
+			set
+			{
+				if ((this._EventDate != value))
+				{
+					this.OnEventDateChanging(value);
+					this.SendPropertyChanging();
+					this._EventDate = value;
+					this.SendPropertyChanged("EventDate");
+					this.OnEventDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdPhoto", DbType="Int NOT NULL")]
+		public int IdPhoto
+		{
+			get
+			{
+				return this._IdPhoto;
+			}
+			set
+			{
+				if ((this._IdPhoto != value))
+				{
+					if (this._Photos.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdPhotoChanging(value);
+					this.SendPropertyChanging();
+					this._IdPhoto = value;
+					this.SendPropertyChanged("IdPhoto");
+					this.OnIdPhotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserCreate", DbType="NVarChar(50)")]
+		public string UserCreate
+		{
+			get
+			{
+				return this._UserCreate;
+			}
+			set
+			{
+				if ((this._UserCreate != value))
+				{
+					this.OnUserCreateChanging(value);
+					this.SendPropertyChanging();
+					this._UserCreate = value;
+					this.SendPropertyChanged("UserCreate");
+					this.OnUserCreateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserUpdate", DbType="NVarChar(50)")]
+		public string UserUpdate
+		{
+			get
+			{
+				return this._UserUpdate;
+			}
+			set
+			{
+				if ((this._UserUpdate != value))
+				{
+					this.OnUserUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._UserUpdate = value;
+					this.SendPropertyChanged("UserUpdate");
+					this.OnUserUpdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreate", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreate
+		{
+			get
+			{
+				return this._DateCreate;
+			}
+			set
+			{
+				if ((this._DateCreate != value))
+				{
+					this.OnDateCreateChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreate = value;
+					this.SendPropertyChanged("DateCreate");
+					this.OnDateCreateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateUpdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateUpdate
+		{
+			get
+			{
+				return this._DateUpdate;
+			}
+			set
+			{
+				if ((this._DateUpdate != value))
+				{
+					this.OnDateUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._DateUpdate = value;
+					this.SendPropertyChanged("DateUpdate");
+					this.OnDateUpdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhotos", Storage="_EventPhotos", ThisKey="IdRecord", OtherKey="IdEvent")]
+		public EntitySet<EventPhotos> EventPhotos
+		{
+			get
+			{
+				return this._EventPhotos;
+			}
+			set
+			{
+				this._EventPhotos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photos_Events", Storage="_Photos", ThisKey="IdPhoto", OtherKey="IdRecord", IsForeignKey=true)]
+		public Photos Photos
+		{
+			get
+			{
+				return this._Photos.Entity;
+			}
+			set
+			{
+				Photos previousValue = this._Photos.Entity;
+				if (((previousValue != value) 
+							|| (this._Photos.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Photos.Entity = null;
+						previousValue.Events.Remove(this);
+					}
+					this._Photos.Entity = value;
+					if ((value != null))
+					{
+						value.Events.Add(this);
+						this._IdPhoto = value.IdRecord;
+					}
+					else
+					{
+						this._IdPhoto = default(int);
+					}
+					this.SendPropertyChanged("Photos");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_EventPhotos(EventPhotos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Events = this;
+		}
+		
+		private void detach_EventPhotos(EventPhotos entity)
+		{
+			this.SendPropertyChanging();
+			entity.Events = null;
 		}
 	}
 }

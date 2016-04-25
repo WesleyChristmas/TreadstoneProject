@@ -18,6 +18,7 @@ namespace PartyCafe.Site.DBUtils
         public string name;
         public int IdPhoto;
         public string PhotoPath;
+        public string Description;
         public DateTime DateEvent;
         public TimeSpan TimeEvent;
         public List<PCEventPhoto> photos;
@@ -30,7 +31,7 @@ namespace PartyCafe.Site.DBUtils
             var db = MainUtils.GetDBContext();
             var events = (from e in db.Events
                           join p in db.Photos on e.IdPhoto equals p.IdRecord
-                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
+                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description}).ToList();
 
             var eventPhotos = (from ep in db.EventPhotos
                             join p in db.Photos on ep.IdPhoto equals p.IdRecord
@@ -48,6 +49,7 @@ namespace PartyCafe.Site.DBUtils
                 pcEvent.PhotoPath = e.Path;
                 pcEvent.DateEvent = e.EventDate.Date;
                 pcEvent.TimeEvent = e.EventDate.TimeOfDay;
+                pcEvent.Description = e.description;
 
                 pcEvent.photos = new List<PCEventPhoto>();
                 foreach(var item in eventPhotos)
@@ -71,12 +73,18 @@ namespace PartyCafe.Site.DBUtils
         public static List<PCEvent> GetNearEvents()
         {
             const int DayInterval = 15;
+            //
 
-            var dbContext = MainUtils.GetDBContext();
-            var events = (from e in dbContext.Events
-                          join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
+            var db = MainUtils.GetDBContext();
+            var events = (from e in db.Events
+                          join p in db.Photos on e.IdPhoto equals p.IdRecord
                           where e.EventDate <= DateTime.Now.AddDays(DayInterval) && e.EventDate >= DateTime.Now.AddDays(-DayInterval)
-                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path}).ToList();
+                          select new { e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description }).ToList();
+
+            var eventPhotos = (from ep in db.EventPhotos
+                               join p in db.Photos on ep.IdPhoto equals p.IdRecord
+                               select new { ep.IdRecord, ep.IdEvent, p.Path, ep.name }).ToList();
+
 
             List<PCEvent> resultList = new List<PCEvent>();
             foreach (var e in events)
@@ -89,9 +97,24 @@ namespace PartyCafe.Site.DBUtils
                 pcEvent.PhotoPath = e.Path;
                 pcEvent.DateEvent = e.EventDate.Date;
                 pcEvent.TimeEvent = e.EventDate.TimeOfDay;
+                pcEvent.Description = e.description;
+
+                pcEvent.photos = new List<PCEventPhoto>();
+                foreach (var item in eventPhotos)
+                {
+                    if (item.IdEvent == pcEvent.idRecord)
+                    {
+                        var newPhoto = new PCEventPhoto();
+                        newPhoto.idRecord = item.IdRecord;
+                        newPhoto.photoPath = item.Path;
+                        newPhoto.name = item.name;
+                        pcEvent.photos.Add(newPhoto);
+                    }
+                }
 
                 resultList.Add(pcEvent);
             }
+
             return resultList;
         }
 
@@ -116,6 +139,7 @@ namespace PartyCafe.Site.DBUtils
                             select e).SingleOrDefault();
 
             curEvent.Name = partyEvent.name != null ? partyEvent.name : "";
+            curEvent.description = partyEvent.Description != null ? partyEvent.Description : String.Empty;
             
             if (partyEvent.DateEvent != null)
             {
@@ -151,7 +175,8 @@ namespace PartyCafe.Site.DBUtils
         public static void InsertEvent(PCEvent partyEvent, string userCreate, PCPhoto image)
         {
             var newEvent = new Events();
-            newEvent.Name = partyEvent.name != null ? partyEvent.name : "";
+            newEvent.Name = partyEvent.name != null ? partyEvent.name : String.Empty;
+            newEvent.description = partyEvent.Description != null ? partyEvent.Description : String.Empty;
 
             if (partyEvent.DateEvent != null)
             {
