@@ -14,9 +14,9 @@
                 <div clas="ed-day">{{item.day}}</div>
                 <em class="ed-month">{{item.month}}</em>
                 <strong class="ed-title">{{item.data.header}}</strong>
-                <span class="ed-imgwrap">
-                    <img ng-src="{{item.data.photo}}" class="ed-image" alt="">
-                </span>
+                <div class="ed-imgwrap" style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;">
+                    <div class="ed-invite">Присоединиться</div>
+                </div>
             </a>
         </div>
     </div>

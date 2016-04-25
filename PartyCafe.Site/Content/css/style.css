@@ -702,7 +702,7 @@ canvas {
 .event-week, .event-day { display: inline-block; }
 .event-day {
     width: 130px;
-    height: 127px;
+    height: 150px;
     text-align: center;
     font-size: 16px;
     vertical-align: middle;
@@ -727,7 +727,7 @@ canvas {
     font-size: 40px;
     color: white;
     width: 129px;
-    height: 130px;
+    height: 140px;
     padding-left: 6px;
 }
 .ed-month, .ed-title, .ed-week { display: inline-block; text-transform: uppercase; }
@@ -748,7 +748,7 @@ canvas {
 .ed-week {
     text-align: center;
     display: block;
-    margin: 3px 0 5px 0;
+    margin: 3px 0;
     font-style: normal;
     padding-left: 3px;
     font-size: 14px;
@@ -758,7 +758,9 @@ canvas {
     position: absolute;
     display: block;
     left: 0;
-    top: -134px;
+    top: -150px;
+    width: 130px;
+    height: 140px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
@@ -770,12 +772,22 @@ canvas {
     margin: 0; padding:0;
 }
 .ed-wrap:hover .ed-imgwrap {
-    top: -6px;
+    top: -2px;
     /*top: 0;*/
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
+}
+.ed-invite {
+    font-size: 14px;
+    padding: 8px 0;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
 }
 
 /* Food menu */
