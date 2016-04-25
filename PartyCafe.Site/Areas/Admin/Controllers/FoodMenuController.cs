@@ -8,11 +8,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
     [AllowAnonymous]
     public class FoodMenuController : Controller
     {
-        private readonly IFoodMenuServiceBase _menuService;
+        //private readonly IFoodMenuServiceBase _menuService;
 
         public FoodMenuController(IFoodMenuServiceBase menuService)
         {
-            _menuService = menuService;
+            //_menuService = menuService;
         }
 
         // GET: Admin/FoodMenu
@@ -38,7 +38,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View("FoodMenuItems");
         }
-
+        /*
         [HttpGet]
         public JsonResult GetAllMenuTypes()
         {
@@ -85,6 +85,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         public JsonResult DeleteFoodMenu(int idMenuItem)
         {
             return Json(_menuService.DeleteFoodMenu(idMenuItem, HttpContext.Server.MapPath("/")));
-        }
+        }*/
     }
 }

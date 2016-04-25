@@ -1,12 +1,14 @@
 ﻿@{
     ViewBag.Title = "календарь событий";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <script src="~/Scripts/isotop/isotope.pkgd.min.js"></script>
 <script src="~/Scripts/AngularControllers/EventCalendarContoller.js"></script>
 
-<div id="calendar" ng-app="eventcalendarapp" ng-controller="EventCalendar">
-    <div class="calendar-title">Ближайшие события</div>
+<div id="calendar" ng-app="eventcalendarapp">
+    <div ng-view></div>
+    <!--<div class="calendar-title">Ближайшие события</div>
     <div id="calendar-wrap">
         <div class="event-day" note ng-repeat="item in Events">
             <a href="" class="ed-wrap">
@@ -14,10 +16,11 @@
                 <div clas="ed-day">{{item.day}}</div>
                 <em class="ed-month">{{item.month}}</em>
                 <strong class="ed-title">{{item.data.header}}</strong>
-                <div class="ed-imgwrap" style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;">
+                <div ng-click="EventMore($index)" class="ed-imgwrap" style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" ng-show="item.data.length === 0 ? false : true">
+                    <div class="ed-time">{{item.data.time.Hours}}:{{item.data.time.Minutes}}</div>
                     <div class="ed-invite">Присоединиться</div>
                 </div>
             </a>
         </div>
-    </div>
+    </div>-->
 </div>

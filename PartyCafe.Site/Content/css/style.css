@@ -779,6 +779,12 @@ canvas {
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
+.ed-time {
+    font-size: 40px;
+    position: absolute;
+    width: 100%;
+    top: 20px;
+}
 .ed-invite {
     font-size: 14px;
     padding: 8px 0;
