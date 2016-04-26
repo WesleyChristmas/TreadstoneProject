@@ -4,15 +4,15 @@
 <div class="calendar-title">Ближайшие события</div>
 <div id="calendar-wrap">
     <div class="event-day" note ng-repeat="item in Events">
-        <a href="" class="ed-wrap">
+        <div href="" class="ed-wrap">
             <div class="ed-week">{{item.week}}</div>
             <div clas="ed-day">{{item.day}}</div>
             <em class="ed-month">{{item.month}}</em>
             <strong class="ed-title">{{item.data.header}}</strong>
-            <div ng-click="EventMore($index)" class="ed-imgwrap" style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" ng-show="item.data.length === 0 ? false : true">
+            <a href="javascript:void(0);" ng-click="EventMore(item.data)" class="ed-imgwrap" style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" ng-show="item.data.length === 0 ? false : true">
                 <div class="ed-time">{{item.data.time.Hours}}:{{item.data.time.Minutes}}</div>
                 <div class="ed-invite">Присоединиться</div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 </div>

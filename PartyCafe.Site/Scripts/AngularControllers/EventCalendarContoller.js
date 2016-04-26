@@ -5,23 +5,14 @@ eventcalendarapp.config(function ($routeProvider) {
     {
         templateUrl: 'EventCalendar/Calendar',
         controller: 'CalendarController'
-    }).when('/add', {
+    }).when('/invite', {
         templateUrl: 'EventCalendar/Invite',
         controller: 'InviteController'
-    });
+    }).otherwise('/');
 });
 
-/*eventcalendarapp.controller("EventCalendar", function ($scope, $http) {
-    $scope.Events = [];
-    getData($scope, $http);
-});*/
-
 eventcalendarapp.service("sharedDataService", function () {
-    this.eventsList = [];
     this.eventsItem = {};
-
-    this.setevents = function (obj) { this.eventsList = obj; }
-    this.getevents = function () { return this.eventsList; }
 
     this.setItem = function (item) { this.eventsItem = item; }
     this.getItem = function () { return this.eventsItem; }
@@ -30,16 +21,60 @@ eventcalendarapp.service("sharedDataService", function () {
 /* Calendar Controller */
 eventcalendarapp.controller("CalendarController", function ($scope, $http, $location, sharedDataService) {
     /*Helpers*/
-    $scope.More = function () {
-
+    $scope.EventMore = function (obj) {
+        sharedDataService.setItem(obj);
+        $location.path('/invite');
     };
-
-    $scope.Events = [];
-    $scope.selectForEdit = '';
+    $('#calendar').removeClass('invitewrap');
 
     $http.get("/EventCalendar/GetCalendar").success(function (data, status) {
         Calendar('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
     });
+});
+
+eventcalendarapp.controller("InviteController", function ($scope, $http, $location, sharedDataService) {
+    /*Helpers*/
+    $scope.InviteEvent = sharedDataService.getItem();
+    $scope.inviteOrder = true;
+    $scope.Order = function () {
+        $scope.inviteOrder = false;
+        $scope.inviteOrderForm = true;
+        $("#calendar-wrap").animate({ scrollTop: $('#calendar-wrap').prop("scrollHeight") }, 500);
+    };
+    $scope.formOrder - function () {
+        $http.post("EventCalendar/Invite", {
+            user: $scope.invite.User,
+            phone: $scope.invite.PhoneNumber,
+            people: $scope.invite.People,
+            promo: $scope.invite.PromoCode
+        }).success(function (data) {
+            if (data == 'good') {
+                $scope.formResult = true;
+                $scope.result = "Спасибо за заказ! В ближайшее время наш менеджер с вами свяжется.";
+                $scope.inviteOrderForm = false;
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.inviteOrder = true;
+                        $scope.formResult = false;
+                    });
+                }, 3500);
+            } else {
+                $scope.result = "Что-то пошло не так. Попробуйте еще раз или позвоните на наш контактный номер.";
+            }
+        });
+    };
+
+    lightbox.option({
+        'alwaysShowNavOnTouchDevices': true,
+        'resizeDuration': 0,
+        'wrapAround': true,
+        'disableScrolling': true,
+    });
+    $('#calendar').addClass('invitewrap');
+
+    /*$http.get("/EventCalendar/GetCalendar").success(function (data, status) {
+        Calendar('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
+    });*/
 });
 
 eventcalendarapp.directive('note', function ($timeout) {
@@ -55,7 +90,6 @@ eventcalendarapp.directive('note', function ($timeout) {
         }
     };
 });
-
 
 /* Helpers */
 Date.prototype.monthDays = function () {
@@ -120,7 +154,9 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
                 var _obj = {
                     header: respons[i].name,
                     photo: respons[i].PhotoPath,
-                    time: respons[i].TimeEvent
+                    time: respons[i].TimeEvent,
+                    desc: respons[i].Description,
+                    childrenPhoto: respons[i].photos
                 }
                 cal[j].data = _obj;
                 break;

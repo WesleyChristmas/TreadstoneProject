@@ -755,6 +755,7 @@ canvas {
 }
 .ed-day { text-align: center; margin-top: 12px; }
 .ed-imgwrap {
+    color: white;
     position: absolute;
     display: block;
     left: 0;
@@ -795,6 +796,52 @@ canvas {
     position: absolute;
     background: rgba(0, 0, 0, 0.6);
 }
+/* Event invite */
+.event-invite_content {
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    padding: 15px;
+    max-height: 650px!important;
+}
+.event-invite_content a { width: 291px; height: 291px; }
+.event-invite_title { text-align: center; font-size: 30px; }
+.event-invite_images { margin: 30px auto; }
+.event-invite_images_wrap { display: inline-block; margin: 2px; }
+.event-invite-images_item { position: relative; display: inline-block; overflow: hidden; }
+.event-invite_text {
+    margin: 20px 0;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+.event-invite_order {
+    margin-top: 30px;
+    background: #000000;
+    padding: 14px 24px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    border: none;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    outline: 1px solid #4C4C4C;
+}
+.event-invite_form { margin-top: 30px; width: 460px; margin: 0 auto; }
+.event-invite_form p { margin-bottom: 10px; margin-top: 15px; }
+.event-invite_form-tb {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    outline: 1px solid #fff;
+    background: rgba(255,255,255,.00);
+    color: white;
+    border: none;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
 
 /* Food menu */
 #accordion { display: none; }
@@ -1112,6 +1159,7 @@ canvas {
     .adress_wrap { display: none; }
     .adress_wrap_mobile { display: block; }
     #calendar { max-width: 410px; }
+    .invitewrap { max-width: 540px!important; }
     .owl-container { padding-right: 10px; width: 400px; }
     .owl-container h1 { font-size: 30px; }
     .owl-carousel h1 { font-size: 20px; }
@@ -1124,7 +1172,7 @@ canvas {
     .services-wrapper, .photogallery-wrapper { height: 690px; width: 600px; }
     .tiled-gallery-item a { height: 176px; width: 176px; }
     .sg-title { font-size: 18px; bottom: 0; }
-    .services-more_content a { width:  500px; height: 500px; }
+    .services-more_content a, .event-invite_content a { width:  500px; height: 500px; }
 }
 @media only screen and (max-width: 640px) {
     .iw-list li { width: 50%; }
@@ -1137,6 +1185,7 @@ canvas {
     .adress_wrap_mobile { display: block; }
     #map { height: 300px; }
     #calendar { max-width: 280px; }
+    .invitewrap { max-width: 480px!important; }
     .owl-container h1 { font-size: 30px; }
     .owl-container { width: 280px; padding-left: 5px; padding-right: 5px;}
     .main-wrap { padding-left: 10px; padding-right: 10px; }
@@ -1145,7 +1194,7 @@ canvas {
     .services-wrapper, .photogallery-wrapper { height: 690px; width: 500px; }
     .tiled-gallery-item a { height: 156px; width: 156px; }
     .sg-title { font-size: 14px; }
-    .services-more_content a { width: 445px; height: 445px; }
+    .services-more_content a, .event-invite_content a { width: 445px; height: 445px; }
     .smore-form { width: 450px; }
 }
  @media only screen and (max-width: 580px) {
@@ -1164,6 +1213,8 @@ canvas {
     .services-wrapper, .photogallery-wrapper { height: 690px; width: 320px; }
     .tiled-gallery-item a { height: 90px; width: 90px; }
     .sg-title { font-size: 11px; word-break: break-word; }
-    .services-more_content a { width: 245px; height: 245px; }
+    .services-more_content a, .event-invite_content a { width: 245px; height: 245px; }
     .smore-form { width: 240px; }
+    .invitewrap { max-width: 290px!important; }
+    .event-invite_form { width: auto; }
 }

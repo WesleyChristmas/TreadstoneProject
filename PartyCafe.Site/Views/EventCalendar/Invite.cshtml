@@ -1,7 +1,38 @@
-﻿
-@{
-    ViewBag.Title = "Invite";
+﻿@{
+    Layout = "";
 }
+<div class="event-invite_content" id="calendar-wrap">
+    <h3 class="event-invite_title">{{InviteEvent.header}}</h3>
+    <div class="event-invite_images">
+        <div class="event-invite_images_wrap" ng-repeat="itemphoto in InviteEvent.childrenPhoto">
+            <a class="event-invite-images_item" href="{{itemphoto.photoPath}}" data-lightbox="gallery" data-title="{{itemphoto.name}}" style="background: url('{{itemphoto.photoPath}}') no-repeat center center; background-size: cover;"></a>
+        </div>
+    </div>
+    <div class="event-invite_text">{{InviteEvent.desc}}</div>
+    <div ng-show="formResult" style="color:white; font-size:20px; text-align:center;">
+        {{result}}
+    </div>
+    <div>
+        <form mathod="post" novalidate ng-show="inviteOrderForm" name="myForm" class="event-invite_form">
+            <p>Имя*:</p>
+            <input type="text" value="" name="user" ng-model="invite.User" required class="event-invite_form-tb">
+            <span style="color:red" ng-show="!myForm.user.$pristine && myForm.user.$invalid">
+                <span ng-show="myForm.user.$error.required">Данное поле является обязательным!</span>
+            </span>
+            <p>Телефон*:</p>
+            <input type="text" name="phone" class="event-invite_form-tb" ng-pattern="/[0-9]{10}$/" ng-maxlength="10" placeholder="9869986868" ng-model="invite.PhoneNumber" required>
+            <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+                <span ng-show="myForm.phone.$error.required">Данное поле является обязательным!</span>
+                <span ng-show="myForm.phone.$error.pattern">Неверно указан номер телефона</span>
+            </span>
+            <p>Количество человек:</p>
+            <input type="text" name="people" class="event-invite_form-tb" ng-pattern="/[0-9]/" ng-maxlength="2" placeholder="5" ng-model="invite.People">
+            <p>Промокод:</p>
+            <input type="text" name="promo" class="event-invite_form-tb" ng-pattern="/[0-9a-zA-Z]/" ng-maxlength="10" placeholder="F145d3" ng-model="invite.PromoCode">
 
-<h2>Invite</h2>
-
+            <p style="text-align: center;">Поля, отмеченные как * - являются обязательными!</p>
+            <input type="button" value="Получить приглашение" class="smore-form_order" ng-click="formOrder()" ng-disabled="(myForm.user.$pristine || myForm.user.$dirty && myForm.user.$invalid) || (myForm.phone.$pristine || myForm.user.$dirty && myForm.user.$invalid)">
+        </form>
+        <input type="button" class="event-invite_order" ng-show="inviteOrder" value="Присоединиться" ng-click="Order()">
+    </div>
+</div>
