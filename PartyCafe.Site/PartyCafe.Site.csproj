@@ -192,6 +192,7 @@
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodMenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
@@ -237,6 +238,7 @@
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuClass.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
+    <Content Include="Areas\Admin\Script\GalleryController.js" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuSections.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -385,6 +387,10 @@
       <LastGenOutput>PartyCafeClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\Gallery\GalleryHome.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\GalleryAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\GalleryEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />

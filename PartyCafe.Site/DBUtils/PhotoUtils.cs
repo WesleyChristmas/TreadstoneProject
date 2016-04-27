@@ -38,8 +38,8 @@ namespace PartyCafe.Site.DBUtils
             string serverPhotoPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + photoPath;
 
             if (!Directory.Exists(serverPhotoPath)) { Directory.CreateDirectory(serverPhotoPath); };
-            string fileName = GetRandomFileName();
-            string fullPath = serverPhotoPath + fileName + Path.GetExtension(image.fileName);
+            //string fileName = GetRandomFileName();
+            string fullPath = serverPhotoPath + image.fileName + Path.GetExtension(image.fileName);
             File.WriteAllBytes(fullPath, image.data);
             return fullPath;
         }
