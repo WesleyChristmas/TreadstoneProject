@@ -57,7 +57,7 @@ galleryapp.controller("GalleryAddController", function ($scope, $http, $location
         $http.post('Gallery/AddGallery', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
-        }).success(function () {
+        }).success(function (response) {
             if (response === 'ok') {
                 $location.path('/');
             } else {
@@ -71,24 +71,26 @@ galleryapp.controller("GalleryAddController", function ($scope, $http, $location
 /* Gallery Edit Controller */
 galleryapp.controller("GalleryEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     /*Helpers*/
-    $scope.Header = "Редактирование новости";
+    $scope.Header = "Редактирование фотографии";
     $scope.itemForEdit = sharedDataService.getItem();
-    $('#summernote').summernote('code', $scope.itemForEdit.Body);
 
     $scope.updateGallery = function () {
-        if (confirm("Сохранить изменения?")) {
-            $http.post('Gallery/UpdateGallery', {
-                id: $scope.itemForEdit.RecordId,
-                title: $scope.itemForEdit.Title,
-                body: $('#summernote').summernote('code')
-            }).success(function (response) {
-                if (response == 'ok') {
-                    $location.path('/');
-                } else {
-                    $scope.error = response;
-                }
-            });
-        }
+        var fd = new FormData();
+        fd.append('id', $scope.itemForEdit.idRecord);
+        fd.append('name', $scope.itemForEdit.name);
+        fd.append('desc', $scope.itemForEdit.description);
+        fd.append('file', document.getElementsByName('galleryPhoto')[0].files[0]);
+        
+        $http.post('Gallery/UpdateGallery', fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).success(function (response) {
+            if (response === 'ok') {
+                $location.path('/');
+            } else {
+                $scope.error = response;
+            }
+        });
     };
     $scope.BackToGalleryList = function () {
         $location.path('/');
