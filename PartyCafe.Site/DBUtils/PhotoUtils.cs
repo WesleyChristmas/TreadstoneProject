@@ -39,7 +39,8 @@ namespace PartyCafe.Site.DBUtils
 
             if (!Directory.Exists(serverPhotoPath)) { Directory.CreateDirectory(serverPhotoPath); };
             //string fileName = GetRandomFileName();
-            string fullPath = serverPhotoPath + image.fileName + Path.GetExtension(image.fileName);
+            //string fullPath = serverPhotoPath + image.fileName + Path.GetExtension(image.fileName);
+            string fullPath = serverPhotoPath + image.fileName;
             File.WriteAllBytes(fullPath, image.data);
             return fullPath;
         }
