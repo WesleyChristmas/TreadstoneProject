@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Редактрование фотографиии";
+    Layout = "";
+}
+<h2>{{Header}}</h2>
+<div class="additwrap">
+    <form name="galleryForm" novalidate>
+        <div class="addit-wrap">
+            <label class="addit-label" for="galleryName">Название:</label>
+            <input type="text" class="form-control" ng-model="itemForEdit.name" name="galleryName" value="{{itemForEdit.name}}" placeholder="Самое лучшее фото">
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="galleryPass">Описание к фотографии:</label>
+            <textarea class="form-control" ng-model="itemForEdit.description" name="galleryDesc" value="{{itemForEdit.description}}" placeholder="Самое лучшее фото вечеринки"></textarea>
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="galleryPass">Фотография:</label>
+            <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="galleryPhoto">
+        </div>
+
+        <div class="error-wrap">{{error}}</div>
+        <div class="tools-wrapp">
+            <ul class="tools_add">
+                <li class="tools-item">
+                    <button class="btn btn-default" ng-click="updateGallery()">Сохранить</button>
+                </li>
+                <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
+            </ul>
+        </div>
+    </form>
+</div>

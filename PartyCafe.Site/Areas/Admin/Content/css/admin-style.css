@@ -1,3 +1,26 @@
 ﻿input, textarea { max-width: 100% !important; }
 textarea { resize:none; }
 img { max-width: 300px; max-height: 300px; }
+.btn { font-size: 16px; min-width: 100px; }
+.activeEdit { background: #8C949A!important; color: #fff!important; }
+.star { color: red; font-size: 18px; }
+.error-wrap { color:red;display: block; font-size: 18px; }
+.succes-wrap { color:forestgreen; font-size: 18px; }
+
+/* table */
+.admintable th { text-align: center; }
+.admintable th { font-size: 18px; text-align: center; }
+.admintable td { font-size: 16px; padding: 8px 10px; }
+.admintable tbody tr:hover { background: #C3CED6; color: white; }
+
+/* tools */
+.tools, .tools_add { list-style: none; margin: 0; padding: 20px 0; }
+.tools { text-align: right; }
+.tools_add { text-align: left; }
+.tools-item { display: inline-block; margin-left: 20px; }
+.tools-item i { text-align: center; width: 45px; font-size: 20px; }
+
+/* add and edit content */
+.additwrap { margin: 30px 0; }
+.addit-wrap { margin-bottom: 20px; }
+.addit-label { display: block; font-size: 18px; }

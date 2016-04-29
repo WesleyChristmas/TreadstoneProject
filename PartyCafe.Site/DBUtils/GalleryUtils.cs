@@ -74,7 +74,7 @@ namespace PartyCafe.Site.DBUtils
             curGallery.Description = gallery.name != null ? gallery.name : String.Empty;
 
             curGallery.DateUpdate = DateTime.Now;
-            curGallery.UserUpdate = userUpdate;
+            curGallery.UserUpdate = String.IsNullOrWhiteSpace(userUpdate) ? "Admin" : userUpdate;
 
             if (image != null)
             { 
