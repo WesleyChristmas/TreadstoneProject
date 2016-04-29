@@ -73,7 +73,6 @@ namespace PartyCafe.Site.DBUtils
         public static List<PCEvent> GetNearEvents()
         {
             const int DayInterval = 15;
-            //
 
             var db = MainUtils.GetDBContext();
             var events = (from e in db.Events
