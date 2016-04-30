@@ -17,8 +17,14 @@ namespace PartyCafe.Site.DBUtils
     {   
         public static string GetRelativeUrl(string path)
         {
-            string PhotoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
-            return Path.Combine(PhotoPath, Path.GetFileName(path));
+            if (path != String.Empty && path.IndexOf("http") == -1)
+            { 
+                string PhotoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
+                return Path.Combine(PhotoPath, Path.GetFileName(path));
+            } else
+            {
+                return path;
+            }
         }
 
         private static string GetRandomFileName()
