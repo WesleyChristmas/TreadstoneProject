@@ -34,13 +34,12 @@ namespace PartyCafe.Site.DBUtils
 
         private static string SavePhoto(PCPhoto image)
         {
-            const string photoPath = @"/Content/photos/";
-            string serverPhotoPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + photoPath;
+            string photoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
+            string serverPhotoPath = Path.Combine(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath, photoPath);
 
             if (!Directory.Exists(serverPhotoPath)) { Directory.CreateDirectory(serverPhotoPath); };
-            //string fileName = GetRandomFileName();
-            //string fullPath = serverPhotoPath + image.fileName + Path.GetExtension(image.fileName);
-            string fullPath = serverPhotoPath + image.fileName;
+            string newFileName = GetRandomFileName();
+            string fullPath = serverPhotoPath + newFileName + Path.GetExtension(image.fileName);
             File.WriteAllBytes(fullPath, image.data);
             return fullPath;
         }

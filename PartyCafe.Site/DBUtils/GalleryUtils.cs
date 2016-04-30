@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -24,6 +25,7 @@ namespace PartyCafe.Site.DBUtils
                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
                           select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, p.Path }).ToList();
 
+            string PhotoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
             List<PCGallery> resultList = new List<PCGallery>();
             foreach (var e in gallery)
             {
@@ -32,7 +34,7 @@ namespace PartyCafe.Site.DBUtils
                 pcGallery.idRecord = e.IdRecord;
                 pcGallery.name = e.Name;
                 pcGallery.idPhoto = e.IdPhoto;
-                pcGallery.photoPath = e.Path;
+                pcGallery.photoPath = Path.Combine(PhotoPath, Path.GetFileName(e.Path));
                 pcGallery.description = e.Description;
 
                 resultList.Add(pcGallery);
