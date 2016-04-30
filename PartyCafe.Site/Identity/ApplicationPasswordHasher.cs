@@ -1,18 +1,38 @@
 ﻿using System;
 using Microsoft.AspNet.Identity;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PartyCafe.Site.Identity
 {
-    public class ApplicationPasswordHasher : IPasswordHasher
+    public class ApplicationPasswordHasher : PasswordHasher
     {
-        public string HashPassword(string password)
+        public override string HashPassword(string password)
         {
-            throw new NotImplementedException();
+            var hasher = MD5.Create();
+            var data = hasher.ComputeHash(Encoding.UTF8.GetBytes(password ?? String.Empty));
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sb.Append(data[i].ToString("x2"));
+            }
+            return sb.ToString();
         }
 
-        public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
+        public override PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword)
         {
-            throw new NotImplementedException();
+            var hash = HashPassword(providedPassword);
+
+            if (hash == hashedPassword)
+            {
+                return PasswordVerificationResult.SuccessRehashNeeded;
+            }
+            else
+            {
+                return PasswordVerificationResult.Failed;
+            }
         }
     }
 }

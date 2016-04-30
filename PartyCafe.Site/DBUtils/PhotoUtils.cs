@@ -15,6 +15,12 @@ namespace PartyCafe.Site.DBUtils
 
     public static class PhotoUtils
     {   
+        public static string GetRelativeUrl(string path)
+        {
+            string PhotoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
+            return Path.Combine(PhotoPath, Path.GetFileName(path));
+        }
+
         private static string GetRandomFileName()
         {
             const int FileNameLength = 8;

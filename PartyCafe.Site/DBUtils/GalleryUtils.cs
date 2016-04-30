@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Web;
 
 namespace PartyCafe.Site.DBUtils
 {
@@ -23,9 +21,8 @@ namespace PartyCafe.Site.DBUtils
             var dbContext = MainUtils.GetDBContext();
             var gallery = (from e in dbContext.Gallery
                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
-                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, p.Path }).ToList();
+                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, path = PhotoUtils.GetRelativeUrl(p.Path) }).ToList();
 
-            string PhotoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
             List<PCGallery> resultList = new List<PCGallery>();
             foreach (var e in gallery)
             {
@@ -34,7 +31,7 @@ namespace PartyCafe.Site.DBUtils
                 pcGallery.idRecord = e.IdRecord;
                 pcGallery.name = e.Name;
                 pcGallery.idPhoto = e.IdPhoto;
-                pcGallery.photoPath = Path.Combine(PhotoPath, Path.GetFileName(e.Path));
+                pcGallery.photoPath = PhotoUtils.GetRelativeUrl(e.path);
                 pcGallery.description = e.Description;
 
                 resultList.Add(pcGallery);
