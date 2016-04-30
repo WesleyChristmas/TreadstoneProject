@@ -120,6 +120,7 @@ namespace PartyCafe.Site.Controllers
         public JsonResult GetAllPhotos()
         {
             var result = GalleryUtils.GetAll();
+            result.ForEach(f => f.photoPath.Replace("\\", "/"));
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

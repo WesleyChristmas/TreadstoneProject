@@ -109,5 +109,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
+
+        [HttpPost]
+        public string DeleteGalleryItem(int id)
+        {
+            try
+            {
+                GalleryUtils.DelGallery(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
     }
 }

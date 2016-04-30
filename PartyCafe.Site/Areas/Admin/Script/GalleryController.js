@@ -15,11 +15,7 @@ galleryapp.config(function ($routeProvider) {
 });
 
 galleryapp.service("sharedDataService", function () {
-    this.rolesList = [];
     this.rolesItem = {};
-
-    this.setGallery = function (obj) { this.rolesList = obj; }
-    this.getGallery = function () { return this.rolesList; }
 
     this.setItem = function (item) { this.rolesItem = item; }
     this.getItem = function () { return this.rolesItem; }
@@ -34,6 +30,15 @@ galleryapp.controller("GalleryHomeController", function ($scope, $http, $locatio
     $scope.EditGallery = function () {
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
+    };
+    $scope.removeGalleryItem = function (item) {
+        $http.post('Gallery/DeleteGalleryItem', {id: item.idRecord}).success(function (response) {
+            if (response === 'ok') {
+                $location.path('/');
+            } else {
+                $scope.error = response;
+            }
+        });
     };
 
     $scope.Gallery = [];
@@ -122,8 +127,4 @@ function uploadFile($scope, $http, obj) {
 
     xhr.open('POST', 'Gallery/UploadFile', true);
     xhr.send(fd);
-    /*
-        $http.post('Gallery/UploadFile', { file: fd }).success(function (respond) {
-            $('.summernote').summernote('insertImage', respond);
-        });*/
 }
