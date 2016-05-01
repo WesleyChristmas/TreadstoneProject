@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "";
+}
+
+<div class="about-entry">
+    <div class="about-wrapper">
+        <div class="about-item" ng-repeat="item in AboutUs">
+            <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
+                <span class="about-popup">{{item.name}}</span>
+            </a>
+        </div>
+    </div>
+</div>
