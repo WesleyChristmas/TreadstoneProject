@@ -16,6 +16,18 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
+        public ActionResult Home()
+        {
+            return View("Home");
+        }
+
+        [HttpGet]
+        public ActionResult Current()
+        {
+            return View("Current");
+        }
+
+        [HttpGet]
         public JsonResult GetAllUs()
         {
             var result = ServiceUtils.GetAll(1);

@@ -1,30 +1,43 @@
-﻿var aboutusapp = new angular.module("aboutusapp", []);
+﻿var aboutusapp = new angular.module("aboutusapp", ['ngRoute']);
 
-aboutusapp.controller("AboutUs", function ($scope, $http) {
-    $scope.AboutUs = [];
-    $scope.AboutusMore = [];
-    $scope.More = function (id) { More($scope, id); }
-    $scope.Oreder = function () {
-        $scope.aboutusOrder = false;
-        $scope.aboutusOrderForm = true;
-    }
-
-    GetAllAboutUs($scope, $http);
+aboutusapp.config(function ($routeProvider) {
+    $routeProvider.when('/',
+    {
+        templateUrl: 'AboutUs/Home',
+        controller: 'HomeController'
+    }).when('/current', {
+        templateUrl: 'AboutUs/Current',
+        controller: 'CurrentController'
+    }).otherwise('/');
 });
 
-function GetAllAboutUs($scope, $http) {
-    $scope.aboutusBloks = true;
-    $http.get("/AboutUs/GetAllUs").success(function (data, status) {
-        $scope.AboutUs = data;
-        $scope.serviceBloks = true;
-    });
-}
+aboutusapp.service("sharedDataService", function () {
+    this.eventsItem = {};
 
-function More($scope, id) {
-    $scope.aboutusMore = true;
-    $scope.aboutusOrder = true;
-    $scope.aboutusBloks = false;
-    $scope.aboutusMore = $scope.AboutUs[id].photos;
+    this.setItem = function (item) { this.eventsItem = item; }
+    this.getItem = function () { return this.eventsItem; }
+});
+
+
+/* Calendar Controller */
+aboutusapp.controller("HomeController", function ($scope, $http, $location, sharedDataService) {
+    /*Helpers*/
+    $scope.AboutUs = [];
+    $scope.More = function (id) {
+        sharedDataService.setItem($scope.AboutUs[id]);
+        $location.path('/current');
+    };
+
+    $http.get("/AboutUs/GetAllUs").success(function (data) {
+        $scope.AboutUs = data;
+    });
+});
+
+/* Current Controller */
+aboutusapp.controller("CurrentController", function ($scope, $http, $location, sharedDataService) {
+    $scope.aboutusMore = sharedDataService.getItem();
+
+    $scope.description = $scope.aboutusMore.description;
 
     lightbox.option({
         'alwaysShowNavOnTouchDevices': true,
@@ -32,4 +45,4 @@ function More($scope, id) {
         'wrapAround': true,
         'disableScrolling': true,
     });
-}
+});
