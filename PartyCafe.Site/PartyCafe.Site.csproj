@@ -1221,6 +1221,8 @@
     <Content Include="Views\AboutUs\Index.cshtml" />
     <Content Include="Views\EventCalendar\Invite.cshtml" />
     <Content Include="Views\EventCalendar\Calendar.cshtml" />
+    <Content Include="Views\AboutUs\Home.cshtml" />
+    <Content Include="Views\AboutUs\Current.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
