@@ -9,7 +9,7 @@
 <div class="photogallery-wrap" ng-app="photogalleryapp" ng-controller="PhotoGallery">
     <div class="post-entry">
         <div class="photogallery-wrapper">
-            <div class="tiled-gallery-item" ng-repeat="item in PhotoGallery" id="links">
+            <div class="photogallery-item" ng-repeat="item in PhotoGallery" id="links">
                 <a href="{{item.photoPath}}" class="fancybox" rel="group" data-lightbox="gallery" data-title="{{item.name}}" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></a>
             </div>
         </div>

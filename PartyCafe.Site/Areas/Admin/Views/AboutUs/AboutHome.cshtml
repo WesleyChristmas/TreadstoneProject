@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "";
+}
+
+<h2>{{Header}}</h2>
+<div class="tools-wrapp">
+    <ul class="tools">
+        <li class="tools-item"><button class="btn btn-default" ng-click="AddAbout()">Добавить блок</button></li>
+        <li class="tools-item">
+            <button class="btn btn-default" ng-click="EditAbout()" ng-disabled="selectForEdit === ''">Редактировать блок</button>
+        </li>
+        <li class="tools-item">
+            <button class="btn btn-default" ng-click="RemoveAbout()" ng-disabled="selectForEdit === ''">Удалить блок</button>
+        </li>
+    </ul>
+</div>
+<div class="admintable">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th width="30px">№</th>
+                <th width="260px">Название блока</th>
+                <th>Описание блока</th>
+                <th>Фото блока</th>
+                <th>Количество фотографий в блоке</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in About" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
+                <td align="center">{{$index + 1}}</td>
+                <td align="center">{{item.name}}</td>
+                <td align="center">{{item.description}}</td>
+                <td align="center">
+                    <div style="width: 100px; height: 100px; background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></div>
+                </td>
+                <td align="center">{{item.photos.length}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

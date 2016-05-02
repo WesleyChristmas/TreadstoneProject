@@ -189,6 +189,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AboutUsController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\CalendarController.cs" />
     <Compile Include="Areas\Admin\Controllers\FoodMenuController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Areas\Admin\Content\css\admin-style.css" />
     <Content Include="Areas\Admin\Content\delete.png" />
     <Content Include="Areas\Admin\Content\edit.png" />
+    <Content Include="Areas\Admin\Script\AboutController.js" />
     <Content Include="Areas\Admin\Script\Blog\BlogController.js" />
     <Content Include="Areas\Admin\Script\Calendar\CalendarClass.js" />
     <Content Include="Areas\Admin\Script\Calendar\CalendarController.js" />
@@ -395,6 +397,10 @@
     <Content Include="Areas\Admin\Views\Gallery\GalleryAdd.cshtml" />
     <Content Include="Areas\Admin\Views\Gallery\GalleryEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutHome.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutEdit.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />

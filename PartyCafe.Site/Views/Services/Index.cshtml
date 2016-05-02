@@ -17,9 +17,9 @@
             <div class="services-wrapper">
 
                 <div ng-show="serviceBloks">
-                    <div class="tiled-gallery-item" ng-repeat="item in Services">
+                    <div class="service-item" ng-repeat="item in Services">
                         <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
-                            <span class="sg-title">{{item.name}}</span>
+                            <span class="service-popup">{{item.name}}</span>
                         </a>
                     </div>
                 </div>
