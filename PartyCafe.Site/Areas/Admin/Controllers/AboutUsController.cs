@@ -30,7 +30,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View("AboutEdit");
         }
-
+        [HttpGet]
+        public ActionResult AboutEditPhoto()
+        {
+            return View("AboutEditPhoto");
+        }
 
         [HttpGet]
         public JsonResult GetAllAbout()
@@ -43,8 +47,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public string UpdateAbout(int id, string name, string desc)
         {
-            return null;
-           /* try
+            try
             {
                 var request = Request.Files;
                 if (request.Count > 0)
@@ -55,7 +58,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     var filename = file.FileName;
                     file.InputStream.Read(content, 0, file.ContentLength);
 
-                    GalleryUtils.EditGallery(
+                    ServiceUtils.EditService(
                         new PCService()
                         {
                             idRecord = id,
@@ -69,8 +72,8 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ServiceUtils.EditService()
-                        new Party()
+                    ServiceUtils.EditService(
+                        new PCService()
                         {
                             idRecord = id,
                             name = name,
@@ -85,7 +88,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 return "Произошла ошибка! " + ex.Message.ToString();
-            }*/
+            }
         }
 
     }

@@ -401,6 +401,7 @@
     <Content Include="Areas\Admin\Views\AboutUs\AboutHome.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutAdd.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutEditPhoto.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />

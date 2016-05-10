@@ -1,9 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Редактирование блока";
     Layout = "";
 }
 
 <h2>{{Header}}</h2>
+<div class="tools-wrapp">
+    <ul class="tools">
+        <li class="tools-item"><button class="btn btn-default" ng-click="AddAbout()">Добавить блок</button></li>
+        <li class="tools-item">
+            <button class="btn btn-default" ng-click="EditAbout()" ng-disabled="selectForEdit === ''">Редактировать блок</button>
+        </li>
+        <li class="tools-item">
+            <button class="btn btn-default" ng-click="RemoveAbout()" ng-disabled="selectForEdit === ''">Удалить блок</button>
+        </li>
+        <li class="tools-item"></li>
+        <li class="tools-item"><button class="btn btn-default" ng-disabled="selectForEdit === ''" ng-click="EditAboutPhoto()">Редактировать фотографии блока</button></li>
+        <li class="tools-item"></li>
+    </ul>
+</div>
 <div class="additwrap">
     <form name="aboutForm" novalidate>
         <div class="addit-wrap">
@@ -19,7 +32,7 @@
             <img ng-src="{{itemForEdit.photoPath}}" ng-show="CurrentPhotoShow">
             <br>
             <br>
-            <div class="addit-wrap" ng-show="ChangePhotoShow" >
+            <div class="addit-wrap" ng-show="ChangePhotoShow">
                 <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="aboutPhoto">
             </div>
             <div class="addit-wrap">
