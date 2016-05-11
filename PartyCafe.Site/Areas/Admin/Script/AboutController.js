@@ -28,8 +28,8 @@ aboutapp.service("sharedDataService", function () {
 aboutapp.controller("AboutHomeController", function ($scope, $http, $location, sharedDataService) {
     $scope.isActive = function (item) { return $scope.selectForEdit === item; };
     $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
-    $scope.AddAbout = function () { $location.path('/add'); };
-    $scope.EditAbout = function () {
+    $scope.addAbout = function () { $location.path('/add'); };
+    $scope.editAbout = function () {
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
     };
@@ -37,8 +37,8 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/editphoto');
     };
-    $scope.removeAboutItem = function (item) {
-        $http.post('AboutUs/DeleteAboutItem', { id: item.idRecord }).success(function (response) {
+    $scope.removeAbout = function (item) {
+        $http.post('AboutUs/RemoveAbout', { id: item.idRecord }).success(function (response) {
             if (response === 'ok') {
                 $location.path('/');
             } else {
@@ -53,7 +53,28 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
 
     GetAllAbout($scope, $http);
 });
+/* About Add Controller */
+aboutapp.controller("AboutAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
+    $scope.Header = "Добавление блока галереи";
+    $scope.addAbout = function () {
+        var fd = new FormData();
+        fd.append('name', $scope.aboutusAdd.Name);
+        fd.append('desc', $scope.aboutusAdd.Desc);
+        fd.append('file', document.getElementsByName('aboutusPhoto')[0].files[0]);
 
+        $http.post('AboutUs/AddAbout', fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).success(function (response) {
+            if (response === 'ok') {
+                $location.path('/');
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
+    $scope.Back = function () { $location.path('/'); }
+});
 /* About Edit Controller */
 aboutapp.controller("AboutEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Редактирование блока";
@@ -87,7 +108,6 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
         $location.path('/');
     };
 });
-
 /* About Edit Controller */
 aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Редактирование фотографий блока";
@@ -121,7 +141,6 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
         $location.path('/');
     };
 });
-
 
 
 function GetAllAbout($scope, $http) {

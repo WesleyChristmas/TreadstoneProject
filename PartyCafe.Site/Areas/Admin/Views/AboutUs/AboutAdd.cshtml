@@ -1,7 +1,31 @@
-﻿
-@{
-    ViewBag.Title = "AboutAdd";
+﻿@{
+    ViewBag.Title = "Добавление блока \"О нас\"";
+    Layout = "";
 }
+<h2>{{Header}}</h2>
+<div class="additwrap">
+    <form name="aboutusForm" novalidate>
+        <div class="addit-wrap">
+            <label class="addit-label" for="aboutusName">Название блока:</label>
+            <input type="text" class="form-control" ng-model="aboutusAdd.Name" name="aboutusName" placeholder="Новый блок галереи">
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="aboutusPass">Описание блока:</label>
+            <textarea кщцы="5" class="form-control" ng-model="aboutusAdd.Desc" name="aboutusDesc" placeholder="Самое лучшее фото вечеринки"></textarea>
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="aboutusPass">Фотография блока:</label>
+            <input type="file" class="form-control" ng-model="aboutusAdd.Photo" name="aboutusPhoto">
+        </div>
 
-<h2>AboutAdd</h2>
-
+        <div class="error-wrap">{{error}}</div>
+        <div class="tools-wrapp">
+            <ul class="tools_add">
+                <li class="tools-item">
+                    <button class="btn btn-default" ng-click="addAbout()">Добавить</button>
+                </li>
+                <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
+            </ul>
+        </div>
+    </form>
+</div>

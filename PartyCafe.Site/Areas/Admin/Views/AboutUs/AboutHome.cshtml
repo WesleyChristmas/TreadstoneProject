@@ -5,15 +5,15 @@
 <h2>{{Header}}</h2>
 <div class="tools-wrapp">
     <ul class="tools">
-        <li class="tools-item"><button class="btn btn-default" ng-click="AddAbout()">Добавить блок</button></li>
+        <li class="tools-item"><button class="btn btn-default" ng-click="addAbout()">Добавить блок</button></li>
         <li class="tools-item">
-            <button class="btn btn-default" ng-click="EditAbout()" ng-disabled="selectForEdit === ''">Редактировать блок</button>
+            <button class="btn btn-default" ng-click="editAbout()" ng-disabled="selectForEdit === ''">Редактировать блок</button>
         </li>
         <li class="tools-item">
-            <button class="btn btn-default" ng-click="RemoveAbout()" ng-disabled="selectForEdit === ''">Удалить блок</button>
+            <button class="btn btn-default" ng-click="removeAbout(selectForEdit)" ng-disabled="selectForEdit === ''">Удалить блок</button>
         </li>
         <li class="tools-item"></li>
-        <li class="tools-item"><button class="btn btn-default" ng-disabled="selectForEdit === ''" ng-click="EditAboutPhoto()">Редактировать фотографии блока</button></li>
+        <li class="tools-item"><button class="btn btn-default" ng-disabled="selectForEdit === ''" ng-click="editAboutPhoto()">Редактировать фотографии блока</button></li>
         <li class="tools-item"></li>
     </ul>
 </div>

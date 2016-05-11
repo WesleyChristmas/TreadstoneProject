@@ -45,6 +45,50 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
 
 
         [HttpPost]
+        public string AddAbout(string name, string desc)
+        {
+            try
+            {
+                var request = Request;
+                var file = Request.Files[0];
+                var content = new byte[file.ContentLength];
+                var filename = file.FileName;
+                file.InputStream.Read(content, 0, file.ContentLength);
+
+                ServiceUtils.InsertService(
+                    new PCService()
+                    {
+                        name = name,
+                        description = desc,
+                        serviceType = 1
+                    },
+                    User.Identity.Name,
+                    new PCPhoto() { data = content, fileName = filename }
+                );
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string RemoveAbout(int id)
+        {
+            try
+            {
+                ServiceUtils.DelService(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+
+
+        [HttpPost]
         public string UpdateAbout(int id, string name, string desc)
         {
             try
