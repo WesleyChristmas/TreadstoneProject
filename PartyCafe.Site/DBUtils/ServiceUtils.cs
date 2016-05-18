@@ -74,7 +74,7 @@ namespace PartyCafe.Site.DBUtils
 
         public static void InsertService(PCService partyService, string userCreate, PCPhoto image)
         {
-            var newService = new Services();
+            var newService = new Service();
             newService.Name = partyService.name != null ? partyService.name : String.Empty;
             newService.Text = partyService.description != null ? partyService.description : String.Empty;
             newService.serviceType = partyService.serviceType;
@@ -128,6 +128,7 @@ namespace PartyCafe.Site.DBUtils
         public static void DelService(int IdService)
         {
             var dbContext = MainUtils.GetDBContext();
+            
             var curService = (from e in dbContext.Services
                             where e.IdRecord == IdService
                             select e).SingleOrDefault();
