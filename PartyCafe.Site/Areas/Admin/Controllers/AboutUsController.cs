@@ -50,22 +50,39 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             try
             {
                 var request = Request;
-                var file = Request.Files[0];
-                var content = new byte[file.ContentLength];
-                var filename = file.FileName;
-                file.InputStream.Read(content, 0, file.ContentLength);
+                if (request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    var content = new byte[file.ContentLength];
+                    var filename = file.FileName;
+                    file.InputStream.Read(content, 0, file.ContentLength);
 
-                ServiceUtils.InsertService(
-                    new PCService()
-                    {
-                        name = name,
-                        description = desc,
-                        serviceType = 1
-                    },
-                    User.Identity.Name,
-                    new PCPhoto() { data = content, fileName = filename }
-                );
-                return "ok";
+                    ServiceUtils.InsertService(
+                        new PCService()
+                        {
+                            name = name,
+                            description = desc,
+                            serviceType = 1
+                        },
+                        User.Identity.Name,
+                        new PCPhoto() { data = content, fileName = filename }
+                    );
+                    return "ok";
+                }
+                else
+                {
+                    ServiceUtils.InsertService(
+                        new PCService()
+                        {
+                            name = name,
+                            description = desc,
+                            serviceType = 1
+                        },
+                        User.Identity.Name,
+                        null
+                    );
+                    return "ok";
+                }
             }
             catch (Exception ex)
             {
@@ -86,7 +103,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
-
 
         [HttpPost]
         public string UpdateAbout(int id, string name, string desc)
