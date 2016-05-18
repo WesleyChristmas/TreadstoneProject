@@ -50,7 +50,7 @@ namespace PartyCafe.Site.DBUtils
 
                 newItem.idRecord = item.IdRecord;
                 newItem.name = item.Name;
-                newItem.photoPath = item.Path;
+                newItem.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
                 newItem.description = item.Text;
                 newItem.title = item.Title;
 
@@ -61,7 +61,7 @@ namespace PartyCafe.Site.DBUtils
                     {
                         var newPhoto = new PCServicePhoto();
                         newPhoto.idRecord = p.IdRecord;
-                        newPhoto.photoPath = p.Path;
+                        newPhoto.photoPath = PhotoUtils.GetRelativeUrl(p.Path);
                         newPhoto.name = p.name;
                         newItem.photos.Add(newPhoto);
                     }

@@ -19,8 +19,8 @@ namespace PartyCafe.Site.DBUtils
         {
             if (path != String.Empty && path.IndexOf("http") == -1)
             { 
-                string PhotoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
-                return Path.Combine(PhotoPath, Path.GetFileName(path));
+                string PhotoPath = @"../" + System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
+                return  Path.Combine(PhotoPath, Path.GetFileName(path)).Replace('\\', '/');
             } else
             {
                 return path;
