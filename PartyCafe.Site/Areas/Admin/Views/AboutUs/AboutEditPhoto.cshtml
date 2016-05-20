@@ -4,50 +4,36 @@
 
 <h2>{{Header}}</h2>
 <div class="tools-wrapp">
-    <ul class="tools">
-        <li class="tools-item"><button class="btn btn-default" ng-click="AddAbout()">Добавить блок</button></li>
-        <li class="tools-item">
-            <button class="btn btn-default" ng-click="EditAbout()" ng-disabled="selectForEdit === ''">Редактировать блок</button>
-        </li>
-        <li class="tools-item">
-            <button class="btn btn-default" ng-click="RemoveAbout()" ng-disabled="selectForEdit === ''">Удалить блок</button>
-        </li>
-        <li class="tools-item"></li>
-        <li class="tools-item"><button class="btn btn-default" ng-disabled="selectForEdit === ''" ng-click="EditAboutPhoto()">Редактировать фотографии блока</button></li>
-        <li class="tools-item"></li>
+    <ul class="tools_add">
+        <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
     </ul>
 </div>
-<div class="additwrap">
-    <form name="aboutForm" novalidate>
-        <div class="addit-wrap">
-            <label class="addit-label" for="aboutName">Название:</label>
-            <input type="text" class="form-control" ng-model="itemForEdit.name" name="aboutName" value="{{itemForEdit.name}}" placeholder="Самое лучшее фото">
-        </div>
-        <div class="addit-wrap">
-            <label class="addit-label" for="aboutPass">Описание:</label>
-            <textarea class="form-control" ng-model="itemForEdit.description" name="aboutDesc" value="{{itemForEdit.description}}" placeholder="Самое лучшее фото"></textarea>
-        </div>
-        <div class="addit-wrap">
-            <label class="addit-label" for="aboutPass">Изображение:</label>
-            <img ng-src="{{itemForEdit.photoPath}}" ng-show="CurrentPhotoShow">
-            <br>
-            <br>
-            <div class="addit-wrap" ng-show="ChangePhotoShow">
-                <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="aboutPhoto">
-            </div>
-            <div class="addit-wrap">
-                <input type="button" class="btn btn-default" value="Изменить изображение блока" ng-click="changePhoto()">
-            </div>
-        </div>
-
-        <div class="error-wrap">{{error}}</div>
-        <div class="tools-wrapp">
-            <ul class="tools_add">
-                <li class="tools-item">
-                    <button class="btn btn-default" ng-click="updateGallery()">Сохранить</button>
-                </li>
-                <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
-            </ul>
-        </div>
-    </form>
+<div class="admintable">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th width="30px">№</th>
+                <th>Фото</th>
+                <th>Описание блока</th>
+                <th>Редактирование</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in BlockPhotos.photos" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
+                <td align="center">{{$index + 1}}</td>
+                <td align="center">
+                    <div style="width: 100px; height: 100px; background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></div>
+                </td>
+                <td align="center">
+                    <textarea class="photo-tb" ng-model="photoName">{{photoName = item.name}}</textarea>
+                </td>
+                <td align="center">
+                    <ul class="photo-list">
+                        <li class="photo-tools" ng-click="updatePhotoName($index)" title="Редактировать название"><i class="fa fa-floppy-o"></i></li>
+                        <li class="photo-tools" ng-click="removePhoto()" title="Удалить фотографию из блока"><i class="fa fa-trash"></i></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

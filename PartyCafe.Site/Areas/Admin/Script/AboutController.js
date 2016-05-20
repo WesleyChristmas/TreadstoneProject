@@ -33,7 +33,7 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
     };
-    $scope.EditAboutPhoto = function () {
+    $scope.editAboutPhoto = function () {
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/editphoto');
     };
@@ -48,7 +48,7 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
     };
 
     $scope.About = [];
-    $scope.Header = "Управление фотогалереей";
+    $scope.Header = 'Управление разделом "О кафе"';
     $scope.selectForEdit = '';
 
     GetAllAbout($scope, $http);
@@ -87,9 +87,9 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
         fd.append('name', $scope.itemForEdit.name);
         fd.append('desc', $scope.itemForEdit.description);
         fd.append('oldphoto', $scope.itemForEdit.photoPath);
-        fd.append('file', document.getElementsByName('galleryPhoto')[0].files[0]);
+        fd.append('file', document.getElementsByName('aboutPhoto')[0].files[0]);
 
-        $http.post('About/UpdateAbout', fd, {
+        $http.post('AboutUs/UpdateAbout', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         }).success(function (response) {
@@ -108,11 +108,16 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
         $location.path('/');
     };
 });
-/* About Edit Controller */
+/* About Edit Photo Controller */
 aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Редактирование фотографий блока";
-    $scope.itemForEdit = sharedDataService.getItem();
+    $scope.BlockPhotos = sharedDataService.getItem();
     $scope.CurrentPhotoShow = true;
+
+    $scope.updatePhotoName = function (id) {
+        var name = document.getElementsByTagName('textarea')[id];
+
+    };
 
     $scope.updateAbout = function () {
         var fd = new FormData();
