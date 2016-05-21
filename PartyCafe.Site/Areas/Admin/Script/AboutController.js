@@ -119,6 +119,16 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
 
     };
 
+    $scope.removePhoto = function (id) {
+        $http.post('AboutUs/RemovePhotoFromBlock', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
+            if (response === 'ok') {
+                $location.path('/');
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
+
     $scope.addPhoto = function () {
         var fd = new FormData();
         fd.append('id', $scope.BlockPhotos.idRecord);
@@ -134,6 +144,14 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
                 $scope.aboutusPhotoAdd.Name = '';
                 $scope.aboutusPhotoAdd.Desc = '';
                 document.getElementsByName('aboutusPhoto').value = '';
+
+                $http.post('AboutUs/GetBlockPhotos', { id: id }, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                }).success(function (response) {
+                    $scope.BlockPhotos = response;
+                });
+
             } else {
                 $scope.error = response;
             }

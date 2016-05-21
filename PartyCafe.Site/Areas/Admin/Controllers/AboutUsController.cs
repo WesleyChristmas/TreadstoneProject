@@ -151,6 +151,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
+
         [HttpPost]
         public string AddPhotoToBlock(int id, string name, string desc)
         {
@@ -164,12 +165,12 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     var filename = file.FileName;
                     file.InputStream.Read(content, 0, file.ContentLength);
 
-                    ServiceUtils.AddPhoto(
+                    /*ServiceUtils.AddPhoto(
                         id,
                         name,
                         new PCPhoto() { data = content, fileName = filename },
                         User.Identity.Name
-                    );
+                    );*/
                     return "ok";
                 }
                 else
@@ -182,5 +183,34 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
+
+        [HttpPost]
+        public JsonResult GetBlockPhotos(int id)
+        {
+            try
+            {
+                var aboutus = ServiceUtils.GetAll(1).Where(w => w.idRecord == id).ToList();
+                return Json(aboutus, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public string RemovePhotoFromBlock(int id)
+        {
+            try
+            {
+                PhotoUtils.DelImage(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "bed";
+            }
+        }
+        
     }
 }
