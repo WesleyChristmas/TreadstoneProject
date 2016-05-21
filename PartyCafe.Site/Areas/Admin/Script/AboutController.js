@@ -119,6 +119,27 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
 
     };
 
+    $scope.addPhoto = function () {
+        var fd = new FormData();
+        fd.append('id', $scope.BlockPhotos.idRecord);
+        fd.append('name', $scope.aboutusPhotoAdd.Name);
+        fd.append('desc', $scope.aboutusPhotoAdd.Desc);
+        fd.append('file', document.getElementsByName('aboutusPhoto')[0].files[0]);
+
+        $http.post('AboutUs/AddPhotoToBlock', fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).success(function (response) {
+            if (response === 'ok') {
+                $scope.aboutusPhotoAdd.Name = '';
+                $scope.aboutusPhotoAdd.Desc = '';
+                document.getElementsByName('aboutusPhoto').value = '';
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
+
     $scope.updateAbout = function () {
         var fd = new FormData();
         fd.append('id', $scope.itemForEdit.idRecord);

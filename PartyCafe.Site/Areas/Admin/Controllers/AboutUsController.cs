@@ -151,5 +151,36 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
+        [HttpPost]
+        public string AddPhotoToBlock(int id, string name, string desc)
+        {
+            try
+            {
+                var request = Request;
+                if (request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    var content = new byte[file.ContentLength];
+                    var filename = file.FileName;
+                    file.InputStream.Read(content, 0, file.ContentLength);
+
+                    ServiceUtils.AddPhoto(
+                        id,
+                        name,
+                        new PCPhoto() { data = content, fileName = filename },
+                        User.Identity.Name
+                    );
+                    return "ok";
+                }
+                else
+                {
+                    return "bed";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
     }
 }

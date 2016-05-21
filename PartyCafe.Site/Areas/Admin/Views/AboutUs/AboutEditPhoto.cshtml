@@ -3,18 +3,31 @@
 }
 
 <h2>{{Header}}</h2>
-<div class="tools-wrapp">
-    <ul class="tools_add">
-        <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
-    </ul>
+<div class="addit-wrap">
+    <div class="addit-wrap">
+        <label class="addit-label" for="aboutusPhotoName">Название:</label>
+        <input type="text" class="form-control" ng-model="aboutusPhotoAdd.Name" name="aboutusPhotoName" placeholder="Название фото">
+    </div>
+    <div class="addit-wrap">
+        <label class="addit-label" for="aboutusPhotoPass">Описание к фотографии:</label>
+        <textarea class="form-control" ng-model="aboutusPhotoAdd.Desc" name="aboutusPhotoDesc" placeholder="Описание фото"></textarea>
+    </div>
+    <div class="addit-wrap">
+        <label class="addit-label" for="aboutusPhoto">Фотография:</label>
+        <input type="file" class="form-control" ng-model="aboutusPhotoAdd.Photo" name="aboutusPhoto">
+    </div>
+    <div class="addit-wrap">
+        <input type="button" class="btn btn-default" value="Добавить фото" ng-click="addPhoto()">
+    </div>
 </div>
+
 <div class="admintable">
     <table border="1" width="100%">
         <thead>
             <tr>
                 <th width="30px">№</th>
                 <th>Фото</th>
-                <th>Описание блока</th>
+                <th>Описание</th>
                 <th>Редактирование</th>
             </tr>
         </thead>
@@ -29,11 +42,17 @@
                 </td>
                 <td align="center">
                     <ul class="photo-list">
-                        <li class="photo-tools" ng-click="updatePhotoName($index)" title="Редактировать название"><i class="fa fa-floppy-o"></i></li>
+                        <li class="photo-tools" ng-click="updatePhotoName($index)" title="Редактировать название"><i class="fa fa-pencil"></i></li>
                         <li class="photo-tools" ng-click="removePhoto()" title="Удалить фотографию из блока"><i class="fa fa-trash"></i></li>
                     </ul>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
+
+<div class="tools-wrapp">
+    <ul class="tools_add">
+        <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
+    </ul>
 </div>
