@@ -104,9 +104,9 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == partyService.idRecord
                             select e).SingleOrDefault();
 
-            curService.Name = partyService.name != null ? partyService.name : String.Empty;
-            curService.Text = partyService.description != null ? partyService.description : String.Empty;
-            curService.Title = partyService.title != null ? partyService.title : String.Empty;
+            curService.Name = partyService.name ?? String.Empty;
+            curService.Text = partyService.description ?? String.Empty;
+            curService.Title = partyService.title ?? String.Empty;
 
             curService.DateUpdate = DateTime.Now;
             curService.UserUpdate = userUpdate;
@@ -147,6 +147,22 @@ namespace PartyCafe.Site.DBUtils
             sp.IdService = IdService;
             sp.name = name;
             db.ServicePhotos.InsertOnSubmit(sp);
+            db.SubmitChanges();
+        }
+
+        public static void EditPhoto(int IdServicePhoto, string name, PCPhoto image, string userUpdate)
+        {
+            var db = MainUtils.GetDBContext();
+            var sp = (from p in db.ServicePhotos
+                      where p.IdRecord == IdServicePhoto
+                      select p).FirstOrDefault();
+
+            if (image != null)
+            {
+                PhotoUtils.EditImage(sp.IdPhoto, image, userUpdate);
+            }
+
+            sp.name = name ?? String.Empty;
             db.SubmitChanges();
         }
 
