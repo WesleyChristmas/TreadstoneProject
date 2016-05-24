@@ -247,6 +247,7 @@
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
     <Content Include="Areas\Admin\Script\GalleryController.js" />
+    <Content Include="Areas\Admin\Script\ServicesController.js" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuSections.cshtml">
       <SubType>Code</SubType>
     </Content>
