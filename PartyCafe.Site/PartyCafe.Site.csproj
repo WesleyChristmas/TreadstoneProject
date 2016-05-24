@@ -223,10 +223,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Identity\ApplicationPasswordHasher.cs" />
-    <Compile Include="Identity\ApplicationUser.cs" />
-    <Compile Include="Identity\ApplicationUserManager.cs" />
-    <Compile Include="Identity\ApplicationUserStore.cs" />
+    <Compile Include="Identity\PartyCafePasswordHasher.cs" />
+    <Compile Include="Identity\PartyCafeUser.cs" />
+    <Compile Include="Identity\PartyCafeUserManager.cs" />
+    <Compile Include="Identity\PartyCafeUserStore.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

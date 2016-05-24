@@ -3,20 +3,20 @@ using System;
 
 namespace PartyCafe.Site.Identity
 {
-    public class ApplicationUser : IUser
+    public class PartyCafeUser : IUser
     {
         Guid _id;
         string _name;
         string _password;
 
-        public ApplicationUser(string name)
+        public PartyCafeUser(string name)
         {
             _id = Guid.NewGuid();
             _name = name;
             _password = String.Empty;
         }
 
-        public ApplicationUser(Guid id, string name, string password)
+        public PartyCafeUser(Guid id, string name, string password)
         {
             _id = id;
             _name = name;

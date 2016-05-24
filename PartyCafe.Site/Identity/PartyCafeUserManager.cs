@@ -7,16 +7,16 @@ using System.Web;
 
 namespace PartyCafe.Site.Identity
 {
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class PartyCafeUserManager : UserManager<PartyCafeUser>
     {
-        public ApplicationUserManager(ApplicationUserStore store) : base(store)
+        public ApplicationUserManager(PartyCafeUserStore store) : base(store)
         {
             this.PasswordHasher = new ApplicationPasswordHasher();
         }
 
-        public override Task<ApplicationUser> FindAsync(string userName, string password)
+        public override Task<PartyCafeUser> FindAsync(string userName, string password)
         {
-            Task<ApplicationUser> taskInvoke = Task<ApplicationUser>.Factory.StartNew(() =>
+            Task<PartyCafeUser> taskInvoke = Task<PartyCafeUser>.Factory.StartNew(() =>
             {
                 var user = Store.FindByNameAsync(userName).Result;
                 PasswordVerificationResult result = this.PasswordHasher.VerifyHashedPassword(user.Password, password);

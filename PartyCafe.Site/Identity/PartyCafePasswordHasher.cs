@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PartyCafe.Site.Identity
 {
-    public class ApplicationPasswordHasher : PasswordHasher
+    public class PartyCafePasswordHasher : PasswordHasher
     {
         public override string HashPassword(string password)
         {

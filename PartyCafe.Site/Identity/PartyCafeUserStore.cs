@@ -8,9 +8,9 @@ using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Identity
 {
-    public class ApplicationUserStore : IUserStore<ApplicationUser>
+    public class PartyCafeUserStore : IUserStore<PartyCafeUser>
     {
-        public Task CreateAsync(ApplicationUser user)
+        public Task CreateAsync(PartyCafeUser user)
         {
             return Task.Factory.StartNew(() => {
                 var db = MainUtils.GetDBContext();
@@ -22,7 +22,7 @@ namespace PartyCafe.Site.Identity
             });
         }
 
-        public Task DeleteAsync(ApplicationUser user)
+        public Task DeleteAsync(PartyCafeUser user)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace PartyCafe.Site.Identity
             throw new NotImplementedException();
         }
 
-        public Task<ApplicationUser> FindByIdAsync(string userId)
+        public Task<PartyCafeUser> FindByIdAsync(string userId)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -41,12 +41,12 @@ namespace PartyCafe.Site.Identity
                                 where u.IdentityId == new Guid(userId)
                                 select u).SingleOrDefault();
 
-                ApplicationUser user = new ApplicationUser(currUser.IdentityId, currUser.Login, currUser.Password);
+                PartyCafeUser user = new PartyCafeUser(currUser.IdentityId, currUser.Login, currUser.Password);
                 return user;
             });
         }
 
-        public Task<ApplicationUser> FindByNameAsync(string userName)
+        public Task<PartyCafeUser> FindByNameAsync(string userName)
         {
             return Task.Factory.StartNew(() => {
                 var db = MainUtils.GetDBContext();
@@ -54,11 +54,11 @@ namespace PartyCafe.Site.Identity
                                 where u.Login == userName
                                 select u).SingleOrDefault();
 
-                return new ApplicationUser(currUser.IdentityId, currUser.Login, currUser.Password);
+                return new PartyCafeUser(currUser.IdentityId, currUser.Login, currUser.Password);
             });
         }
 
-        public Task UpdateAsync(ApplicationUser user)
+        public Task UpdateAsync(PartyCafeUser user)
         {
             throw new NotImplementedException();
         }
