@@ -170,10 +170,15 @@ namespace PartyCafe.Site.DBUtils
         {
             var db = MainUtils.GetDBContext();
             var x = (from sp in db.ServicePhotos
-                     where sp.IdPhoto == IdPhoto
+                     where sp.IdRecord == IdPhoto
                      select sp).SingleOrDefault();
+
+            int idPhoto = x.IdPhoto;
+
             db.ServicePhotos.DeleteOnSubmit(x);
             db.SubmitChanges();
+
+            PhotoUtils.DelImage(idPhoto);
         }
     }
 }

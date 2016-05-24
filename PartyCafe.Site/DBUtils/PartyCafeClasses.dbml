@@ -134,7 +134,7 @@
       <Association Name="Photos_Service" Member="Photos" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photos" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="u0103018_partycafe_user.ServicePhotos" Member="ServicePhotos">
+  <Table Name="ServicePhotos">
     <Type Name="ServicePhoto">
       <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdService" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

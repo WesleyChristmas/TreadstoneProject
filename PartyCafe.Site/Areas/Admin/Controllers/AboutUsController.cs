@@ -165,12 +165,12 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     var filename = file.FileName;
                     file.InputStream.Read(content, 0, file.ContentLength);
 
-                    /*ServiceUtils.AddPhoto(
+                    ServiceUtils.AddPhoto(
                         id,
                         name,
                         new PCPhoto() { data = content, fileName = filename },
                         User.Identity.Name
-                    );*/
+                    );
                     return "ok";
                 }
                 else
@@ -189,7 +189,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var aboutus = ServiceUtils.GetAll(1).Where(w => w.idRecord == id).ToList();
+                var aboutus = ServiceUtils.GetAll(ServiceType.aboutService).Where(w => w.idRecord == id).SingleOrDefault();
                 return Json(aboutus, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

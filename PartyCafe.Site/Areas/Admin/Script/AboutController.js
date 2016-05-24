@@ -145,10 +145,7 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
                 $scope.aboutusPhotoAdd.Desc = '';
                 document.getElementsByName('aboutusPhoto').value = '';
 
-                $http.post('AboutUs/GetBlockPhotos', { id: id }, {
-                    transformRequest: angular.identity,
-                    headers: { 'Content-Type': undefined }
-                }).success(function (response) {
+                $http.post('AboutUs/GetBlockPhotos', { id: id }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
 
@@ -184,6 +181,8 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
     $scope.Back = function () {
         $location.path('/');
     };
+
+    GetBlockPhotos($scope, $http);
 });
 
 
@@ -197,4 +196,10 @@ function GetAllAbout($scope, $http) {
 
     $('#loader').css({ "display": "none" });
     $('.spinner').hide();
+}
+
+function GetBlockPhotos($scope, $http) {
+    $http.post('AboutUs/GetBlockPhotos', { id: '28' }).success(function (response) {
+        $scope.BlockPhotos = response;
+    });
 }

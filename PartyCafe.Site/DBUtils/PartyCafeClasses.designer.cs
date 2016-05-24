@@ -3085,7 +3085,7 @@ namespace PartyCafe.Site.DBUtils
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="u0103018_partycafe_user.ServicePhotos")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="ServicePhotos")]
 	public partial class ServicePhoto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		

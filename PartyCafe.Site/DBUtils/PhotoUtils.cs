@@ -91,15 +91,24 @@ namespace PartyCafe.Site.DBUtils
 
         public static void DelImage(int id)
         {
-            var db = MainUtils.GetDBContext();
-            var curPhoto = (from p in db.Photos
-                            where p.IdRecord == id
-                            select p).SingleOrDefault();
+            if (id > 0)
+            { 
+                var db = MainUtils.GetDBContext();
+                var curPhoto = (from p in db.Photos
+                                where p.IdRecord == id
+                                select p).SingleOrDefault();
+                try
+                { 
+                    File.Delete(curPhoto.Path);
+                }
+                catch (Exception ex)
+                {
+                    // NO LOGGER IB PROJECT  AHAHAHAHHA!
+                }
+                db.Photos.DeleteOnSubmit(curPhoto);
 
-            File.Delete(curPhoto.Path);
-            db.Photos.DeleteOnSubmit(curPhoto);
-
-            db.SubmitChanges();
+                db.SubmitChanges();
+            }
         }
     }
 }
