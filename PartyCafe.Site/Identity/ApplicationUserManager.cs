@@ -18,10 +18,11 @@ namespace PartyCafe.Site.Identity
         {
             Task<ApplicationUser> taskInvoke = Task<ApplicationUser>.Factory.StartNew(() =>
             {
-                PasswordVerificationResult result = this.PasswordHasher.VerifyHashedPassword(userName, password);
-                if (result == PasswordVerificationResult.SuccessRehashNeeded)
+                var user = Store.FindByNameAsync(userName).Result;
+                PasswordVerificationResult result = this.PasswordHasher.VerifyHashedPassword(user.Password, password);
+                if (result == PasswordVerificationResult.Success)
                 {
-                    return Store.FindByNameAsync(userName).Result;
+                    return user;
                 }
                 return null;
             });

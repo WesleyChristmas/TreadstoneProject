@@ -27,7 +27,7 @@ namespace PartyCafe.Site.Identity
 
             if (hash == hashedPassword)
             {
-                return PasswordVerificationResult.SuccessRehashNeeded;
+                return PasswordVerificationResult.Success;
             }
             else
             {
