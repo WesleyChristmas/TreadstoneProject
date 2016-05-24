@@ -142,7 +142,7 @@ namespace PartyCafe.Site.DBUtils
         public static void AddPhoto(int IdService, string name, PCPhoto image, string userCreate)
         {
             var db = MainUtils.GetDBContext();
-            ServicePhotos sp = new ServicePhotos();
+            ServicePhoto sp = new ServicePhoto();
             sp.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
             sp.IdService = IdService;
             sp.name = name;

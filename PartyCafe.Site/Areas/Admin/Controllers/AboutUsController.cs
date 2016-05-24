@@ -203,7 +203,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                PhotoUtils.DelImage(id);
+                ServiceUtils.DelPhoto(id);
                 return "ok";
             }
             catch (Exception ex)
