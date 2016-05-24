@@ -195,6 +195,7 @@
     <Compile Include="Areas\Admin\Controllers\FoodMenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
     <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -246,6 +247,7 @@
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
     <Content Include="Areas\Admin\Script\GalleryController.js" />
+    <Content Include="Areas\Admin\Script\ServicesController.js" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuSections.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -403,6 +405,10 @@
     <Content Include="Areas\Admin\Views\AboutUs\AboutAdd.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutEdit.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutEditPhoto.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\ServicesHome.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\ServicesAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\ServicesEdit.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />
