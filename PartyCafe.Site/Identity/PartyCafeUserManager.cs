@@ -9,9 +9,9 @@ namespace PartyCafe.Site.Identity
 {
     public class PartyCafeUserManager : UserManager<PartyCafeUser>
     {
-        public ApplicationUserManager(PartyCafeUserStore store) : base(store)
+        public PartyCafeUserManager(PartyCafeUserStore store) : base(store)
         {
-            this.PasswordHasher = new ApplicationPasswordHasher();
+            this.PasswordHasher = new PartyCafePasswordHasher();
         }
 
         public override Task<PartyCafeUser> FindAsync(string userName, string password)
