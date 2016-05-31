@@ -133,7 +133,14 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == IdService
                             select e).SingleOrDefault();
 
-            curService.
+            // Delete subphotos
+            var curServicePhotos = (from x in dbContext.ServicePhotos
+                                    where x.IdService == IdService
+                                    select x);
+            foreach(var item in curServicePhotos)
+            {
+                DelPhoto(item.IdRecord);
+            }
 
             dbContext.Services.DeleteOnSubmit(curService);
             dbContext.SubmitChanges();
@@ -168,11 +175,11 @@ namespace PartyCafe.Site.DBUtils
             db.SubmitChanges();
         }
 
-        public static void DelPhoto(int IdPhoto)
+        public static void DelPhoto(int IdServicePhoto)
         {
             var db = MainUtils.GetDBContext();
             var x = (from sp in db.ServicePhotos
-                     where sp.IdRecord == IdPhoto
+                     where sp.IdRecord == IdServicePhoto
                      select sp).SingleOrDefault();
 
             int idPhoto = x.IdPhoto;
