@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "";
+}
+
+<h2>{{Header}}</h2>
+<div class="addit-wrap">
+    <div class="addit-wrap">
+        <label class="addit-label" for="servicesPhotoName">Название:</label>
+        <input type="text" class="form-control" ng-model="servicesPhotoAdd.Name" name="servicesPhotoName" placeholder="Название фото">
+    </div>
+    <div class="addit-wrap">
+        <label class="addit-label" for="servicesPhotoPass">Описание к фотографии:</label>
+        <textarea class="form-control" ng-model="servicesPhotoAdd.Desc" name="servicesPhotoDesc" placeholder="Описание фото"></textarea>
+    </div>
+    <div class="addit-wrap">
+        <label class="addit-label" for="servicesPhoto">Фотография:</label>
+        <input type="file" class="form-control" ng-model="servicesPhotoAdd.Photo" name="servicesPhoto">
+    </div>
+    <div class="addit-wrap">
+        <input type="button" class="btn btn-default" value="Добавить фото" ng-click="addPhoto()">
+    </div>
+</div>
+
+<div class="admintable">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th width="30px">№</th>
+                <th>Фото</th>
+                <th>Описание</th>
+                <th>Редактирование</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in BlockPhotos.photos" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
+                <td align="center">{{$index + 1}}</td>
+                <td align="center">
+                    <div style="width: 100px; height: 100px; background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></div>
+                </td>
+                <td align="center">
+                    <textarea class="photo-tb" ng-model="photoName">{{photoName}}</textarea>
+                </td>
+                <td align="center">
+                    <ul class="photo-list">
+                        <li class="photo-tools" ng-click="updatePhotoName($index)" title="Редактировать название"><i class="fa fa-pencil"></i></li>
+                        <li class="photo-tools" ng-click="removePhoto($index)" title="Удалить фотографию из блока"><i class="fa fa-trash"></i></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="tools-wrapp">
+    <ul class="tools_add">
+        <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
+    </ul>
+</div>
