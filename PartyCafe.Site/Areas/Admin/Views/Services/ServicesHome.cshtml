@@ -4,15 +4,15 @@
 <h2>{{Header}}</h2>
 <div class="tools-wrapp">
     <ul class="tools">
-        <li class="tools-item"><button class="btn btn-default" ng-click="addServices()">Добавить блок</button></li>
+        <li class="tools-item"><button class="btn btn-default" ng-click="addServices()">Добавить услугу</button></li>
         <li class="tools-item">
-            <button class="btn btn-default" ng-click="editServices()" ng-disabled="selectForEdit === ''">Редактировать блок</button>
+            <button class="btn btn-default" ng-click="editServices()" ng-disabled="selectForEdit === ''">Редактировать услугу</button>
         </li>
         <li class="tools-item">
-            <button class="btn btn-default" ng-click="removeServices(selectForEdit)" ng-disabled="selectForEdit === ''">Удалить блок</button>
+            <button class="btn btn-default" ng-click="removeServices(selectForEdit)" ng-disabled="selectForEdit === ''">Удалить услугу</button>
         </li>
         <li class="tools-item"></li>
-        <li class="tools-item"><button class="btn btn-default" ng-disabled="selectForEdit === ''" ng-click="editServicesPhoto()">Редактировать фотографии блока</button></li>
+        <li class="tools-item"><button class="btn btn-default" ng-disabled="selectForEdit === ''" ng-click="editServicesPhoto()">Редактировать фотографии услуги</button></li>
         <li class="tools-item"></li>
     </ul>
 </div>
@@ -21,10 +21,10 @@
         <thead>
             <tr>
                 <th width="30px">№</th>
-                <th width="260px">Название блока</th>
-                <th>Описание блока</th>
-                <th>Фото блока</th>
-                <th>Количество фотографий в блоке</th>
+                <th width="260px">Название услуги</th>
+                <th>Описание услуги</th>
+                <th>Фото услуги</th>
+                <th>Количество фотографий в услугах</th>
             </tr>
         </thead>
         <tbody>

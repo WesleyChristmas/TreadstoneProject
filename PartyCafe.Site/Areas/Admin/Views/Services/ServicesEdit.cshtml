@@ -1,7 +1,40 @@
-﻿
-@{
-    ViewBag.Title = "ServicesEdit";
+﻿@{
+    ViewBag.Title = "Редактирование услуги";
+    Layout = "";
 }
 
-<h2>ServicesEdit</h2>
+<h2>{{Header}}</h2>
+<div class="additwrap">
+    <form name="servicesForm" novalidate>
+        <div class="addit-wrap">
+            <label class="addit-label" for="servicesName">Название услуги:</label>
+            <input type="text" class="form-control" ng-model="itemForEdit.name" name="servicesName" value="{{itemForEdit.name}}" placeholder="Самое лучшее фото">
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="servicesDesc">Описание услуги:</label>
+            <textarea class="form-control" ng-model="itemForEdit.description" name="servicesDesc" value="{{itemForEdit.description}}" placeholder="Самое лучшее фото"></textarea>
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="servicesPhoto">Фотография услуги:</label>
+            <img ng-src="{{itemForEdit.photoPath}}" ng-show="CurrentPhotoShow">
+            <br>
+            <br>
+            <div class="addit-wrap" ng-show="ChangePhotoShow">
+                <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="servicesPhoto">
+            </div>
+            <div class="addit-wrap">
+                <input type="button" class="btn btn-default" value="Изменить изображение услуги" ng-click="changePhoto()">
+            </div>
+        </div>
 
+        <div class="error-wrap">{{error}}</div>
+        <div class="tools-wrapp">
+            <ul class="tools_add">
+                <li class="tools-item">
+                    <button class="btn btn-default" ng-click="updateServices()">Сохранить</button>
+                </li>
+                <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
+            </ul>
+        </div>
+    </form>
+</div>

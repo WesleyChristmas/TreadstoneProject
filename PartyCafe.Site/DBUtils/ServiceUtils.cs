@@ -133,6 +133,8 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == IdService
                             select e).SingleOrDefault();
 
+            curService.
+
             dbContext.Services.DeleteOnSubmit(curService);
             dbContext.SubmitChanges();
 

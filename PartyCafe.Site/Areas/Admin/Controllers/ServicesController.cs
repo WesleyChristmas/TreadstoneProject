@@ -29,6 +29,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View("ServicesEdit");
         }
+        [HttpGet]
+        public ActionResult ServicesEditPhoto()
+        {
+            return View("ServicesEditPhoto");
+        }
 
 
         [HttpPost]
@@ -77,7 +82,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string RemoveService(int id)
+        public string RemoveServices(int id)
         {
             try
             {
@@ -90,7 +95,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string UpdateAbout(int id, string name, string desc)
+        public string UpdateServices(int id, string name, string desc)
         {
             try
             {
@@ -138,7 +143,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public string AddPhotoToBlock(int id, string name, string desc)
+        public string AddPhotoToServices(int id, string name, string desc)
         {
             try
             {
@@ -169,7 +174,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string RemovePhotoFromBlock(int id)
+        public string RemovePhotoFromServices(int id)
         {
             try
             {
@@ -183,7 +188,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetBlockPhotos(int id)
+        public JsonResult GetServicesPhotos(int id)
         {
             try
             {

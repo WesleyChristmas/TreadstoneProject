@@ -19,7 +19,6 @@ servicesapp.config(function ($routeProvider) {
 
 servicesapp.service("sharedDataService", function () {
     this.rolesItem = {};
-
     this.setItem = function (item) { this.rolesItem = item; }
     this.getItem = function () { return this.rolesItem; }
 });
@@ -58,9 +57,9 @@ servicesapp.controller("ServicesAddController", function ($scope, $http, $locati
     $scope.Header = "Добавление услуги";
     $scope.addServices = function () {
         var fd = new FormData();
-        fd.append('name', $scope.servicesusAdd.Name);
-        fd.append('desc', $scope.servicesusAdd.Desc);
-        fd.append('file', document.getElementsByName('servicesusPhoto')[0].files[0]);
+        fd.append('name', $scope.servicesAdd.Name);
+        fd.append('desc', $scope.servicesAdd.Desc);
+        fd.append('file', document.getElementsByName('servicesPhoto')[0].files[0]);
 
         $http.post('Services/AddServices', fd, {
             transformRequest: angular.identity,
@@ -108,42 +107,42 @@ servicesapp.controller("ServicesEditController", function ($scope, $http, $locat
 });
 /* Services Edit Photo Controller */
 servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    $scope.Header = "Редактирование фотографий блока";
     $scope.BlockPhotos = sharedDataService.getItem();
+    $scope.Header = "Редактирование фотографий услуги - " + $scope.BlockPhotos.name;
     $scope.CurrentPhotoShow = true;
 
     $scope.updatePhotoName = function (id) {
         var name = document.getElementsByTagName('textarea')[id];
-
     };
 
     $scope.removePhoto = function (id) {
-        $http.post('Services/RemovePhotoFromBlock', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
+        $http.post('Services/RemovePhotoFromServices', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
             if (response === 'ok') {
-                $location.path('/');
+                $http.post('Services/GetServicesPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
+                    $scope.BlockPhotos = response;
+                });
             } else {
                 $scope.error = response;
             }
         });
     };
-
     $scope.addPhoto = function () {
         var fd = new FormData();
         fd.append('id', $scope.BlockPhotos.idRecord);
-        fd.append('name', $scope.servicesusPhotoAdd.Name);
-        fd.append('desc', $scope.servicesusPhotoAdd.Desc);
-        fd.append('file', document.getElementsByName('servicesusPhoto')[0].files[0]);
+        fd.append('name', $scope.servicesPhotoAdd.Name);
+        fd.append('desc', $scope.servicesPhotoAdd.Desc);
+        fd.append('file', document.getElementsByName('servicesPhoto')[0].files[0]);
 
-        $http.post('Services/AddPhotoToBlock', fd, {
+        $http.post('Services/AddPhotoToServices', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         }).success(function (response) {
             if (response === 'ok') {
-                $scope.servicesusPhotoAdd.Name = '';
-                $scope.servicesusPhotoAdd.Desc = '';
-                document.getElementsByName('servicesusPhoto').value = '';
+                $scope.servicesPhotoAdd.Name = '';
+                $scope.servicesPhotoAdd.Desc = '';
+                document.getElementsByName('servicesPhoto').value = '';
 
-                $http.post('Services/GetBlockPhotos', { id: id }).success(function (response) {
+                $http.post('Services/GetServicesPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
 
@@ -152,7 +151,6 @@ servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $
             }
         });
     };
-
     $scope.updateServices = function () {
         var fd = new FormData();
         fd.append('id', $scope.itemForEdit.idRecord);
@@ -178,7 +176,6 @@ servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $
     };
     $scope.Back = function () { $location.path('/'); };
 });
-
 
 function GetAllServices($scope, $http) {
     $('#loader').css({ "display": "block" });
