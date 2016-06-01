@@ -115,20 +115,32 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
     $scope.CurrentPhotoShow = true;
 
     $scope.updatePhotoName = function (id) {
-        var name = document.getElementsByTagName('textarea')[id];
-
-    };
-
-    $scope.removePhoto = function (id) {
-        $http.post('AboutUs/RemovePhotoFromBlock', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
+        var name = document.getElementsByName('photoDesc')[id];
+        $http.post('AboutUs/UpdatePhotoBlock', {
+            id: $scope.BlockPhotos.photos[id].idRecord,
+            name: name.value
+        }).success(function (response) {
             if (response === 'ok') {
-                $location.path('/');
+                $http.post('AboutUs/GetBlockPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
+                    $scope.BlockPhotos = response;
+                });
             } else {
                 $scope.error = response;
             }
         });
     };
 
+    $scope.removePhoto = function (id) {
+        $http.post('AboutUs/RemovePhotoFromBlock', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
+            if (response === 'ok') {
+                $http.post('AboutUs/GetBlockPhotos', { id: $scope.itemForEdit.idRecord }).success(function (response) {
+                    $scope.BlockPhotos = response;
+                });
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
     $scope.addPhoto = function () {
         var fd = new FormData();
         fd.append('id', $scope.BlockPhotos.idRecord);
@@ -145,7 +157,7 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
                 $scope.aboutusPhotoAdd.Desc = '';
                 document.getElementsByName('aboutusPhoto').value = '';
 
-                $http.post('AboutUs/GetBlockPhotos', { id: id }).success(function (response) {
+                $http.post('AboutUs/GetBlockPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
 
@@ -154,7 +166,6 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
             }
         });
     };
-
     $scope.updateAbout = function () {
         var fd = new FormData();
         fd.append('id', $scope.itemForEdit.idRecord);

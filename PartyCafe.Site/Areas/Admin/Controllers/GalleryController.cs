@@ -62,7 +62,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
-
         [HttpPost]
         public string UpdateGallery(int id, string name, string desc)
         {
@@ -109,7 +108,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
-
         [HttpPost]
         public string DeleteGalleryItem(int id)
         {

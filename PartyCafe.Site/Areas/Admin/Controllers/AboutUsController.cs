@@ -89,7 +89,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
-
         [HttpPost]
         public string RemoveAbout(int id)
         {
@@ -103,7 +102,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
-
         [HttpPost]
         public string UpdateAbout(int id, string name, string desc)
         {
@@ -183,6 +181,33 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
+        [HttpPost]
+        public string RemovePhotoFromBlock(int id)
+        {
+            try
+            {
+                ServiceUtils.DelPhoto(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "bed";
+            }
+        }
+        [HttpPost]
+        public string UpdatePhotoBlock(int id, string name)
+        {
+            try
+            {
+                ServiceUtils.EditPhoto(id, name, null, User.Identity.Name);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+
 
         [HttpPost]
         public JsonResult GetBlockPhotos(int id)
@@ -198,19 +223,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
-        public string RemovePhotoFromBlock(int id)
-        {
-            try
-            {
-                ServiceUtils.DelPhoto(id);
-                return "ok";
-            }
-            catch (Exception ex)
-            {
-                return "bed";
-            }
-        }
+
         
     }
 }
