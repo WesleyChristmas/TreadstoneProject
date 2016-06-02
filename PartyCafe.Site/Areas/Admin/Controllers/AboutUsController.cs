@@ -43,7 +43,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(aboutus, JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpPost]
         public string AddAbout(string name, string desc)
         {
@@ -149,7 +148,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-
         [HttpPost]
         public string AddPhotoToBlock(int id, string name, string desc)
         {
@@ -208,7 +206,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-
         [HttpPost]
         public JsonResult GetBlockPhotos(int id)
         {
@@ -222,8 +219,5 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-
-
-        
     }
 }

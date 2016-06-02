@@ -35,7 +35,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return View("ServicesEditPhoto");
         }
 
-
         [HttpPost]
         public string AddServices(string name, string desc)
         {
@@ -141,7 +140,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-
         [HttpPost]
         public string AddPhotoToServices(int id, string name, string desc)
         {
@@ -167,6 +165,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 {
                     return "bed";
                 }
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+        [HttpPost]
+        public string UpdatePhotoServices(int id, string name)
+        {
+            try
+            {
+                ServiceUtils.EditPhoto(id, name, null, User.Identity.Name);
+                return "ok";
             }
             catch (Exception ex)
             {

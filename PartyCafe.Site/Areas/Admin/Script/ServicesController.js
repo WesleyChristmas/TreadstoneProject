@@ -27,6 +27,7 @@ servicesapp.service("sharedDataService", function () {
 servicesapp.controller("ServicesHomeController", function ($scope, $http, $location, sharedDataService) {
     $scope.isActive = function (item) { return $scope.selectForEdit === item; };
     $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
+
     $scope.addServices = function () { $location.path('/add'); };
     $scope.editServices = function () {
         sharedDataService.setItem($scope.selectForEdit);
@@ -37,7 +38,9 @@ servicesapp.controller("ServicesHomeController", function ($scope, $http, $locat
         $location.path('/editphoto');
     };
     $scope.removeServices = function (item) {
-        $http.post('Services/RemoveServices', { id: item.idRecord }).success(function (response) {
+        $http.post('Services/RemoveServices', {
+            id: item.idRecord
+        }).success(function (response) {
             if (response === 'ok') {
                 $location.path('/');
             } else {
@@ -76,8 +79,8 @@ servicesapp.controller("ServicesAddController", function ($scope, $http, $locati
 });
 /* Services Edit Controller */
 servicesapp.controller("ServicesEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    $scope.Header = "Редактирование услуги";
     $scope.itemForEdit = sharedDataService.getItem();
+    $scope.Header = "Редактирование услуги - " + $scope.itemForEdit.name;
     $scope.CurrentPhotoShow = true;
 
     $scope.updateServices = function () {
@@ -113,12 +116,30 @@ servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $
 
     $scope.updatePhotoName = function (id) {
         var name = document.getElementsByTagName('textarea')[id];
+        $http.post('AboutUs/UpdatePhotoServices', {
+            id: $scope.BlockPhotos.photos[id].idRecord,
+            name: name.value
+        }).success(function (response) {
+            if (response === 'ok') {
+                $http.post('AboutUs/GetServicesPhotos', {
+                    id: $scope.BlockPhotos.idRecord
+                }).success(function (response) {
+                    $scope.BlockPhotos = response;
+                });
+            } else {
+                $scope.error = response;
+            }
+        });
     };
 
     $scope.removePhoto = function (id) {
-        $http.post('Services/RemovePhotoFromServices', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
+        $http.post('Services/RemovePhotoFromServices', {
+            id: $scope.BlockPhotos.photos[id].idRecord
+        }).success(function (response) {
             if (response === 'ok') {
-                $http.post('Services/GetServicesPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
+                $http.post('Services/GetServicesPhotos', {
+                    id: $scope.BlockPhotos.idRecord
+                }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
             } else {
@@ -142,34 +163,17 @@ servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $
                 $scope.servicesPhotoAdd.Desc = '';
                 document.getElementsByName('servicesPhoto').value = '';
 
-                $http.post('Services/GetServicesPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
+                $http.post('Services/GetServicesPhotos', {
+                    id: $scope.BlockPhotos.idRecord
+                }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
-
             } else {
                 $scope.error = response;
             }
         });
     };
-    $scope.updateServices = function () {
-        var fd = new FormData();
-        fd.append('id', $scope.itemForEdit.idRecord);
-        fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.description);
-        fd.append('oldphoto', $scope.itemForEdit.photoPath);
-        fd.append('file', document.getElementsByName('galleryPhoto')[0].files[0]);
 
-        $http.post('Services/UpdateServices', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
-    };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;
         $scope.ChangePhotoShow = true;

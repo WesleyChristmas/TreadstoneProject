@@ -27,7 +27,8 @@ aboutapp.service("sharedDataService", function () {
 /* About Home Controller */
 aboutapp.controller("AboutHomeController", function ($scope, $http, $location, sharedDataService) {
     $scope.isActive = function (item) { return $scope.selectForEdit === item; };
-    $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
+    $scope.HighlightItem = function (item) { $scope.selectForEdit = item; console.log(item); };
+
     $scope.addAbout = function () { $location.path('/add'); };
     $scope.editAbout = function () {
         sharedDataService.setItem($scope.selectForEdit);
@@ -55,7 +56,7 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
 });
 /* About Add Controller */
 aboutapp.controller("AboutAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    $scope.Header = "Добавление блока галереи";
+    $scope.Header = "Добавление блока";
     $scope.addAbout = function () {
         var fd = new FormData();
         fd.append('name', $scope.aboutusAdd.Name);
@@ -77,8 +78,8 @@ aboutapp.controller("AboutAddController", function ($scope, $http, $location, $r
 });
 /* About Edit Controller */
 aboutapp.controller("AboutEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    $scope.Header = "Редактирование блока";
     $scope.itemForEdit = sharedDataService.getItem();
+    $scope.Header = "Редактирование блока - " + $scope.itemForEdit.name;
     $scope.CurrentPhotoShow = true;
 
     $scope.updateAbout = function () {
@@ -104,14 +105,12 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
         $scope.CurrentPhotoShow = false;
         $scope.ChangePhotoShow = true;
     };
-    $scope.Back = function () {
-        $location.path('/');
-    };
+    $scope.Back = function () { $location.path('/'); };
 });
 /* About Edit Photo Controller */
 aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    $scope.Header = "Редактирование фотографий блока";
     $scope.BlockPhotos = sharedDataService.getItem();
+    $scope.Header = "Редактирование фотографий блока - " + $scope.BlockPhotos.name;
     $scope.CurrentPhotoShow = true;
 
     $scope.updatePhotoName = function (id) {
@@ -121,7 +120,9 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
             name: name.value
         }).success(function (response) {
             if (response === 'ok') {
-                $http.post('AboutUs/GetBlockPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
+                $http.post('AboutUs/GetBlockPhotos', {
+                    id: $scope.BlockPhotos.idRecord
+                }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
             } else {
@@ -129,11 +130,14 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
             }
         });
     };
-
     $scope.removePhoto = function (id) {
-        $http.post('AboutUs/RemovePhotoFromBlock', { id: $scope.BlockPhotos.photos[id].idRecord }).success(function (response) {
+        $http.post('AboutUs/RemovePhotoFromBlock', {
+            id: $scope.BlockPhotos.photos[id].idRecord
+        }).success(function (response) {
             if (response === 'ok') {
-                $http.post('AboutUs/GetBlockPhotos', { id: $scope.itemForEdit.idRecord }).success(function (response) {
+                $http.post('AboutUs/GetBlockPhotos', {
+                    id: $scope.BlockPhotos.idRecord
+                }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
             } else {
@@ -157,43 +161,28 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
                 $scope.aboutusPhotoAdd.Desc = '';
                 document.getElementsByName('aboutusPhoto').value = '';
 
-                $http.post('AboutUs/GetBlockPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
+                $http.post('AboutUs/GetBlockPhotos', {
+                    id: $scope.BlockPhotos.idRecord
+                }).success(function (response) {
                     $scope.BlockPhotos = response;
                 });
-
             } else {
                 $scope.error = response;
             }
         });
     };
-    $scope.updateAbout = function () {
-        var fd = new FormData();
-        fd.append('id', $scope.itemForEdit.idRecord);
-        fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.description);
-        fd.append('oldphoto', $scope.itemForEdit.photoPath);
-        fd.append('file', document.getElementsByName('galleryPhoto')[0].files[0]);
 
-        $http.post('About/UpdateAbout', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
-    };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;
         $scope.ChangePhotoShow = true;
     };
-    $scope.Back = function () {
-        $location.path('/');
-    };
+    $scope.Back = function () { $location.path('/'); };
 
-    GetBlockPhotos($scope, $http);
+    $http.post('AboutUs/GetBlockPhotos', {
+        id: $scope.BlockPhotos.idRecord
+    }).success(function (response) {
+        $scope.BlockPhotos = response;
+    });
 });
 
 
@@ -210,7 +199,7 @@ function GetAllAbout($scope, $http) {
 }
 
 function GetBlockPhotos($scope, $http) {
-    $http.post('AboutUs/GetBlockPhotos', { id: '28' }).success(function (response) {
+    $http.post('AboutUs/GetBlockPhotos', { id: $scope.BlockPhotos.idRecord }).success(function (response) {
         $scope.BlockPhotos = response;
     });
 }

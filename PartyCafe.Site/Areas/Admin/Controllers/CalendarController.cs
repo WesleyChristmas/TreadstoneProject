@@ -5,31 +5,22 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
 {
     public class CalendarController : Controller
     {
-        //private readonly IBlogCalendarService _calendarService;
-        /*
-        public CalendarController(IBlogCalendarService calendarService)
-        {
-            _calendarService = calendarService;
-        }
-        */
-
         // GET: Admin/Calendar
         public ActionResult Index()
         {
             return View();
         }
-
         [HttpGet]
         public ActionResult CalendarEvents()
         {
             return View("CalendarEvents");
         }
-
         [HttpGet]
         public ActionResult EditCalendarEvent()
         {
             return View("EditCalendarEvent");
         }
+
 
         [HttpGet]
         public JsonResult GetCalendar()
