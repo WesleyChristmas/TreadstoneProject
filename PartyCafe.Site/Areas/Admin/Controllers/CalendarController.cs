@@ -11,14 +11,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult CalendarEvents()
+        public ActionResult CalendarHome()
         {
-            return View("CalendarEvents");
+            return View("CalendarHome");
         }
         [HttpGet]
-        public ActionResult EditCalendarEvent()
+        public ActionResult CalendarAdd()
         {
-            return View("EditCalendarEvent");
+            return View("CalendarAdd");
+        }
+        [HttpGet]
+        public ActionResult CalendarEdit()
+        {
+            return View("CalendarEdit");
         }
 
 
