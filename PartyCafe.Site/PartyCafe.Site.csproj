@@ -240,6 +240,7 @@
     <Content Include="Areas\Admin\Content\edit.png" />
     <Content Include="Areas\Admin\Script\AboutController.js" />
     <Content Include="Areas\Admin\Script\Blog\BlogController.js" />
+    <Content Include="Areas\Admin\Script\CalendarController.js" />
     <Content Include="Areas\Admin\Script\Calendar\CalendarClass.js" />
     <Content Include="Areas\Admin\Script\Calendar\CalendarController.js" />
     <Content Include="Areas\Admin\Script\Calendar\CalendarLibrary.js" />

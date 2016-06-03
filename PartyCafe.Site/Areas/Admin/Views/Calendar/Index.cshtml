@@ -1,15 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Календарь событий";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<script type="text/javascript" src="~/Areas/Admin/Script/Calendar/CalendarClass.js"></script>
 <script type="text/javascript" src="~/Areas/Admin/Script/Calendar/CalendarController.js"></script>
-<script type="text/javascript" src="~/Areas/Admin/Script/Calendar/CalendarLibrary.js"></script>
-
-<div ng-app="CalendarApp" ng-controller="CalendarController">
-    <h2>Календарь событий</h2>
+<div ng-app="CalendarApp">
     <div ng-view></div>
 </div>
 
