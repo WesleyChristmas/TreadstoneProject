@@ -14,6 +14,38 @@ calendarapp.config(function ($routeProvider) {
     }).otherwise('/');
 });
 
+calendarapp.filter('filterDate', function () {
+    return function (date) {
+        var curDate = date.match(/\d+/g);
+        if (curDate.length) {
+            var _data = new Date(parseInt(curDate)),
+                _day = _data.getDay(),
+                _month = _data.getMonth() + 1,
+                _yaer = _data.getFullYear(),
+                result = "";
+
+            result += _day < 10 ? "0" + _day + "." : _day + ".";
+            result += _month < 10 ? "0" + _month + "." : _month + ".";
+            result += _yaer;
+
+            return result;
+        }
+    };
+});
+calendarapp.filter('filterTime', function () {
+    return function (time) {
+        if (time !== undefined) {
+            var result = "";
+
+            result += time.Hours < 10 ? "0" + time.Hours : time.Hours;
+            result += ":";
+            result += time.Minutes < 10 ? "0" + time.Minutes : time.Minutes;
+            
+            return result;
+        }
+    };
+});
+
 calendarapp.service("sharedDataService", function () {
     this.rolesItem = {};
 
@@ -106,7 +138,7 @@ function GetAllCalendar($scope, $http) {
     $('#loader').css({ "display": "block" });
     $('.spinner').show();
 
-    $http.get('Calendar/GetAllCalendar').success(function (result) {
+    $http.get('Calendar/GetAllEvents').success(function (result) {
         $scope.Calendar = result;
     });
 
