@@ -28,7 +28,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public JsonResult GetCalendar()
+        public JsonResult GetAllEvents()
         {
             return Json(EventUtils.GetAll(), JsonRequestBehavior.AllowGet);
         }
