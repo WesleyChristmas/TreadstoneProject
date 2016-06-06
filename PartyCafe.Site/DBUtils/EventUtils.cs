@@ -182,7 +182,7 @@ namespace PartyCafe.Site.DBUtils
                 DateTime newDate = partyEvent.DateEvent;
                 if (partyEvent.TimeEvent != null)
                 {
-                    newDate.AddSeconds(partyEvent.TimeEvent.Seconds);
+                   newDate = newDate.AddSeconds(partyEvent.TimeEvent.TotalSeconds);
                 }
                 newEvent.EventDate = newDate;
             }

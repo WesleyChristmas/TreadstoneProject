@@ -1,5 +1,23 @@
 ﻿var calendarapp = new angular.module("CalendarApp", ['ngRoute']);
 
+calendarapp.directive('jqdatepicker', function () {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModelCtrl) {
+            $(function () {
+                element.datepicker({
+                    dateFormat: 'dd.mm.yy',
+                    onSelect: function (date) {
+                        scope.$apply(function () {
+                            ngModelCtrl.$setViewValue(date);
+                        });
+                    }
+                });
+            });
+        }
+    };
+});
 calendarapp.config(function ($routeProvider) {
     $routeProvider.when('/',
     {
@@ -58,8 +76,8 @@ calendarapp.controller("CalendarHomeController", function ($scope, $http, $locat
     /*Helpers*/
     $scope.isActive = function (item) { return $scope.selectForEdit === item; };
     $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
-    $scope.AddCalendar = function () { $location.path('/add'); };
-    $scope.EditCalendar = function () {
+    $scope.addCalendar = function () { $location.path('/add'); };
+    $scope.editCalendar = function () {
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
     };
@@ -82,16 +100,17 @@ calendarapp.controller("CalendarHomeController", function ($scope, $http, $locat
 
 /* Calendar Add Controller */
 calendarapp.controller("CalendarAddController", function ($scope, $http, $location) {
-    /*Helpers*/
-    $scope.Header = "Добавление фото в галлерею";
+    $scope.Header = "Добавление мероприятия в календарь событий";
     $scope.Back = function () { $location.path('/'); }
-    $scope.addCalendar = function () {
+    $scope.addEvent = function () {
         var fd = new FormData();
-        fd.append('name', $scope.calendarAdd.Name);
-        fd.append('description', $scope.calendarAdd.Desc);
-        fd.append('file', document.getElementsByName('calendarPhoto')[0].files[0]);
+        fd.append('name', $scope.eventsAdd.Name);
+        fd.append('description', $scope.eventsAdd.Desc);
+        fd.append('date', $scope.eventsAdd.Date);
+        fd.append('time', $scope.eventsAdd.Time);
+        fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
 
-        $http.post('Calendar/AddCalendar', fd, {
+        $http.post('Calendar/AddCalendarEvent', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         }).success(function (response) {
@@ -102,23 +121,26 @@ calendarapp.controller("CalendarAddController", function ($scope, $http, $locati
             }
         });
     };
-
 });
 
 /* Calendar Edit Controller */
 calendarapp.controller("CalendarEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    /*Helpers*/
-    $scope.Header = "Редактирование фотографии";
+    $scope.Header = "Редактирование мероприятия";
     $scope.itemForEdit = sharedDataService.getItem();
+
+    $scope.itemForEdit.DateEvent = parseDate($scope.itemForEdit.DateEvent);
+    $scope.itemForEdit.TimeEvent = parseTime($scope.itemForEdit.TimeEvent);
 
     $scope.updateCalendar = function () {
         var fd = new FormData();
         fd.append('id', $scope.itemForEdit.idRecord);
         fd.append('name', $scope.itemForEdit.name);
         fd.append('desc', $scope.itemForEdit.description);
-        fd.append('file', document.getElementsByName('calendarPhoto')[0].files[0]);
+        fd.append('date', $scope.itemForEdit.Date);
+        fd.append('time', $scope.itemForEdit.Time);
+        fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
 
-        $http.post('Calendar/UpdateCalendar', fd, {
+        $http.post('Calendar/UpdateCalendarEvent', fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
         }).success(function (response) {
@@ -145,6 +167,66 @@ function GetAllCalendar($scope, $http) {
     $('#loader').css({ "display": "none" });
     $('.spinner').hide();
 }
+function restrictTime(myfield, e) {
+    if (!e) { var e = window.event; }
+    if (e.keyCode) { code = e.keyCode; }
+    else if (e.which) { code = e.which; }
+
+    var character = String.fromCharCode(code);
+    if (!e.ctrlKey && (code >= 48 && code <= 57) || (code >= 96 && code <= 105)) {
+        var currentValue = myfield.value,
+            currentValueSplited = currentValue.split('');
+
+        if (currentValueSplited.length > 0) {
+            switch (currentValueSplited.length) {
+                case 1:
+                    if (currentValue.search(/[0-2]{1}/) != -1) {
+                        return currentValue;
+                    } else {
+                        myfield.value = '';
+                        return myfield.value;
+                    }
+                    break;
+                case 2:
+                    if (currentValueSplited[0] === '0' || currentValueSplited[0] === '1') {
+                        if (currentValue.search(/[0-2]{1}[0-9]{1}/) != -1) {
+                            myfield.value = currentValueSplited[0] + currentValueSplited[1] + ':';
+                            return myfield.value;
+                        } else {
+                            myfield.value = myfield.value.slice(0, -1);
+                            return myfield.value;
+                        }
+                    } else {
+                        if (currentValue.search(/[0-2]{1}[0-3]{1}/) != -1) {
+                            myfield.value = currentValueSplited[0] + currentValueSplited[1] + ':';
+                            return myfield.value;
+                        } else {
+                            myfield.value = myfield.value.slice(0, -1);
+                            return myfield.value;
+                        }
+                    }
+                    break;
+                case 3:
+                    if (currentValueSplited.indexOf(':') === -1) {
+                        myfield.value = myfield.value.splice(2, 0, ':');
+                        return myfield.value;
+                    }
+                    break;
+                case 4:
+                    if (currentValueSplited[3].search(/[0-5]/) === 0) {
+                        return myfield.value;
+                    } else {
+                        myfield.value = myfield.value.slice(0, -1);
+                        return myfield.value;
+                    }
+                    break;
+            }
+        }
+    } else {
+        if (code !== 8) { myfield.value = myfield.value.slice(0, -1); }
+        return myfield.value;
+    }
+}
 function uploadFile($scope, $http, obj) {
     var xhr = new XMLHttpRequest(),
         fd = new FormData();
@@ -159,4 +241,31 @@ function uploadFile($scope, $http, obj) {
 
     xhr.open('POST', 'Calendar/UploadFile', true);
     xhr.send(fd);
+}
+function parseTime(time) {
+    if (time !== undefined) {
+        var result = "";
+
+        result += time.Hours < 10 ? "0" + time.Hours : time.Hours;
+        result += ":";
+        result += time.Minutes < 10 ? "0" + time.Minutes : time.Minutes;
+
+        return result;
+    }
+}
+function parseDate(date) {
+    var curDate = date.match(/\d+/g);
+    if (curDate.length) {
+        var _data = new Date(parseInt(curDate)),
+            _day = _data.getDay(),
+            _month = _data.getMonth() + 1,
+            _yaer = _data.getFullYear(),
+            result = "";
+
+        result += _day < 10 ? "0" + _day + "." : _day + ".";
+        result += _month < 10 ? "0" + _month + "." : _month + ".";
+        result += _yaer;
+
+        return result;
+    }
 }

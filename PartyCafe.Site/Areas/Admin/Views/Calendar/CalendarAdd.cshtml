@@ -1,7 +1,38 @@
-﻿
-@{
-    ViewBag.Title = "CalendarAdd";
+﻿@{
+    ViewBag.Title = "Добавление мероприятия";
+    Layout = "";
 }
-
-<h2>CalendarAdd</h2>
-
+<h2>{{Header}}</h2>
+<div class="additwrap">
+    <form name="eventsForm" novalidate>
+        <div class="addit-wrap">
+            <label class="addit-label" for="eventsName">Название мероприятия:</label>
+            <input type="text" class="form-control" ng-model="eventsAdd.Name" name="eventsName" placeholder="Название">
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="eventsDesc">Описание мероприятия:</label>
+            <textarea cols="5" class="form-control" ng-model="eventsAdd.Desc" name="eventsDesc" placeholder="Описание"></textarea>
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="eventsPhoto">Фотография мероприятия:</label>
+            <input type="file" class="form-control" ng-model="eventsAdd.Photo" name="eventsPhoto">
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="eventsDate">Дата мероприятия:</label>
+            <input type="text" name="eventsDate" class="form-control" ng-model="eventsAdd.Date" jqdatepicker placeholder="11/02/2015">
+        </div>
+        <div class="addit-wrap">
+            <label class="addit-label" for="eventsTime">Время мероприятия:</label>
+            <input type="text" name="eventsTime" class="form-control" ng-model="eventsAdd.Time" maxlength="5" onkeyup="restrictTime(this, event);" placeholder="15:49">
+        </div>
+        <div class="error-wrap">{{error}}</div>
+        <div class="tools-wrapp">
+            <ul class="tools_add">
+                <li class="tools-item">
+                    <button class="btn btn-default" ng-click="addEvent()">Добавить</button>
+                </li>
+                <li class="tools-item"><button class="btn btn-default" ng-click="Back()">Назад</button></li>
+            </ul>
+        </div>
+    </form>
+</div>
