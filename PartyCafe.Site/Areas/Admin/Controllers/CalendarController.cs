@@ -95,12 +95,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     var filename = file.FileName;
                     file.InputStream.Read(content, 0, file.ContentLength);
 
-                    ServiceUtils.EditService(
-                        new PCService()
+                    EventUtils.EditEvent(
+                        new PCEvent()
                         {
                             idRecord = id,
                             name = name,
-                            description = desc
+                            Description = desc,
+                            DateEvent = DateTime.Parse(date),
+                            TimeEvent = TimeSpan.Parse(time)
                         },
                         User.Identity.Name,
                         new PCPhoto() { data = content, fileName = filename }
@@ -109,12 +111,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ServiceUtils.EditService(
-                        new PCService()
+                    EventUtils.EditEvent(
+                        new PCEvent()
                         {
                             idRecord = id,
                             name = name,
-                            description = desc
+                            Description = desc,
+                            DateEvent = DateTime.Parse(date),
+                            TimeEvent = TimeSpan.Parse(time)
                         },
                         User.Identity.Name,
                         null
@@ -127,12 +131,18 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
-
         [HttpPost]
-        public JsonResult DeleteBlogCalendar(int idCalendar)
+        public string RemoveCalendarEvent(int id)
         {
-            //return Json(_calendarService.DeleteBlogCalendar(idCalendar, HttpContext.Server.MapPath("/")));
-            return null;
+            try
+            {
+                EventUtils.DelEvent(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
         }
 
     }

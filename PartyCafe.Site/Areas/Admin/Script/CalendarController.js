@@ -81,8 +81,10 @@ calendarapp.controller("CalendarHomeController", function ($scope, $http, $locat
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
     };
-    $scope.removeCalendarItem = function (item) {
-        $http.post('Calendar/DeleteCalendarItem', { id: item.idRecord }).success(function (response) {
+    $scope.removeCalendar = function (item) {
+        $http.post('Calendar/RemoveCalendarEvent', {
+            id: item.idRecord
+        }).success(function (response) {
             if (response === 'ok') {
                 $location.path('/');
             } else {
@@ -131,13 +133,13 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
     $scope.itemForEdit.DateEvent = parseDate($scope.itemForEdit.DateEvent);
     $scope.itemForEdit.TimeEvent = parseTime($scope.itemForEdit.TimeEvent);
 
-    $scope.updateCalendar = function () {
+    $scope.updateEvent = function () {
         var fd = new FormData();
         fd.append('id', $scope.itemForEdit.idRecord);
         fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.description);
-        fd.append('date', $scope.itemForEdit.Date);
-        fd.append('time', $scope.itemForEdit.Time);
+        fd.append('desc', $scope.itemForEdit.Description);
+        fd.append('date', $scope.itemForEdit.DateEvent);
+        fd.append('time', $scope.itemForEdit.TimeEvent);
         fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
 
         $http.post('Calendar/UpdateCalendarEvent', fd, {
