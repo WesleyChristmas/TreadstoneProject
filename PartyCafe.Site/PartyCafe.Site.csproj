@@ -239,19 +239,13 @@
     <Content Include="Areas\Admin\Content\delete.png" />
     <Content Include="Areas\Admin\Content\edit.png" />
     <Content Include="Areas\Admin\Script\AboutController.js" />
-    <Content Include="Areas\Admin\Script\Blog\BlogController.js" />
     <Content Include="Areas\Admin\Script\CalendarController.js" />
-    <Content Include="Areas\Admin\Script\Calendar\CalendarClass.js" />
-    <Content Include="Areas\Admin\Script\Calendar\CalendarController.js" />
-    <Content Include="Areas\Admin\Script\Calendar\CalendarLibrary.js" />
+    <Content Include="Areas\Admin\Script\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuClass.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
     <Content Include="Areas\Admin\Script\GalleryController.js" />
     <Content Include="Areas\Admin\Script\ServicesController.js" />
-    <Content Include="Areas\Admin\Views\FoodMenu\MenuSections.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Areas\Admin\Views\Services\ServicesEditPhoto.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -371,13 +365,10 @@
     <Content Include="Scripts\AngularJs\angular-aria.min.js.map" />
     <Content Include="Scripts\AngularJs\angular-animate.min.js.map" />
     <Content Include="Scripts\AngularJs\angular.min.js.map" />
-    <Content Include="Areas\Admin\Views\FoodMenu\EditMenuSection.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\Index.cshtml" />
     <Content Include="Content\video\video.ogv" />
     <Content Include="Content\video\video.webm" />
-    <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuItems.cshtml" />
-    <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\BlogTable.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\BlogEdit.cshtml" />
     <Content Include="fonts\entypo-selected.eot" />
@@ -414,6 +405,7 @@
     <Content Include="Areas\Admin\Views\Calendar\CalendarHome.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\CalendarAdd.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\CalendarEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuHome.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />
