@@ -39,3 +39,28 @@ img { max-width: 300px; max-height: 300px; }
 .additwrap { margin: 30px 0; }
 .addit-wrap { margin-bottom: 20px; }
 .addit-label { display: block; font-size: 18px; }
+
+/* foode menu */
+.fm-main { margin-top: 20px; }
+.fm-main_text { width: 120px; }
+.fm-main_list, .fm-main_tools-list { margin: 5px 0 0 0; padding: 0; list-style: none; }
+
+.fm-main_list-item,
+.fm-main_tools-item { margin: 0; padding: 0; display: inline-block; cursor: pointer; }
+.fm-main_list-itemclear { margin: 0; padding: 0; display: inline-block; }
+.fm-main_list-item,
+.fm-main_list-itemclear { padding: 10px 5px; width: 130px; height: auto; }
+.fm-main_list-itemclear { display: inline-block; wid }
+.fm-main_tools-item { margin-right: 5px; }
+.fm-main_tools-item {
+    width: 25px;
+    height: 22px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.fm-main_list-item:hover, .fm-main_tools-item:hover {
+    -webkit-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+    -moz-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+    box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+}
