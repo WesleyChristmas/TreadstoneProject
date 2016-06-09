@@ -5,13 +5,16 @@
     <h3 class="event-invite_title">{{InviteEvent.header}}</h3>
     <div class="event-invite_images">
         <div class="event-invite_images_wrap" ng-repeat="itemphoto in InviteEvent.childrenPhoto">
-            <a class="event-invite-images_item" href="{{itemphoto.photoPath}}" data-lightbox="gallery" data-title="{{itemphoto.name}}" style="background: url('{{itemphoto.photoPath}}') no-repeat center center; background-size: cover;"></a>
+            {{InviteEvent.photos}}
+            <a class="event-invite-images_item"
+               href="{{itemphoto.photoPath}}"
+               data-lightbox="gallery"
+               data-title="{{itemphoto.name}}"
+               style="background: url('{{itemphoto.photoPath}}') no-repeat center center; background-size: cover;"></a>
         </div>
     </div>
     <div class="event-invite_text">{{InviteEvent.desc}}</div>
-    <div ng-show="formResult" style="color:white; font-size:20px; text-align:center;">
-        {{result}}
-    </div>
+    <div ng-show="formResult" style="color:white; font-size:20px; text-align:center;">{{result}}</div>
     <div>
         <form mathod="post" novalidate ng-show="inviteOrderForm" name="myForm" class="event-invite_form">
             <p>Имя*:</p>

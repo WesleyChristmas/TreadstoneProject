@@ -35,6 +35,7 @@ eventcalendarapp.controller("CalendarController", function ($scope, $http, $loca
 eventcalendarapp.controller("InviteController", function ($scope, $http, $location, sharedDataService) {
     /*Helpers*/
     $scope.InviteEvent = sharedDataService.getItem();
+    console.log(sharedDataService.getItem())
     $scope.inviteOrder = true;
     $scope.Order = function () {
         $scope.inviteOrder = false;
