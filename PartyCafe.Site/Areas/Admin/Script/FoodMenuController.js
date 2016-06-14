@@ -38,18 +38,26 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
     };
 
     $scope.FoodMenu = [];
+    $scope.selectedmain = 0;
     $scope.Header = "Управление меню кафе";
     $scope.selectForEdit = '';
+    $scope.editmainitem = false;
 
     /* Main */
     $scope.addMain = function () { };
     $scope.getSubmenu = function (item) {
-        $scope.SubMenu = item;
         if (item === undefined) {
             $scope.SubMenuEdit = false;
+            $scope.SubMenu = [];
+            $scope.selectedmain = 0;
         } else {
-            $scope.SubMenuEdit = item.length > 0 ? true : false;
+            $scope.SubMenuEdit = item.subGroups.length > 0 ? true : false;
+            $scope.SubMenu = item.subGroups;
+            $scope.selectedmain = item.idRecord;
         }
+    };
+    $scope.editMainItem = function (item) {
+
     };
 
     GetAllFoodMenu($scope, $http);
