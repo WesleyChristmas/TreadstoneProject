@@ -36,8 +36,19 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             }
         });
     };
+    $scope.getModel = function (item) {
+        if (item.Platform === null) {
+            return item.Weight;
+        } else {
+            return item.Platform;
+        }
+        //return item.Platform === null ? item.Weight : item.Platform;
+    };
 
     $scope.FoodMenu = [];
+    $scope.SubMenu = [];
+    $scope.SubMenuItems = [];
+
     $scope.selectedmain = 0;
     $scope.Header = "Управление меню кафе";
     $scope.selectForEdit = '';
@@ -56,6 +67,14 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             $scope.selectedmain = item.idRecord;
         }
     };
+    $scope.getSubmenuItems = function (item) {
+        if (item == undefined) {
+            $scope.SubMenuItems = [];
+        } else {
+            $scope.SubMenuItems = item.items;
+        }
+    };
+
     $scope.editMainItem = function (item) {
 
     };

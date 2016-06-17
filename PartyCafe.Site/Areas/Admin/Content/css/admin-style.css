@@ -67,14 +67,14 @@ img { max-width: 300px; max-height: 300px; }
 
 /*foodmenu - sumbenu */
 .fm-submenu {
-    width: 230px;
+    width: 200px;
     height: 600px;
     overflow: hidden;
 }
 .fm-submenu-wrapper {
     width: 230px;
     height: 600px;
-    padding: 0 10px;
+    padding: 10px;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -88,9 +88,10 @@ img { max-width: 300px; max-height: 300px; }
     text-align: center;
     font-size: 18px;
 }
-.fm-sm_list-item { width: 180px; }
+.fm-sm_list-item { width: 180px; padding: 5px; }
 .fm-sm_tools-item:hover, .fm-sm_list-item:hover {
     -webkit-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
     -moz-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
     box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
 }
+.fm-subitems-wrap { margin: 5px 0; }
