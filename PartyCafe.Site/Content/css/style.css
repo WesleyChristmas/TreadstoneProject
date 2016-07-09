@@ -456,14 +456,13 @@ canvas {
     display: inline-block;
     font-size: 25px;
     position: absolute;
-    bottom: -90px;
+    bottom: 0px;
     width: 100%;
     text-align: center;
     padding: 15px;
     background: rgba(0, 0, 0, 0.6);
     color: white;
 }
-.service-item a:hover .service-popup { bottom: 0; }
 .services-more_content { height: 100%; background: rgba(0,0,0,0.7); padding: 15px; }
 .services-more_content a { width: 291px;  height: 291px; }
 .smore-title { text-align: center; font-size: 30px; }
@@ -572,7 +571,7 @@ canvas {
 .about-popup, .about-popup_more {
     display: inline-block;
     position: absolute;
-    bottom: -90px;
+    bottom: 0;
     width: 100%;
     padding: 15px 0;
     text-align: center;
@@ -581,9 +580,6 @@ canvas {
 }
 .about-popup { font-size: 30px; }
 .about-popup_more { font-size: 25px; }
-.about-item a:hover .about-popup,
-.about-item a:hover .about-popup_more { bottom: 0; }
-
 
 /*Gallery*/
 .photogallery-wrap {
