@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
+using System;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
@@ -33,27 +34,115 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(EventUtils.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
-        /*
         [HttpPost]
-        public void AddBlogCalendar(BlogCalendarEntity calendar)
+        public string AddCalendarEvent(string name, string desc, string date, string time)
         {
-           // _calendarService.AddBlogCalendar(calendar, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
+            try
+            {
+                var request = Request;
+                if (request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    var content = new byte[file.ContentLength];
+                    var filename = file.FileName;
+                    file.InputStream.Read(content, 0, file.ContentLength);
+
+                    EventUtils.InsertEvent(
+                        new PCEvent()
+                        {
+                            name = name,
+                            Description = desc,
+                            DateEvent = DateTime.Parse(date),
+                            TimeEvent = TimeSpan.Parse(time)
+                        },
+                        User.Identity.Name,
+                        new PCPhoto() { data = content, fileName = filename }
+                    );
+                    return "ok";
+                }
+                else
+                {
+                    EventUtils.InsertEvent(
+                        new PCEvent()
+                        {
+                            name = name,
+                            Description = desc,
+                            DateEvent = DateTime.Parse(date),
+                            TimeEvent = TimeSpan.Parse(time)
+                        },
+                        User.Identity.Name,
+                        null
+                    );
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
         }
-        */
-
         [HttpPost]
-        public void UpdateBlogCalendar(PCEvent calendar)
+        public string UpdateCalendarEvent(int id, string name, string desc, string date, string time)
         {
+            try
+            {
+                var request = Request.Files;
+                if (request.Count > 0)
+                {
+                    var file = Request.Files[0];
 
-            EventUtils.EditEvent(calendar, "admin", null);
-            //_calendarService.UpdateBlogCalendar(calendar, ImageSaver.GetSingleImage(Request, 2, HttpContext.Server.MapPath("/")));
+                    var content = new byte[file.ContentLength];
+                    var filename = file.FileName;
+                    file.InputStream.Read(content, 0, file.ContentLength);
+
+                    EventUtils.EditEvent(
+                        new PCEvent()
+                        {
+                            idRecord = id,
+                            name = name,
+                            Description = desc,
+                            DateEvent = DateTime.Parse(date),
+                            TimeEvent = TimeSpan.Parse(time)
+                        },
+                        User.Identity.Name,
+                        new PCPhoto() { data = content, fileName = filename }
+                    );
+                    return "ok";
+                }
+                else
+                {
+                    EventUtils.EditEvent(
+                        new PCEvent()
+                        {
+                            idRecord = id,
+                            name = name,
+                            Description = desc,
+                            DateEvent = DateTime.Parse(date),
+                            TimeEvent = TimeSpan.Parse(time)
+                        },
+                        User.Identity.Name,
+                        null
+                    );
+                    return "ok";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
         }
-
         [HttpPost]
-        public JsonResult DeleteBlogCalendar(int idCalendar)
+        public string RemoveCalendarEvent(int id)
         {
-            //return Json(_calendarService.DeleteBlogCalendar(idCalendar, HttpContext.Server.MapPath("/")));
-            return null;
+            try
+            {
+                EventUtils.DelEvent(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
         }
 
     }

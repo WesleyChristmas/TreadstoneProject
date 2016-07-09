@@ -1,18 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Редактирование меню";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<script type="text/javascript" src="~/Areas/Admin/Script/FoodMenu/FoodMenuController.js"></script>
-<script type="text/javascript" src="~/Areas/Admin/Script/FoodMenu/FoodMenuClass.js"></script>
-<script type="text/javascript" src="~/Areas/Admin/Script/FoodMenu/FoodMenuLibrary.js"></script>
+<script type="text/javascript" src="~/Areas/Admin/Script/FoodMenuController.js"></script>
+<link href="~/Areas/Admin/Content/css/font-awesome.min.css" rel="stylesheet" />
 
-<div ng-app="FoodMenuAdminApp" ng-controller="FoodMenuAdminController">
-
-    <h2>Редактирование меню</h2>
-
+<div ng-app="FoodMenuApp">
     <div ng-view></div>
-
 </div>
 

@@ -39,3 +39,59 @@ img { max-width: 300px; max-height: 300px; }
 .additwrap { margin: 30px 0; }
 .addit-wrap { margin-bottom: 20px; }
 .addit-label { display: block; font-size: 18px; }
+
+/* foode menu */
+.fm-main_active { outline: 1px solid red; }
+.fm-main { margin: 20px 0; }
+.fm-main_text { width: 120px; }
+.fm-main_list, .fm-main_tools-list { margin: 5px 0 0 0; padding: 0; list-style: none; }
+
+.fm-main_list-item,
+.fm-main_tools-item { margin: 0; padding: 0; display: inline-block; cursor: pointer; }
+.fm-main_list-itemclear { margin: 0; padding: 0; display: inline-block; }
+.fm-main_list-item,
+.fm-main_list-itemclear { padding: 10px 5px; width: 130px; height: auto; }
+.fm-main_list-itemclear { display: inline-block; }
+.fm-main_tools-item { margin-right: 5px; }
+.fm-main_tools-item {
+    width: 25px;
+    height: 22px;
+    text-align: center;
+    font-size: 18px;
+}
+.fm-main_list-item:hover, .fm-main_tools-item:hover {
+    -webkit-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+    -moz-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+    box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+}
+
+/*foodmenu - sumbenu */
+.fm-submenu {
+    width: 200px;
+    height: 600px;
+    overflow: hidden;
+}
+.fm-submenu-wrapper {
+    width: 230px;
+    height: 600px;
+    padding: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.fm-sm_tools { display: inline-block; }
+.fm-sm_list, .fm-sm_tools-list { padding: 0; margin: 0; list-style: none; }
+.fm-sm_tools-list { margin: 5px 0; }
+.fm-sm_tools-item {
+    display: inline-block;
+    width: 25px;
+    height: 22px;
+    text-align: center;
+    font-size: 18px;
+}
+.fm-sm_list-item { width: 180px; padding: 5px; }
+.fm-sm_tools-item:hover, .fm-sm_list-item:hover {
+    -webkit-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+    -moz-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+    box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
+}
+.fm-subitems-wrap { margin: 5px 0; }
