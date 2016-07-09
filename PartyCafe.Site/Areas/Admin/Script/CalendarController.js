@@ -19,7 +19,7 @@ calendarapp.filter('filterDate', function () {
         var curDate = date.match(/\d+/g);
         if (curDate.length) {
             var _data = new Date(parseInt(curDate)),
-                _day = _data.getDay(),
+                _day = _data.getDate(),
                 _month = _data.getMonth() + 1,
                 _yaer = _data.getFullYear(),
                 result = "";
@@ -58,8 +58,8 @@ calendarapp.controller("CalendarHomeController", function ($scope, $http, $locat
     /*Helpers*/
     $scope.isActive = function (item) { return $scope.selectForEdit === item; };
     $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
-    $scope.AddCalendar = function () { $location.path('/add'); };
-    $scope.EditCalendar = function () {
+    $scope.addCalendar = function () { $location.path('/add'); };
+    $scope.editCalendar = function () {
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
     };
