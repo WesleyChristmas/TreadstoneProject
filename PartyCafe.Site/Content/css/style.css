@@ -414,7 +414,7 @@ canvas {
 
 /* Services */
 .services-wrap {
-    max-width: 955px;
+    max-width: 997px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 20px;
@@ -428,7 +428,7 @@ canvas {
 .services-wrapper {
     overflow:hidden;
     overflow-y:scroll;
-    height: 690px;
+    height: 620px;
     width: 1000px;
 }
 .service-item {
@@ -528,7 +528,7 @@ canvas {
 
 /* About Us */
 .about-wrap {
-    max-width: 953px;
+    max-width: 997px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 20px;
@@ -542,7 +542,7 @@ canvas {
 .about-wrapper, .about-wrapper_more {
     overflow:hidden;
     overflow-y:scroll;
-    height: 690px;
+    height: 620px;
     width: 1000px;
 }
 .about-title { text-align: center; margin-bottom: 30px; font-size: 30px; }
@@ -1057,10 +1057,16 @@ canvas {
     .photogallery-wrapper { width: 900px; }
     .photogallery-item a { height: 270px; width: 270px; }
 
-    .about-wrap { max-width: 863px; }
+    .services-wrap { height: 690px; max-width: 907px; }
+    .services-wrapper { width: 900px; }
+    .service-item a { height: 270px; width: 270px; }
+    .service-popup { font-size: 20px; padding: 15px 10px; bottom: 0; }
+
+
+    .about-wrap { max-width: 907px; }
     .about-wrapper, .about-wrapper_more { width: 900px; }
     .about-item a { height: 270px; width: 270px; }
-    .about-popup, .about-popup_more { font-size: 25px; }
+    .about-popup, .about-popup_more { font-size: 20px; }
 }
 @media only screen and (max-width: 960px) {
     .h-wrap { max-width: 720px; }
@@ -1097,15 +1103,28 @@ canvas {
 
     .smore-order { width: 98%; }
 
-    .services-wrap { height: 690px; max-width: 762px; }
+    .services-wrap { height: 690px; max-width: 804px; }
     .services-wrapper { width: 800px; }
     .service-item a { height: 236px; width: 236px; }
     .service-popup { font-size: 20px; padding: 15px 10px; bottom: 0; }
 
-    .about-wrap { height: 690px; max-width: 762px; }
+    .about-wrap { height: 690px; max-width: 804px; }
     .about-wrapper, .about-wrapper_more { width: 800px; }
     .about-item a { height: 236px; width: 236px; }
-    .about-popup, .about-popup_more { font-size: 20px; }
+    .about-popup, .about-popup_more { font-size: 18px; }
+}
+@media only screen and (max-width: 824px) {
+    .services-more_content a, .event-invite_content a { width:  556px; height: 556px; }
+
+    .services-wrap { max-width: 665px; }
+    .services-wrapper { height: 640px; width: 660px; }
+    .service-item a { height: 190px; width: 190px; }
+    .service-popup { font-size: 20px; padding: 15px 10px; bottom: 0; }
+
+    .about-wrap { max-width: 665px; height: 660px; }
+    .about-wrapper, .about-wrapper_more { width: 660px; }
+    .about-item a { height: 190px; width: 190px; }
+    .about-popup, .about-popup_more { padding: 15px 10px; }
 }
 @media only screen and (max-width: 780px) {
     .iw-link_title { font-size: 25px; margin-top: 15px; }
@@ -1139,21 +1158,18 @@ canvas {
     .dish-item { max-width: 60%%; }
     .dish-item img { width: 200px; }
 
-    .services-more_content a, .event-invite_content a { width:  500px; height: 500px; }
-
-    .services-wrap { max-width: 620px; }
-    .services-wrapper { height: 690px; width: 660px; }
+    .services-wrapper { height: 640px; width: 660px; }
     .service-item a { height: 190px; width: 190px; }
     .service-popup { font-size: 20px; padding: 15px 10px; bottom: 0; }
 
-    .photogallery-wrap { max-width: 620px; }
+    .photogallery-wrap { max-width: 647px; }
     .photogallery-wrapper { width: 660px; }
     .photogallery-item a { height: 190px; width: 190px; }
 
-    .about-wrap { max-width: 620px; }
+    .about-wrap { max-width: 650px; }
     .about-wrapper, .about-wrapper_more { width: 660px; }
     .about-item a { height: 190px; width: 190px; }
-    .about-popup, .about-popup_more { font-size: 20px; padding: 15px 10px; bottom: 0; }
+    .about-popup, .about-popup_more { padding: 15px 10px; }
 
 }
 @media only screen and (max-width: 640px) {
@@ -1173,11 +1189,11 @@ canvas {
     .main-wrap { padding-left: 10px; padding-right: 10px; }
     .dish-item { width: 90%; }
 
-    .services-more_content a, .event-invite_content a { width: 445px; height: 445px; }
+    .services-more_content a, .event-invite_content a { width: 465px; height: 465px; }
     .smore-form { width: 450px; }
 
-    .services-wrap { max-width: 563px; }
-    .services-wrapper { height: 690px; width: 560px; }
+    .services-wrap { max-width: 587px; }
+    .services-wrapper { /*height: 690px;*/ width: 560px; }
     .service-item a { height: 170px; width: 170px; }
     .service-popup { font-size: 18px; }
 
@@ -1203,16 +1219,22 @@ canvas {
     #top-social { width: 80%; position: relative; }
     .barMenuContent { width: 115%; }
 
-    .services-more_content a, .event-invite_content a { width: 245px; height: 245px; }
     .smore-form { width: 240px; }
     .invitewrap { max-width: 290px!important; }
     .event-invite_form { width: auto; }
 
     .services-wrap { max-width: 453px; }
-    .services-wrapper { width: 560px; }
+    .services-wrapper { width: 453px; }
     .service-item { float: none; margin: 10px 0; }
     .service-item a { height: 410px; width: 410px; }
     .service-popup { font-size: 25px; padding: 15px; word-break: break-word; }
+
+    .smore-form { width: 450px; }
+    .services-wrap { max-width: 587px; }
+    .services-wrapper { /*height: 690px;*/ width: 560px; }
+    .service-item a { height: 170px; width: 170px; }
+    .service-popup { font-size: 18px; }
+
 
     .photogallery-wrap { max-width: 453px; }
     .photogallery-wrapper { width: 460px; }

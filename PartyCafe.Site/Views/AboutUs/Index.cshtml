@@ -8,6 +8,12 @@
 <script src="~/Scripts/lightbox.js"></script>
 
 <div class="about-wrap" ng-app="aboutusapp">
-    <div ng-view></div>
+    <div class="h1 ng-scope ng-binding">
+        @ViewBag.Title
+        <div class="darkArea">
+            <div ng-view></div>
+        </div>
+        <div class="clear"></div>
+    </div>
 </div>
 
