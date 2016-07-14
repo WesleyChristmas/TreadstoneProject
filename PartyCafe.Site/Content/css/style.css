@@ -436,6 +436,7 @@ canvas {
     margin: 0;
     position: relative;
     margin: 0 2px;
+    overflow: hidden;
 }
 .service-item a {
     background: transparent;
@@ -451,6 +452,14 @@ canvas {
     width: 300px;
     background-size: cover;
     overflow: hidden;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}
+.service-item a:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: -webkit-transform 10s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1),-webkit-transform 20s cubic-bezier(0,1,.35,1)
 }
 .service-popup{
     display: inline-block;
@@ -567,6 +576,14 @@ canvas {
     width: 300px;
     background-size: cover;
     overflow: hidden;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}
+.about-item a:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: -webkit-transform 10s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1),-webkit-transform 20s cubic-bezier(0,1,.35,1)
 }
 .about-popup, .about-popup_more {
     display: inline-block;
@@ -605,6 +622,7 @@ canvas {
     margin: 0;
     position: relative;
     margin: 0 2px;
+    overflow: hidden;
 }
 .photogallery-item a {
     background: transparent;
@@ -620,6 +638,14 @@ canvas {
     width: 300px;
     background-size: cover;
     overflow: hidden;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}
+.photogallery-item a:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: -webkit-transform 10s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1),-webkit-transform 20s cubic-bezier(0,1,.35,1)
 }
 
 /* Calendar */
@@ -1200,7 +1226,7 @@ canvas {
     .services-more_content a, .event-invite_content a { width: 465px; height: 465px; }
     .smore-form { width: 450px; }
 
-    .services-wrap { max-width: 587px; }
+    .services-wrap { max-width: 586px; }
     .services-wrapper { /*height: 690px;*/ width: 560px; }
     .service-item a { height: 170px; width: 170px; }
     .service-popup { font-size: 18px; }
@@ -1232,16 +1258,21 @@ canvas {
     .event-invite_form { width: auto; }
 
     .services-wrap { max-width: 453px; }
-    .services-wrapper { width: 453px; }
-    .service-item { float: none; margin: 10px 0; }
+    .services-wrapper { width: 430px; }
+    .service-item {
+        float: none;
+        margin: 10px 0;
+        width: 390px;
+    }
     .service-item a { height: 410px; width: 410px; }
-    .service-popup { font-size: 25px; padding: 15px; word-break: break-word; }
+    .service-popup {
+        font-size: 25px;
+        padding: 15px;
+        word-break: break-word;
+        left: 0;
+    }
 
     .smore-form { width: 450px; }
-    .services-wrap { max-width: 587px; }
-    .services-wrapper { /*height: 690px;*/ width: 560px; }
-    .service-item a { height: 170px; width: 170px; }
-    .service-popup { font-size: 18px; }
 
     .photogallery-wrap { max-width: 453px; }
     .photogallery-wrapper { width: 460px; }
@@ -1249,21 +1280,30 @@ canvas {
     .photogallery-item a { height: 320px; width: 380px; }
 
     .about-wrap { max-width: 453px; }
-    .about-wrapper { width: 460px; }
+    .about-wrapper { width: 430px; }
     .about-title {
         margin-bottom: 10px;
         margin-top: 10px;
         font-size: 20px;
      }
     .about-wrapper_more { width: 460px; height: 610px; }
-    .about-item { float: none; margin: 10px 0; }
+    .about-item {
+        float: none;
+        margin: 10px 0;
+        width: 390px;
+    }
     .about-item a { height: 410px; width: 410px; }
-    .about-popup, .about-popup_more { font-size: 25px; padding: 15px; }
+    .about-popup, .about-popup_more {
+        font-size: 25px;
+        padding: 15px;
+        left: 0;
+    }
 }
 @media only screen and (max-width: 480px) {
 
     .about-wrap { max-width: 346px; }
     .about-wrapper, .about-wrapper_more { width: 320px; }
+    .about-item { width: 280px; }
     .about-item a { height: 220px; width: 280px; }
     .about-popup, .about-popup_more { font-size: 18px; padding: 15px 10px}
 

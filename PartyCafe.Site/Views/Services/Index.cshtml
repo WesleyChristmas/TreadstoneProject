@@ -21,9 +21,8 @@
 
                         <div ng-show="serviceBloks">
                             <div class="service-item" ng-repeat="item in Services">
-                                <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)">
-                                    <span class="service-popup">{{item.name}}</span>
-                                </a>
+                                <a href="javascript:void(0)" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;" ng-click="More($index)"></a>
+                                <span class="service-popup">{{item.name}}</span>
                             </div>
                         </div>
 
