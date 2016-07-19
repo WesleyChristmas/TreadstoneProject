@@ -35,7 +35,7 @@
             <div class="fm-submenu-wrapper">
                 <ul class="fm-sm_list">
                     <li class="fm-main_list-itemclear"></li>
-                    <li class="fm-sm_list-item" ng-repeat="item in SubMenu" ng-click="getSubmenuItems(item)">
+                    <li class="fm-sm_list-item" ng-repeat="item in SubMenu" ng-class="{'fm-sub_active' : item.idRecord == selectedsub}" ng-click="getSubmenuItems(item)">
                         <input type="text" ng-model="item.name" class="fm-sm_text">
                         <div class="fm-sm_tools">
                             <ul class="fm-sm_tools-list">
@@ -63,10 +63,10 @@
         <!-- Submenu items -->
         <ul class="fm-sm_list">
             <li class="fm-main_list-itemclear"></li>
-            <li class="-fm-sm_list-item" ng-repeat="item in SubMenuItems">
+            <li class="fm-smi_list-item" ng-repeat="item in SubMenuItems">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-sx-2">
-                        <img src="{{item.photoPath}}" style="background-color: gray;">
+                        <img src="{{item.photoPath}}" style="background-color: gray; background-size: cover; width: 100%;">
                     </div>
                     <div class="col-md-8 col-sm-8 col-sx-8">
                         <div class="fm-subitems-wrap">
@@ -87,7 +87,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="fm-sm_tools">
                     <ul class="fm-sm_tools-list">
                         <li class="fm-sm_tools-item"><i class="fa fa-plus"></i></li>
@@ -96,7 +95,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="fm-sm_list-item" ng-show="SubMenuEdit" >
+            <li class="fm-smi_list-item" ng-show="SubMenuItemsEdit">
                 <input type="text" ng-model="mainsection.name" class="fm-sm_text" placeholder="Новый раздел">
                 <div class="fm-sm_tools">
                     <ul class="fm-sm_tools-list">

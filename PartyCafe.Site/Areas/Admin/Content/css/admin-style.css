@@ -41,7 +41,7 @@ img { max-width: 300px; max-height: 300px; }
 .addit-label { display: block; font-size: 18px; }
 
 /* foode menu */
-.fm-main_active { outline: 1px solid red; }
+.fm-main_active { background: rgba(39, 167, 31, 0.15); }
 .fm-main { margin: 20px 0; }
 .fm-main_text { width: 120px; }
 .fm-main_list, .fm-main_tools-list { margin: 5px 0 0 0; padding: 0; list-style: none; }
@@ -66,6 +66,7 @@ img { max-width: 300px; max-height: 300px; }
 }
 
 /*foodmenu - sumbenu */
+.fm-sub_active { background: rgba(39, 167, 31, 0.15); }
 .fm-submenu {
     width: 200px;
     height: 600px;
@@ -89,6 +90,7 @@ img { max-width: 300px; max-height: 300px; }
     font-size: 18px;
 }
 .fm-sm_list-item { width: 180px; padding: 5px; }
+.fm-smi_list-item { margin-bottom: 10px; }
 .fm-sm_tools-item:hover, .fm-sm_list-item:hover {
     -webkit-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;
     -moz-box-shadow: inset 1px 1px #D9DADC,1px 1px #D9DADC;

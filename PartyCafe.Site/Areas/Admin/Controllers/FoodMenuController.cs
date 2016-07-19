@@ -24,5 +24,28 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             var result = MenuUtils.GetAll();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public string AddServices(string name, string desc)
+        {
+            try
+            {
+                    .InsertService(
+                        new PCService()
+                        {
+                            name = name,
+                            description = desc,
+                            serviceType = 0
+                        },
+                        User.Identity.Name,
+                        new PCPhoto() { data = content, fileName = filename }
+                    );
+                    return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
     }
 }
