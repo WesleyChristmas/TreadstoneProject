@@ -26,6 +26,17 @@ namespace PartyCafe.Site.DBUtils
         public List<MenuGroupView> subGroups;
     }
 
+    public class PCMenuItem
+    {
+        public int IdRecord;
+        public string Name;
+        public float Price;
+        public string Country;
+        public string Description;
+        public string Platform;
+        public int Weight;
+    }
+
     public static class MenuUtils
     {
         private class MenuItemData
@@ -187,5 +198,50 @@ namespace PartyCafe.Site.DBUtils
                 groupsData.Add(gd);
             }
         }
+
+        public static void InsertItem (PCMenuItem partyItem, string userCreate, PCPhoto image)
+        {
+            var newMenuItem = new Events();
+            newMenuItem.Name = partyItem.Name ?? String.Empty;
+            newMenuItem.description = partyItem.Description ?? String.Empty;
+            //newMenuItem
+
+            if (image != null)
+            {
+                newMenuItem.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
+            }
+            else
+            {
+                newMenuItem.IdPhoto = 0;
+            }
+
+            newMenuItem.DateCreate = DateTime.Now;
+            newMenuItem.UserCreate = userCreate;
+
+            var dbContext = MainUtils.GetDBContext();
+            dbContext.Events.InsertOnSubmit(newMenuItem);
+            dbContext.SubmitChanges();
+        }
+        public static void EditItem(PCMenuItem partyEvent, string userUpdate, PCPhoto image)
+        {
+            throw new Exception();
+        }
+        public static void DelItem(int idRecord)
+        {
+            throw new Exception();
+        }
+
+        //public static void InsertGroup (PCMenuItem partyItem, string userCreate, PCPhoto image)
+        //{
+        //    throw new Exception();
+        //}
+        //public static void EditGroup(PCMenuItem partyEvent, string userUpdate, PCPhoto image)
+        //{
+        //    throw new Exception();
+        //}
+        //public static void DelGroup(int idRecord)
+        //{
+        //    throw new Exception();
+        //}
     }
 }
