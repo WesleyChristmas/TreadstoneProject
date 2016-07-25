@@ -336,9 +336,9 @@ namespace PartyCafe.Site.DBUtils
                             select mg).SingleOrDefault();
 
             var groupsToDel = curGroup.MenuGroups2.ToList();
-            foreach(var groupDel in groupsData)
+            foreach(var groupDel in groupsToDel)
             {
-                DelGroup(groupDel.idRecord);
+                DelGroup(groupDel.IdRecord);
             }
 
             var itemsToDel = curGroup.MenuItems.ToList();
