@@ -51,6 +51,7 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
 
     $scope.selectedmain = 0;
     $scope.selectedsub = 0;
+    $scope.index = { main: 0, sub: 0, item: 0 };
 
     $scope.Header = "Управление меню кафе";
     $scope.selectForEdit = '';
@@ -95,29 +96,34 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         });
     };
 
-    $scope.getSubmenu = function (item) {
+    $scope.getSubmenu = function (item, index) {
         if (item === undefined) {
             $scope.SubMenuEdit = false;
             $scope.SubMenu = [];
             $scope.selectedmain = 0;
+            $scope.index.main = 0;
         } else {
             $scope.SubMenuEdit = item.subGroups.length >= 0 ? true : false;
             $scope.SubMenu = item.subGroups;
             $scope.selectedmain = item.idRecord;
+            $scope.index.main = index;
         }
     };
-    $scope.getSubmenuItems = function (item) {
+    $scope.getSubmenuItems = function (item, index) {
         if (item == undefined) {
+            $scope.SubMenuItemsEdit = false;
             $scope.SubMenuItems = [];
             $scope.selectedsub = 0;
+            $scope.index.sub = 0;
         } else {
-            $scope.SubMenuItemsEdit = item.subGroups.length > 0 ? true : false;
+            $scope.SubMenuItemsEdit = item.items.length >= 0 ? true : false;
             $scope.SubMenuItems = item.items;
             $scope.selectedsub = item.idRecord;
+            $scope.index.sub = index;
         }
     };
 
-    /* Submenu item */
+    /* Submenu */
     $scope.addSubItem = function (itemName) {
         if ($scope.selectedmain !== 0) {
             $http.post('FoodMenu/AddGroupItem', {
@@ -126,19 +132,112 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             }).success(function (response) {
                 if (response === 'ok') {
                     $scope.subsection.name = '';
-                    GetAllFoodMenu($scope, $http);
+
+                    $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                        $scope.FoodMenu = result;
+                        $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                    });
                 } else {
                     $scope.error = response;
                 }
             });
         }
     };
+    $scope.editSubItem = function (itemName, item) {
+        $http.post('FoodMenu/EditGroupItem', {
+            name: itemName,
+            id: item.idRecord,
+            idparent: $scope.selectedmain
+        }).success(function (response) {
+            if (response === 'ok') {
+                $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                    $scope.FoodMenu = result;
+                    $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                });
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
     $scope.removeSubItem = function (item) {
         $http.post('FoodMenu/RemoveGroupItem', {
             id: item.idRecord
         }).success(function (response) {
             if (response === 'ok') {
-                GetAllFoodMenu($scope, $http);
+                $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                    $scope.FoodMenu = result;
+                    $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                });
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
+
+    /* Submenu item */
+    $scope.addSubmenuItem = function (item) {
+        if ($scope.selectedmain !== 0) {
+            $http.post('FoodMenu/AddItem', {
+                groupid: $scope.selectedsub,
+                name: item.name,
+                des: item.description,
+                weipla: item.platformweight,
+                price: item.price
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $scope.subsectionitem.name = '';
+                    $scope.subsectionitem.description = '';
+                    $scope.subsectionitem.platformweight = '';
+                    $scope.subsectionitem.price = '';
+
+                    $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                        $scope.FoodMenu = result;
+                        $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                        $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
+                    });
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
+    };
+    $scope.editSubmenuItem = function (item, id) {
+        if ($scope.selectedmain !== 0) {
+            $http.post('FoodMenu/EditItem', {
+                groupid: $scope.selectedsub,
+                name: item.name,
+                des: item.description,
+                weipla: item.platformweight,
+                price: item.price,
+                idrecord: id
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $scope.subsectionitem.name = '';
+                    $scope.subsectionitem.description = '';
+                    $scope.subsectionitem.platformweight = '';
+                    $scope.subsectionitem.price = '';
+
+                    $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                        $scope.FoodMenu = result;
+                        $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                        $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
+                    });
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
+    };
+    $scope.removeSubmenuItem = function (item) {
+        $http.post('FoodMenu/RemoveItem', {
+            id: item.idRecord
+        }).success(function (response) {
+            if (response === 'ok') {
+                $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                    $scope.FoodMenu = result;
+                    $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                    $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
+                });
             } else {
                 $scope.error = response;
             }

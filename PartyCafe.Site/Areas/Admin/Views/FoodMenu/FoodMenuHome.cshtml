@@ -6,7 +6,7 @@
 <div class="fm-main">
     <ul class="fm-main_list">
         <li class="fm-main_list-itemclear"></li>
-        <li class="fm-main_list-item" ng-repeat="item in FoodMenu" ng-class="{'fm-main_active' : item.idRecord == selectedmain}" ng-click="getSubmenu(item)">
+        <li class="fm-main_list-item" ng-repeat="item in FoodMenu" ng-class="{'fm-main_active' : item.idRecord == selectedmain}" ng-click="getSubmenu(item, $index)">
             <input type="text" ng-model="item.name" class="fm-main_text" ng-disabled="item.disable">
             <div class="fm-main_tools">
                 <ul class="fm-main_tools-list">
@@ -16,7 +16,7 @@
                 </ul>
             </div>
         </li>
-        <li class="fm-main_list-item" ng-click="getSubmenu()">
+        <li class="fm-main_list-item" ng-click="getSubmenu(undefined, $index)">
             <input type="text" ng-model="mainsection.name" class="fm-main_text" placeholder="Новый раздел">
             <div class="fm-main_tools">
                 <ul class="fm-main_tools-list">
@@ -35,12 +35,12 @@
             <div class="fm-submenu-wrapper">
                 <ul class="fm-sm_list">
                     <li class="fm-main_list-itemclear"></li>
-                    <li class="fm-sm_list-item" ng-repeat="item in SubMenu" ng-class="{'fm-sub_active' : item.idRecord == selectedsub}" ng-click="getSubmenuItems(item)">
+                    <li class="fm-sm_list-item" ng-repeat="item in SubMenu" ng-class="{'fm-sub_active' : item.idRecord == selectedsub}" ng-click="getSubmenuItems(item, $index)">
                         <input type="text" ng-model="item.name" class="fm-sm_text">
                         <div class="fm-sm_tools">
                             <ul class="fm-sm_tools-list">
                                 <li class="fm-sm_tools-item"><i class="fa fa-plus"></i></li>
-                                <li class="fm-sm_tools-item"><i class="fa fa-pencil"></i></li>
+                                <li class="fm-sm_tools-item" ng-click="editSubItem(item.name, item)"><i class="fa fa-pencil"></i></li>
                                 <li class="fm-sm_tools-item" ng-click="removeSubItem(item)"><i class="fa fa-trash"></i></li>
                             </ul>
                         </div>
@@ -59,7 +59,7 @@
         <!-- /Submenu -->
     </div>
 
-    <div class="col-md-8 col-sm-8 col-sx-8" style="outline: 1px solid;">
+    <div class="col-md-8 col-sm-8 col-sx-8">
         <!-- Submenu items -->
         <ul class="fm-sm_list">
             <li class="fm-main_list-itemclear"></li>
@@ -89,18 +89,38 @@
                 </div>
                 <div class="fm-sm_tools">
                     <ul class="fm-sm_tools-list">
-                        <li class="fm-sm_tools-item"><i class="fa fa-plus"></i></li>
-                        <li class="fm-sm_tools-item"><i class="fa fa-pencil"></i></li>
-                        <li class="fm-sm_tools-item"><i class="fa fa-trash"></i></li>
+                        <!--<li class="fm-sm_tools-item" ng-click="addSubmenuItem()"><i class="fa fa-plus"></i></li>-->
+                        <li class="fm-sm_tools-item" ng-click="editSubmenuItem(item, item.idRecord)"><i class="fa fa-pencil"></i></li>
+                        <li class="fm-sm_tools-item" ng-click="removeSubmenuItem(item)"><i class="fa fa-trash"></i></li>
                     </ul>
                 </div>
             </li>
             <li class="fm-smi_list-item" ng-show="SubMenuItemsEdit">
-                <input type="text" ng-model="mainsection.name" class="fm-sm_text" placeholder="Новый раздел">
-                <div class="fm-sm_tools">
-                    <ul class="fm-sm_tools-list">
-                        <li class="fm-sm_tools-item" ng-click="addMain()"><i class="fa fa-plus"></i></li>
-                    </ul>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-sx-2"></div>
+                    <div class="col-md-8 col-sm-8 col-sx-8">
+                        <div class="fm-subitems-wrap">
+                            <div>Название</div>
+                            <input type="text" ng-model="subsectionitem.name" class="fm-sm_text" name="subitemName">
+                        </div>
+                        <div class="fm-subitems-wrap">
+                            <div>Описание</div>
+                            <input type="text" ng-model="subsectionitem.description" class="fm-sm_text" name="subitemDesc">
+                        </div>
+                        <div class="fm-subitems-wrap">
+                            <div>Вес / платформа</div>
+                            <input type="text" ng-model="subsectionitem.platformweight" class="platformweight">
+                        </div>
+                        <div class="price-wrap">
+                            <div>Цена</div>
+                            <input type="text" ng-model="subsectionitem.price" class="platformweight"><i class='fa fa-rub'></i>
+                        </div>
+                        <div class="fm-sm_tools">
+                            <ul class="fm-sm_tools-list">
+                                <li class="fm-sm_tools-item" ng-click="addSubmenuItem(subsectionitem)"><i class="fa fa-plus"></i></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </li>
         </ul>

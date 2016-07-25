@@ -25,7 +25,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         [HttpPost]
         public string AddGroupItem(string name, int? parentId = null)
         {
@@ -48,7 +47,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string EditMainItem(string name, int id)
+        public string EditGroupItem(string name, int id, int? idparent = null)
         {
             try
             {
@@ -56,7 +55,8 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     new PCMenuGroup()
                     {
                         IdRecord = id,
-                        Name = name
+                        Name = name,
+                        IdParent = idparent
                     },
                     User.Identity.Name,
                     null
@@ -74,6 +74,73 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             try
             {
                 MenuUtils.DelGroup(id);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+
+        [HttpPost]
+        public string AddItem(string name, int groupid, string des, string weipla, float price)
+        {
+            try
+            {
+                MenuUtils.InsertItem(
+                    new PCMenuItem()
+                    {
+                        IdGroup = groupid,
+                        Name = name,
+                        Description = des,
+                        Weight = weipla,
+                        Platform = weipla,
+                        Price = price,
+                        Country = des
+                    },
+                    User.Identity.Name,
+                    null
+                );
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+        [HttpPost]
+        public string EditItem(string name, int groupid, string des, string weipla, float price, int idrecord)
+        {
+            try
+            {
+                MenuUtils.EditItem(
+                    new PCMenuItem()
+                    {
+                        IdRecord = idrecord,
+                        IdGroup = groupid,
+                        Name = name,
+                        Description = des,
+                        Weight = weipla,
+                        Platform = weipla,
+                        Price = price,
+                        Country = des
+                    },
+                    User.Identity.Name,
+                    null
+                );
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+        [HttpPost]
+        public string RemoveItem(int id)
+        {
+            try
+            {
+                MenuUtils.DelItem(id);
                 return "ok";
             }
             catch (Exception ex)
