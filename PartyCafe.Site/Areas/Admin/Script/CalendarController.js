@@ -259,7 +259,7 @@ function parseDate(date) {
     var curDate = date.match(/\d+/g);
     if (curDate.length) {
         var _data = new Date(parseInt(curDate)),
-            _day = _data.getDay(),
+            _day = _data.getDate(),
             _month = _data.getMonth() + 1,
             _yaer = _data.getFullYear(),
             result = "";

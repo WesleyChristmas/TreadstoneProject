@@ -42,7 +42,7 @@ servicesapp.controller("ServicesHomeController", function ($scope, $http, $locat
             id: item.idRecord
         }).success(function (response) {
             if (response === 'ok') {
-                $location.path('/');
+                GetAllServices($scope, $http);
             } else {
                 $scope.error = response;
             }

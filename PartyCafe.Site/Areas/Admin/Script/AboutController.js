@@ -41,7 +41,7 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
     $scope.removeAbout = function (item) {
         $http.post('AboutUs/RemoveAbout', { id: item.idRecord }).success(function (response) {
             if (response === 'ok') {
-                $location.path('/');
+                GetAllAbout($scope, $http);
             } else {
                 $scope.error = response;
             }
