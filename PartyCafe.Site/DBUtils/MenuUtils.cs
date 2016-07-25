@@ -34,7 +34,15 @@ namespace PartyCafe.Site.DBUtils
         public string Country;
         public string Description;
         public string Platform;
-        public int Weight;
+        public string Weight;
+        public int IdGroup;
+    }
+    public class PCMenuGroup
+    {
+        public int IdRecord;
+        public string Name;
+        public int IdParent;
+        public int IdPhoto;
     }
 
     public static class MenuUtils
@@ -201,10 +209,14 @@ namespace PartyCafe.Site.DBUtils
 
         public static void InsertItem (PCMenuItem partyItem, string userCreate, PCPhoto image)
         {
-            var newMenuItem = new Events();
+            var newMenuItem = new MenuItems();
             newMenuItem.Name = partyItem.Name ?? String.Empty;
             newMenuItem.description = partyItem.Description ?? String.Empty;
-            //newMenuItem
+            newMenuItem.Platform = partyItem.Platform ?? string.Empty;
+            newMenuItem.Price = Convert.ToDecimal(partyItem.Price);
+            newMenuItem.Country = partyItem.Country ?? String.Empty;
+            newMenuItem.IdGroup = partyItem.IdGroup;
+            newMenuItem.Weight = partyItem.Weight;
 
             if (image != null)
             {
@@ -219,29 +231,118 @@ namespace PartyCafe.Site.DBUtils
             newMenuItem.UserCreate = userCreate;
 
             var dbContext = MainUtils.GetDBContext();
-            dbContext.Events.InsertOnSubmit(newMenuItem);
+            dbContext.MenuItems.InsertOnSubmit(newMenuItem);
             dbContext.SubmitChanges();
         }
-        public static void EditItem(PCMenuItem partyEvent, string userUpdate, PCPhoto image)
+        public static void EditItem(PCMenuItem partyItem, string userUpdate, PCPhoto image)
         {
-            throw new Exception();
+            var dbContext = MainUtils.GetDBContext();
+            var curMenuItem = (from mi in dbContext.MenuItems
+                            where mi.IdRecord == partyItem.IdRecord
+                            select mi).SingleOrDefault();
+
+            curMenuItem.Name = partyItem.Name ?? String.Empty;
+            curMenuItem.description = partyItem.Description ?? String.Empty;
+            curMenuItem.Platform = partyItem.Platform ?? string.Empty;
+            curMenuItem.Price = Convert.ToDecimal(partyItem.Price);
+            curMenuItem.Country = partyItem.Country ?? String.Empty;
+            curMenuItem.IdGroup = partyItem.IdGroup;
+            curMenuItem.Weight = partyItem.Weight;
+
+            curMenuItem.DateUpdate = DateTime.Now;
+            curMenuItem.UserUpdate = userUpdate;
+
+            if (image != null)
+            { 
+                if (curMenuItem.IdPhoto > 0)
+                {
+                    PhotoUtils.EditImage(curMenuItem.IdPhoto, image, userUpdate);
+                } else {
+                    curMenuItem.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                }
+            }
+
+            dbContext.SubmitChanges();
         }
         public static void DelItem(int idRecord)
         {
-            throw new Exception();
+            var dbContext = MainUtils.GetDBContext();
+            var curMenuItem = (from mi in dbContext.MenuItems
+                            where mi.IdRecord == idRecord
+                            select mi).SingleOrDefault();
+
+            dbContext.MenuItems.DeleteOnSubmit(curMenuItem);
+            dbContext.SubmitChanges();
+
+            if (curMenuItem.IdPhoto > 0) { PhotoUtils.DelImage(curMenuItem.IdPhoto); };
         }
 
-        //public static void InsertGroup (PCMenuItem partyItem, string userCreate, PCPhoto image)
-        //{
-        //    throw new Exception();
-        //}
-        //public static void EditGroup(PCMenuItem partyEvent, string userUpdate, PCPhoto image)
-        //{
-        //    throw new Exception();
-        //}
-        //public static void DelGroup(int idRecord)
-        //{
-        //    throw new Exception();
-        //}
+        public static void InsertGroup(PCMenuGroup partyGroup, string userCreate, PCPhoto image)
+        {
+            var newMenuGroup = new MenuGroups();
+            newMenuGroup.GroupName = partyGroup.Name ?? String.Empty;
+            newMenuGroup.IdParent = partyGroup.IdParent;
+
+            if (image != null)
+            {
+                newMenuGroup.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
+            }
+            else
+            {
+                newMenuGroup.IdPhoto = 0;
+            }
+
+            newMenuGroup.DateCreate = DateTime.Now;
+            newMenuGroup.UserCreate = userCreate;
+
+            var dbContext = MainUtils.GetDBContext();
+            dbContext.MenuGroups.InsertOnSubmit(newMenuGroup);
+            dbContext.SubmitChanges();
+        }
+        public static void EditGroup(PCMenuGroup partyGroup, string userUpdate, PCPhoto image)
+        {
+            var dbContext = MainUtils.GetDBContext();
+            var curMenuGroup = (from mg in dbContext.MenuGroups
+                               where mg.IdRecord == partyGroup.IdRecord
+                               select mg).SingleOrDefault();
+
+            curMenuGroup.GroupName = partyGroup.Name ?? String.Empty;
+            curMenuGroup.IdParent = partyGroup.IdParent;
+
+            curMenuGroup.DateUpdate = DateTime.Now;
+            curMenuGroup.UserUpdate = userUpdate;
+
+            if (image != null)
+            {
+                if (curMenuGroup.IdPhoto > 0)
+                {
+                    PhotoUtils.EditImage(curMenuGroup.IdPhoto, image, userUpdate);
+                }
+                else
+                {
+                    curMenuGroup.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                }
+            }
+
+            dbContext.SubmitChanges();
+        }
+        public static void DelGroup(int idRecord)
+        {
+            var dbContext = MainUtils.GetDBContext();
+            var curGroup = (from mg in dbContext.MenuGroups
+                            where mg.IdRecord == idRecord
+                            select mg).SingleOrDefault();
+
+            var items = curGroup.MenuItems.ToList();
+            foreach(var item in items)
+            {
+                DelItem(item.IdRecord);
+            }
+
+            dbContext.MenuGroups.DeleteOnSubmit(curGroup);
+            dbContext.SubmitChanges();
+
+            if (curGroup.IdPhoto > 0) { PhotoUtils.DelImage(curGroup.IdPhoto); };
+        }
     }
 }
