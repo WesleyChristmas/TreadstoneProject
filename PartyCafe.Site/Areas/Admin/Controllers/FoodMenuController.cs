@@ -48,7 +48,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string EditGroupItem(string name, int id)
+        public string EditMainItem(string name, int id)
         {
             try
             {
