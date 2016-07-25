@@ -57,8 +57,20 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
     $scope.editmainitem = false;
 
     /* Main */
-    $scope.addMainItem = function () {
+    $scope.addMainItem = function (name) {
+        var fd = new FormData();
+        fd.append('name', name);
 
+        $http.post('FoodMenu/AddMainItem', fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+        }).success(function (response) {
+            if (response === 'ok') {
+                GetAllFoodMenu($scope, $http);
+            } else {
+                $scope.error = response;
+            }
+        });
     };
     $scope.getSubmenu = function (item) {
         if (item === undefined) {

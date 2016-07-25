@@ -41,7 +41,7 @@ namespace PartyCafe.Site.DBUtils
     {
         public int IdRecord;
         public string Name;
-        public int IdParent;
+        public int? IdParent;
         public int IdPhoto;
     }
 

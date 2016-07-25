@@ -26,21 +26,20 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddServices(string name, string desc)
+        public string AddMainItem(string name)
         {
             try
             {
-                    .InsertService(
-                        new PCService()
-                        {
-                            name = name,
-                            description = desc,
-                            serviceType = 0
-                        },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
-                    );
-                    return "ok";
+                MenuUtils.InsertGroup(
+                    new PCMenuGroup()
+                    {
+                        IdParent = null,
+                        Name = name
+                    },
+                    User.Identity.Name,
+                    null
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
