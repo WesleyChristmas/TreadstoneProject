@@ -4,12 +4,12 @@
 <h2>{{Header}}</h2>
 <div class="tools-wrapp">
     <ul class="tools">
-        <li class="tools-item"><button class="btn btn-default" ng-click="AddGallery()">Добавить фото в галлерею</button></li>
+        <li class="tools-item"><button class="btn btn-default" ng-click="addGallery()">Добавить фото в галлерею</button></li>
         <li class="tools-item">
-            <button class="btn btn-default" ng-click="EditGallery()" ng-disabled="selectForEdit === ''">Редактировать фото</button>
+            <button class="btn btn-default" ng-click="editGallery()" ng-disabled="selectForEdit === ''">Редактировать фото</button>
         </li>
         <li class="tools-item">
-            <button class="btn btn-default" ng-click="RemoveGallery()" ng-disabled="selectForEdit === ''">Удалить фото</button>
+            <button class="btn btn-default" ng-click="removeGalleryItem()" ng-disabled="selectForEdit === ''">Удалить фото</button>
         </li>
     </ul>
 </div>

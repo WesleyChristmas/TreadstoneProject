@@ -26,15 +26,15 @@ galleryapp.controller("GalleryHomeController", function ($scope, $http, $locatio
     /*Helpers*/
     $scope.isActive = function (item) { return $scope.selectForEdit === item; };
     $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
-    $scope.AddGallery = function () { $location.path('/add'); };
-    $scope.EditGallery = function () {
+    $scope.addGallery = function () { $location.path('/add'); };
+    $scope.editGallery = function () {
         sharedDataService.setItem($scope.selectForEdit);
         $location.path('/edit');
     };
-    $scope.removeGalleryItem = function (item) {
-        $http.post('Gallery/DeleteGalleryItem', {id: item.idRecord}).success(function (response) {
+    $scope.removeGalleryItem = function () {
+        $http.post('Gallery/DeleteGalleryItem', { id: $scope.selectForEdit.idRecord }).success(function (response) {
             if (response === 'ok') {
-                $location.path('/');
+                GetAllGallery($scope, $http);
             } else {
                 $scope.error = response;
             }
