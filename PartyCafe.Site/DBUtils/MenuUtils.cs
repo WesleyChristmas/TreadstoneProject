@@ -85,7 +85,6 @@ namespace PartyCafe.Site.DBUtils
                     if (el.idParent == 0)
                     {
                         MenuGroupView md = new MenuGroupView();
-
                         md.idRecord = el.idRecord;
                         md.name = el.name;
                         md.photoPath = el.photoPath;
@@ -336,11 +335,18 @@ namespace PartyCafe.Site.DBUtils
                             where mg.IdRecord == idRecord
                             select mg).SingleOrDefault();
 
-            var items = curGroup.MenuItems.ToList();
-            foreach(var item in items)
+            var groupsToDel = curGroup.MenuGroups2.ToList();
+            foreach(var groupDel in groupsData)
+            {
+                DelGroup(groupDel.idRecord);
+            }
+
+            var itemsToDel = curGroup.MenuItems.ToList();
+            foreach (var item in itemsToDel)
             {
                 DelItem(item.IdRecord);
             }
+
 
             dbContext.MenuGroups.DeleteOnSubmit(curGroup);
             dbContext.SubmitChanges();
