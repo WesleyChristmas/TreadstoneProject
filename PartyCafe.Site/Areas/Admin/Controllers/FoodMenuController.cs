@@ -25,6 +25,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+
         [HttpPost]
         public string AddMainItem(string name)
         {
@@ -39,6 +40,40 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     User.Identity.Name,
                     null
                 );
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+        [HttpPost]
+        public string AddMainItem(string name, int id)
+        {
+            try
+            {
+                MenuUtils.EditGroup(
+                    new PCMenuGroup()
+                    {
+                        IdParent = id,
+                        Name = name
+                    },
+                    User.Identity.Name,
+                    null
+                );
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+        [HttpPost]
+        public string RemoveMainItem(int id)
+        {
+            try
+            {
+                MenuUtils.DelGroup(id);
                 return "ok";
             }
             catch (Exception ex)

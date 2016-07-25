@@ -57,13 +57,9 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
     $scope.editmainitem = false;
 
     /* Main */
-    $scope.addMainItem = function (name) {
-        var fd = new FormData();
-        fd.append('name', name);
-
-        $http.post('FoodMenu/AddMainItem', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
+    $scope.addMainItem = function (itemName) {
+        $http.post('FoodMenu/AddMainItem', {
+            name: itemName
         }).success(function (response) {
             if (response === 'ok') {
                 GetAllFoodMenu($scope, $http);
@@ -72,6 +68,30 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             }
         });
     };
+    $scope.editMainItem = function (itemName, item) {
+        $http.post('FoodMenu/EditMainItem', {
+            name: itemName,
+            id: item.idRecord
+        }).success(function (response) {
+            if (response === 'ok') {
+                GetAllFoodMenu($scope, $http);
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
+    $scope.removeMainItem = function (item) {
+        $http.post('FoodMenu/RemoveMainItem', {
+            id: item.idRecord
+        }).success(function (response) {
+            if (response === 'ok') {
+                GetAllFoodMenu($scope, $http);
+            } else {
+                $scope.error = response;
+            }
+        });
+    };
+
     $scope.getSubmenu = function (item) {
         if (item === undefined) {
             $scope.SubMenuEdit = false;
@@ -92,10 +112,6 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             $scope.SubMenuItems = item.items;
             $scope.selectedsub = item.idRecord;
         }
-    };
-
-    $scope.editMainItem = function (item) {
-
     };
 
     GetAllFoodMenu($scope, $http);
