@@ -11,7 +11,7 @@
             <div class="fm-main_tools">
                 <ul class="fm-main_tools-list">
                     <li class="fm-main_tools-item" ng-click=""><i class="fa fa-floppy-o"></i></li>
-                    <li class="fm-main_tools-item" ng-click="editMainItem(item)"><i class="fa fa-pencil"></i></li>
+                    <li class="fm-main_tools-item" ng-click="editMainItem(item.name, item)"><i class="fa fa-pencil"></i></li>
                     <li class="fm-main_tools-item" ng-click="removeMainItem(item)"><i class="fa fa-trash"></i></li>
                 </ul>
             </div>
@@ -41,15 +41,15 @@
                             <ul class="fm-sm_tools-list">
                                 <li class="fm-sm_tools-item"><i class="fa fa-plus"></i></li>
                                 <li class="fm-sm_tools-item"><i class="fa fa-pencil"></i></li>
-                                <li class="fm-sm_tools-item"><i class="fa fa-trash"></i></li>
+                                <li class="fm-sm_tools-item" ng-click="removeSubItem(item)"><i class="fa fa-trash"></i></li>
                             </ul>
                         </div>
                     </li>
                     <li class="fm-sm_list-item" ng-show="SubMenuEdit" ng-click="getSubmenuItems()">
-                        <input type="text" ng-model="mainsection.name" class="fm-sm_text" placeholder="Новый раздел">
+                        <input type="text" ng-model="subsection.name" class="fm-sm_text" placeholder="Новый раздел">
                         <div class="fm-sm_tools">
                             <ul class="fm-sm_tools-list">
-                                <li class="fm-sm_tools-item" ng-click="addMain()"><i class="fa fa-plus"></i></li>
+                                <li class="fm-sm_tools-item" ng-click="addSubItem(subsection.name)"><i class="fa fa-plus"></i></li>
                             </ul>
                         </div>
                     </li>

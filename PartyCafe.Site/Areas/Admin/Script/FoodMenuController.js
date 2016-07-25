@@ -58,10 +58,11 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
 
     /* Main */
     $scope.addMainItem = function (itemName) {
-        $http.post('FoodMenu/AddMainItem', {
+        $http.post('FoodMenu/AddGroupItem', {
             name: itemName
         }).success(function (response) {
             if (response === 'ok') {
+                $scope.mainsection.name = "";
                 GetAllFoodMenu($scope, $http);
             } else {
                 $scope.error = response;
@@ -69,11 +70,13 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         });
     };
     $scope.editMainItem = function (itemName, item) {
-        $http.post('FoodMenu/EditMainItem', {
+        $http.post('FoodMenu/EditGroupItem', {
             name: itemName,
             id: item.idRecord
         }).success(function (response) {
             if (response === 'ok') {
+                $scope.selectForEdit = '';
+                $scope.selectedmain = 0;
                 GetAllFoodMenu($scope, $http);
             } else {
                 $scope.error = response;
@@ -81,7 +84,7 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         });
     };
     $scope.removeMainItem = function (item) {
-        $http.post('FoodMenu/RemoveMainItem', {
+        $http.post('FoodMenu/RemoveGroupItem', {
             id: item.idRecord
         }).success(function (response) {
             if (response === 'ok') {
@@ -98,7 +101,7 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             $scope.SubMenu = [];
             $scope.selectedmain = 0;
         } else {
-            $scope.SubMenuEdit = item.subGroups.length > 0 ? true : false;
+            $scope.SubMenuEdit = item.subGroups.length >= 0 ? true : false;
             $scope.SubMenu = item.subGroups;
             $scope.selectedmain = item.idRecord;
         }
@@ -112,6 +115,34 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
             $scope.SubMenuItems = item.items;
             $scope.selectedsub = item.idRecord;
         }
+    };
+
+    /* Submenu item */
+    $scope.addSubItem = function (itemName) {
+        if ($scope.selectedmain !== 0) {
+            $http.post('FoodMenu/AddGroupItem', {
+                name: itemName,
+                parentId: $scope.selectedmain
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $scope.subsection.name = '';
+                    GetAllFoodMenu($scope, $http);
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
+    };
+    $scope.removeSubItem = function (item) {
+        $http.post('FoodMenu/RemoveGroupItem', {
+            id: item.idRecord
+        }).success(function (response) {
+            if (response === 'ok') {
+                GetAllFoodMenu($scope, $http);
+            } else {
+                $scope.error = response;
+            }
+        });
     };
 
     GetAllFoodMenu($scope, $http);

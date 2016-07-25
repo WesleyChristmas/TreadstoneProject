@@ -27,14 +27,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public string AddMainItem(string name)
+        public string AddGroupItem(string name, int? parentId = null)
         {
             try
             {
                 MenuUtils.InsertGroup(
                     new PCMenuGroup()
                     {
-                        IdParent = null,
+                        IdParent = parentId,
                         Name = name
                     },
                     User.Identity.Name,
@@ -48,14 +48,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string AddMainItem(string name, int id)
+        public string EditGroupItem(string name, int id)
         {
             try
             {
                 MenuUtils.EditGroup(
                     new PCMenuGroup()
                     {
-                        IdParent = id,
+                        IdRecord = id,
                         Name = name
                     },
                     User.Identity.Name,
@@ -69,7 +69,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string RemoveMainItem(int id)
+        public string RemoveGroupItem(int id)
         {
             try
             {
