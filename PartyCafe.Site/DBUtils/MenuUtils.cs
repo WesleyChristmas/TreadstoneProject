@@ -70,34 +70,37 @@ namespace PartyCafe.Site.DBUtils
 
         private static List<MenuItemData> itemsData;
         private static List<MenuGroupData> groupsData;
+        private static object _fillDataLock = new Object();
 
         public static List<MenuGroupView> GetAll()
         {
-            FillData();
+            List<MenuGroupView> menu = new List<MenuGroupView>();
 
-            List <MenuGroupView> menu = new List<MenuGroupView>();
+            lock (_fillDataLock)
+            { 
+                FillData();
 
-            foreach (var el in groupsData)
-            {
-                if (el.idParent == 0)
+                foreach (var el in groupsData)
                 {
-                    MenuGroupView md = new MenuGroupView();
+                    if (el.idParent == 0)
+                    {
+                        MenuGroupView md = new MenuGroupView();
 
-                    md.idRecord = el.idRecord;
-                    md.name = el.name;
-                    md.photoPath = el.photoPath;
+                        md.idRecord = el.idRecord;
+                        md.name = el.name;
+                        md.photoPath = el.photoPath;
 
-                    menu.Add(md);
+                        menu.Add(md);
+                    }
+                }
+
+                foreach (var el in menu)
+                {
+                    el.items = GetItems(el.idRecord);
+                    el.subGroups = GetGroups(el.idRecord);
                 }
             }
 
-            foreach (var el in menu)
-            {
-                el.items = GetItems(el.idRecord);
-                el.subGroups = GetGroups(el.idRecord);
-            }
-
-            
             return menu;
         }
 
