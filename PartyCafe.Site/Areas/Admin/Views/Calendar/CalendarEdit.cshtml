@@ -4,10 +4,10 @@
 }
 <h2>{{Header}}</h2>
 <div class="additwrap">
-    <form name="eventsForm" novalidate>
+    <form name="eventsForm">
         <div class="addit-wrap">
             <label class="addit-label" for="eventsName">Название мероприятия:</label>
-            <input type="text" class="form-control" ng-model="itemForEdit.name" name="eventsName" placeholder="Название" value="{{itemForEdit.name}}">
+            <input type="text" class="form-control" ng-model="itemForEdit.name" name="eventsName" placeholder="Название" value="{{itemForEdit.name}}" required>
         </div>
         <div class="addit-wrap">
             <label class="addit-label" for="eventsDesc">Описание мероприятия:</label>
@@ -19,7 +19,7 @@
             <br>
             <br>
             <div class="addit-wrap" ng-show="ChangePhotoShow">
-                <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="eventsPhoto">
+                <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="eventsPhoto" required>
             </div>
             <div class="addit-wrap">
                 <input type="button" class="btn btn-default" value="Изменить изображение мероприятия" ng-click="changePhoto()">
@@ -27,11 +27,11 @@
         </div>
         <div class="addit-wrap">
             <label class="addit-label" for="eventsDate">Дата мероприятия:</label>
-            <input type="text" name="eventsDate" class="form-control" ng-model="itemForEdit.DateEvent" value="{{itemForEdit.DateEvent}}" jqdatepicker placeholder="11/02/2015">
+            <input type="text" name="eventsDate" class="form-control" ng-model="itemForEdit.DateEvent" value="{{itemForEdit.DateEvent}}" jqdatepicker placeholder="11/02/2015" required>
         </div>
         <div class="addit-wrap">
             <label class="addit-label" for="eventsTime">Время мероприятия:</label>
-            <input type="text" name="eventsTime" class="form-control" ng-model="itemForEdit.TimeEvent" maxlength="5" value="{{itemForEdit.TimeEvent}}" onkeyup="restrictTime(this, event);" placeholder="15:49">
+            <input type="text" name="eventsTime" class="form-control" ng-model="itemForEdit.TimeEvent" maxlength="5" value="{{itemForEdit.TimeEvent}}" onkeyup="restrictTime(this, event);" placeholder="15:49" required>
         </div>
         <div class="error-wrap">{{error}}</div>
         <div class="tools-wrapp">

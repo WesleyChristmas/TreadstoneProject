@@ -105,23 +105,25 @@ calendarapp.controller("CalendarAddController", function ($scope, $http, $locati
     $scope.Header = "Добавление мероприятия в календарь событий";
     $scope.Back = function () { $location.path('/'); }
     $scope.addEvent = function () {
-        var fd = new FormData();
-        fd.append('name', $scope.eventsAdd.Name);
-        fd.append('description', $scope.eventsAdd.Desc);
-        fd.append('date', $scope.eventsAdd.Date);
-        fd.append('time', $scope.eventsAdd.Time);
-        fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
+        if ($scope.eventsForm.$valid) {
+            var fd = new FormData();
+            fd.append('name', $scope.eventsAdd.Name);
+            fd.append('description', $scope.eventsAdd.Desc);
+            fd.append('date', $scope.eventsAdd.Date);
+            fd.append('time', $scope.eventsAdd.Time);
+            fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
 
-        $http.post('Calendar/AddCalendarEvent', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+            $http.post('Calendar/AddCalendarEvent', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
 });
 
@@ -129,29 +131,30 @@ calendarapp.controller("CalendarAddController", function ($scope, $http, $locati
 calendarapp.controller("CalendarEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Редактирование мероприятия";
     $scope.itemForEdit = sharedDataService.getItem();
-
     $scope.itemForEdit.DateEvent = parseDate($scope.itemForEdit.DateEvent);
     $scope.itemForEdit.TimeEvent = parseTime($scope.itemForEdit.TimeEvent);
 
     $scope.updateEvent = function () {
-        var fd = new FormData();
-        fd.append('id', $scope.itemForEdit.idRecord);
-        fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.Description);
-        fd.append('date', $scope.itemForEdit.DateEvent);
-        fd.append('time', $scope.itemForEdit.TimeEvent);
-        fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
+        if ($scope.eventsForm.$valid) {
+            var fd = new FormData();
+            fd.append('id', $scope.itemForEdit.idRecord);
+            fd.append('name', $scope.itemForEdit.name);
+            fd.append('desc', $scope.itemForEdit.Description);
+            fd.append('date', $scope.itemForEdit.DateEvent);
+            fd.append('time', $scope.itemForEdit.TimeEvent);
+            fd.append('file', document.getElementsByName('eventsPhoto')[0].files[0]);
 
-        $http.post('Calendar/UpdateCalendarEvent', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+            $http.post('Calendar/UpdateCalendarEvent', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.BackToCalendarList = function () {
         $location.path('/');
