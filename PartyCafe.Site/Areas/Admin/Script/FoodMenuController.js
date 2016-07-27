@@ -71,29 +71,33 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         });
     };
     $scope.editMainItem = function (itemName, item) {
-        $http.post('FoodMenu/EditGroupItem', {
-            name: itemName,
-            id: item.idRecord
-        }).success(function (response) {
-            if (response === 'ok') {
-                $scope.selectForEdit = '';
-                $scope.selectedmain = 0;
-                GetAllFoodMenu($scope, $http);
-            } else {
-                $scope.error = response;
-            }
-        });
+        if (confirm("Изменить раздел меню: " + itemName + "?")) {
+            $http.post('FoodMenu/EditGroupItem', {
+                name: itemName,
+                id: item.idRecord
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $scope.selectForEdit = '';
+                    $scope.selectedmain = 0;
+                    GetAllFoodMenu($scope, $http);
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.removeMainItem = function (item) {
-        $http.post('FoodMenu/RemoveGroupItem', {
-            id: item.idRecord
-        }).success(function (response) {
-            if (response === 'ok') {
-                GetAllFoodMenu($scope, $http);
-            } else {
-                $scope.error = response;
-            }
-        });
+        if (confirm("Удалить раздел меню: " + item.name + "?")) {
+            $http.post('FoodMenu/RemoveGroupItem', {
+                id: item.idRecord
+            }).success(function (response) {
+                if (response === 'ok') {
+                    GetAllFoodMenu($scope, $http);
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
 
     $scope.getSubmenu = function (item, index) {
@@ -144,20 +148,22 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         }
     };
     $scope.editSubItem = function (itemName, item) {
-        $http.post('FoodMenu/EditGroupItem', {
-            name: itemName,
-            id: item.idRecord,
-            idparent: $scope.selectedmain
-        }).success(function (response) {
-            if (response === 'ok') {
-                $http.get('FoodMenu/GetAllMenu').success(function (result) {
-                    $scope.FoodMenu = result;
-                    $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
-                });
-            } else {
-                $scope.error = response;
-            }
-        });
+        if (confirm("Изменить раздел меню: " + itemName + "?")) {
+            $http.post('FoodMenu/EditGroupItem', {
+                name: itemName,
+                id: item.idRecord,
+                idparent: $scope.selectedmain
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                        $scope.FoodMenu = result;
+                        $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                    });
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.removeSubItem = function (item) {
         $http.post('FoodMenu/RemoveGroupItem', {
@@ -202,21 +208,40 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         }
     };
     $scope.editSubmenuItem = function (item, id) {
-        if ($scope.selectedmain !== 0) {
-            $http.post('FoodMenu/EditItem', {
-                groupid: $scope.selectedsub,
-                name: item.name,
-                des: item.description,
-                weipla: item.platformweight,
-                price: item.price,
-                idrecord: id
+        if (confirm("Изменить позицию меню: " + itemName + "?")) {
+            if ($scope.selectedmain !== 0) {
+                $http.post('FoodMenu/EditItem', {
+                    groupid: $scope.selectedsub,
+                    name: item.name,
+                    des: item.description,
+                    weipla: item.platformweight,
+                    price: item.price,
+                    idrecord: id
+                }).success(function (response) {
+                    if (response === 'ok') {
+                        $scope.subsectionitem.name = '';
+                        $scope.subsectionitem.description = '';
+                        $scope.subsectionitem.platformweight = '';
+                        $scope.subsectionitem.price = '';
+
+                        $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                            $scope.FoodMenu = result;
+                            $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                            $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
+                        });
+                    } else {
+                        $scope.error = response;
+                    }
+                });
+            }
+        }
+    };
+    $scope.removeSubmenuItem = function (item) {
+        if (confirm("Удалить позицию меню: " + item.name + "?")) {
+            $http.post('FoodMenu/RemoveItem', {
+                id: item.idRecord
             }).success(function (response) {
                 if (response === 'ok') {
-                    $scope.subsectionitem.name = '';
-                    $scope.subsectionitem.description = '';
-                    $scope.subsectionitem.platformweight = '';
-                    $scope.subsectionitem.price = '';
-
                     $http.get('FoodMenu/GetAllMenu').success(function (result) {
                         $scope.FoodMenu = result;
                         $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
@@ -227,21 +252,6 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
                 }
             });
         }
-    };
-    $scope.removeSubmenuItem = function (item) {
-        $http.post('FoodMenu/RemoveItem', {
-            id: item.idRecord
-        }).success(function (response) {
-            if (response === 'ok') {
-                $http.get('FoodMenu/GetAllMenu').success(function (result) {
-                    $scope.FoodMenu = result;
-                    $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
-                    $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
-                });
-            } else {
-                $scope.error = response;
-            }
-        });
     };
 
     GetAllFoodMenu($scope, $http);

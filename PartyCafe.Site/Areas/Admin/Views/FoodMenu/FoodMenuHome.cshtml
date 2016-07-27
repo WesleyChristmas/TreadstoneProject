@@ -3,6 +3,21 @@
 }
 <h2>{{Header}}</h2>
 <!-- Main food menu -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Сохранить изменения?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-default bt-ok">Подтвердить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="fm-main">
     <ul class="fm-main_list">
         <li class="fm-main_list-itemclear"></li>
@@ -11,7 +26,7 @@
             <div class="fm-main_tools">
                 <ul class="fm-main_tools-list">
                     <li class="fm-main_tools-item" ng-click=""><i class="fa fa-floppy-o"></i></li>
-                    <li class="fm-main_tools-item" ng-click="editMainItem(item.name, item)"><i class="fa fa-pencil"></i></li>
+                    <li class="fm-main_tools-item" data-toggle="modal" ng-click="editMainItem(item.name, item)"><i class="fa fa-pencil"></i></li>
                     <li class="fm-main_tools-item" ng-click="removeMainItem(item)"><i class="fa fa-trash"></i></li>
                 </ul>
             </div>

@@ -1,4 +1,9 @@
-﻿input, textarea { max-width: 100% !important; }
+﻿::-webkit-input-placeholder { font-style: italic; }
+::-moz-placeholder          { font-style: italic; }
+:-moz-placeholder           { font-style: italic; }
+:-ms-input-placeholder      { font-style: italic; }
+
+input, textarea { max-width: 100% !important; }
 textarea { resize:none; }
 img { max-width: 300px; max-height: 300px; }
 .btn { font-size: 16px; min-width: 100px; }
@@ -6,6 +11,7 @@ img { max-width: 300px; max-height: 300px; }
 .star { color: red; font-size: 18px; }
 .error-wrap { color:red;display: block; font-size: 18px; }
 .succes-wrap { color:forestgreen; font-size: 18px; }
+.form-control { font-size: 16px; }
 
 /* table */
 .admintable th { text-align: center; }
