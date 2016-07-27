@@ -4,7 +4,7 @@ using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class FoodMenuController : Controller
     {
         // GET: Admin/FoodMenu

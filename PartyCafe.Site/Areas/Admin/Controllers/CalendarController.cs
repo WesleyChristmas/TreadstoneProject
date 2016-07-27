@@ -4,6 +4,7 @@ using System;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
+    [Authorize]
     public class CalendarController : Controller
     {
         // GET: Admin/Calendar

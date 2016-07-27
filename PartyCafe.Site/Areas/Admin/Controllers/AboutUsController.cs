@@ -7,6 +7,7 @@ using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
+    [Authorize]
     public class AboutUsController : Controller
     {
         // GET: Admin/AboutUs

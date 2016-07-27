@@ -8,6 +8,7 @@ using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
+    [Authorize]
     public class GalleryController : Controller
     {
         // GET: Admin/Gallery
