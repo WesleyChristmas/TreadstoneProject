@@ -28,6 +28,12 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
+        public string TestUser()
+        { 
+            return String.Format("Autorized: {0}, Name: {1}", HttpContext.User.Identity.IsAuthenticated.ToString(), HttpContext.User.Identity.Name);
+        }
+
+        [HttpGet]
         public JsonResult GetAllUs()
         {
             var result = ServiceUtils.GetAll(1);
