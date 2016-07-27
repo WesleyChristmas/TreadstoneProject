@@ -59,21 +59,23 @@ servicesapp.controller("ServicesHomeController", function ($scope, $http, $locat
 servicesapp.controller("ServicesAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Добавление услуги";
     $scope.addServices = function () {
-        var fd = new FormData();
-        fd.append('name', $scope.servicesAdd.Name);
-        fd.append('desc', $scope.servicesAdd.Desc);
-        fd.append('file', document.getElementsByName('servicesPhoto')[0].files[0]);
+        if ($scope.servicesForm.$valid) {
+            var fd = new FormData();
+            fd.append('name', $scope.servicesAdd.Name);
+            fd.append('desc', $scope.servicesAdd.Desc);
+            fd.append('file', document.getElementsByName('servicesPhoto')[0].files[0]);
 
-        $http.post('Services/AddServices', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+            $http.post('Services/AddServices', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.Back = function () { $location.path('/'); }
 });
@@ -84,23 +86,25 @@ servicesapp.controller("ServicesEditController", function ($scope, $http, $locat
     $scope.CurrentPhotoShow = true;
 
     $scope.updateServices = function () {
-        var fd = new FormData();
-        fd.append('id', $scope.itemForEdit.idRecord);
-        fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.description);
-        fd.append('oldphoto', $scope.itemForEdit.photoPath);
-        fd.append('file', document.getElementsByName('servicesPhoto')[0].files[0]);
+        if ($scope.servicesForm.$valid) {
+            var fd = new FormData();
+            fd.append('id', $scope.itemForEdit.idRecord);
+            fd.append('name', $scope.itemForEdit.name);
+            fd.append('desc', $scope.itemForEdit.description);
+            fd.append('oldphoto', $scope.itemForEdit.photoPath);
+            fd.append('file', document.getElementsByName('servicesPhoto')[0].files[0]);
 
-        $http.post('Services/UpdateServices', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+            $http.post('Services/UpdateServices', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;

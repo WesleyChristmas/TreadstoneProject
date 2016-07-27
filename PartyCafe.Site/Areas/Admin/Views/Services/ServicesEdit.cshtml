@@ -5,10 +5,10 @@
 
 <h2>{{Header}}</h2>
 <div class="additwrap">
-    <form name="servicesForm" novalidate>
+    <form name="servicesForm">
         <div class="addit-wrap">
             <label class="addit-label" for="servicesName">Название услуги:</label>
-            <input type="text" class="form-control" ng-model="itemForEdit.name" name="servicesName" value="{{itemForEdit.name}}" placeholder="Самое лучшее фото">
+            <input type="text" class="form-control" ng-model="itemForEdit.name" name="servicesName" value="{{itemForEdit.name}}" placeholder="Самое лучшее фото" required>
         </div>
         <div class="addit-wrap">
             <label class="addit-label" for="servicesDesc">Описание услуги:</label>

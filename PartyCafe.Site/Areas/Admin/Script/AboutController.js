@@ -58,21 +58,23 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
 aboutapp.controller("AboutAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Добавление блока";
     $scope.addAbout = function () {
-        var fd = new FormData();
-        fd.append('name', $scope.aboutusAdd.Name);
-        fd.append('desc', $scope.aboutusAdd.Desc);
-        fd.append('file', document.getElementsByName('aboutusPhoto')[0].files[0]);
+        if ($scope.aboutusForm.$valid) {
+            var fd = new FormData();
+            fd.append('name', $scope.aboutusAdd.Name);
+            fd.append('desc', $scope.aboutusAdd.Desc);
+            fd.append('file', document.getElementsByName('aboutusPhoto')[0].files[0]);
 
-        $http.post('AboutUs/AddAbout', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+            $http.post('AboutUs/AddAbout', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.Back = function () { $location.path('/'); }
 });
@@ -83,23 +85,25 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
     $scope.CurrentPhotoShow = true;
 
     $scope.updateAbout = function () {
-        var fd = new FormData();
-        fd.append('id', $scope.itemForEdit.idRecord);
-        fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.description);
-        fd.append('oldphoto', $scope.itemForEdit.photoPath);
-        fd.append('file', document.getElementsByName('aboutPhoto')[0].files[0]);
+        if ($scope.aboutusForm.$valid) {
+            var fd = new FormData();
+            fd.append('id', $scope.itemForEdit.idRecord);
+            fd.append('name', $scope.itemForEdit.name);
+            fd.append('desc', $scope.itemForEdit.description);
+            fd.append('oldphoto', $scope.itemForEdit.photoPath);
+            fd.append('file', document.getElementsByName('aboutPhoto')[0].files[0]);
 
-        $http.post('AboutUs/UpdateAbout', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+            $http.post('AboutUs/UpdateAbout', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;
