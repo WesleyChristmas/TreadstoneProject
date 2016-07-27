@@ -11,7 +11,8 @@ using PartyCafe.Site.Identity;
 
 namespace PartyCafe.Site.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         public AccountController()
@@ -70,7 +71,8 @@ namespace PartyCafe.Site.Controllers
 
         //
         // GET: /Account/Register
-        [Authorize(Users = "spectr")]
+        //[Authorize(Users = "spectr")]
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -81,22 +83,22 @@ namespace PartyCafe.Site.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            /*if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new User() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent:false);
+                    await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     AddErrors(result);
                 }
-            }*/
+            }
 
             // If we got this far, something failed, redisplay form
             return View(model);

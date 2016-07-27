@@ -49,7 +49,16 @@ namespace PartyCafe.Site.Identity
                 user.UserId = Guid.NewGuid();
                 using (SqlConnection connection = new SqlConnection(_connectionString))
                     connection.Execute("insert into Users(UserId, UserName, Description, TimeLimit, PasswordHash, SecurityStamp)" +
-                        " values(@userId, @userName, @description, @timeLimit, @passwordHash, @securityStamp)", user);
+                        " values(@UserId, @UserName, @description, @timeLimit, @passwordHash, @securityStamp)",
+                        new
+                        {
+                            UserId = user.UserId,
+                            UserName = user.UserName,
+                            description = user.Description,
+                            timeLimit = user.TimeLimit,
+                            passwordHash = user.PasswordHash,
+                            securityStamp = user.SecurityStamp
+                        } );
             });
         }
 
@@ -61,8 +70,8 @@ namespace PartyCafe.Site.Identity
             return Task.Factory.StartNew(() =>
             {
                 using (var connection = new SqlConnection(_connectionString))
-                    connection.Execute("delete from UserRoles where UserId = @userId;" +
-                                       "delete from Users where UserId = @userId", new { userId = user.UserId });
+                    connection.Execute("delete from UserRoles where UserId = @UserId;" +
+                                       "delete from Users where UserId = @UserId", new { UserId = user.UserId });
             });
         }
         public virtual Task<User> FindByIdAsync(string userId)
@@ -77,7 +86,7 @@ namespace PartyCafe.Site.Identity
             return Task.Factory.StartNew(() =>
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
-                    return connection.Query<User>("select * from Users where UserId = @userId", new { userId = parsedUserId }).SingleOrDefault();
+                    return connection.Query<User>("select * from Users where UserId = @UserId", new { UserId = parsedUserId }).SingleOrDefault();
             });
         }
         public virtual Task<User> FindByNameAsync(string userName)
@@ -88,7 +97,7 @@ namespace PartyCafe.Site.Identity
             return Task.Factory.StartNew(() =>
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
-                    return connection.Query<User>("select * from Users where lower(UserName) = lower(@userName)", new { userName }).SingleOrDefault();
+                    return connection.Query<User>("select * from Users where lower(UserName) = lower(@UserName)", new { UserName = userName }).SingleOrDefault();
             });
         }
         public virtual Task UpdateAsync(User user)
@@ -99,7 +108,14 @@ namespace PartyCafe.Site.Identity
             return Task.Factory.StartNew(() =>
             {
                 using (SqlConnection connection = new SqlConnection(_connectionString))
-                    connection.Execute("update Users set UserName = @userName, Description = @description, PasswordHash = @passwordHash, SecurityStamp = @securityStamp where UserId = @userId", user);
+                    connection.Execute("update Users set UserName = @UserName, Description = @description, PasswordHash = @passwordHash, SecurityStamp = @securityStamp where UserId = @UserId",
+                        new {
+                            UserName = user.UserName,
+                            UserId = user.UserId,
+                            Description = user.Description,
+                            PasswordHash = user.PasswordHash,
+                            SecurityStamp = user.SecurityStamp
+                        });
             });
         }
         #endregion
@@ -151,7 +167,7 @@ namespace PartyCafe.Site.Identity
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                connection.Execute("INSERT INTO UserRoles (UserId,RoleId)" +
+                connection.Execute("INSERT INTO UserRoles (UserId, RoleId)" +
                                    " VALUES (@userId,(SELECT TOP 1 RoleId FROM Roles WHERE Name=@roleName))",
                     new { userId = user.UserId, roleName });
                 return Task.FromResult(0);
