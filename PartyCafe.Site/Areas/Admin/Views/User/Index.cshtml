@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Редактирование учетной записи Администратора";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
+<script src="~/Areas/Admin/Script/UsersController.js"></script>
+<div ng-app="UsersApp">
+    <div ng-view></div>
+</div>

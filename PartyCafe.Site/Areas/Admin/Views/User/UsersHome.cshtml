@@ -1,7 +1,34 @@
-﻿
-@{
-    ViewBag.Title = "UsersHome";
+﻿@{
+    Layout = "";
 }
-
-<h2>UsersHome</h2>
+<h2>{{Header}}</h2>
+<div class="tools-wrapp">
+    <ul class="tools">
+        <li class="tools-item"><button class="btn btn-default" ng-click="AddUser()">Добавить пользователя</button></li>
+        <li class="tools-item">
+            <button class="btn btn-default" ng-click="EditUser()" ng-disabled="selectForEdit === ''">Редактировать пользователя</button>
+        </li>
+        <li class="tools-item">
+            <button class="btn btn-default" ng-click="RemoveUser()" ng-disabled="selectForEdit === ''">Удалить пользователя</button>
+        </li>
+    </ul>
+</div>
+<div class="rolestable">
+    <table border="1" width="100%">
+        <thead>
+            <tr>
+                <th width="30px">№</th>
+                <th width="260px">Логин</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in Users" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
+                <td align="center">{{$index + 1}}</td>
+                <td align="center">{{item.UserName}}</td>
+                <td>{{item.Description}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 

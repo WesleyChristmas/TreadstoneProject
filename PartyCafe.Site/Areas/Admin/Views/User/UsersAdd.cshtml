@@ -1,7 +1,62 @@
-﻿
-@{
-    ViewBag.Title = "UsersAdd";
+﻿@{
+    Layout = "";
 }
-
-<h2>UsersAdd</h2>
-
+<h2>{{Header}}</h2>
+<div class="useraddwrap">
+    <form name="usersForm" novalidate>
+        <div class="useradd-wrap">
+            <label class="useradd-label" for="userName">Логин:<span class="star">*</span></label>
+            <input type="text" class="form-control" ng-model="userAdd.Name" name="userName" placeholder="User" required>
+            <span class="error-wrap" ng-show="usersForm.userName.$invalid && !usersForm.userName.$pristine">
+                <span ng-show="usersForm.userName.$error.required">Данное поле является обязательным!</span>
+            </span>
+        </div>
+        <div class="useradd-wrap">
+            <label class="useradd-label" for="userPass">Пароль:<span class="star">*</span></label>
+            <input type="text" class="form-control" ng-model="userAdd.Password" ng-minlength="6" name="userPass" placeholder="Пароль" required>
+            <span class="error-wrap" ng-show="usersForm.userPass.$invalid && !usersForm.userPass.$pristine">
+                <span ng-show="usersForm.userPass.$error.required">Данное поле является обязательным!</span>
+                <span ng-show="usersForm.userPass.$error.minlength">Длина поля не должна быть меньше 6 символов!</span>
+            </span>
+        </div>
+        <div class="useradd-wrap">
+            <label class="useradd-label" for="userPassConf">Подтверждение пароля:<span class="star">*</span></label>
+            <input type="text" class="form-control" ng-model="userAdd.ConfirmPassword" name="userPassConf" placeholder="Подтверждение пароля" required>
+            <span class="error-wrap" ng-show="usersForm.userPassConf.$invalid && !usersForm.userPassConf.$pristine">
+                <span ng-show="usersForm.userPassConf.$error.required">Данное поле является обязательным!</span>
+            </span>
+        </div>
+        <div class="useradd-wrap">
+            <label class="useradd-label">Роли пользователя:<span class="star">*</span></label>
+            <table>
+                <tbody>
+                    <tr ng-repeat="item in UserRoles.avaibleOptions">
+                        <td><b>{{item.name}}</b></td>
+                        <td width="40px" align="center"><input type="checkbox" class="useradd-list-cb" id="{{item.name}}" value="{{item.name}}" ng-checked="Settings.selectedRole.indexOf(item.name) > -1" ng-click="toggleSelect(item.name)"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-class="Pass.Class" ng-show="Pass.Show">
+                <span>{{Pass.Msg}}</span>
+            </div>
+        </div>
+        <div class="useradd-wrap">
+            <label class="useradd-label" for="userDesc">Описание</label>
+            <input type="text" class="form-control" ng-model="userAdd.Description" name="userDesc" placeholder="Обычный пользователь">
+        </div>
+        <div class="useradd-wrap">
+            <p>Поля, отмеченные как <span class="star">*</span> - являются обязательными!</p>
+        </div>
+        <div ng-class="Pass.Class" ng-show="Pass.Show">
+            <span>{{Pass.Error}}</span>
+        </div>
+        <div class="tools-wrapp">
+            <ul class="tools_add">
+                <li class="tools-item">
+                    <button class="btn btn-default" ng-class="{disabled_btn: usersForm.$invalid==true}" ng-disabled="usersForm.$invalid" ng-click="addUser()">Сохранить</button>
+                </li>
+                <li class="tools-item"><button class="btn btn-default" ng-click="BackToUserList()">Назад</button></li>
+            </ul>
+        </div>
+    </form>
+</div>

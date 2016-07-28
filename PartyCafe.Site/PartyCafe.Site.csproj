@@ -200,7 +200,7 @@
     <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Areas\Admin\Core\Utils\UserUtils.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
@@ -250,6 +250,7 @@
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
     <Content Include="Areas\Admin\Script\GalleryController.js" />
+    <Content Include="Areas\Admin\Script\UsersController.js" />
     <Content Include="Areas\Admin\Script\ServicesController.js" />
     <Content Include="Areas\Admin\Views\Services\ServicesEditPhoto.cshtml">
       <SubType>Code</SubType>

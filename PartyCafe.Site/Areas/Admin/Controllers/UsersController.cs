@@ -6,7 +6,7 @@ using PartyCafe.Site.Models;
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
     [Authorize]
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         // GET: Admin/User
         public ActionResult Index()
