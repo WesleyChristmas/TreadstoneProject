@@ -104,13 +104,12 @@ namespace PartyCafe.Site.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
+        [Authorize]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("/", "Home");
         }
 
         #region Helpers
