@@ -3,9 +3,9 @@
 }
 <h2>{{Header}}</h2>
 <div class="useraddwrap">
-    <form name="usersForm" novalidate>
+    <form name="usersForm">
         <div class="useradd-wrap">
-            <label class="useradd-label" for="userName">Логин:<span class="star">*</span></label>
+            <label class="useradd-label" for="userName">Логин:</label>
             <input type="text" class="form-control" ng-model="itemForEdit.UserName" name="userName" placeholder="Логин" required>
             <span class="error-wrap" ng-show="usersForm.userName.$invalid && !usersForm.userName.$pristine">
                 <span ng-show="usersForm.userName.$error.required">Данное поле является обязательным!</span>
@@ -29,20 +29,6 @@
                     <span>{{Pass.Msg}}</span>
                 </div>
                 <button style="margin-top: 20px;" class="btn btn-default" ng-click="changePassword()">Применить</button>
-            </div>
-        </div>
-        <div class="useradd-wrap">
-            <label class="useradd-label">Роли пользователя:<span class="star">*</span></label>
-            <table>
-                <tbody>
-                    <tr ng-repeat="item in UserRoles.avaibleOptions">
-                        <td><b>{{item.name}}</b></td>
-                        <td width="40px" align="center"><input type="checkbox" class="useradd-list-cb" id="{{item.name}}" value="{{item.name}}" ng-checked="Settings.selectedRole.indexOf(item.name) > -1" ng-click="toggleSelect(item.name)"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div ng-class="Rol.Class" ng-show="Rol.Show">
-                <span>{{Rol.Msg}}</span>
             </div>
         </div>
         <div class="tools-wrapp">
