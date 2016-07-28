@@ -3,10 +3,12 @@
 foodmenuapp.controller("FoodMenuCt", function ($scope, $http) {
     $scope.Food = [];
     $scope.FoodSub = [];
+    $scope.FoodSubItem = [];
     $scope.title = 'Наше меню в кафе';
     $scope.selectedItem = '';
     $scope.selectedLast = 0;
     $scope.ShowSubMenu = function (id, obj) {
+        $scope.FoodSubItem = [];
         $scope.selected = true;
         $scope.FoodSub = obj.subGroups;
         if ($('.barMenuLeft').hasClass('show')) {
@@ -64,7 +66,7 @@ foodmenuapp.filter('photofilter', function () {
 function GetAllMenu($scope, $http) {
     $http.get("/FoodMenu/GetAllMenu").success(function (data, status) {
         $scope.Food = data;
-        console.log(data);
+        //console.log(data);
         $scope.ShowSubMenu(0, data[0]);
         $scope.ShowSubMenuItem(4, data[0].subGroups[4]);
     });
