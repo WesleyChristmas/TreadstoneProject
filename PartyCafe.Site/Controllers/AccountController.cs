@@ -11,8 +11,7 @@ using PartyCafe.Site.Identity;
 
 namespace PartyCafe.Site.Controllers
 {
-    //[Authorize]
-    [AllowAnonymous]
+    [Authorize]
     public class AccountController : Controller
     {
         public AccountController()
@@ -71,8 +70,7 @@ namespace PartyCafe.Site.Controllers
 
         //
         // GET: /Account/Register
-        //[Authorize(Users = "spectr")]
-        [AllowAnonymous]
+        [Authorize(Users = "spectr")]
         public ActionResult Register()
         {
             return View();
@@ -81,24 +79,24 @@ namespace PartyCafe.Site.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new User() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    AddErrors(result);
-                }
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    var user = new User() { UserName = model.UserName };
+            //    var result = await UserManager.CreateAsync(user, model.Password);
+            //    if (result.Succeeded)
+            //    {
+            //        await SignInAsync(user, isPersistent: false);
+            //        return RedirectToAction("Index", "Home");
+            //    }
+            //    else
+            //    {
+            //        AddErrors(result);
+            //    }
+            //}
 
             // If we got this far, something failed, redisplay form
             return View(model);
