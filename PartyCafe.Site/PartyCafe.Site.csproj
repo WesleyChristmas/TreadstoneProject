@@ -257,6 +257,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\User\UsersHome.cshtml" />
     <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -411,9 +412,9 @@
     <Content Include="Areas\Admin\Views\Calendar\CalendarAdd.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\CalendarEdit.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuHome.cshtml" />
-    <Content Include="Areas\Admin\Views\User\UsersHome.cshtml" />
     <Content Include="Areas\Admin\Views\User\UsersAdd.cshtml" />
     <Content Include="Areas\Admin\Views\User\UsersEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />
