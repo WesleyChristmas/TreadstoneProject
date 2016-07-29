@@ -10,12 +10,20 @@
             <input type="text" class="form-control" ng-model="itemForEdit.name" name="galleryName" value="{{itemForEdit.name}}" placeholder="Самое лучшее фото">
         </div>
         <div class="addit-wrap">
-            <label class="addit-label" for="galleryPass">Описание к фотографии:</label>
+            <label class="addit-label" for="galleryDesc">Описание к фотографии:</label>
             <textarea class="form-control" ng-model="itemForEdit.description" name="galleryDesc" value="{{itemForEdit.description}}" placeholder="Самое лучшее фото вечеринки"></textarea>
         </div>
         <div class="addit-wrap">
-            <label class="addit-label" for="galleryPass">Фотография:</label>
-            <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="galleryPhoto">
+            <label class="addit-label" for="galleryPhoto">Фотография:</label>
+            <img ng-src="{{itemForEdit.photoPath}}">
+            <br>
+            <br>
+            <div class="addit-wrap" ng-show="ChangePhotoShow">
+                <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="galleryPhoto">
+            </div>
+            <div class="addit-wrap">
+                <input type="button" class="btn btn-default" value="Изменить изображение" ng-click="changePhoto()">
+            </div>
         </div>
 
         <div class="error-wrap">{{error}}</div>
