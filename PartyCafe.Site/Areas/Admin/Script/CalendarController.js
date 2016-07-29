@@ -156,6 +156,10 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
             });
         //}
     };
+    $scope.changePhoto = function () {
+        $scope.CurrentPhotoShow = false;
+        $scope.ChangePhotoShow = true;
+    };
     $scope.BackToCalendarList = function () {
         $location.path('/');
     };
