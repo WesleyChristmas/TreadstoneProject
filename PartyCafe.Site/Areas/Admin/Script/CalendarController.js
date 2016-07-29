@@ -123,6 +123,8 @@ calendarapp.controller("CalendarAddController", function ($scope, $http, $locati
                     $scope.error = response;
                 }
             });
+        } else {
+            $scope.error = "Одно из обязательных полей не заполнено!"
         }
     };
 });
@@ -133,6 +135,7 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
     $scope.itemForEdit = sharedDataService.getItem();
     $scope.itemForEdit.DateEvent = parseDate($scope.itemForEdit.DateEvent);
     $scope.itemForEdit.TimeEvent = parseTime($scope.itemForEdit.TimeEvent);
+    $scope.ChangePhotoBtn = true;
 
     $scope.updateEvent = function () {
         if ($scope.eventsForm.$valid) {
@@ -154,11 +157,14 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
                     $scope.error = response;
                 }
             });
+        } else {
+            $scope.error = "Одно из обязательных полей не заполнено!"
         }
     };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;
         $scope.ChangePhotoShow = true;
+        $scope.ChangePhotoBtn = false;
     };
     $scope.BackToCalendarList = function () {
         $location.path('/');
