@@ -105,7 +105,7 @@ calendarapp.controller("CalendarAddController", function ($scope, $http, $locati
     $scope.Header = "Добавление мероприятия в календарь событий";
     $scope.Back = function () { $location.path('/'); }
     $scope.addEvent = function () {
-        //if ($scope.eventsForm.$valid) {
+        if ($scope.eventsForm.$valid) {
             var fd = new FormData();
             fd.append('name', $scope.eventsAdd.Name);
             fd.append('description', $scope.eventsAdd.Desc);
@@ -123,7 +123,7 @@ calendarapp.controller("CalendarAddController", function ($scope, $http, $locati
                     $scope.error = response;
                 }
             });
-       // }
+        }
     };
 });
 
@@ -135,7 +135,7 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
     $scope.itemForEdit.TimeEvent = parseTime($scope.itemForEdit.TimeEvent);
 
     $scope.updateEvent = function () {
-        //if ($scope.eventsForm.$valid) {
+        if ($scope.eventsForm.$valid) {
             var fd = new FormData();
             fd.append('id', $scope.itemForEdit.idRecord);
             fd.append('name', $scope.itemForEdit.name);
@@ -154,7 +154,7 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
                     $scope.error = response;
                 }
             });
-        //}
+        }
     };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;

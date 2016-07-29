@@ -78,7 +78,6 @@ galleryapp.controller("GalleryEditController", function ($scope, $http, $locatio
     $scope.Header = "Редактирование фотографии";
     $scope.itemForEdit = sharedDataService.getItem();
     $scope.Back = function () { $location.path('/'); }
-    console.log($scope.itemForEdit);
 
     $scope.updateGallery = function () {
         var fd = new FormData();
