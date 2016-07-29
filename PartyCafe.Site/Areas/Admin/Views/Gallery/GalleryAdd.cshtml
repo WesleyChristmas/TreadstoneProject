@@ -4,7 +4,7 @@
 }
 <h2>{{Header}}</h2>
 <div class="additwrap">
-    <form name="galleryForm" novalidate>
+    <form name="galleryForm">
         <div class="addit-wrap">
             <label class="addit-label" for="galleryName">Название:</label>
             <input type="text" class="form-control" ng-model="galleryAdd.Name" name="galleryName" placeholder="Самое лучшее фото">
@@ -17,7 +17,6 @@
             <label class="addit-label" for="galleryPass">Фотография:</label>
             <input type="file" class="form-control" ng-model="galleryAdd.Photo" name="galleryPhoto">
         </div>
-
         <div class="error-wrap">{{error}}</div>
         <div class="tools-wrapp">
             <ul class="tools_add">

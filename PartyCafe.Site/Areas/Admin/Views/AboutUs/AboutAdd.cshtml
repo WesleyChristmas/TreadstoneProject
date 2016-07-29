@@ -4,9 +4,9 @@
 }
 <h2>{{Header}}</h2>
 <div class="additwrap">
-    <form name="aboutusForm">
+    <form name="aboutusForm" novalidate>
         <div class="addit-wrap">
-            <label class="addit-label" for="aboutusName">Название блока:</label>
+            <label class="addit-label" for="aboutusName"><span class="star">*</span>Название блока:</label>
             <input type="text" class="form-control" ng-model="aboutusAdd.Name" name="aboutusName" placeholder="Новый блок галереи" required>
         </div>
         <div class="addit-wrap">
@@ -15,9 +15,8 @@
         </div>
         <div class="addit-wrap">
             <label class="addit-label" for="aboutusPass">Фотография блока:</label>
-            <input type="file" class="form-control" ng-model="aboutusAdd.Photo" name="aboutusPhoto" required>
+            <input type="file" class="form-control" ng-model="aboutusAdd.Photo" name="aboutusPhoto">
         </div>
-
         <div class="error-wrap">{{error}}</div>
         <div class="tools-wrapp">
             <ul class="tools_add">

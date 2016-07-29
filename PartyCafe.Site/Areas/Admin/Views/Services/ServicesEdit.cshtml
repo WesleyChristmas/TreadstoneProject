@@ -16,13 +16,13 @@
         </div>
         <div class="addit-wrap">
             <label class="addit-label" for="servicesPhoto">Фотография услуги:</label>
-            <img ng-src="{{itemForEdit.photoPath}}" ng-show="CurrentPhotoShow">
+            <img ng-src="{{itemForEdit.photoPath}}">
             <br>
             <br>
             <div class="addit-wrap" ng-show="ChangePhotoShow">
                 <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="servicesPhoto">
             </div>
-            <div class="addit-wrap">
+            <div class="addit-wrap" ng-show="ChangePhotoBtn">
                 <input type="button" class="btn btn-default" value="Изменить изображение услуги" ng-click="changePhoto()">
             </div>
         </div>

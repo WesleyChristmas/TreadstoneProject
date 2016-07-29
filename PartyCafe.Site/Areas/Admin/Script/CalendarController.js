@@ -136,6 +136,7 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
     $scope.itemForEdit.DateEvent = parseDate($scope.itemForEdit.DateEvent);
     $scope.itemForEdit.TimeEvent = parseTime($scope.itemForEdit.TimeEvent);
     $scope.ChangePhotoBtn = true;
+    $scope.ChangePhotoShow = false;
 
     $scope.updateEvent = function () {
         if ($scope.eventsForm.$valid) {
@@ -162,7 +163,6 @@ calendarapp.controller("CalendarEditController", function ($scope, $http, $locat
         }
     };
     $scope.changePhoto = function () {
-        $scope.CurrentPhotoShow = false;
         $scope.ChangePhotoShow = true;
         $scope.ChangePhotoBtn = false;
     };

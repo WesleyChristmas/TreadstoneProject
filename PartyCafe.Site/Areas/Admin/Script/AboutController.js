@@ -58,7 +58,7 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
 aboutapp.controller("AboutAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Добавление блока";
     $scope.addAbout = function () {
-        //if ($scope.aboutusForm.$valid) {
+        if ($scope.aboutusForm.$valid) {
             var fd = new FormData();
             fd.append('name', $scope.aboutusAdd.Name);
             fd.append('desc', $scope.aboutusAdd.Desc);
@@ -74,7 +74,9 @@ aboutapp.controller("AboutAddController", function ($scope, $http, $location, $r
                     $scope.error = response;
                 }
             });
-       // }
+        } else {
+            $scope.error = "Одно из обязательных полей не заполнено!"
+        }
     };
     $scope.Back = function () { $location.path('/'); }
 });
@@ -82,10 +84,11 @@ aboutapp.controller("AboutAddController", function ($scope, $http, $location, $r
 aboutapp.controller("AboutEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.itemForEdit = sharedDataService.getItem();
     $scope.Header = "Редактирование блока - " + $scope.itemForEdit.name;
-    $scope.CurrentPhotoShow = true;
+    $scope.ChangePhotoBtn = true;
+    $scope.ChangePhotoShow = false;
 
     $scope.updateAbout = function () {
-       // if ($scope.aboutusForm.$valid) {
+        if ($scope.aboutusForm.$valid) {
             var fd = new FormData();
             fd.append('id', $scope.itemForEdit.idRecord);
             fd.append('name', $scope.itemForEdit.name);
@@ -103,11 +106,13 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
                     $scope.error = response;
                 }
             });
-        //}
+        } else {
+            $scope.error = "Одно из обязательных полей не заполнено!"
+        }
     };
     $scope.changePhoto = function () {
-        $scope.CurrentPhotoShow = false;
         $scope.ChangePhotoShow = true;
+        $scope.ChangePhotoBtn = false;
     };
     $scope.Back = function () { $location.path('/'); };
 });
