@@ -172,7 +172,7 @@ namespace PartyCafe.Site.DBUtils
                 MenuItemData id = new MenuItemData();
                 id.idRecord = item.IdRecord;
                 id.name = item.Name;
-                id.photoPath = item.Path;
+                id.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
                 id.Platform = item.Platform; 
                 id.price = item.Price;
                 id.Weight = item.Weight;
@@ -203,7 +203,7 @@ namespace PartyCafe.Site.DBUtils
                 gd.idParent = (group.IdParent == null) ? 0 : (int)group.IdParent;
                 gd.idRecord = group.IdRecord;
                 gd.name = group.GroupName;
-                gd.photoPath = group.Path;
+                gd.photoPath = PhotoUtils.GetRelativeUrl(group.Path);
 
                 groupsData.Add(gd);
             }
