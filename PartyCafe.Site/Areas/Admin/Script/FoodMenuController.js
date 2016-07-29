@@ -26,15 +26,17 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         $location.path('/edit');
     };
     $scope.removeFoodMenu = function (item) {
-        $http.post('FoodMenu/RemoveFoodMenuEvent', {
-            id: item.idRecord
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
+        if (confirm("Удалить пункт меню: " + item.name + "?")) {
+            $http.post('FoodMenu/RemoveFoodMenuEvent', {
+                id: item.idRecord
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $location.path('/');
+                } else {
+                    $scope.error = response;
+                }
+            });
+        }
     };
     $scope.getModel = function (item) {
         if (item.Platform === null) {
@@ -208,7 +210,7 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         }
     };
     $scope.editSubmenuItem = function (item, id) {
-        if (confirm("Изменить позицию меню: " + itemName + "?")) {
+        if (confirm("Изменить позицию меню: " + item.name + "?")) {
             if ($scope.selectedmain !== 0) {
                 $http.post('FoodMenu/EditItem', {
                     groupid: $scope.selectedsub,
