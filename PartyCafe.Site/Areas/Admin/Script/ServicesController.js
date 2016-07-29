@@ -59,7 +59,7 @@ servicesapp.controller("ServicesHomeController", function ($scope, $http, $locat
 servicesapp.controller("ServicesAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Добавление услуги";
     $scope.addServices = function () {
-        if ($scope.servicesForm.$valid) {
+        //if ($scope.servicesForm.$valid) {
             var fd = new FormData();
             fd.append('name', $scope.servicesAdd.Name);
             fd.append('desc', $scope.servicesAdd.Desc);
@@ -75,7 +75,7 @@ servicesapp.controller("ServicesAddController", function ($scope, $http, $locati
                     $scope.error = response;
                 }
             });
-        }
+       // }
     };
     $scope.Back = function () { $location.path('/'); }
 });
@@ -86,7 +86,7 @@ servicesapp.controller("ServicesEditController", function ($scope, $http, $locat
     $scope.CurrentPhotoShow = true;
 
     $scope.updateServices = function () {
-        if ($scope.servicesForm.$valid) {
+        //if ($scope.servicesForm.$valid) {
             var fd = new FormData();
             fd.append('id', $scope.itemForEdit.idRecord);
             fd.append('name', $scope.itemForEdit.name);
@@ -104,7 +104,7 @@ servicesapp.controller("ServicesEditController", function ($scope, $http, $locat
                     $scope.error = response;
                 }
             });
-        }
+        //}
     };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;

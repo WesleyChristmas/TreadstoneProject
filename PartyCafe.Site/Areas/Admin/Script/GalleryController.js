@@ -70,7 +70,6 @@ galleryapp.controller("GalleryAddController", function ($scope, $http, $location
             }
         });
     };
-
 });
 
 /* Gallery Edit Controller */
@@ -78,6 +77,7 @@ galleryapp.controller("GalleryEditController", function ($scope, $http, $locatio
     /*Helpers*/
     $scope.Header = "Редактирование фотографии";
     $scope.itemForEdit = sharedDataService.getItem();
+    $scope.Back = function () { $location.path('/'); }
 
     $scope.updateGallery = function () {
         var fd = new FormData();
@@ -96,9 +96,6 @@ galleryapp.controller("GalleryEditController", function ($scope, $http, $locatio
                 $scope.error = response;
             }
         });
-    };
-    $scope.BackToGalleryList = function () {
-        $location.path('/');
     };
 });
 

@@ -58,7 +58,7 @@ aboutapp.controller("AboutHomeController", function ($scope, $http, $location, s
 aboutapp.controller("AboutAddController", function ($scope, $http, $location, $routeParams, sharedDataService) {
     $scope.Header = "Добавление блока";
     $scope.addAbout = function () {
-        if ($scope.aboutusForm.$valid) {
+        //if ($scope.aboutusForm.$valid) {
             var fd = new FormData();
             fd.append('name', $scope.aboutusAdd.Name);
             fd.append('desc', $scope.aboutusAdd.Desc);
@@ -74,7 +74,7 @@ aboutapp.controller("AboutAddController", function ($scope, $http, $location, $r
                     $scope.error = response;
                 }
             });
-        }
+       // }
     };
     $scope.Back = function () { $location.path('/'); }
 });
@@ -85,7 +85,7 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
     $scope.CurrentPhotoShow = true;
 
     $scope.updateAbout = function () {
-        if ($scope.aboutusForm.$valid) {
+       // if ($scope.aboutusForm.$valid) {
             var fd = new FormData();
             fd.append('id', $scope.itemForEdit.idRecord);
             fd.append('name', $scope.itemForEdit.name);
@@ -103,7 +103,7 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
                     $scope.error = response;
                 }
             });
-        }
+        //}
     };
     $scope.changePhoto = function () {
         $scope.CurrentPhotoShow = false;
