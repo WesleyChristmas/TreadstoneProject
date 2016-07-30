@@ -47,6 +47,14 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
         //return item.Platform === null ? item.Weight : item.Platform;
     };
 
+    $scope.ChangePhotoBtn = true;
+    $scope.ChangePhotoShow = false;
+
+    $scope.changePhoto = function () {
+        $scope.ChangePhotoShow = true;
+        $scope.ChangePhotoBtn = false;
+    };
+
     $scope.FoodMenu = [];
     $scope.SubMenu = [];
     $scope.SubMenuItems = [];
@@ -185,7 +193,34 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
     /* Submenu item */
     $scope.addSubmenuItem = function (item) {
         if ($scope.selectedmain !== 0) {
-            $http.post('FoodMenu/AddItem', {
+            var fd = new FormData();
+            fd.append('groupid', $scope.selectedsub);
+            fd.append('name', item.name);
+            fd.append('des', item.description);
+            fd.append('weipla', item.platformweight);
+            fd.append('price', item.price);
+            fd.append('file', document.getElementsByName('submenuitemPhoto')[0].files[0]);
+
+            $http.post('FoodMenu/AddItem', fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).success(function (response) {
+                if (response === 'ok') {
+                    $scope.subsectionitem.name = '';
+                    $scope.subsectionitem.description = '';
+                    $scope.subsectionitem.platformweight = '';
+                    $scope.subsectionitem.price = '';
+
+                    $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                        $scope.FoodMenu = result;
+                        $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                        $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
+                    });
+                } else {
+                    $scope.error = response;
+                }
+            });
+           /* $http.post('FoodMenu/AddItem', {
                 groupid: $scope.selectedsub,
                 name: item.name,
                 des: item.description,
@@ -206,13 +241,36 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
                 } else {
                     $scope.error = response;
                 }
-            });
+            });*/
         }
     };
-    $scope.editSubmenuItem = function (item, id) {
+    $scope.editSubmenuItem = function (item, platformweightmodel, id) {
         if (confirm("Изменить позицию меню: " + item.name + "?")) {
             if ($scope.selectedmain !== 0) {
-                $http.post('FoodMenu/EditItem', {
+                var fd = new FormData();
+                fd.append('groupid', $scope.selectedsub);
+                fd.append('name', item.name);
+                fd.append('des', item.description);
+                fd.append('weipla', platformweightmodel);
+                fd.append('price', item.price);
+                fd.append('idrecord', id);
+                fd.append('file', document.getElementsByName('foodmenusubitemPhoto')[0].files[0]);
+
+                $http.post('FoodMenu/EditItem', fd, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                }).success(function (response) {
+                    if (response === 'ok') {
+                           $http.get('FoodMenu/GetAllMenu').success(function (result) {
+                            $scope.FoodMenu = result;
+                            $scope.SubMenu = $scope.FoodMenu[$scope.index.main].subGroups;
+                            $scope.SubMenuItems = $scope.SubMenu[$scope.index.sub].items;
+                        });
+                    } else {
+                        $scope.error = response;
+                    }
+                });
+               /* $http.post('FoodMenu/EditItem', {
                     groupid: $scope.selectedsub,
                     name: item.name,
                     des: item.description,
@@ -234,7 +292,7 @@ foodmenuapp.controller("FoodMenuHomeController", function ($scope, $http, $locat
                     } else {
                         $scope.error = response;
                     }
-                });
+                });*/
             }
         }
     };

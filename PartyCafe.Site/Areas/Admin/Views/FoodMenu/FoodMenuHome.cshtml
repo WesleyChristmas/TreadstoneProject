@@ -82,6 +82,13 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-sx-2">
                         <img src="{{item.photoPath}}" style="background-color: gray; background-size: cover; width: 100%;">
+                        <br>
+                        <div class="addit-wrap" ng-show="ChangePhotoShow">
+                            <input type="file" class="form-control" ng-model="itemForEdit.Photo" name="foodmenusubitemPhoto">
+                        </div>
+                        <div class="addit-wrap" ng-show="ChangePhotoBtn">
+                            <input type="button" class="btn btn-default" value="Изменить изображение" ng-click="changePhoto()">
+                        </div>
                     </div>
                     <div class="col-md-8 col-sm-8 col-sx-8">
                         <div class="fm-subitems-wrap">
@@ -94,7 +101,7 @@
                         </div>
                         <div class="fm-subitems-wrap">
                             <div>Вес / платформа</div>
-                            <input class="platformweight" ng-model="model" ng-if="model = item.Platform === null ? item.Weight : item.Platform">
+                            <input class="platformweight" ng-model="platformweightmodel" ng-if="platformweightmodel = item.Platform === null ? item.Weight : item.Platform">
                         </div>
                         <div class="price-wrap">
                             <div>Цена</div>
@@ -105,14 +112,20 @@
                 <div class="fm-sm_tools">
                     <ul class="fm-sm_tools-list">
                         <!--<li class="fm-sm_tools-item" ng-click="addSubmenuItem()"><i class="fa fa-plus"></i></li>-->
-                        <li class="fm-sm_tools-item" ng-click="editSubmenuItem(item, item.idRecord)"><i class="fa fa-pencil"></i></li>
+                        <li class="fm-sm_tools-item" ng-click="editSubmenuItem(item, platformweightmodel, item.idRecord)"><i class="fa fa-pencil"></i></li>
                         <li class="fm-sm_tools-item" ng-click="removeSubmenuItem(item)"><i class="fa fa-trash"></i></li>
                     </ul>
                 </div>
             </li>
             <li class="fm-smi_list-item" ng-show="SubMenuItemsEdit">
                 <div class="row">
-                    <div class="col-md-4 col-sm-4 col-sx-2"></div>
+                    <div class="col-md-4 col-sm-4 col-sx-2">
+                        <div class="addit-wrap">
+                            <label class="addit-label" for="submenuitemPhoto">Фотография:</label>
+                            <br>
+                            <input type="file" class="form-control" ng-model="submenuitem.Photo" name="submenuitemPhoto">
+                        </div>
+                    </div>
                     <div class="col-md-8 col-sm-8 col-sx-8">
                         <div class="fm-subitems-wrap">
                             <div>Название</div>

@@ -78,8 +78,11 @@ namespace PartyCafe.Site.DBUtils
             var curPhoto = (from p in db.Photos
                             where p.IdRecord == id
                             select p).SingleOrDefault();
-
-            File.Delete(curPhoto.Path);
+            try
+            {
+                File.Delete(curPhoto.Path);
+            }
+            catch (Exception ex) { }
 
             curPhoto.Path = SavePhoto(image);
             curPhoto.FileName = image.fileName;

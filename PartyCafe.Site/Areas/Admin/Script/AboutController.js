@@ -94,7 +94,7 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
             fd.append('name', $scope.itemForEdit.name);
             fd.append('desc', $scope.itemForEdit.description);
             fd.append('oldphoto', $scope.itemForEdit.photoPath);
-            fd.append('file', document.getElementsByName('aboutPhoto')[0].files[0]);
+            fd.append('file', document.getElementsByName('foodmenusubitemPhoto')[0].files[0]);
 
             $http.post('AboutUs/UpdateAbout', fd, {
                 transformRequest: angular.identity,

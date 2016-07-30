@@ -87,21 +87,47 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                MenuUtils.InsertItem(
-                    new PCMenuItem()
-                    {
-                        IdGroup = groupid,
-                        Name = name,
-                        Description = des,
-                        Weight = weipla,
-                        Platform = weipla,
-                        Price = price,
-                        Country = des
-                    },
-                    User.Identity.Name,
-                    null
-                );
-                return "ok";
+                var request = Request;
+                if (request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    var content = new byte[file.ContentLength];
+                    var filename = file.FileName;
+                    file.InputStream.Read(content, 0, file.ContentLength);
+
+                    MenuUtils.InsertItem(
+                        new PCMenuItem()
+                        {
+                            IdGroup = groupid,
+                            Name = name,
+                            Description = des,
+                            Weight = weipla,
+                            Platform = weipla,
+                            Price = price,
+                            Country = des
+                        },
+                        User.Identity.Name,
+                        new PCPhoto() { data = content, fileName = filename }
+                    );
+                    return "ok";
+                }
+                else {
+                    MenuUtils.InsertItem(
+                        new PCMenuItem()
+                        {
+                            IdGroup = groupid,
+                            Name = name,
+                            Description = des,
+                            Weight = weipla,
+                            Platform = weipla,
+                            Price = price,
+                            Country = des
+                        },
+                        User.Identity.Name,
+                        null
+                    );
+                    return "ok";
+                }
             }
             catch (Exception ex)
             {
@@ -113,22 +139,50 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                MenuUtils.EditItem(
-                    new PCMenuItem()
-                    {
-                        IdRecord = idrecord,
-                        IdGroup = groupid,
-                        Name = name,
-                        Description = des,
-                        Weight = weipla,
-                        Platform = weipla,
-                        Price = price,
-                        Country = des
-                    },
-                    User.Identity.Name,
-                    null
-                );
-                return "ok";
+                var request = Request;
+                if (request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+                    var content = new byte[file.ContentLength];
+                    var filename = file.FileName;
+                    file.InputStream.Read(content, 0, file.ContentLength);
+
+                    MenuUtils.EditItem(
+                        new PCMenuItem()
+                        {
+                            IdGroup = groupid,
+                            IdRecord = idrecord,
+                            Name = name,
+                            Description = des,
+                            Weight = weipla,
+                            Platform = weipla,
+                            Price = price,
+                            Country = des
+                        },
+                        User.Identity.Name,
+                        new PCPhoto() { data = content, fileName = filename }
+                    );
+                    return "ok";
+                }
+                else
+                {
+                    MenuUtils.EditItem(
+                        new PCMenuItem()
+                        {
+                            IdGroup = groupid,
+                            IdRecord = idrecord,
+                            Name = name,
+                            Description = des,
+                            Weight = weipla,
+                            Platform = weipla,
+                            Price = price,
+                            Country = des
+                        },
+                        User.Identity.Name,
+                        null
+                    );
+                    return "ok";
+                }
             }
             catch (Exception ex)
             {
