@@ -11,6 +11,7 @@ namespace PartyCafe.Site.DBUtils
         public string description;
         public string photoPath;
         public int idPhoto;
+        public string tag;
     }
 
     public class GalleryUtils
@@ -21,7 +22,7 @@ namespace PartyCafe.Site.DBUtils
             var dbContext = MainUtils.GetDBContext();
             var gallery = (from e in dbContext.Gallery
                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
-                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, path = PhotoUtils.GetRelativeUrl(p.Path) }).ToList();
+                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, path = PhotoUtils.GetRelativeUrl(p.Path), e.Tag }).ToList();
 
             List<PCGallery> resultList = new List<PCGallery>();
             foreach (var e in gallery)
@@ -33,6 +34,34 @@ namespace PartyCafe.Site.DBUtils
                 pcGallery.idPhoto = e.IdPhoto;
                 pcGallery.photoPath = PhotoUtils.GetRelativeUrl(e.path);
                 pcGallery.description = e.Description;
+                pcGallery.tag = e.Tag;
+
+                resultList.Add(pcGallery);
+            }
+
+            return resultList;
+        }
+
+        public static List<PCGallery> GetAllByTags(List<string> tags)
+        {
+            var dbContext = MainUtils.GetDBContext();
+            var gallery = (from e in dbContext.Gallery
+                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
+                           where tags.Contains(e.Tag)
+                           select new { e.IdRecord, e.Name, e.IdPhoto, e.Description,
+                               path = PhotoUtils.GetRelativeUrl(p.Path), e.Tag }).ToList();
+
+            List<PCGallery> resultList = new List<PCGallery>();
+            foreach (var e in gallery)
+            {
+                PCGallery pcGallery = new PCGallery();
+
+                pcGallery.idRecord = e.IdRecord;
+                pcGallery.name = e.Name;
+                pcGallery.idPhoto = e.IdPhoto;
+                pcGallery.photoPath = PhotoUtils.GetRelativeUrl(e.path);
+                pcGallery.description = e.Description;
+                pcGallery.tag = e.Tag;
 
                 resultList.Add(pcGallery);
             }
@@ -43,8 +72,10 @@ namespace PartyCafe.Site.DBUtils
         public static void InsertGallery(PCGallery gallery, string userCreate, PCPhoto image)
         {
             var newGallery = new Gallery();
-            newGallery.Name = gallery.name != null ? gallery.name : String.Empty;
-            newGallery.Description = gallery.description != null ? gallery.description : String.Empty; ;
+            newGallery.Name = gallery.name ?? String.Empty;
+            newGallery.Description = gallery.description ?? String.Empty;
+            newGallery.Tag = gallery.tag ?? String.Empty;
+
             if (image != null)
             {
                 newGallery.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
@@ -69,8 +100,9 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == gallery.idRecord
                             select e).SingleOrDefault();
 
-            curGallery.Name = gallery.name != null ? gallery.name : String.Empty;
-            curGallery.Description = gallery.name != null ? gallery.name : String.Empty;
+            curGallery.Name = gallery.name ?? String.Empty;
+            curGallery.Description = gallery.name ?? String.Empty;
+            curGallery.Tag = gallery.tag ?? String.Empty;
 
             curGallery.DateUpdate = DateTime.Now;
             curGallery.UserUpdate = String.IsNullOrWhiteSpace(userUpdate) ? "Admin" : userUpdate;

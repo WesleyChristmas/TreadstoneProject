@@ -1,18 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="u0103018_partycafe" Class="PartyCafeClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=37.140.192.61;Initial Catalog=u0103018_partycafe;Persist Security Info=True;User ID=u0103018_partycafe_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="u0103018_partycafeConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Gallery" Member="Gallery">
-    <Type Name="Gallery">
-      <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IdPhoto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="UserCreate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="UserUpdate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DateUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Photos_Gallery" Member="Photos" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photos" IsForeignKey="true" />
-    </Type>
-  </Table>
+  <Connection Mode="WebSettings" ConnectionString="Data Source=37.140.192.61;Initial Catalog=u0103018_partycafe;Persist Security Info=True;User ID=u0103018_partycafe_user" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="u0103018_partycafeConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Games" Member="Games">
     <Type Name="Games">
       <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -36,7 +23,6 @@
       <Column Name="UserUpdate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DateUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Photos_Gallery" Member="Gallery" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Gallery" />
       <Association Name="Photos_Games" Member="Games" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Games" />
       <Association Name="Photos_MenuGroups" Member="MenuGroups" ThisKey="IdRecord" OtherKey="IdPhoto" Type="MenuGroups" />
       <Association Name="Photos_MenuItems" Member="MenuItems" ThisKey="IdRecord" OtherKey="IdPhoto" Type="MenuItems" />
@@ -44,6 +30,7 @@
       <Association Name="Photos_Events" Member="Events" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Events" />
       <Association Name="Photos_Service" Member="Services" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Service" />
       <Association Name="Photos_ServicePhoto" Member="ServicePhotos" ThisKey="IdRecord" OtherKey="IdPhoto" Type="ServicePhoto" />
+      <Association Name="Photos_Gallery" Member="Gallery" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Gallery" />
     </Type>
   </Table>
   <Table Name="dbo.MenuGroups" Member="MenuGroups">
@@ -142,6 +129,20 @@
       <Column Name="name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="Photos_ServicePhoto" Member="Photos" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photos" IsForeignKey="true" />
       <Association Name="Service_ServicePhoto" Member="Service" ThisKey="IdService" OtherKey="IdRecord" Type="Service" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gallery" Member="Gallery">
+    <Type Name="Gallery">
+      <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdPhoto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="UserCreate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserUpdate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateUpdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Tag" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Association Name="Photos_Gallery" Member="Photos" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photos" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
