@@ -39,7 +39,7 @@ namespace PartyCafe.Site.DBUtils
                 resultList.Add(pcGallery);
             }
 
-            return resultList;
+            return resultList.OrderByDescending(x => x.idRecord).ToList();
         }
 
         public static List<PCGallery> GetAllByTags(List<string> tags)
@@ -66,7 +66,7 @@ namespace PartyCafe.Site.DBUtils
                 resultList.Add(pcGallery);
             }
 
-            return resultList;
+            return resultList.OrderByDescending(x => x.idRecord).ToList();
         }
 
         public static void InsertGallery(PCGallery gallery, string userCreate, PCPhoto image)

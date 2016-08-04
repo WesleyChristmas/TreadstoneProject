@@ -93,7 +93,7 @@ namespace PartyCafe.Site.DBUtils
                 pcEvent.idRecord = e.IdRecord;
                 pcEvent.name = e.Name;
                 pcEvent.IdPhoto = e.IdPhoto;
-                pcEvent.PhotoPath = e.Path;
+                pcEvent.PhotoPath = PhotoUtils.GetRelativeUrl(e.Path);
                 pcEvent.DateEvent = e.EventDate.Date;
                 pcEvent.TimeEvent = e.EventDate.TimeOfDay;
                 pcEvent.Description = e.description;
@@ -105,7 +105,7 @@ namespace PartyCafe.Site.DBUtils
                     {
                         var newPhoto = new PCEventPhoto();
                         newPhoto.idRecord = item.IdRecord;
-                        newPhoto.photoPath = item.Path;
+                        newPhoto.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
                         newPhoto.name = item.name;
                         pcEvent.photos.Add(newPhoto);
                     }
