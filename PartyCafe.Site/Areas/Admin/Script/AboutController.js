@@ -94,7 +94,10 @@ aboutapp.controller("AboutEditController", function ($scope, $http, $location, $
             fd.append('name', $scope.itemForEdit.name);
             fd.append('desc', $scope.itemForEdit.description);
             fd.append('oldphoto', $scope.itemForEdit.photoPath);
-            fd.append('file', document.getElementsByName('foodmenusubitemPhoto')[0].files[0]);
+            if(document.getElementsByName('aboutPhoto')[0] != null){
+                fd.append('file', document.getElementsByName('aboutPhoto')[0].files[0]);
+            }
+            
 
             $http.post('AboutUs/UpdateAbout', fd, {
                 transformRequest: angular.identity,
@@ -155,6 +158,17 @@ aboutapp.controller("AboutEditPhotoController", function ($scope, $http, $locati
         });
     };
     $scope.addPhoto = function () {
+        
+        if(!$scope.aboutPhotoForm.$valid){
+            $scope.error = "Одно из обязательных полей не заполнено!"
+            return;
+        }
+        
+        if(document.getElementsByName('aboutusPhoto')[0].files.length < 1){
+            $scope.error = "Вы не выбрали фотографию!"
+            return;
+        }
+        
         var fd = new FormData();
         fd.append('id', $scope.BlockPhotos.idRecord);
         fd.append('name', $scope.aboutusPhotoAdd.Name);

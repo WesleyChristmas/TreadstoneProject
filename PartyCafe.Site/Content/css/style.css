@@ -1382,3 +1382,18 @@ canvas {
     .photogallery-item { float: none; margin: 10px 0; }
     .photogallery-item a { height: 220px; width: 290px; }
 }
+
+.er-pg-container{
+    width:100%;
+    color:#fff;
+    text-align:center;
+}
+
+.er-pg-header{
+    font-size:28px;
+}
+
+.er-pg-desc{
+    padding:30px 0;
+    font-size:20px;
+}

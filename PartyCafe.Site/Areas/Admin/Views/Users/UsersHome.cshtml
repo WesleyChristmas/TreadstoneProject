@@ -14,17 +14,15 @@
     </ul>
 </div>
 <div class="admintable">
-    <table border="1" width="100%">
+    <table width="100%">
         <thead>
             <tr>
-                <th align="center" width="30px">№</th>
                 <th align="center" width="260px">Логин</th>
                 <th align="center">Описание</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in Users" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
-                <td align="center">{{$index + 1}}</td>
                 <td align="center">{{item.UserName}}</td>
                 <td>{{item.Description}}</td>
             </tr>

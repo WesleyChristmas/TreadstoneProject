@@ -142,7 +142,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddPhotoToServices(int id, string name, string desc)
+        public string AddPhotoToServices(int id, string name, string desc = "")
         {
             try
             {

@@ -17,10 +17,9 @@
     </ul>
 </div>
 <div class="admintable">
-    <table border="1" width="100%">
+    <table width="100%">
         <thead>
             <tr>
-                <th width="30px">№</th>
                 <th width="260px">Название услуги</th>
                 <th>Описание услуги</th>
                 <th>Фото услуги</th>
@@ -29,7 +28,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in Services" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
-                <td align="center">{{$index + 1}}</td>
                 <td align="center">{{item.name}}</td>
                 <td align="center">{{item.description}}</td>
                 <td align="center">

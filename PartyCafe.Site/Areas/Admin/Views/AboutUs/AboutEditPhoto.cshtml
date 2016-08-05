@@ -4,9 +4,10 @@
 
 <h2>{{Header}}</h2>
 <div class="addit-wrap">
+    <form name="aboutPhotoForm">
     <div class="addit-wrap">
         <label class="addit-label" for="aboutusPhotoName">Название:</label>
-        <input type="text" class="form-control" ng-model="aboutusPhotoAdd.Name" name="aboutusPhotoName" placeholder="Название фото">
+        <input type="text" class="form-control" ng-model="aboutusPhotoAdd.Name" name="aboutusPhotoName" placeholder="Название фото" required>
     </div>
     <div class="addit-wrap">
         <label class="addit-label" for="aboutusPhotoPass">Описание к фотографии:</label>
@@ -19,13 +20,14 @@
     <div class="addit-wrap">
         <input type="button" class="btn btn-default" value="Добавить фото" ng-click="addPhoto()">
     </div>
+    <div class="error-wrap">{{error}}</div>
+    </form>
 </div>
 
 <div class="admintable">
-    <table border="1" width="100%">
+    <table width="100%">
         <thead>
             <tr>
-                <th width="30px">№</th>
                 <th>Фото</th>
                 <th>Описание</th>
                 <th>Редактирование</th>
@@ -33,7 +35,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in BlockPhotos.photos" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
-                <td align="center">{{$index + 1}}</td>
                 <td align="center">
                     <div style="width: 100px; height: 100px; background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></div>
                 </td>

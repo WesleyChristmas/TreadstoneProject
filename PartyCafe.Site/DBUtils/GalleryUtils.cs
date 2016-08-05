@@ -101,7 +101,7 @@ namespace PartyCafe.Site.DBUtils
                             select e).SingleOrDefault();
 
             curGallery.Name = gallery.name ?? String.Empty;
-            curGallery.Description = gallery.name ?? String.Empty;
+            curGallery.Description = gallery.description ?? String.Empty;
             curGallery.Tag = gallery.tag ?? String.Empty;
 
             curGallery.DateUpdate = DateTime.Now;

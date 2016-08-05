@@ -157,6 +157,17 @@ servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $
         });
     };
     $scope.addPhoto = function () {
+        
+        if(!$scope.servicePhotoForm.$valid){
+            $scope.error = "Одно из обязательных полей не заполнено!"
+            return;
+        }
+        
+        if(document.getElementsByName('servicesPhoto')[0].files.length < 1){
+            $scope.error = "Вы не выбрали фотографию!"
+            return;
+        }
+        
         var fd = new FormData();
         fd.append('id', $scope.BlockPhotos.idRecord);
         fd.append('name', $scope.servicesPhotoAdd.Name);

@@ -4,28 +4,30 @@
 
 <h2>{{Header}}</h2>
 <div class="addit-wrap">
+    <form name="servicePhotoForm">
     <div class="addit-wrap">
-        <label class="addit-label" for="servicesPhotoName">Название:</label>
-        <input type="text" class="form-control" ng-model="servicesPhotoAdd.Name" name="servicesPhotoName" placeholder="Название фото">
+        <label class="addit-label" for="servicesPhotoName"><span class="star">*</span>Название:</label>
+        <input type="text" class="form-control" ng-model="servicesPhotoAdd.Name" name="servicesPhotoName" placeholder="Название фото" required>
     </div>
     <div class="addit-wrap">
         <label class="addit-label" for="servicesPhotoPass">Описание к фотографии:</label>
         <textarea class="form-control" ng-model="servicesPhotoAdd.Desc" name="servicesPhotoDesc" placeholder="Описание фото"></textarea>
     </div>
     <div class="addit-wrap">
-        <label class="addit-label" for="servicesPhoto">Фотография:</label>
+        <label class="addit-label" for="servicesPhoto"><span class="star">*</span>Фотография:</label>
         <input type="file" class="form-control" ng-model="servicesPhotoAdd.Photo" name="servicesPhoto">
     </div>
     <div class="addit-wrap">
         <input type="button" class="btn btn-default" value="Добавить фото" ng-click="addPhoto()">
     </div>
+    <div class="error-wrap">{{error}}</div>
+    </form>
 </div>
 
 <div class="admintable">
-    <table border="1" width="100%">
+    <table width="100%">
         <thead>
             <tr>
-                <th width="30px">№</th>
                 <th>Фото</th>
                 <th>Описание</th>
                 <th>Редактирование</th>
@@ -33,7 +35,6 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in BlockPhotos.photos" ng-click="HighlightItem(item)" ng-class="{activeEdit: isActive(item)}">
-                <td align="center">{{$index + 1}}</td>
                 <td align="center">
                     <div style="width: 100px; height: 100px; background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></div>
                 </td>
