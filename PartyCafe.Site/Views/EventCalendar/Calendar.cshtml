@@ -9,10 +9,12 @@
             <div clas="ed-day">{{item.day}}</div>
             <em class="ed-month">{{item.month}}</em>
             <strong class="ed-title">{{item.data.header}}</strong>
-            <a href="javascript:void(0);" ng-click="EventMore(item.data)" class="ed-imgwrap" style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" ng-show="item.data.length === 0 ? false : true">
+            <!-- style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" -->
+            <div ng-click="EventMore(item.data)" class="ed-imgwrap"  ng-show="item.data.length === 0 ? false : true">
                 <div class="ed-time">{{item.data.time.Hours}}:{{item.data.time.Minutes}}</div>
                 <div class="ed-invite">Присоединиться</div>
-            </a>
+                <img ng-src="{{item.data.photo}}" />
+            </div>
         </div>
     </div>
 </div>

@@ -579,12 +579,26 @@ canvas {
     transform: matrix(1, 0, 0, 1, 0, 0);
 }
 .about-item a:hover {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(1.6);
+    transform: scale(1.6);
+    /*
     transition: -webkit-transform 10s cubic-bezier(0,1,.35,1);
     transition: transform 20s cubic-bezier(0,1,.35,1);
     transition: transform 20s cubic-bezier(0,1,.35,1),-webkit-transform 20s cubic-bezier(0,1,.35,1)
+    */
 }
+
+/* after для женщин и детей! */
+.about-item a:hover:after{
+    -webkit-transform: scale(0.0);
+    transform: scale(0.0);
+    /*
+    transition: -webkit-transform 10s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1);
+    transition: transform 20s cubic-bezier(0,1,.35,1),-webkit-transform 20s cubic-bezier(0,1,.35,1)    
+    */
+}
+
 .about-popup, .about-popup_more {
     display: inline-block;
     position: absolute;
@@ -703,7 +717,7 @@ canvas {
     height: 140px;
     padding-left: 6px;
 }
-.ed-month, .ed-title, .ed-week { display: inline-block; text-transform: uppercase; }
+.ed-month, .ed-title, .ed-week { display: inline-block; text-transform: uppercase;}
 .ed-month {
     font-style: normal;
     padding-left: 3px;
@@ -729,6 +743,7 @@ canvas {
 .ed-day { text-align: center; margin-top: 12px; }
 .ed-imgwrap {
     color: white;
+    background-color:rgba(0,0,0,0.8);
     position: absolute;
     display: block;
     left: 0;
@@ -740,6 +755,7 @@ canvas {
     -o-transition: all 0.3s;
     transition: all 0.3s;
 }
+
 .ed-image {
     border: none;
     background: transparent;
@@ -754,7 +770,9 @@ canvas {
     transition: all 0.3s;
 }
 .ed-time {
+    color:white;
     font-size: 40px;
+    background-color: rgba(0,0,0,0.4);
     position: absolute;
     width: 100%;
     top: 20px;
