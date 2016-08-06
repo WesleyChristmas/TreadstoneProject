@@ -1,15 +1,9 @@
 using System;
-using Entity;
-using Entity.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using PartyCafe.Site.Controllers;
 using PartyCafe.Site.Models;
-using Repository.Pattern.DataContext;
-using Repository.Pattern.Ef6;
-using Repository.Pattern.Repositories;
-using Repository.Pattern.UnitOfWork;
 
 namespace PartyCafe.Site.App_Start
 {

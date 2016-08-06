@@ -201,7 +201,6 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Admin\Core\ImageSaver.cs" />
     <Compile Include="Areas\Admin\Core\Utils\UserUtils.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
@@ -1256,36 +1255,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Database\Db.Entity\Db.Entity.csproj">
-      <Project>{AC5EB895-AF19-4A0C-9847-5E4404B98E01}</Project>
-      <Name>Db.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Database\Db.Service\Db.Service.csproj">
-      <Project>{7753ee03-772b-4c14-8ffc-ef8f8a7784d7}</Project>
-      <Name>Db.Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Database\Framework\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
-      <Project>{f68a1d19-93fb-47c1-a22b-42bea3e4fd8c}</Project>
-      <Name>Repository.Pattern.Ef6</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Database\Framework\Repository.Pattern\Repository.Pattern.csproj">
-      <Project>{6e682a14-c872-4813-b620-76e108dea683}</Project>
-      <Name>Repository.Pattern</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Database\Framework\Service.Pattern\Service.Pattern.csproj">
-      <Project>{86f86650-ee3c-4372-8fec-40c2fe015022}</Project>
-      <Name>Service.Pattern</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Library\BusinessEntity\BusinessEntity.csproj">
-      <Project>{498e4e0c-3ef6-44bf-9f2b-5bfebb6a11cf}</Project>
-      <Name>BusinessEntity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Library\BusinessInterface\BusinessInterface.csproj">
-      <Project>{fa1bfb81-6408-4c61-a701-b77abc608486}</Project>
-      <Name>BusinessInterface</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

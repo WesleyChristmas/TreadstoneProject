@@ -1,7 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Collections.Generic;
-using BusinessEntity;
-using BusinessInterface;
 using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Controllers
