@@ -787,6 +787,12 @@ canvas {
     position: absolute;
     background: rgba(0, 0, 0, 0.6);
 }
+
+.ed-photo {
+    width: 130px;
+    height: 140px;
+}
+
 /* Event invite */
 .event-invite_content {
     height: 100%;

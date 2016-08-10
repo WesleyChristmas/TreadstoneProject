@@ -125,12 +125,12 @@ servicesapp.controller("ServicesEditPhotoController", function ($scope, $http, $
 
     $scope.updatePhotoName = function (id) {
         var name = document.getElementsByTagName('textarea')[id];
-        $http.post('AboutUs/UpdatePhotoServices', {
+        $http.post('AboutUs/UpdatePhotoBlock', {
             id: $scope.BlockPhotos.photos[id].idRecord,
             name: name.value
         }).success(function (response) {
             if (response === 'ok') {
-                $http.post('AboutUs/GetServicesPhotos', {
+                $http.post('AboutUs/GetBlockPhotos', {
                     id: $scope.BlockPhotos.idRecord
                 }).success(function (response) {
                     $scope.BlockPhotos = response;

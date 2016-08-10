@@ -13,7 +13,7 @@
             <div ng-click="EventMore(item.data)" class="ed-imgwrap"  ng-show="item.data.length === 0 ? false : true">
                 <div class="ed-time">{{item.data.time.Hours}}:{{item.data.time.Minutes}}</div>
                 <div class="ed-invite">Присоединиться</div>
-                <img ng-src="{{item.data.photo}}" />
+                <img class="ed-photo" ng-src="{{item.data.photo}}" />
             </div>
         </div>
     </div>
