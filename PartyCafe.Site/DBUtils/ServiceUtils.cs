@@ -27,7 +27,6 @@ namespace PartyCafe.Site.DBUtils
         public string description;
         public string title;
         public int serviceType;
-        public List<PCServicePhoto> photos;
     }
 
     public static class ServiceUtils
@@ -38,61 +37,45 @@ namespace PartyCafe.Site.DBUtils
             var services = (from s in db.Services
                             join p in db.Photos on s.IdPhoto equals p.IdRecord
                             where s.serviceType == serviceType
-
                             select new { s.IdRecord, s.Name, s.Text, s.Title, p.Path }).ToList();
 
+            return services.Select(item => new PCService
+            {
+                idRecord = item.IdRecord,
+                name = item.Name,
+                photoPath = PhotoUtils.GetRelativeUrl(item.Path),
+                description = item.Text, title = item.Title
+            }).ToList();
+        }
+
+        public static List<PCServicePhoto> GetServicePhotos(int id)
+        {
+            var db = MainUtils.GetDBContext();
             var servicePhotos = (from sp in db.ServicePhotos
                                  join p in db.Photos on sp.IdPhoto equals p.IdRecord
+                                 where sp.IdService == id
                                  select new { sp.IdRecord, sp.IdService, p.Path, sp.name }).ToList();
 
-            List<PCService> result = new List<PCService>();
-            foreach (var item in services)
+            return servicePhotos.Select(p => new PCServicePhoto
             {
-                var newItem = new PCService();
-
-                newItem.idRecord = item.IdRecord;
-                newItem.name = item.Name;
-                newItem.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
-                newItem.description = item.Text;
-                newItem.title = item.Title;
-
-                newItem.photos = new List<PCServicePhoto>();
-                foreach (var p in servicePhotos)
-                {
-                    if (p.IdService == newItem.idRecord)
-                    {
-                        var newPhoto = new PCServicePhoto();
-                        newPhoto.idRecord = p.IdRecord;
-                        newPhoto.photoPath = PhotoUtils.GetRelativeUrl(p.Path);
-                        newPhoto.name = p.name;
-                        newItem.photos.Add(newPhoto);
-                    }
-                }
-                result.Add(newItem);
-            }
-
-            return result;
+                idRecord = p.IdRecord,
+                photoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                name = p.name
+            }).ToList();
         }
 
         public static void InsertService(PCService partyService, string userCreate, PCPhoto image)
         {
-            var newService = new Service();
-            newService.Name = partyService.name ?? String.Empty;
-            newService.Text = partyService.description ?? String.Empty;
-            newService.serviceType = partyService.serviceType;
-            newService.Title = partyService.title;
-
-            if (image != null)
+            var newService = new Service
             {
-                newService.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
-            }
-            else
-            {
-                newService.IdPhoto = 0;
-            }
-
-            newService.DateCreate = DateTime.Now;
-            newService.UserCreate = userCreate;
+                Name = partyService.name ?? string.Empty,
+                Text = partyService.description ?? string.Empty,
+                serviceType = partyService.serviceType,
+                Title = partyService.title,
+                IdPhoto = (image != null) ? PhotoUtils.InsertImage(image, userCreate) : 0,
+                DateCreate = DateTime.Now,
+                UserCreate = userCreate
+            };
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Services.InsertOnSubmit(newService);
@@ -106,23 +89,27 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == partyService.idRecord
                             select e).SingleOrDefault();
 
-            curService.Name = partyService.name ?? String.Empty;
-            curService.Text = partyService.description ?? String.Empty;
-            curService.Title = partyService.title ?? String.Empty;
-
-            curService.DateUpdate = DateTime.Now;
-            curService.UserUpdate = userUpdate;
-
-            if (image != null)
+            if (curService != null)
             {
-                if (curService.IdPhoto > 0)
+                curService.Name = partyService.name ?? string.Empty;
+                curService.Text = partyService.description ?? string.Empty;
+                curService.Title = partyService.title ?? string.Empty;
+
+                curService.DateUpdate = DateTime.Now;
+                curService.UserUpdate = userUpdate;
+
+                if (image != null)
                 {
-                    PhotoUtils.EditImage(curService.IdPhoto, image, userUpdate);
+                    if (curService.IdPhoto > 0)
+                    {
+                        PhotoUtils.EditImage(curService.IdPhoto, image, userUpdate);
+                    }
+                    else
+                    {
+                        curService.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
+                    }
                 }
-                else {
-                    curService.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
-                }
-            }
+            } else return;
 
             dbContext.SubmitChanges();
         }

@@ -13,9 +13,9 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllPhotos()
+        public JsonResult GetAllPhotos(int startPos = 0, int count = 20)
         {
-            var result = GalleryUtils.GetAll();
+            var result = GalleryUtils.GetAll(startPos, count);
             result.ForEach(f => f.photoPath.Replace("\\", "/"));
             return Json(result, JsonRequestBehavior.AllowGet);
         }

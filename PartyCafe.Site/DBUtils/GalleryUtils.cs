@@ -17,28 +17,22 @@ namespace PartyCafe.Site.DBUtils
     public class GalleryUtils
     {
 
-        public static List<PCGallery> GetAll()
+        public static List<PCGallery> GetAll(int startPosition, int count)
         {
             var dbContext = MainUtils.GetDBContext();
-            var gallery = (from e in dbContext.Gallery
+            var gallery = (from e in dbContext.Gallery.OrderByDescending(x => x.IdRecord).Skip(startPosition - 1).Take(count)
                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
-                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, path = PhotoUtils.GetRelativeUrl(p.Path), e.Tag }).ToList();
+                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, path = PhotoUtils.GetRelativeUrl(p.Path), e.Tag }
+                          ).ToList();
 
-            List<PCGallery> resultList = new List<PCGallery>();
-            foreach (var e in gallery)
+            return  gallery.Select(e => new PCGallery
             {
-                PCGallery pcGallery = new PCGallery();
-
-                pcGallery.idRecord = e.IdRecord;
-                pcGallery.name = e.Name;
-                pcGallery.idPhoto = e.IdPhoto;
-                pcGallery.photoPath = PhotoUtils.GetRelativeUrl(e.path);
-                pcGallery.description = e.Description;
-
-                resultList.Add(pcGallery);
-            }
-
-            return resultList.OrderByDescending(x => x.idRecord).ToList();
+                idRecord = e.IdRecord,
+                name = e.Name,
+                idPhoto = e.IdPhoto,
+                photoPath = PhotoUtils.GetRelativeUrl(e.path),
+                description = e.Description
+            }).ToList();
         }
 
         public static List<PCGallery> GetAllByTags(List<string> tags)
