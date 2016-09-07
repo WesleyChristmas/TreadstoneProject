@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebGrease.Css.Extensions;
 
 namespace PartyCafe.Site.DBUtils
 {
@@ -11,7 +12,6 @@ namespace PartyCafe.Site.DBUtils
         public string description;
         public string photoPath;
         public int idPhoto;
-        public string tag;
     }
 
     public class GalleryUtils
@@ -34,7 +34,6 @@ namespace PartyCafe.Site.DBUtils
                 pcGallery.idPhoto = e.IdPhoto;
                 pcGallery.photoPath = PhotoUtils.GetRelativeUrl(e.path);
                 pcGallery.description = e.Description;
-                pcGallery.tag = e.Tag;
 
                 resultList.Add(pcGallery);
             }
@@ -45,28 +44,26 @@ namespace PartyCafe.Site.DBUtils
         public static List<PCGallery> GetAllByTags(List<string> tags)
         {
             var dbContext = MainUtils.GetDBContext();
-            var gallery = (from e in dbContext.Gallery
-                           join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
-                           where tags.Contains(e.Tag)
-                           select new { e.IdRecord, e.Name, e.IdPhoto, e.Description,
-                               path = PhotoUtils.GetRelativeUrl(p.Path), e.Tag }).ToList();
+            var galleries = dbContext.GalleryHashtags
+                .Where(x => tags.Contains(x.Hashtag))
+                .Select(x => x.Gallery).ToList();
 
             List<PCGallery> resultList = new List<PCGallery>();
-            foreach (var e in gallery)
+            galleries.ForEach(x =>
             {
-                PCGallery pcGallery = new PCGallery();
+                PCGallery resGallery = new PCGallery()
+                {
+                    idRecord = x.IdRecord,
+                    name = x.Name,
+                    idPhoto = x.IdPhoto,
+                    photoPath = PhotoUtils.GetRelativeUrl(x.Photo.Path),
+                    description = x.Description,
+                };
 
-                pcGallery.idRecord = e.IdRecord;
-                pcGallery.name = e.Name;
-                pcGallery.idPhoto = e.IdPhoto;
-                pcGallery.photoPath = PhotoUtils.GetRelativeUrl(e.path);
-                pcGallery.description = e.Description;
-                pcGallery.tag = e.Tag;
-
-                resultList.Add(pcGallery);
-            }
-
-            return resultList.OrderByDescending(x => x.idRecord).ToList();
+                resultList.Add(resGallery);
+            });
+           
+            return resultList;
         }
 
         public static void InsertGallery(PCGallery gallery, string userCreate, PCPhoto image)
@@ -74,7 +71,6 @@ namespace PartyCafe.Site.DBUtils
             var newGallery = new Gallery();
             newGallery.Name = gallery.name ?? String.Empty;
             newGallery.Description = gallery.description ?? String.Empty;
-            newGallery.Tag = gallery.tag ?? String.Empty;
 
             if (image != null)
             {
@@ -102,7 +98,6 @@ namespace PartyCafe.Site.DBUtils
 
             curGallery.Name = gallery.name ?? String.Empty;
             curGallery.Description = gallery.description ?? String.Empty;
-            curGallery.Tag = gallery.tag ?? String.Empty;
 
             curGallery.DateUpdate = DateTime.Now;
             curGallery.UserUpdate = String.IsNullOrWhiteSpace(userUpdate) ? "Admin" : userUpdate;
@@ -134,6 +129,43 @@ namespace PartyCafe.Site.DBUtils
             dbContext.SubmitChanges();
 
             if (curGallery.IdPhoto > 0) { PhotoUtils.DelImage(curGallery.IdPhoto); };
+        }
+
+        public static List<string> GetHashtags(int id)
+        {
+            var dbContext = MainUtils.GetDBContext();
+            return dbContext.GalleryHashtags
+                .Where(x => x.GalleryId == id)
+                .Select(x => x.Hashtag)
+                .ToList();
+        }
+
+        public static void SetHashtags(int id, List<string> inputHashtagsStr)
+        {
+            var dbContext = MainUtils.GetDBContext();
+            var curHashtags = dbContext.GalleryHashtags.Where(x => x.GalleryId == id);
+            var curHashtagsStr = curHashtags
+                .Select(x => x.Hashtag)
+                .ToList();
+
+            // Добавляем новые
+            var addHashtagsStr = inputHashtagsStr.Except(curHashtagsStr).ToList();
+            addHashtagsStr.ForEach(x =>
+            {
+                var gh = new GalleryHashtag
+                {
+                    GalleryId = id,
+                    Hashtag = x
+                };
+                dbContext.GalleryHashtags.InsertOnSubmit(gh);
+            });
+
+            // Удаляем лишние
+            var delHashtagsStr = curHashtagsStr.Except(inputHashtagsStr);
+            var delHashtags = curHashtags.Where(x => delHashtagsStr.Contains(x.Hashtag));
+            dbContext.GalleryHashtags.DeleteAllOnSubmit(delHashtags);
+
+            dbContext.SubmitChanges();
         }
     }
 }

@@ -211,7 +211,7 @@ namespace PartyCafe.Site.DBUtils
         public static void AddPhoto(int IdEvent, string name, PCPhoto image, string userCreate)
         {
             var db = MainUtils.GetDBContext();
-            EventPhotos ep = new EventPhotos();
+            EventPhoto ep = new EventPhoto();
             ep.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
             ep.IdEvent = IdEvent;
             ep.name = name;

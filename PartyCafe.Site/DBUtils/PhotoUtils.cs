@@ -59,7 +59,7 @@ namespace PartyCafe.Site.DBUtils
         public static int InsertImage(PCPhoto image, string userCreate)
         {   
             var db = MainUtils.GetDBContext();
-            var photo = new Photos();
+            var photo = new Photo();
 
             photo.FileName = image.fileName; 
             photo.Path = SavePhoto(image);

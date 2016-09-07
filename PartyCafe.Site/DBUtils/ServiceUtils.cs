@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 
 namespace PartyCafe.Site.DBUtils
 {
@@ -37,6 +38,7 @@ namespace PartyCafe.Site.DBUtils
             var services = (from s in db.Services
                             join p in db.Photos on s.IdPhoto equals p.IdRecord
                             where s.serviceType == serviceType
+
                             select new { s.IdRecord, s.Name, s.Text, s.Title, p.Path }).ToList();
 
             var servicePhotos = (from sp in db.ServicePhotos
@@ -75,8 +77,8 @@ namespace PartyCafe.Site.DBUtils
         public static void InsertService(PCService partyService, string userCreate, PCPhoto image)
         {
             var newService = new Service();
-            newService.Name = partyService.name != null ? partyService.name : String.Empty;
-            newService.Text = partyService.description != null ? partyService.description : String.Empty;
+            newService.Name = partyService.name ?? String.Empty;
+            newService.Text = partyService.description ?? String.Empty;
             newService.serviceType = partyService.serviceType;
             newService.Title = partyService.title;
 

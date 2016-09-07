@@ -22,11 +22,13 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View("GalleryHome");
         }
+
         [HttpGet]
         public ActionResult GalleryAdd()
         {
             return View("GalleryAdd");
         }
+
         [HttpGet]
         public ActionResult GalleryEdit()
         {
@@ -40,21 +42,27 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(gallery, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetAllGalleryByTags(List<string> hashtags)
+        {
+            var gallery = GalleryUtils.GetAllByTags(hashtags);
+            return Json(gallery, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public string AddGallery(string name, string desc)
         {
             try
             {
-                var request = Request;
                 var file = Request.Files[0];
                 var content = new byte[file.ContentLength];
                 var filename = file.FileName;
                 file.InputStream.Read(content, 0, file.ContentLength);
 
                 GalleryUtils.InsertGallery(
-                    new PCGallery() { name = name, description = desc },
+                    new PCGallery() {name = name, description = desc},
                     User.Identity.Name,
-                    new PCPhoto() { data = content, fileName = filename }
+                    new PCPhoto() {data = content, fileName = filename}
                 );
                 return "ok";
             }
@@ -63,6 +71,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
+
         [HttpPost]
         public string UpdateGallery(int id, string name, string desc)
         {
@@ -85,7 +94,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             description = desc
                         },
                         User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
+                        new PCPhoto() {data = content, fileName = filename}
                     );
                     return "ok";
                 }
@@ -109,6 +118,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
+
         [HttpPost]
         public string DeleteGalleryItem(int id)
         {
@@ -120,6 +130,26 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 return "Произошла ошибка! " + ex.Message.ToString();
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetHashtags(int id)
+        {
+            return Json(GalleryUtils.GetHashtags(id), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public string SetHashtags(int id, List<string> hashtags)
+        {
+            try
+            {
+                GalleryUtils.SetHashtags(id, hashtags);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "bad";
             }
         }
     }
