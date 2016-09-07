@@ -36,9 +36,9 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllGallery()
+        public JsonResult GetAllGallery(int startPos = 0, int count = 20)
         {
-            var gallery = GalleryUtils.GetAll();
+            var gallery = GalleryUtils.GetAll(startPos, count);
             return Json(gallery, JsonRequestBehavior.AllowGet);
         }
 
