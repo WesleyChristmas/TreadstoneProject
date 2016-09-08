@@ -211,6 +211,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="DBUtils\EmailUtils.cs" />
     <Compile Include="DBUtils\EventUtils.cs" />
     <Compile Include="DBUtils\GalleryUtils.cs" />
     <Compile Include="DBUtils\MainUtils.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Utils\ControllerUtils.cs" />
+    <Compile Include="Models\Utils\Mailer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

@@ -2,8 +2,9 @@
 using PartyCafe.Site.DBUtils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
-using System.Net.Mail;
+
 
 namespace PartyCafe.Site.Controllers
 {
@@ -46,28 +47,23 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpPost]
-        public string Invite(string user, string phone, int? people, string promo, string service)
+        public string Invite(string username, string phone, int? peopleNum, string promoCode, string service)
         {
-            var mess = "Заказ услуги - " + service + "\n";
-            mess += " Имя:" + user + "\n";
-            mess += " Телефона:" + phone + "\n";
-            mess += " Количество человек:" + people + "\n";
-            mess += " Промокод:" + promo + "\n";
-
             try
-            {
-                MailMessage mm = new MailMessage("igdevelopment-info@yandex.ru", "dropletofrain@mail.ru");
-                mm.Subject = "Сообщение с контактной формы";
-                mm.Body = mess;
+            { 
+                var subject = "Заказ услуги с сайта PartyCafe";
 
-                SmtpClient sc = new SmtpClient("smtp.yandex.ru", 25);
-                sc.Credentials = new System.Net.NetworkCredential()
-                {
-                    UserName = "igdevelopment-info@yandex.ru",
-                    Password = "dev89%lopment"
-                };
-                sc.EnableSsl = true;
-                //sc.Send(mm);
+                var message = "Заказ услуги - " + service + Environment.NewLine +
+                    "Имя: " + username + Environment.NewLine +
+                    "Телефона:" + phone + Environment.NewLine +
+                    ((peopleNum.HasValue) ? "Количество человек: " + peopleNum + Environment.NewLine : string.Empty) +
+                    "Промокод:" + promoCode;
+
+                var reader = new System.Configuration.AppSettingsReader();
+                var recipient = reader.GetValue("EmailOrdersTo", typeof(string)).ToString();
+
+                EmailUtils.AddEmail(subject, message, recipient);
+
 
                 return "ok";
             }

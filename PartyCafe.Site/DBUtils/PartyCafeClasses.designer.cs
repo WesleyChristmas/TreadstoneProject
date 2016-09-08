@@ -63,6 +63,9 @@ namespace PartyCafe.Site.DBUtils
     partial void InsertGalleryHashtag(GalleryHashtag instance);
     partial void UpdateGalleryHashtag(GalleryHashtag instance);
     partial void DeleteGalleryHashtag(GalleryHashtag instance);
+    partial void InsertEmail(Email instance);
+    partial void UpdateEmail(Email instance);
+    partial void DeleteEmail(Email instance);
     #endregion
 		
 		public PartyCafeClassesDataContext(string connection) : 
@@ -174,6 +177,14 @@ namespace PartyCafe.Site.DBUtils
 			get
 			{
 				return this.GetTable<GalleryHashtag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Email> Emails
+		{
+			get
+			{
+				return this.GetTable<Email>();
 			}
 		}
 	}
@@ -3484,6 +3495,188 @@ namespace PartyCafe.Site.DBUtils
 						this._GalleryId = default(int);
 					}
 					this.SendPropertyChanged("Gallery");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Emails")]
+	public partial class Email : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdRecord;
+		
+		private string _Subject;
+		
+		private string _Message;
+		
+		private string _To;
+		
+		private System.DateTime _DateCreate;
+		
+		private System.Nullable<System.DateTime> _DateSend;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdRecordChanging(int value);
+    partial void OnIdRecordChanged();
+    partial void OnSubjectChanging(string value);
+    partial void OnSubjectChanged();
+    partial void OnMessageChanging(string value);
+    partial void OnMessageChanged();
+    partial void OnToChanging(string value);
+    partial void OnToChanged();
+    partial void OnDateCreateChanging(System.DateTime value);
+    partial void OnDateCreateChanged();
+    partial void OnDateSendChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateSendChanged();
+    #endregion
+		
+		public Email()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRecord", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdRecord
+		{
+			get
+			{
+				return this._IdRecord;
+			}
+			set
+			{
+				if ((this._IdRecord != value))
+				{
+					this.OnIdRecordChanging(value);
+					this.SendPropertyChanging();
+					this._IdRecord = value;
+					this.SendPropertyChanged("IdRecord");
+					this.OnIdRecordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Subject", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Subject
+		{
+			get
+			{
+				return this._Subject;
+			}
+			set
+			{
+				if ((this._Subject != value))
+				{
+					this.OnSubjectChanging(value);
+					this.SendPropertyChanging();
+					this._Subject = value;
+					this.SendPropertyChanged("Subject");
+					this.OnSubjectChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this.OnMessageChanging(value);
+					this.SendPropertyChanging();
+					this._Message = value;
+					this.SendPropertyChanged("Message");
+					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[To]", Storage="_To", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string To
+		{
+			get
+			{
+				return this._To;
+			}
+			set
+			{
+				if ((this._To != value))
+				{
+					this.OnToChanging(value);
+					this.SendPropertyChanging();
+					this._To = value;
+					this.SendPropertyChanged("To");
+					this.OnToChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreate", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreate
+		{
+			get
+			{
+				return this._DateCreate;
+			}
+			set
+			{
+				if ((this._DateCreate != value))
+				{
+					this.OnDateCreateChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreate = value;
+					this.SendPropertyChanged("DateCreate");
+					this.OnDateCreateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateSend", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateSend
+		{
+			get
+			{
+				return this._DateSend;
+			}
+			set
+			{
+				if ((this._DateSend != value))
+				{
+					this.OnDateSendChanging(value);
+					this.SendPropertyChanging();
+					this._DateSend = value;
+					this.SendPropertyChanged("DateSend");
+					this.OnDateSendChanged();
 				}
 			}
 		}

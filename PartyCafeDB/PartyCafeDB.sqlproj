@@ -65,7 +65,6 @@
     <Build Include="Tables\Roles.sql" />
     <Build Include="Tables\UserRoles.sql" />
     <Build Include="Tables\Users.sql" />
-    <Build Include="Tables\sysdiagrams.sql" />
     <Build Include="Tables\Events.sql" />
     <Build Include="Tables\Gallery.sql" />
     <Build Include="Tables\Games.sql" />
@@ -76,8 +75,10 @@
     <Build Include="Tables\EventPhotos.sql" />
     <Build Include="Tables\Services.sql" />
     <Build Include="Tables\GalleryHashtags.sql" />
+    <Build Include="Tables\Emails.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PartyCafeDB.publish.xml" />
+    <None Include="StartUp.sql" />
   </ItemGroup>
 </Project>
