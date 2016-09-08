@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using WebGrease.Css.Extensions;
 
@@ -17,13 +18,36 @@ namespace PartyCafe.Site.DBUtils
     public class GalleryUtils
     {
 
-        public static List<PCGallery> GetAll(int startPosition, int count)
+        public static List<PCGallery> GetAll(int startPosition, int needCount)
         {
+            startPosition = (startPosition < 1) ? 0 : 0;
+            needCount = (needCount < 1) ? 1 : needCount;
+
             var dbContext = MainUtils.GetDBContext();
-            var gallery = (from e in dbContext.Gallery.OrderByDescending(x => x.IdRecord).Skip(startPosition - 1).Take(count)
-                          join p in dbContext.Photos on e.IdPhoto equals p.IdRecord
-                          select new { e.IdRecord, e.Name, e.IdPhoto, e.Description, path = PhotoUtils.GetRelativeUrl(p.Path), e.Tag }
-                          ).ToList();
+            var gallery = (dbContext.Gallery.OrderByDescending(x => x.IdRecord)
+                    .Join(dbContext.Photos, e => e.IdPhoto, p => p.IdRecord,
+                        (e, p) =>
+                            new
+                            {
+                                e.IdRecord,
+                                e.Name,
+                                e.IdPhoto,
+                                e.Description,
+                                path = PhotoUtils.GetRelativeUrl(p.Path),
+                                e.Tag
+                            })
+            ).ToList();
+
+            var fullCount = gallery.Count;
+            if (fullCount == 0)
+                return new List<PCGallery>();
+
+            var reminder = fullCount - (startPosition);
+            var countToTake = (reminder < needCount) ? reminder : needCount;
+            if (countToTake <= 0)
+                return new List<PCGallery>();
+
+            gallery = gallery.GetRange(startPosition, countToTake);
 
             return  gallery.Select(e => new PCGallery
             {

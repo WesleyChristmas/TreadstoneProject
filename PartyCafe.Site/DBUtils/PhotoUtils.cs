@@ -17,31 +17,21 @@ namespace PartyCafe.Site.DBUtils
     {   
         public static string GetRelativeUrl(string path)
         {
-            if (path != String.Empty && path.IndexOf("http") == -1)
-            { 
-                string PhotoPath = @"../" + System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
-                return  Path.Combine(PhotoPath, Path.GetFileName(path)).Replace('\\', '/');
-            } else
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                return path;
+                string photoPath = @"/" + System.Configuration.ConfigurationManager.AppSettings["PhotoPath"].Replace(@"\", "/");
+                return Path.Combine(photoPath, path);
             }
+            else return null;
         }
 
-        private static string GetRandomFileName()
+        private static string GetPhysicalPhotoPath(string photoFilename)
         {
-            const int FileNameLength = 8;
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string photoPath = System.Configuration.ConfigurationManager.AppSettings["PhotoPath"];
+            string serverPhotoPath = Path.Combine(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath,
+                photoPath);
 
-            int i = 0;
-            string result = "";
-            var random = new Random();
-
-            while (i < FileNameLength)
-            {
-                result += chars[random.Next(chars.Length)];
-                i++;
-            }
-            return result;
+            return Path.Combine(serverPhotoPath, photoFilename);
         }
 
         private static string SavePhoto(PCPhoto image)
@@ -50,10 +40,10 @@ namespace PartyCafe.Site.DBUtils
             string serverPhotoPath = Path.Combine(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath, photoPath);
 
             if (!Directory.Exists(serverPhotoPath)) { Directory.CreateDirectory(serverPhotoPath); };
-            string newFileName = GetRandomFileName();
-            string fullPath = serverPhotoPath + newFileName + "_" + Path.GetFileName(image.fileName);
+            string newFileName = Path.GetFileNameWithoutExtension(image.fileName) + "_" + Guid.NewGuid() + Path.GetExtension(image.fileName);
+            string fullPath = serverPhotoPath + newFileName;
             File.WriteAllBytes(fullPath, image.data);
-            return fullPath;
+            return newFileName;
         }
 
         public static int InsertImage(PCPhoto image, string userCreate)
@@ -102,7 +92,7 @@ namespace PartyCafe.Site.DBUtils
                                 select p).SingleOrDefault();
                 try
                 { 
-                    File.Delete(curPhoto.Path);
+                    File.Delete(GetPhysicalPhotoPath(curPhoto.Path));
                 }
                 catch (Exception ex)
                 {
