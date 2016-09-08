@@ -114,17 +114,17 @@ namespace PartyCafe.Site.DBUtils
             dbContext.SubmitChanges();
         }
 
-        public static void DelService(int IdService)
+        public static void DelService(int idService)
         {
             var dbContext = MainUtils.GetDBContext();
             
             var curService = (from e in dbContext.Services
-                            where e.IdRecord == IdService
+                            where e.IdRecord == idService
                             select e).SingleOrDefault();
 
             // Delete subphotos
             var curServicePhotos = (from x in dbContext.ServicePhotos
-                                    where x.IdService == IdService
+                                    where x.IdService == idService
                                     select x);
             foreach(var item in curServicePhotos)
             {
@@ -150,11 +150,11 @@ namespace PartyCafe.Site.DBUtils
             db.SubmitChanges();
         }
 
-        public static void EditPhoto(int IdServicePhoto, string name, PCPhoto image, string userUpdate)
+        public static void EditPhoto(int idServicePhoto, string name, PCPhoto image, string userUpdate)
         {
             var db = MainUtils.GetDBContext();
             var sp = (from p in db.ServicePhotos
-                      where p.IdRecord == IdServicePhoto
+                      where p.IdRecord == idServicePhoto
                       select p).FirstOrDefault();
 
             if (image != null)
@@ -162,15 +162,15 @@ namespace PartyCafe.Site.DBUtils
                 PhotoUtils.EditImage(sp.IdPhoto, image, userUpdate);
             }
 
-            sp.name = name ?? String.Empty;
+            sp.name = name ?? string.Empty;
             db.SubmitChanges();
         }
 
-        public static void DelPhoto(int IdServicePhoto)
+        public static void DelPhoto(int idServicePhoto)
         {
             var db = MainUtils.GetDBContext();
             var x = (from sp in db.ServicePhotos
-                     where sp.IdRecord == IdServicePhoto
+                     where sp.IdRecord == idServicePhoto
                      select sp).SingleOrDefault();
 
             int idPhoto = x.IdPhoto;

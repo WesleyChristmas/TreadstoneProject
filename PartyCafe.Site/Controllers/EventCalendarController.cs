@@ -36,15 +36,17 @@ namespace PartyCafe.Site.Controllers
         [HttpGet]
         public JsonResult GetCalendar()
         {
-            EventResult er = new EventResult();
-            er.Calendar = EventUtils.GetNearEvents();
-            er.CurDate = DateTime.Now;
-            
+            EventResult er = new EventResult
+            {
+                Calendar = EventUtils.GetNearEvents(),
+                CurDate = DateTime.Now
+            };
+
             return Json(er, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<JsonResult> Invite(string user, string phone, int? people, string promo, string service)
+        public string Invite(string user, string phone, int? people, string promo, string service)
         {
             var mess = "Заказ услуги - " + service + "\n";
             mess += " Имя:" + user + "\n";
@@ -67,11 +69,11 @@ namespace PartyCafe.Site.Controllers
                 sc.EnableSsl = true;
                 //sc.Send(mm);
 
-                return Json("good", JsonRequestBehavior.AllowGet);
+                return "ok";
             }
             catch (Exception ex)
             {
-                return Json("error", JsonRequestBehavior.AllowGet);
+                return "bad";
             }
         }
     }

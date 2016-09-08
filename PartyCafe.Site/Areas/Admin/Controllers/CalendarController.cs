@@ -39,6 +39,40 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(EventUtils.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetEventPhotos(int id)
+        {
+            return Json(EventUtils.GetEventPhotos(id));
+        }
+
+        [HttpPost]
+        public string AddPhoto(int idEvent, string name)
+        {
+            try
+            {
+                EventUtils.AddPhoto(idEvent, name, ControllerUtils.GetPhotoEntity(Request.Files), User.Identity.Name);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "bad";
+            }
+        }
+
+        [HttpPost]
+        public string DelPhoto(int idEvent)
+        {
+            try
+            {
+                EventUtils.DelPhoto(idEvent);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "bad";
+            }
+        }
+
         [HttpPost]
         public string AddCalendarEvent(string name, string desc, string date, string time)
         {
@@ -98,7 +132,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
 

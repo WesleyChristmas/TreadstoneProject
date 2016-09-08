@@ -70,7 +70,7 @@ namespace PartyCafe.Site.DBUtils
                             select p).SingleOrDefault();
             try
             {
-                File.Delete(curPhoto.Path);
+                File.Delete(GetPhysicalPhotoPath(curPhoto.Path));
             }
             catch (Exception ex) { }
 
