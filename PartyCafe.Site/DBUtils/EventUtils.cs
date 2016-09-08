@@ -171,7 +171,7 @@ namespace PartyCafe.Site.DBUtils
 
         }
 
-        public static void InsertEvent(PCEvent partyEvent, string userCreate, PCPhoto image)
+        public static void InsertEvent(PCEvent partyEvent, PCPhoto image, string userCreate)
         {
             var newEvent = new Events();
             newEvent.Name = partyEvent.name != null ? partyEvent.name : String.Empty;

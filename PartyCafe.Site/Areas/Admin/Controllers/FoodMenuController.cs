@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
+using PartyCafe.Site.Models.Utils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
@@ -36,14 +38,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         IdParent = parentId,
                         Name = name
                     },
-                    User.Identity.Name,
-                    null
+                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    User.Identity.Name
                 );
                 return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
         [HttpPost]
@@ -58,14 +60,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         Name = name,
                         IdParent = idparent
                     },
-                    User.Identity.Name,
-                    null
+                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    User.Identity.Name
                 );
                 return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
         [HttpPost]
@@ -78,7 +80,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
 
@@ -87,15 +89,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request;
-                if (request.Files.Count > 0)
-                {
-                    var file = Request.Files[0];
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    MenuUtils.InsertItem(
+                MenuUtils.InsertItem(
                         new PCMenuItem()
                         {
                             IdGroup = groupid,
@@ -106,32 +100,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             Price = price,
                             Country = des
                         },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
+                        ControllerUtils.GetPhotoEntity(Request.Files),
+                        User.Identity.Name
                     );
-                    return "ok";
-                }
-                else {
-                    MenuUtils.InsertItem(
-                        new PCMenuItem()
-                        {
-                            IdGroup = groupid,
-                            Name = name,
-                            Description = des,
-                            Weight = weipla,
-                            Platform = weipla,
-                            Price = price,
-                            Country = des
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
+                return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
         [HttpPost]
@@ -139,15 +115,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request;
-                if (request.Files.Count > 0)
-                {
-                    var file = Request.Files[0];
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    MenuUtils.EditItem(
+                MenuUtils.EditItem(
                         new PCMenuItem()
                         {
                             IdGroup = groupid,
@@ -159,36 +127,17 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             Price = price,
                             Country = des
                         },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
+                        ControllerUtils.GetPhotoEntity(Request.Files),
+                        User.Identity.Name
                     );
                     return "ok";
-                }
-                else
-                {
-                    MenuUtils.EditItem(
-                        new PCMenuItem()
-                        {
-                            IdGroup = groupid,
-                            IdRecord = idrecord,
-                            Name = name,
-                            Description = des,
-                            Weight = weipla,
-                            Platform = weipla,
-                            Price = price,
-                            Country = des
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
             }
-            catch (Exception ex)
+            catch ( Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
+
         [HttpPost]
         public string RemoveItem(int id)
         {
@@ -199,7 +148,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
     }

@@ -82,7 +82,7 @@ namespace PartyCafe.Site.DBUtils
             dbContext.SubmitChanges();
         }
 
-        public static void EditService(PCService partyService, string userUpdate, PCPhoto image)
+        public static void EditService(PCService partyService, PCPhoto image, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curService = (from e in dbContext.Services
@@ -140,10 +140,12 @@ namespace PartyCafe.Site.DBUtils
         public static void AddPhoto(int IdService, string name, PCPhoto image, string userCreate)
         {
             var db = MainUtils.GetDBContext();
-            ServicePhoto sp = new ServicePhoto();
-            sp.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
-            sp.IdService = IdService;
-            sp.name = name;
+            ServicePhoto sp = new ServicePhoto
+            {
+                IdPhoto = PhotoUtils.InsertImage(image, userCreate),
+                IdService = IdService,
+                name = name
+            };
             db.ServicePhotos.InsertOnSubmit(sp);
             db.SubmitChanges();
         }

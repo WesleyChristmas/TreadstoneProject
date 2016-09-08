@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using WebGrease.Css.Extensions;
 
 namespace PartyCafe.Site.DBUtils
 {
@@ -15,8 +13,22 @@ namespace PartyCafe.Site.DBUtils
         public int idPhoto;
     }
 
+    public class Hashtag
+    {
+        public string Tag;
+        public int Count;
+    }
+
     public class GalleryUtils
     {
+        public static List<Hashtag> GetAllHashtags()
+        {
+            var db = MainUtils.GetDBContext();
+            return db.GalleryHashtags
+                .GroupBy(x => x.Hashtag)
+                .Select(x => new Hashtag() {Tag = x.Key, Count = x.Count()})
+                .ToList();
+        }
 
         public static List<PCGallery> GetAll(int startPosition, int needCount)
         {
@@ -59,66 +71,62 @@ namespace PartyCafe.Site.DBUtils
             }).ToList();
         }
 
-        public static List<PCGallery> GetAllByTags(List<string> tags)
+        public static List<PCGallery> GetAllByTags(List<string> tags, int startPosition, int needCount)
         {
             var dbContext = MainUtils.GetDBContext();
             var galleries = dbContext.GalleryHashtags
                 .Where(x => tags.Contains(x.Hashtag))
                 .Select(x => x.Gallery).ToList();
 
-            List<PCGallery> resultList = new List<PCGallery>();
-            galleries.ForEach(x =>
-            {
-                PCGallery resGallery = new PCGallery()
-                {
-                    idRecord = x.IdRecord,
-                    name = x.Name,
-                    idPhoto = x.IdPhoto,
-                    photoPath = PhotoUtils.GetRelativeUrl(x.Photo.Path),
-                    description = x.Description,
-                };
+            var fullCount = galleries.Count;
+            if (fullCount == 0)
+                return new List<PCGallery>();
 
-                resultList.Add(resGallery);
-            });
-           
-            return resultList;
+            var reminder = fullCount - (startPosition);
+            var countToTake = (reminder < needCount) ? reminder : needCount;
+            if (countToTake <= 0)
+                return new List<PCGallery>();
+            galleries = galleries.GetRange(startPosition, countToTake);
+
+            return galleries.Select(x => new PCGallery
+            {
+                idRecord = x.IdRecord,
+                name = x.Name,
+                idPhoto = x.IdPhoto,
+                photoPath = PhotoUtils.GetRelativeUrl(x.Photo.Path),
+                description = x.Description,
+            }).ToList();
         }
 
-        public static void InsertGallery(PCGallery gallery, string userCreate, PCPhoto image)
+        public static void InsertGallery(PCGallery gallery, PCPhoto image, string userCreate)
         {
-            var newGallery = new Gallery();
-            newGallery.Name = gallery.name ?? String.Empty;
-            newGallery.Description = gallery.description ?? String.Empty;
-
-            if (image != null)
+            var newGallery = new Gallery
             {
-                newGallery.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
-            }
-            else
-            {
-                newGallery.IdPhoto = 0;
-            }
-
-            newGallery.DateCreate = DateTime.Now;
-            newGallery.UserCreate = userCreate;
+                Name = gallery.name ?? string.Empty,
+                Description = gallery.description ?? string.Empty,
+                IdPhoto = (image != null) ? PhotoUtils.InsertImage(image, userCreate) : 0,
+                DateCreate = DateTime.Now,
+                UserCreate = userCreate
+            };
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Gallery.InsertOnSubmit(newGallery);
             dbContext.SubmitChanges();
         }
 
-        public static void EditGallery(PCGallery gallery, string userUpdate, PCPhoto image)
+        public static void EditGallery(PCGallery gallery, PCPhoto image, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curGallery = (from e in dbContext.Gallery
                             where e.IdRecord == gallery.idRecord
                             select e).SingleOrDefault();
+            if (curGallery == null) return;
 
-            curGallery.Name = gallery.name ?? String.Empty;
-            curGallery.Description = gallery.description ?? String.Empty;
+            curGallery.Name = gallery.name ?? string.Empty;
+            curGallery.Description = gallery.description ?? string.Empty;
 
             curGallery.DateUpdate = DateTime.Now;
-            curGallery.UserUpdate = String.IsNullOrWhiteSpace(userUpdate) ? "Admin" : userUpdate;
+            curGallery.UserUpdate = string.IsNullOrWhiteSpace(userUpdate) ? "Admin" : userUpdate;
 
             if (image != null)
             { 
@@ -131,9 +139,7 @@ namespace PartyCafe.Site.DBUtils
                     curGallery.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
                 }
             }
-
             dbContext.SubmitChanges();
-
         }
 
         public static void DelGallery(int idRecord)
@@ -143,13 +149,14 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == idRecord
                             select e).SingleOrDefault();
 
+            if (curGallery == null) return;
             dbContext.Gallery.DeleteOnSubmit(curGallery);
             dbContext.SubmitChanges();
 
             if (curGallery.IdPhoto > 0) { PhotoUtils.DelImage(curGallery.IdPhoto); };
         }
 
-        public static List<string> GetHashtags(int id)
+        public static List<string> GetHashtagsByPhotoId(int id)
         {
             var dbContext = MainUtils.GetDBContext();
             return dbContext.GalleryHashtags
@@ -186,4 +193,6 @@ namespace PartyCafe.Site.DBUtils
             dbContext.SubmitChanges();
         }
     }
+
+
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
+using PartyCafe.Site.Models.Utils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
@@ -43,9 +44,9 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllGalleryByTags(List<string> hashtags)
+        public JsonResult GetAllGalleryByTags(List<string> hashtags, int startPos = 1, int count = 20)
         {
-            var gallery = GalleryUtils.GetAllByTags(hashtags);
+            var gallery = GalleryUtils.GetAllByTags(hashtags, startPos, count);
             return Json(gallery, JsonRequestBehavior.AllowGet);
         }
 
@@ -54,21 +55,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var file = Request.Files[0];
-                var content = new byte[file.ContentLength];
-                var filename = file.FileName;
-                file.InputStream.Read(content, 0, file.ContentLength);
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                if (photo == null) return "bad";
 
                 GalleryUtils.InsertGallery(
                     new PCGallery() {name = name, description = desc},
-                    User.Identity.Name,
-                    new PCPhoto() {data = content, fileName = filename}
+                    photo,
+                    User.Identity.Name
                 );
                 return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
 
@@ -77,45 +76,24 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request.Files;
-                if (request.Count > 0)
-                {
-                    var file = Request.Files[0];
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                if (photo == null) return "bad";
 
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    GalleryUtils.EditGallery(
-                        new PCGallery()
-                        {
-                            idRecord = id,
-                            name = name,
-                            description = desc
-                        },
-                        User.Identity.Name,
-                        new PCPhoto() {data = content, fileName = filename}
-                    );
-                    return "ok";
-                }
-                else
-                {
-                    GalleryUtils.EditGallery(
-                        new PCGallery()
-                        {
-                            idRecord = id,
-                            name = name,
-                            description = desc
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
+                GalleryUtils.EditGallery(
+                    new PCGallery()
+                    {
+                        idRecord = id,
+                        name = name,
+                        description = desc
+                    },
+                    photo,
+                    User.Identity.Name
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
 
@@ -129,14 +107,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
 
         [HttpGet]
         public JsonResult GetHashtags(int id)
         {
-            return Json(GalleryUtils.GetHashtags(id), JsonRequestBehavior.AllowGet);
+            return Json(GalleryUtils.GetHashtagsByPhotoId(id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

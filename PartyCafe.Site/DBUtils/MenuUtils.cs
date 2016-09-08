@@ -209,7 +209,7 @@ namespace PartyCafe.Site.DBUtils
             }
         }
 
-        public static void InsertItem (PCMenuItem partyItem, string userCreate, PCPhoto image)
+        public static void InsertItem (PCMenuItem partyItem, PCPhoto image, string userCreate)
         {
             var newMenuItem = new MenuItems();
             newMenuItem.Name = partyItem.Name ?? String.Empty;
@@ -236,7 +236,7 @@ namespace PartyCafe.Site.DBUtils
             dbContext.MenuItems.InsertOnSubmit(newMenuItem);
             dbContext.SubmitChanges();
         }
-        public static void EditItem(PCMenuItem partyItem, string userUpdate, PCPhoto image)
+        public static void EditItem(PCMenuItem partyItem, PCPhoto image, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curMenuItem = (from mi in dbContext.MenuItems
@@ -279,7 +279,7 @@ namespace PartyCafe.Site.DBUtils
             if (curMenuItem.IdPhoto > 0) { PhotoUtils.DelImage(curMenuItem.IdPhoto); };
         }
 
-        public static void InsertGroup(PCMenuGroup partyGroup, string userCreate, PCPhoto image)
+        public static void InsertGroup(PCMenuGroup partyGroup, PCPhoto image, string userCreate)
         {
             var newMenuGroup = new MenuGroups();
             newMenuGroup.GroupName = partyGroup.Name ?? String.Empty;
@@ -301,7 +301,7 @@ namespace PartyCafe.Site.DBUtils
             dbContext.MenuGroups.InsertOnSubmit(newMenuGroup);
             dbContext.SubmitChanges();
         }
-        public static void EditGroup(PCMenuGroup partyGroup, string userUpdate, PCPhoto image)
+        public static void EditGroup(PCMenuGroup partyGroup, PCPhoto image, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curMenuGroup = (from mg in dbContext.MenuGroups

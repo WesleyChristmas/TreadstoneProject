@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
+using PartyCafe.Site.Models.Utils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
@@ -49,46 +50,24 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request;
-                if (request.Files.Count > 0)
-                {
-                    var file = Request.Files[0];
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    ServiceUtils.InsertService(
-                        new PCService()
-                        {
-                            name = name,
-                            description = desc,
-                            serviceType = 1
-                        },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
-                    );
-                    return "ok";
-                }
-                else
-                {
-                    ServiceUtils.InsertService(
-                        new PCService()
-                        {
-                            name = name,
-                            description = desc,
-                            serviceType = 1
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
+                ServiceUtils.InsertService(
+                    new PCService()
+                    {
+                        name = name,
+                        description = desc,
+                        serviceType = 1
+                    },
+                    User.Identity.Name,
+                    ControllerUtils.GetPhotoEntity(Request.Files)
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
+
         [HttpPost]
         public string RemoveAbout(int id)
         {
@@ -99,7 +78,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
         [HttpPost]
@@ -107,41 +86,17 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request.Files;
-                if (request.Count > 0)
-                {
-                    var file = Request.Files[0];
-
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    ServiceUtils.EditService(
+                ServiceUtils.EditService(
                         new PCService()
                         {
                             idRecord = id,
                             name = name,
                             description = desc
                         },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
+                        ControllerUtils.GetPhotoEntity(Request.Files),
+                        User.Identity.Name
                     );
-                    return "ok";
-                }
-                else
-                {
-                    ServiceUtils.EditService(
-                        new PCService()
-                        {
-                            idRecord = id,
-                            name = name,
-                            description = desc
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
+                return "ok";
             }
             catch (Exception ex)
             {
@@ -150,36 +105,27 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddPhotoToBlock(int id, string name, string desc)
+        public string AddPhotoToBlock(int id, string name)
         {
             try
             {
-                var request = Request;
-                if (request.Files.Count > 0)
-                {
-                    var file = Request.Files[0];
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                if (photo == null) return "bad";
 
-                    ServiceUtils.AddPhoto(
-                        id,
-                        name,
-                        new PCPhoto() { data = content, fileName = filename },
-                        User.Identity.Name
-                    );
-                    return "ok";
-                }
-                else
-                {
-                    return "bed";
-                }
+                ServiceUtils.AddPhoto(
+                    id,
+                    name,
+                    photo,
+                    User.Identity.Name
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
+
         [HttpPost]
         public string RemovePhotoFromBlock(int id)
         {
@@ -193,12 +139,13 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "bed";
             }
         }
+
         [HttpPost]
         public string UpdatePhotoBlock(int id, string name)
         {
             try
             {
-                ServiceUtils.EditPhoto(id, name, null, User.Identity.Name);
+                ServiceUtils.EditPhoto(id, name, ControllerUtils.GetPhotoEntity(Request.Files), User.Identity.Name);
                 return "ok";
             }
             catch (Exception ex)
@@ -212,7 +159,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var aboutus = ServiceUtils.GetAll(ServiceType.aboutService).Where(w => w.idRecord == id).SingleOrDefault();
+                var aboutus = ServiceUtils.GetServicePhotos(id);
                 return Json(aboutus, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

@@ -9,7 +9,6 @@ namespace PartyCafe.Site.Controllers
 {
     public class AboutUsController : Controller
     {
-        // GET: AboutUs
         public ActionResult Index()
         {
             return View();
@@ -28,15 +27,16 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
-        public string TestUser()
-        { 
-            return String.Format("Autorized: {0}, Name: {1}", HttpContext.User.Identity.IsAuthenticated.ToString(), HttpContext.User.Identity.Name);
-        }
-
-        [HttpGet]
         public JsonResult GetAllUs()
         {
             var result = ServiceUtils.GetAll(1);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetPhotos(int id)
+        {
+            var result = ServiceUtils.GetServicePhotos(id);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
