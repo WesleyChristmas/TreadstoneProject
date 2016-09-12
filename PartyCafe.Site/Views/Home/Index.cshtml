@@ -2,13 +2,16 @@
     ViewBag.Title = "PartyCafe";
 }
 
-<script src="~/Scripts/owl.carousel.min.js"></script>
 <link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
 <link href="~/Content/css/owl.theme.css" rel="stylesheet" />
 <link href="~/Content/css/owl.transitions.css" rel="stylesheet" />
 <link href="~/Content/css/animate.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/css/home-index-style.css" rel="stylesheet"/>
 
-<!--<div class="content-block animated">-->
+
+<script src="~/Scripts/owl.carousel.min.js"></script>
+<script src="~/Scripts/parts/home/index.js"></script>
+
     <div class="owl-container animated">
         <h1>ZАКРЫТАЯ<br> ТЕРРИТОРИЯ</h1>
         <div class="owl-carousel owl-theme">
@@ -18,18 +21,5 @@
         </div>
         <p>Мы ждем Вас</p>
     </div>
-<!--</div>-->
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            items: 1,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: false
-        });
-    });
-</script>
+    @Html.Partial("_InstaGallery")

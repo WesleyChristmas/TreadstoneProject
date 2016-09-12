@@ -1,0 +1,116 @@
+
+.services-row{
+    max-height:300px;
+    overflow:hidden;
+    border-top:5px solid #000;
+    border-bottom:5px solid #000;
+    background-color:#000;
+}
+
+.services-row img{
+    width:100%;
+}
+
+.services-header{
+    position:absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    padding-top:120px;
+    padding-left:20px;
+    padding-right:20px;
+    font-size:30px;
+    text-align:center;
+    color:white;
+    z-index:100;
+    transition:background-color 0.5s ease;
+    background-color:rgba(0,0,0,0.4);
+}
+
+.services-header:hover{
+    transition:background-color 0.5s ease;
+    background-color:transparent;
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+}
+
+/*Detailed part */
+
+#srv-dtl-img{
+    border-top:10px solid #000;
+    border-bottom:10px solid #000;
+    height:300px;
+    overflow:hidden;
+}
+
+#srv-dtl-img img{
+    min-width:100%;   
+    min-height:300px;
+}
+
+#srv-dtl-hd{
+    background-color:rgba(0,0,0,0.5);
+    font-size:35px;
+    padding:20px 0;
+    text-align:center;
+    color:white;
+}
+
+#srv-dtl-desc{
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+    font-size:19px;
+    padding: 10px 30px;
+    border-bottom:5px solid #000;
+}
+
+#srv-order div{
+    margin:10px;
+    padding:20px;
+    background-color:#000;
+    border: 2px solid #c4c4c4;
+    color:#c4c4c4;
+    font-size:20px;
+    text-align:center;
+    transition:border 0.5s ease, color 05.s ease;
+}
+
+#srv-order div:hover{
+    transition:border 0.5s ease, color 05.s ease;
+    color:#fff;
+    border: 2px solid #fff;
+}
+
+
+#order-ctn{
+    width:calc(100% + 30px);
+    margin: 0 -15px;
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+    font-size:19px;
+    padding:20px;
+    border-bottom:5px solid #000;
+}
+
+#order-ctn div{
+    padding-bottom:5px;
+}
+
+#order-ctn input[type="text"]{
+    width:100%;
+    background-color:transparent;
+    border : 2px solid #c4c4c4;
+    outline:none;
+    color:#fff;
+    padding:5px 10px;;
+}
+
+#srv-photos div{
+    overflow:hidden;
+    padding:0 !important;
+}
+
+#srv-photos img{
+    width:100%;
+    height:100%;
+    border : 2px solid #000;
+}

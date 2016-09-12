@@ -3,17 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="~/Scripts/AngularControllers/AboutUsController.js"></script>
-<link href="~/Content/css/lightbox.css" rel="stylesheet" />
-<script src="~/Scripts/lightbox.js"></script>
+<link href="~/Content/css/about-us-style.css" rel="stylesheet"/>
 
-<div class="about-wrap" ng-app="aboutusapp">
-    <div class="h1 ng-scope ng-binding">
-        @ViewBag.Title
-        <div class="darkArea">
-            <div ng-view></div>
-        </div>
-        <div class="clear"></div>
-    </div>
+
+<div id="panoram-ctn" class="row">
+    <img src="~/Content/example/about-us.jpg"/>
+</div>
+<div id="about-header" class="row">
+    Party cafe
+</div>
+<div id="about-us" class="row">
+    Текст Текст Текст очень много текста описание списки блаблабла короче куча всего, будем брать из базы ;)
 </div>
 

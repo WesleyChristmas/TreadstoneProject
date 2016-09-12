@@ -1,6 +1,24 @@
 ﻿@{
     Layout = "";
 }
+
+<div id="calendar-header">
+    Ближайшие события
+</div>
+
+<div id="calendar" class="row">
+    <div class="col-sm-4 col-md-3 col-lg-2 clnd-ctn" ng-repeat="item in Events">
+        <div class="clnd">
+            <div class="clnd-week">{{item.week}}</div>
+            <div class="clnd-day">{{item.day}}</div>
+            <div class="clnd-month">{{item.month}}</div>
+            <img ng-src="{{item.data.photo}}" ng-show="item.data.header" />
+        </div>
+    </div>
+</div>
+
+<!--
+
 <div class="calendar-title">Ближайшие события</div>
 <div id="calendar-wrap">
     <div class="event-day" note ng-repeat="item in Events">
@@ -10,6 +28,7 @@
             <em class="ed-month">{{item.month}}</em>
             <strong class="ed-title">{{item.data.header}}</strong>
             <!-- style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" -->
+            <!--
             <div ng-click="EventMore(item.data)" class="ed-imgwrap"  ng-show="item.data.length === 0 ? false : true">
                 <div class="ed-time">{{item.data.time.Hours}}:{{item.data.time.Minutes}}</div>
                 <div class="ed-invite">Присоединиться</div>
@@ -18,3 +37,5 @@
         </div>
     </div>
 </div>
+
+-->

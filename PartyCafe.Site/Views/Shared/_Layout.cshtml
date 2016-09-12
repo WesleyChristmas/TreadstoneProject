@@ -3,45 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Party Cafe закрытая зона - @ViewBag.Title</title>
-    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <title>Party Cafe</title>
+    <!--<link href="~/Content/css/style.css" rel="stylesheet" />-->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/menu-style.css" rel="stylesheet" />
+    <link href="~/Content/css/bg-video-style.css" rel="stylesheet" />
     <script src="~/Scripts/jquery/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/jquery/jquery-ui.min.js"></script>
     <script src="~/Scripts/AngularJs/angular.min.js"></script>
     <script src="~/Scripts/AngularJs/angular-route.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:300,400,500|Open+Sans:300,400,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="~/Content/css/main-style.css" rel="stylesheet"/>
 </head>
 <body>
-    <!-- CONTENT -->
-    <div class="content">
-        <header class="header">
-            <nav id="navigation">
-                @Html.Partial("_Menu")
-            </nav>
-        </header>
 
-        <!-- BG-VIDEO -->
-        @Html.Partial("_BgVideo")
-        <!--/ BG-VIDEO -->
-
-        <div class="wrap">
-            <div>
-                @RenderBody()
-            </div>
-        </div>
-
-        <div class="iw-wrap">
-            @Html.Partial("_InstaGallery")
-        </div>
-
-        <footer class="footer">
-            <div class="f-wrap">
-                <p>@DateTime.Now.Year &copy; All Rights reserved by <a href="/">Party-Cafe</a></p>
-            </div>
-        </footer>
+    @Html.Partial("_Menu")
+    @Html.Partial("_BgVideo")
+    <div id="container">
+        @RenderBody()
     </div>
-    <!--/ CONTENT -->
 
     @RenderSection("scripts", required: false)
 </body>

@@ -18,8 +18,8 @@ function getPhoto($scope, $http) {
     $http.jsonp(url + '&callback=JSON_CALLBACK').success(function (result, status) {
         console.log(result);
         var photocount = result.data.length;
-        if (photocount > 9) { 
-            $scope.Gallery = result.data.slice(Math.max(photocount- 10, 0));
+        if (photocount > 11) { 
+            $scope.Gallery = result.data.slice(0,12);
         } else {
             $scope.Gallery = result.data;
         }

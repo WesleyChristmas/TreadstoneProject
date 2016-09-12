@@ -1,89 +1,50 @@
-﻿<div class="h-wrap">
-    <div id="navigation-wrapper">
-        <!-- Mobile -->
-        <div class="mobile-wrap">
-            <div class="logo-text">
-                <a href="/" style=" font-size: 20px; margin-left: 13px; line-height: 64px;">Party-Cafe</a>
+﻿<nav id="menu-container" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand" onclick="document.location='/'">
+                    Party-cafe logo
+                </div>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#party-navbar" >
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                </button>
             </div>
-            <div class="mobile-menu-btn">
-                <a href="javascript:void(0);" class="mobile-nav">
-                    <script>
-                        $('.mobile-nav').on('click', function () {
-                            var mobile = $('.mobile-menu');
-                            if (mobile.hasClass('show'))
-                            {
-                                mobile.removeClass('show');
-                            } else {
-                                mobile.addClass('show');
-                            }
-                        })
-                    </script>
-                    <i class="fa fa-bars"></i>
-                    <span class="slicknav_menutxt"></span>
-                </a>
-            </div>
-            <div id="top-social">
-                <a href="https://www.facebook.com/partycaferu" target="_blank"><i class="fa fa-facebook"></i></a>
-                <!-- <a href="https://twitter.com/BBershadsky" target="_blank"><i class="fa fa-twitter"></i></a> -->
-                <a href="https://www.instagram.com/partycafe.ru/" target="_blank"><i class="fa fa-instagram"></i></a>
-                <a href="https://plus.google.com/b/104058438741807625622/104058438741807625622?hl=ru" target="_blank"><i class="fa fa-google-plus"></i></a>
-                <a href="https://vk.com/partycaferu" target="_blank"><i class="fa fa-vk"></i></a>
-            </div>
-            <ul id="menu-top-menu" class="mobile-menu">
-                <li>
-                    <a href="/AboutUs" class="mi-link-aboutus">О кафе</a>
-                </li>
-                <li>
-                    <a href="/Services" class="mi-link-services">Услуги</a>
-                </li>
-                <li>
-                    <a href="/EventCalendar" class="mi-link-event">Мероприятия</a>
-                </li>
-                <li>
-                    <a href="/FoodMenu" class="mi-link-foodmenu">Меню</a>
-                </li>
-                <li>
-                    <a href="/PhotoGallery" class="mi-link-gallery">Фотогалерея</a>
-                </li>
-                <li>
-                    <a href="/Contact" class="mi-link-blog">Контакты</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /Mobile -->
-        <!-- Mm -->
-        <div class="mm-wrap">
-            <div class="logo-text">
-                <a href="/" style=" font-size: 20px; margin-left: 13px; line-height: 64px;">Party-Cafe</a>
-            </div>
-            <ul id="menu-top-menu" class="menu">
-                <li class="menu-item">
-                    <a href="/AboutUs" class="mi-link-aboutus">О кафе</a>
-                </li>
-                <li class="menu-item">
-                    <a href="/Services" class="mi-link-services">Услуги</a>
-                </li>
-                <li class="menu-item">
-                    <a href="/EventCalendar" class="mi-link-event">Мероприятия</a>
-                </li>
-                <li class="menu-item">
-                    <a href="/FoodMenu" class="mi-link-foodmenu">Меню</a>
-                </li>
-                <li class="menu-item">
-                    <a href="/PhotoGallery" class="mi-link-gallery">Фотогалерея</a>
-                </li>
-                <li class="menu-item">
-                    <a href="/Contact" class="mi-link-blog">Контакты</a>
-                </li>
-            </ul>
-            <div id="top-social">
-                <a href="https://www.facebook.com/partycaferu" target="_blank"><i class="fa fa-facebook"></i></a>
-                <!-- <a href="https://twitter.com/BBershadsky" target="_blank"><i class="fa fa-twitter"></i></a> -->
-                <a href="https://www.instagram.com/partycafe.ru/" target="_blank"><i class="fa fa-instagram"></i></a>
-                <a href="https://plus.google.com/b/104058438741807625622/104058438741807625622?hl=ru" target="_blank"><i class="fa fa-google-plus"></i></a>
-                <a href="https://vk.com/partycaferu" target="_blank"><i class="fa fa-vk"></i></a>
+            <div id="party-navbar" class="collapse navbar-collapse" >
+                <ul class="nav navbar-nav">
+                    <li class="sliding-middle-out">
+                        <a href="/AboutUs">О кафе</a>
+                    </li>
+                    <li>
+                        <a href="/Services">Услуги</a>
+                    </li>
+                    <li>
+                        <a href="/EventCalendar">Мероприятия</a>
+                    </li>
+                    <li>
+                        <a href="#">Меню</a>
+                    </li>
+                    <li>
+                        <a href="#">Фотогалерея</a>
+                    </li>
+                    <li>
+                        <a href="#">Контакты</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-right">
+                    <li>
+                        <a class="fa fa-vk"></a>
+                    </li>
+                    <li>
+                        <a class="fa fa-instagram"></a>
+                    </li>
+                    <li>
+                        <a class="fa fa-facebook"></a>
+                    </li>
+                    <li>
+                        <a class="fa fa-twitter"></a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- /Mm -->
-    </div>
-</div>
+    </nav>

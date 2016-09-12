@@ -1,0 +1,87 @@
+#menu-container{
+    background-color:#000;
+    color:#d4d4d4;
+    border-bottom:1px solid black;
+}
+
+.navbar{
+    margin-bottom:0 !important;
+}
+
+.navbar-default{
+    border: none !important;
+}
+.navbar-collapse{
+    z-index:1000;
+    border:none !important;
+}
+
+.navbar-collapse.in{
+    overflow:hidden !important;
+}
+
+.nav li a, .navbar-brand{
+    cursor:default;
+    color:inherit !important;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+.nav li {
+	display: inline-block;
+	position: relative;
+	padding-bottom: 3px;
+    height:50px;
+    font-size:14px;
+    color:#d4d4d4;
+    font-weight:bold;
+    border: 1px solid transparent;
+}
+.navbar-nav li:after {
+	content: '';
+	display: block;
+	margin: auto;
+    margin-top: -10px;
+	height: 2px;
+	width: 0px;
+	background: transparent;
+	transition: width .3s ease, background-color .3s ease;
+}
+.navbar-nav li:hover:after {
+	width: 100%;
+	background: #FFF;
+}
+
+.navbar-toggle{
+    border:none !important;
+    outline:none;
+}
+
+.navbar-toggle:hover{
+    background-color:#000 !important;
+}
+
+.navbar-toggle:focus{
+    background-color:#000 !important;
+}
+
+.fa{
+    margin:5px !important;
+    font-size:25px !important;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    background-color:#000 !important;
+    color:#fff !important;
+}
+
+
+.fa:hover{
+    transition: background-color 0.5s ease, color 0.5s ease;
+    background-color:#fff !important;
+    color:#000 !important;
+}
+

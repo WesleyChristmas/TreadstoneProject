@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using PartyCafe.Site.DBUtils;
 using System.Net.Mail;
-using System.Text;
 
 namespace PartyCafe.Site.Controllers
 {
@@ -16,6 +12,16 @@ namespace PartyCafe.Site.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult ServiceList()
+        {
+            return View("ServiceList");
+        }
+
+        public ActionResult ServiceDetailed()
+        {
+            return View("ServiceDetailed");
         }
 
         [HttpGet]

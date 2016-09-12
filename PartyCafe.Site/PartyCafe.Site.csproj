@@ -1245,9 +1245,12 @@
     <Content Include="Views\AboutUs\Home.cshtml" />
     <Content Include="Views\AboutUs\Current.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Services\ServiceList.cshtml" />
+    <Content Include="Views\Services\ServiceDetailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\parts\home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

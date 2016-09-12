@@ -411,7 +411,7 @@ p {
   line-height: 1.4;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .lead {
     font-size: 21px;
   }
@@ -608,7 +608,7 @@ dd {
   margin-left: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .dl-horizontal dt {
     float: left;
     width: 160px;
@@ -924,7 +924,7 @@ pre code {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .container {
     max-width: 750px;
   }
@@ -1584,7 +1584,7 @@ table th[class*="col-"] {
   border-color: #f8e5be;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
   .table-responsive {
     width: 100%;
     margin-bottom: 15px;
@@ -1933,7 +1933,7 @@ textarea.input-lg {
   color: #737373;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .form-inline .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -1991,7 +1991,7 @@ textarea.input-lg {
   clear: both;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .form-horizontal .control-label {
     text-align: right;
   }
@@ -3350,7 +3350,7 @@ input[type="button"].btn-block {
   margin-bottom: 1px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-right .dropdown-menu {
     right: 0;
     left: auto;
@@ -3900,7 +3900,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .nav-tabs.nav-justified > li {
     display: table-cell;
     width: 1%;
@@ -3956,7 +3956,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .nav-justified > li {
     display: table-cell;
     width: 1%;
@@ -4050,7 +4050,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   clear: both;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar {
     border-radius: 4px;
   }
@@ -4076,7 +4076,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   clear: both;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-header {
     float: left;
   }
@@ -4116,7 +4116,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   overflow-y: auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -4148,7 +4148,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-left: -15px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .container > .navbar-header,
   .container > .navbar-collapse {
     margin-right: 0;
@@ -4160,7 +4160,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-width: 0 0 1px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-static-top {
     border-radius: 0;
   }
@@ -4174,7 +4174,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-width: 0 0 1px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     border-radius: 0;
@@ -4203,7 +4203,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   text-decoration: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar > .container .navbar-brand {
     margin-left: -15px;
   }
@@ -4232,7 +4232,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-top: 4px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-toggle {
     display: none;
   }
@@ -4271,7 +4271,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-nav {
     float: left;
     margin: 0;
@@ -4285,7 +4285,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-left {
     float: left !important;
   }
@@ -4306,7 +4306,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-form .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -4335,7 +4335,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-form {
     width: auto;
     padding-top: 0;
@@ -4376,7 +4376,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-bottom: 15px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1300px) {
   .navbar-text {
     margin-right: 15px;
     margin-left: 15px;
@@ -4950,7 +4950,7 @@ a.list-group-item.active > .badge,
   border-radius: 6px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1300px) {
   .jumbotron {
     padding-top: 48px;
     padding-bottom: 48px;
@@ -5738,7 +5738,7 @@ body.modal-open,
   margin-left: 0;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1300px) {
   .modal-dialog {
     right: auto;
     left: 50%;
@@ -6183,7 +6183,7 @@ body.modal-open,
   text-shadow: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1300px) {
   .carousel-control .icon-prev,
   .carousel-control .icon-next {
     width: 30px;

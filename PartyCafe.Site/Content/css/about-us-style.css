@@ -1,0 +1,27 @@
+
+#panoram-ctn{
+    border-top:10px solid #000;
+    border-bottom:10px solid #000;
+    overflow:hidden;
+}
+
+#panoram-ctn img{
+    min-width:100%;   
+    min-height:300px;
+}
+
+#about-header{
+    background-color:rgba(0,0,0,0.5);
+    font-size:35px;
+    padding:20px 0;
+    text-align:center;
+    color:white;
+}
+
+#about-us{
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+    font-size:19px;
+    padding: 10px 30px;
+    border-bottom:5px solid #000;
+}

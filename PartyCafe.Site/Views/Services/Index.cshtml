@@ -4,13 +4,27 @@
 }
 
 <link href="~/Content/css/lightbox.css" rel="stylesheet" />
+<link href="~/Content/css/services-style.css" rel="stylesheet"/>
+
+
 <script src="~/Scripts/lightbox.js"></script>
-
 <script src="~/Scripts/jquery/datepicker-ru.js"></script>
-<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
-<link href="~/Content/css/jquery-ui.theme.min.css" rel="stylesheet" />
-<script src="~/Scripts/AngularControllers/ServicesContoller.js"></script>
 
+<!-- AngularJs -->
+<script src="~/Scripts/AngularControllers/Services/ServicesController.js"></script>
+<script src="~/Scripts/AngularControllers/Services/ServicesDetailedController.js"></script>
+<script src="~/Scripts/AngularControllers/Services/ServicesListController.js"></script>
+
+<!--<link href="~/Content/css/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Content/css/jquery-ui.theme.min.css" rel="stylesheet" /> -->
+
+
+<div ng-app="servicesapp" ng-controller="ServiceController">
+    <div ng-view></div>
+</div>
+
+
+<!--
 <div>
     <div class="services-wrap" ng-app="servicesapp" ng-controller="ServicesCt">
         <div class="h1 ng-scope ng-binding">
@@ -78,3 +92,5 @@
         
     </div>
 </div>
+
+-->

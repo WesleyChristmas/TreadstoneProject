@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="srv-dtl-img" class="row">
+    <img src="~/Content/example/service-detailed-ex.jpg" />
+</div>
+<div id="srv-dtl-hd" class="row">
+    Заголовок для услуги
+</div>
+<div id="srv-dtl-desc" class="row">
+    Описание для услуги, будет браться из базы
+</div>
+
+<!-- Order part -->
+
+<div id="order-ctn" class="collapse">
+    <div class="row">
+        <div class="col-sm-6">
+            * Имя:
+        </div>
+        <div class="col-sm-6">
+            <input type="text" placeholder="Ваше имя"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            * Телефон: 
+        </div>
+        <div class="col-sm-6">
+            <input type="text" placeholder="+7 (999) 999-99-99"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            * Дата:
+        </div>
+        <div class="col-sm-6">
+            <input type="text" placeholder="21.08.2016"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            * Время:
+        </div>
+        <div class="col-sm-6">
+            <input type="text" placeholder="21:00"/>            
+        </div>
+    </div>
+</div>
+
+<div id="srv-order" class="row" data-toggle="collapse" data-target="#order-ctn">
+    <div>Хочу заказать</div>
+</div>
+
+<!-- Photo part -->
+<div id="srv-photos" class="row">
+    <div class="col-sm-6">
+        <img src="~/Content/example/service-detailed-ex.jpg" />
+    </div>
+    <div class="col-sm-6">
+        <img src="~/Content/example/service-detailed-ex.jpg" />
+    </div>
+
+    <div class="col-sm-6">
+        <img src="~/Content/example/service-detailed-ex.jpg" />
+    </div>
+    <div class="col-sm-6">
+        <img src="~/Content/example/service-detailed-ex.jpg" />
+    </div>
+</div>
