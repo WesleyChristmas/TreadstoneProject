@@ -25,7 +25,7 @@ namespace PartyCafe.Site.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetFoodMenu(int idType)
         {
             return Json(null);

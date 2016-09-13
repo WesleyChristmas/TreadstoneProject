@@ -3,308 +3,69 @@
 }
 
 <script src="~/Scripts/AngularControllers/FoodMenuController.js"></script>
+<link href="~/Content/css/food-menu-style.css" rel="stylesheet"/>
 
-<div class="">
-    <div class="main-wrap" ng-app="foodmenuapp">
-
-        <div class="h1" ng-controller="FoodMenuCt">
-            {{title}}
-            <div class="darkArea">
-                <div class="barMenu">
-                    <div class="barMenuLine" style="min-height:400px;">
-                        <div class="barMenuLeft">
-                            <span ng-repeat="item in Food"><a href="javascript:void(0)" data-id="{{item.idRecord}}" ng-click="ShowSubMenu($index, item)"><u>{{item.name}}</u></a></span>
+<div ng-app="foodmenuapp" ng-controller="FoodMenuCt">
+    <h2>Меню</h2>
+    <div class="row">
+        <nav id="menu-nav" class="navbar navbar-default navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navbar" >
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="menu-navbar" class="collapse navbar-collapse" >
+                <ul class="nav navbar-nav">
+                    <li class="no-light" ng-repeat="item in Menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{item.name}} 
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="sub in item.subGroups" ng-click="GetFoodItems(this)">
+                                <a>{{sub.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </nav>
+        <div id="food-ctn" class="row">
+            <div class="col-lg-6" ng-repeat="food in CurrentItems">
+                <div class="row food-row">
+                    <div class="col-sm-6 spec-col">
+                        <div class="food-item">
+                            <div class="food-photo">
+                                <img ng-src="{{food.photoPath}}"/>
+                            </div>
+                            <div class="food-header">
+                                {{food.name}}
+                            </div>
                         </div>
-
-                        <div class="barMenuLeft-mobile">
-                            <a href="javascript:void(0);" class="fm-mobile">
-                                <script>
-                                    $('.fm-mobile').on('click', function () {
-                                        var mobile = $('.barMenuLeft');
-                                        if (mobile.hasClass('show')) {
-                                            mobile.removeClass('show');
-                                        } else {
-                                            mobile.addClass('show');
-                                        }
-                                    });
-                                    $(window).resize(function () {
-                                        if ($('.barMenuLeft').hasClass('show')) {
-                                            $('.barMenuLeft').removeClass('show');
-                                        }
-                                    });
-                                </script>
-                                <i class="fa fa-bars"></i>
-                                <span class="slicknav_menutxt"></span>
-                            </a>
+                    </div>
+                    <div class="col-sm-6 spec-col">
+                        <div class="food-desc">
+                        <div class="desc">
+                            {{food.description}}
                         </div>
-                        
-                        <div class="barMenuContent">
-                            <div class='food-col' ng-class="{fmactive: true === selected}">
-                                <ul>
-                                    <li ng-repeat="subitem in FoodSub">
-                                        <span class='img'><img src=''></span>
-                                        <span class='title'>
-                                            <a href="javascript:void(0)" data-id="subitem.idRecord" ng-click="ShowSubMenuItem($index, subitem)">{{subitem.name}}</a>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div id="accordion" class="accordion">
-                                <div class="accordion-section" ng-repeat="subitem in FoodSub">
-                                    <a href="javscript:void(0);" class="accordion-section-title" ng-class="{accactive: $index === selectedItem}" ng-click="ShowSubMenuItem($index, subitem)">{{subitem.name}}</a>
-                                    <div id="accordion-{{$index}}" class="accordion-section-content">
-                                        <div ng-repeat="subitems in FoodSubItem" ng-class="{smactive: true === selectedItems}" class='dish-item'>
-                                            <img src="{{subitems.photoPath}}">
-                                            <div>
-                                                <h3>{{subitems.name}}</h3>
-                                                <p class="desc">{{subitems.description}}</p>
-                                                <span class="platformweight">{{subitems.Platform === null ? subitems.Weight : subitems.Platform}}</span>
-                                                <div class="price-wrap">
-                                                    <span class='fc-price'>
-                                                        {{subitems.price | pricefilter}}<i class='fa fa-rub'></i>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="barMenu__wrap">
-                                <div ng-repeat="subitems in FoodSubItem" ng-class="{smactive: true === selectedItem}" class='dish-item'>
-                                    <img src="{{subitems.photoPath}}">
-                                    <div>
-                                        <h3>{{subitems.name}}</h3>
-                                        <p>{{subitems.description}}</p>
-                                        <p>{{subitems.Platform === null ? subitems.Weight : subitems.Platform}}</p>
-                                        <div>
-                                            <span class='fc-price'>
-                                                {{subitems.price | pricefilter}}<i class='fa fa-rub'></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div class="weight">
+                            <span>Вес:</span>
+                            {{food.Weight}}
+                            <span>гр.</span>
+                        </div>
+                        <div class="price">
+                            <span>Цена:</span>
+                            {{food.price}}
+                            <i class='fa fa-rub'></i>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="clear"></div>
         </div>
     </div>
 </div>
-
-<script>
-            $(function () {
-                //$("#accordion").accordion({ collapsible: true, active: false });
-               /* function close_accordion_section() {
-                    $('.accordion .accordion-section-title').removeClass('active');
-                    $('.accordion .accordion-section-content').slideUp(0).removeClass('open');
-                }
-
-                $('.accordion-section-title').click(function (e) {
-                    var currentAttrValue = $(this).attr('href');
-
-                    if ($(e.target).is('.active')) {
-                        close_accordion_section();
-                    } else {
-                        close_accordion_section();
-                        $(this).addClass('active');
-                        $('.accordion ' + currentAttrValue).slideDown(0).addClass('open');
-                    }
-
-                    e.preventDefault();
-                });*/
-            });
-            /* function GetAllMenu() {
-                 var xhr = new XMLHttpRequest();
-                 xhr.open("GET", "/FoodMenu/GetAllMenu");
-                 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                 xhr.onreadystatechange = function () {
-                     if (xhr.readyState == 4 && xhr.status == 200) {
-                         var jsonResponse = JSON.parse(xhr.responseText);
-                         //FillMenu(jsonResponse);
-                         console.log(jsonResponse);
-                     }
-                 }
-                 xhr.send();
-             }
-            GetAllMenu();*/
-
-            function createTopMenu(item, main) {
-                var _span = document.createElement('span'),
-                    _a = document.createElement('a'),
-                    _u = document.createElement('u');
-
-                _u.textContent = item.name;
-                _a.setAttribute('href', 'javascript:void(0)');
-                _a.setAttribute('data-id', item.idRecord);
-                _a.onclick = (function (opt) {
-                    return function () {
-                        var fc = document.getElementsByClassName('food-col'),
-                            fcId = document.getElementById('fc' + opt.idRecord),
-                            l = fc.length;
-
-                        for (var i = 0; i < l; ++i) {
-                            if (fc[i].className.replace(/[\n\t]/g, "").indexOf('fmactive') > -1) {
-                                fc[i].className = fc[i].className.replace(/\bfmactive\b/, '').trim();
-                            }
-                        }
-
-                        if (main.className.replace(/[\n\t]/g, "").indexOf('show') > -1) {
-                            main.className = main.className.replace(/\bshow\b/, '').trim();
-                        }
-
-                        fcId.className += ' fmactive';
-                    };
-                })(item);
-                _a.appendChild(_u);
-                _span.appendChild(_a)
-                main.appendChild(_span);
-            }
-            function creatSubMenu(list, item, parentitem) {
-                var _li = document.createElement('li'),
-                    _simg = document.createElement('span'),
-                    _stitle = document.createElement('span'),
-                    _a = document.createElement('a'),
-                    _i = document.createElement('img');
-
-                _i.setAttribute('src', item.photoPath);
-                _simg.className = 'img';
-                //_simg.appendChild(_i);
-
-                _li.appendChild(_simg);
-
-                _a.setAttribute('data-parent', parentitem.idRecord);
-                _a.setAttribute('data-item', item.idRecord);
-                _a.innerHTML = item.name;
-                _a.onclick = (function (opt) {
-                    return function () {
-                        var di = document.getElementsByClassName('dish-item'),
-                            diId = document.getElementById('di' + opt.idRecord),
-                            l = di.length;
-
-                        for (var i = 0; i < l; ++i) {
-                            if (di[i].className.replace(/[\n\t]/g, "").indexOf('smactive') > -1) {
-                                di[i].className = di[i].className.replace(/\bsmactive\b/, '').trim();
-                            }
-                        }
-
-                        for (var i = 0; i < l; ++i) {
-                            if (di[i].dataset.parent == opt.idRecord) {
-                                di[i].className += ' smactive';
-                            }
-                        }
-                    };
-                })(item);
-
-                _stitle.className = 'title';
-                _stitle.appendChild(_a);
-
-                _li.appendChild(_stitle);
-                list.appendChild(_li);
-            }
-            function creatItems(itemmenu, item, parentitem) {
-                var _dp = document.createElement('div'),
-                    _dch = document.createElement('div'),
-                    _dprice = document.createElement('div'),
-                    _img = document.createElement('img'),
-                    _h3 = document.createElement('h3'),
-                    _pweight = document.createElement('p'),
-                    _pdesc = document.createElement('p'),
-                    _s = document.createElement('span'),
-                    _i = document.createElement('i');
-
-                _i.className = 'fa fa-rub';
-                _s.textContent = parseInt(item.price);
-                _s.className = 'fc-price';
-                _s.appendChild(_i);
-
-                _dprice.appendChild(_s);
-
-                _h3.textContent = item.name;
-                _pdesc.textContent = item.description;
-                _pweight.textContent = item.Platform === null ? item.Weight : item.Platform;
-
-                _dch.appendChild(_h3);
-                _dch.appendChild(_pdesc);
-                _dch.appendChild(_pweight);
-                _dch.appendChild(_dprice);
-
-                _img.setAttribute('src', item.photoPath);
-
-                _dp.className = 'dish-item';
-                _dp.setAttribute('data-parent', parentitem.idRecord);
-                _dp.setAttribute('data-item', item.idRecord);
-                _dp.id = 'di' + parentitem.idRecord;
-                _dp.appendChild(_img);
-                _dp.appendChild(_dch);
-
-                itemmenu.appendChild(_dp);
-            }
-
-            function FillMenu(obj) {
-                var l = obj.length,
-                    topmenu = document.getElementsByClassName('barMenuLeft')[0],
-                    submenu = document.getElementsByClassName('barMenuContent')[0],
-                    itemmenu = document.getElementsByClassName('barMenu__wrap')[0];
-
-                for (var i = 0; i < l; ++i) {
-                    var item = obj[i].subGroups,
-                        itemL = obj[i].subGroups.length,
-                        _d = document.createElement('div'),
-                        _ul = document.createElement('ul');
-
-                    createTopMenu(obj[i], topmenu);
-
-                    for (var j = 0; j < itemL; ++j) {
-                        creatSubMenu(_ul, item[j], obj[i]);
-
-                        var _item = item[j].items,
-                            _itemL = _item.length;
-
-                        for (var k = 0; k < _itemL; ++k) {
-                            creatItems(itemmenu, _item[k], item[j]);
-                        }
-                    }
-                    _d.className = 'food-col';
-                    _d.id = 'fc' + obj[i].idRecord;
-                    _d.appendChild(_ul);
-                    submenu.appendChild(_d);
-                }
-            }
-</script>
-
-
-<style>
-   .accordion, .accordion * {
-    -webkit-box-sizing:border-box; 
-    -moz-box-sizing:border-box; 
-    box-sizing:border-box;
-}
- 
-.accordion {
-    overflow:hidden;
-    box-shadow:0px 1px 3px rgba(0,0,0,0.25);
-    border-radius:3px;
-    //background:#f7f7f7;
-}
- 
-
-.accordion-section-title {
-    width:100%;
-    padding:15px;
-    display:inline-block;
-    border-bottom:1px solid #1a1a1a;
-    background:#333;
-    transition:all linear 0.15s;
-    font-size:1.200em;
-    text-shadow:0px 1px 0px #1a1a1a;
-    color:#fff;
-}
-.accactive, .accordion-section-title:hover { text-decoration:none; }
-.accordion-section:last-child .accordion-section-title { border-bottom:none; }
-.accordion-section-content { padding:15px; display:none; }
-</style>

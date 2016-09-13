@@ -1,36 +1,52 @@
 
+.spec-col{
+    padding:0 !important;
+}
+
 .services-row{
-    max-height:300px;
-    overflow:hidden;
-    border-top:5px solid #000;
-    border-bottom:5px solid #000;
-    background-color:#000;
+    height:300px;
+    text-align:center;
 }
 
 .services-row img{
     width:100%;
+    min-width:400px;
+    min-height:300px;
+}
+
+.service-item{
+    width:100%;
+    height:300px;
+    overflow:hidden;
+    border-left:5px solid #000;
+    border-right:5px solid #000;
+    border-bottom:5px solid #000;
 }
 
 .services-header{
     position:absolute;
-    top:0;
     width:100%;
-    height:100%;
-    padding-top:120px;
-    padding-left:20px;
-    padding-right:20px;
+    height:300px;
+    top:0;
     font-size:30px;
     text-align:center;
     color:white;
-    z-index:100;
     transition:background-color 0.5s ease;
+    background-color:rgba(0,0,0,0.4);
+}
+
+.services-header div{
+    position:absolute;
+    width:100%;
+    padding-bottom:20px;
+    bottom:0;
+    left:0;
     background-color:rgba(0,0,0,0.4);
 }
 
 .services-header:hover{
     transition:background-color 0.5s ease;
     background-color:transparent;
-    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
 }
 
 /*Detailed part */
@@ -83,15 +99,18 @@
 
 #order-ctn{
     width:calc(100% + 30px);
-    margin: 0 -15px;
+    margin : 0 -15px;
+    padding: 0 15px;
     background-color:rgba(0,0,0,0.5);
     color:white;
     font-size:19px;
-    padding:20px;
+    
+    border-top:5px solid #000;
     border-bottom:5px solid #000;
 }
 
 #order-ctn div{
+    padding-top:5px;
     padding-bottom:5px;
 }
 
@@ -101,16 +120,77 @@
     border : 2px solid #c4c4c4;
     outline:none;
     color:#fff;
-    padding:5px 10px;;
+    padding:5px 10px;
 }
 
 #srv-photos div{
     overflow:hidden;
+    height:400px;
     padding:0 !important;
+    margin-top:10px;
 }
 
 #srv-photos img{
     width:100%;
     height:100%;
     border : 2px solid #000;
+}
+
+#order-btn div{
+    position:relative;
+    width:150px;
+    height:60px;
+    left:50%;
+    margin-left:-75px;
+
+    padding-top:15px;
+    text-align:center;
+    background-color:#000;
+    border: 2px solid #c4c4c4;
+    color:#c4c4c4;
+
+}
+
+#order-btn div:hover{
+    transition:border 0.5s ease, color 05.s ease;
+    color:#fff;
+    border: 2px solid #fff;
+}
+
+.sys-row{
+    text-align:center;
+}
+
+/* Datepicker fixes */
+
+.datepicker{
+    margin-top:50px !important;
+    background-color:#000;
+    border:3px solid #fff;
+    color:white;
+}
+
+.datepicker thead tr:first-child th:hover, .datepicker tfoot tr th:hover{
+    background-color:#fff;
+    color:#000;
+}
+
+.datepicker table tr td.day:hover, .datepicker table tr td.day.focused,
+.datepicker table tr td span:hover{
+    background-color:#fff;
+    color:#000;
+}
+
+.datepicker table tr td.active, .datepicker table tr td.active:hover,
+ .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover{
+     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#d3d3d3)) !important;
+     background-image:-moz-linear-gradient(top, #0088cc, #0044cc) !important;
+     background-image:-ms-linear-gradient(top, #0088cc, #0044cc) !important;
+     background-image:o-linear-gradient(top, #0088cc, #0044cc) !important;
+     background-image:linear-gradient(top, #0088cc, #0044cc) !important;
+     color:#000;
+}
+
+.datepicker table tr td.active:hover, .datepicker table tr td.active:hover:hover, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active.disabled:hover:hover, .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active, .datepicker table tr td.active.disabled:active, .datepicker table tr td.active.disabled:hover:active, .datepicker table tr td.active.active, .datepicker table tr td.active:hover.active, .datepicker table tr td.active.disabled.active, .datepicker table tr td.active.disabled:hover.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active:hover.disabled, .datepicker table tr td.active.disabled.disabled, .datepicker table tr td.active.disabled:hover.disabled, .datepicker table tr td.active[disabled], .datepicker table tr td.active:hover[disabled], .datepicker table tr td.active.disabled[disabled], .datepicker table tr td.active.disabled:hover[disabled]{
+    color:#000;
 }

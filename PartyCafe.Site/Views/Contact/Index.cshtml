@@ -1,93 +1,37 @@
 ﻿@{
     ViewBag.Title = "Наши контакты";
 }
+
+<!-- Map -->
 <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
-<link href="~/Content/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="~/Content/css/animate.min.css" rel="stylesheet" type="text/css" />
-<link href="~/Content/css/fonts.css" type="text/css" rel="stylesheet" />
 
-<div class="map_wrap">
-    <ul class="list-icon-items">
-        <li class="grid-3 secondary alpha">
-            <a href="/cdn-cgi/l/email-protection#0e666b6262614e6c7b67627a6c776c7b68686f6261206d6163">
-                <i class="circ large tertiary ss-icon ss-standard">&#x2709;<i class="circ pulse"></i></i>
-                <h4 class="secondary">Email</h4>
-                <p>Text us</p>
-            </a>
-        </li>
-        <li class="grid-3 secondary">
-            <a href="/cdn-cgi/l/email-protection#0e666b6262614e6c7b67627a6c776c7b68686f6261206d6163">
-                <i class="circ large tertiary ss-icon ss-standard">&#x1F4F1;<i class="circ pulse"></i></i>
-                <h4 class="secondary">Instagram</h4>
-                <p>watch us</p>
-            </a>
-        </li>
-        <li class="grid-3 secondary">
-            <a href="http://twitter.com/builtbybuffalo">
-                <i class="circ large tertiary ss-icon ss-social">&#xF611;<i class="circ pulse"></i></i>
-                <h4 class="secondary">Twitter</h4>
-                <p><span class="pseudo-link">Follow us</span></p>
-            </a>
-        </li>
-        <li class="grid-3 secondary omega">
-            <a href="skype:builtbybuffalo?call">
-                <i class="circ large tertiary ss-icon ss-social">&#xF6A0;<i class="circ pulse"></i></i>
-                <h4 class="secondary">Skype</h4>
-                <p><span class="pseudo-link">Call us</span></p>
-            </a>
-        </li>
-    </ul>
-    <hr class="center" />
+<link href="~/Content/css/contact-style.css" rel="stylesheet" />
+<script src="~/Scripts/AngularControllers/ContactController.js"></script>
 
-    <div class="adress_wrap_mobile">
-        <h2 class="adress_title">Наш адресс</h2>
-        <div>
-            <ul class="adress_mobile">
-                <li>г.Москва, Большая Черкизовская 24 А, стр. 1</li>
-                <li>Тел +7 916 99999 80</li>
-                <li>Почта hello@partycafe.ru</li>
-            </ul>
+
+<div ng-app="ContactApp" ng-controller="ContactController">
+    <div id="contact-ctn" class="row">
+        <div id="map"></div>
+    </div>
+    <div id="contact-data" class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="sys">Адрес:</div>
+            <div class="data">г.Москва, Большая Черкизовская 24 А, стр. 1</div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="sys">Телефон:</div>
+            <div class="data">+7 916 99999 80</div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <div class="sys">Email:</div>
+            <div class="data">hello@partycafe.ru</div>
         </div>
     </div>
-    
-    <div id='map'></div>
-    
-    <div class="adress_wrap">
-        <h2 class="adress_title">Наш адресс</h2>
-        <div>
-            <ul class="adress">
-                <li>г.Москва</li>
-                <li>Большая Черкизовская 24 А, стр. 1</li>
-                <li>Тел +7 916 99999 80</li>
-                <li>Почта hello@partycafe.ru</li>
-            </ul>
-        </div>
-    </div>
-
 </div>
-<script>
-    L.mapbox.accessToken = 'pk.eyJ1Ijoid2VzbGV5YnVybndvb2QiLCJhIjoiY2lsNTNvaWNxMDBmY3c5bTBuNnhyb2R4NSJ9.MY590yZ-rkPWcJUfbUjAUw';
-    var map = L.mapbox.map('map', 'mapbox.streets').setView([55.7972157, 37.7320033], 16);
-    L.mapbox.featureLayer({
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [
-                37.7320033,
-                55.7972157
-            ]
-        },
-        properties: {
-            title: 'Zакрытая Территория',
-            description: 'Москва, Большая Черкизовская 24 А, стр. 1<br>Тел +7 916 99999 80<br>Почта hello@partycafe.ru',
-            'marker-size': 'large',
-            'marker-color': '#BE9A6B',
-            'marker-symbol': 'cafe'
-        }
-    }).addTo(map);
-    map.scrollWheelZoom.disable();
-</script>
+
+
+
 
 
 

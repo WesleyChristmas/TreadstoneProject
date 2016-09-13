@@ -1,4 +1,10 @@
 
+h2{
+    text-align:center;
+    padding-top:10px;
+    color:#fff;
+}
+
 #calendar-header{
     margin-top:60px;
     margin-bottom:0px;
@@ -20,18 +26,24 @@
 
 .clnd{
     padding:10px;
-    height:120px;
+    height:100px;
+    overflow:hidden;
     z-index:5;
     background-color:rgba(0,0,0,0.4);
     color:#fff;
+    text-align:center;
 }
 
 .clnd:hover{
     background-color:transparent;
-    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
 }
 
-.clnd img{
+.clnd:hover .img-ctn{
+    transition: z-index 0.5s ease;
+    z-index:100;
+}
+
+.clnd .img-ctn{
     position:absolute;
     top:0;
     left:0;
@@ -39,6 +51,11 @@
     width:100%;
     height:100%;
     outline:none;
+    overflow:hidden;
+}
+
+.clnd img{
+    height:100%;
 }
 
 .clnd-week{
@@ -60,4 +77,70 @@
     bottom:0;
     z-index:5;
     font-size:20px;
+}
+
+/* Order part */
+
+#order{
+    width:calc(100% + 30px);
+    margin : 0 -15px;
+    padding: 0 15px;
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+    font-size:19px;
+    
+    border-top:5px solid #000;
+    border-bottom:5px solid #000;
+}
+
+#order div{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+#order input[type="text"]{
+    width:100%;
+    background-color:transparent;
+    border : 2px solid #c4c4c4;
+    outline:none;
+    color:#fff;
+    padding:5px 10px;
+}
+
+#order-btn div{
+    position:relative;
+    width:200px;
+    height:60px;
+    left:50%;
+    margin-left:-100px;
+
+    padding-top:15px;
+    text-align:center;
+    background-color:#000;
+    border: 2px solid #c4c4c4;
+    color:#c4c4c4;
+
+}
+
+#order-btn div:hover{
+    transition:border 0.5s ease, color 05.s ease;
+    color:#fff;
+    border: 2px solid #fff;
+}
+
+#order-img{
+    width:100%;
+    max-height:300px;
+    overflow:hidden;
+    text-align: center;
+}
+
+#order-img img{
+    height:300px;
+}
+
+#order-header{
+    width:100%;
+    text-align:center;
+    font-size:25px;
 }

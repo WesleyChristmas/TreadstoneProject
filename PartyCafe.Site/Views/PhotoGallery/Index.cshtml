@@ -2,31 +2,33 @@
     ViewBag.Title = "Фотогалерея";
 }
 
-<script src="~/Scripts/AngularControllers/PhotoGalleryController.js"></script>
-<link href="~/Content/css/lightbox.css" rel="stylesheet" />
-<script src="~/Scripts/lightbox.js"></script>
 
-<div class="photogallery-wrap" ng-app="photogalleryapp" ng-controller="PhotoGallery">
-    <div class="h1">
-        @ViewBag.Title
-        <div class="darkArea">
-            <div class="post-entry">
-                <div class="photogallery-wrapper">
-                    <div class="photogallery-item" ng-repeat="item in PhotoGallery" id="links">
-                        <a href="{{item.photoPath}}" class="fancybox" rel="group" data-lightbox="gallery" data-title="{{item.name}}" style="background: url('{{item.photoPath}}') no-repeat center center; background-size: cover;"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
+<link href="~/Content/css/photo-gallery-style.css" rel="stylesheet" />
+<script src="~/Scripts/AngularControllers/PhotoGalleryController.js"></script>
+
+
+
+<div ng-app="photogalleryapp" ng-controller="PhotoGallery">
+
+<div id="hash-panel" class="row">
+    <div id="hash" class="col-xs-1">
+        #
+    </div>
+    <div id="hash-input" class="col-xs-11">
+        <input type="text" ng-model="Paging.Tag" ng-keyup="StartTagProcess()" placeholder="Поиск..."/>
     </div>
 </div>
 
-<script>
-    lightbox.option({
-        'alwaysShowNavOnTouchDevices': true,
-        'resizeDuration': 0,
-        'wrapAround': true,
-        'disableScrolling': true,
-    });
-</script>
+<div class="row">
+    <div class="col-sm-6 col-md-4 spec-col" ng-repeat="photo in PhotoGallery">
+        <div class="photo-ctn">
+            <img ng-src="{{photo.photoPath}}" />
+        </div>
+        <div class="photo-name">
+            <div>
+                {{photo.name}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>

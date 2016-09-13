@@ -21,9 +21,10 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllByTags(List<string> tags, int startPos = 1, int count = 20)
+        //Пока исправил на один тэг
+        public JsonResult GetAllByTags(string tag, int startPos = 1, int count = 20)
         {
-            var result = GalleryUtils.GetAllByTags(tags, startPos, count);
+            var result = GalleryUtils.GetAllByTags(new List<string> {tag}, startPos, count);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

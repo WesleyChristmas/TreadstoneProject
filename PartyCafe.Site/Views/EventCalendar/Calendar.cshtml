@@ -2,40 +2,86 @@
     Layout = "";
 }
 
-<div id="calendar-header">
+<h2>
     Ближайшие события
-</div>
+</h2>
 
 <div id="calendar" class="row">
     <div class="col-sm-4 col-md-3 col-lg-2 clnd-ctn" ng-repeat="item in Events">
-        <div class="clnd">
+        <div class="clnd" ng-click="SelectEvent(this)">
             <div class="clnd-week">{{item.week}}</div>
             <div class="clnd-day">{{item.day}}</div>
             <div class="clnd-month">{{item.month}}</div>
-            <img ng-src="{{item.data.photo}}" ng-show="item.data.header" />
-        </div>
-    </div>
-</div>
-
-<!--
-
-<div class="calendar-title">Ближайшие события</div>
-<div id="calendar-wrap">
-    <div class="event-day" note ng-repeat="item in Events">
-        <div href="" class="ed-wrap">
-            <div class="ed-week">{{item.week}}</div>
-            <div clas="ed-day">{{item.day}}</div>
-            <em class="ed-month">{{item.month}}</em>
-            <strong class="ed-title">{{item.data.header}}</strong>
-            <!-- style="background: url('{{item.data.photo}}') center center no-repeat; background-size: cover;" -->
-            <!--
-            <div ng-click="EventMore(item.data)" class="ed-imgwrap"  ng-show="item.data.length === 0 ? false : true">
-                <div class="ed-time">{{item.data.time.Hours}}:{{item.data.time.Minutes}}</div>
-                <div class="ed-invite">Присоединиться</div>
-                <img class="ed-photo" ng-src="{{item.data.photo}}" />
+            <div class="img-ctn">
+                <img ng-src="{{item.data.photo}}" ng-show="item.data.header" />
+            </div>
+            <div class="event-name">
+                {{item.data.name}}
             </div>
         </div>
     </div>
 </div>
 
--->
+<div id="order" class="row" ng-show="Order.Show">
+    <div id="order-img" class="row">
+        <img ng-src="{{Order.ServiceImg}}" />
+    </div>
+    <div id="order-header" class="row">
+        <div>
+            {{Order.ServiceName}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            * Имя:
+        </div>
+        <div class="col-sm-6">
+            <input type="text" ng-model="Order.Name" placeholder="Ваше имя"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            * Телефон: 
+        </div>
+        <div class="col-sm-6">
+            <input type="text" ng-model="Order.Phone" placeholder="+7 (999) 999-99-99"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            * Количество человек:
+        </div>
+        <div class="col-sm-6">
+            <input type="text" ng-model="Order.Date" ng-pattern="/[0-9]/" ng-maxlength="2" placeholder="5"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            &#160&#160Промокод:
+        </div>
+        <div class="col-sm-6">
+            <input type="text" ng-model="Order.Time" ng-pattern="/[0-9a-zA-Z]/" ng-maxlength="10" placeholder="F145d3"//>            
+        </div>
+    </div>
+
+    <div class="row sys-row" ng-show="Order.ValError">
+        Не все поля введены правильно!
+    </div>
+
+    <div class="row sys-row" ng-show="Order.ServerError">
+        Не получилось отправить Вашу заявку :С Попробуйте связаться с нами по телефону. Спасибо за понимание!
+    </div>
+
+    <div class="row sys-row" ng-show="Order.Good">
+        Ваша заявка была успешно отправлена. В ближайшее время Вам пеерезвонят для уточнения заявки
+    </div>
+
+    <div class="row">
+        <div id="order-btn">
+            <div ng-click="SendOrder()">Присоединиться</div>
+        </div>
+    </div>
+</div>

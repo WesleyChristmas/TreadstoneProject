@@ -3,10 +3,16 @@
     Layout = null;
 }
 
-<div class="row services-row" ng-repeat="item in Services">
-    <div class="col-xs-12" ng-click="GetDetailed($index)">
-        <img ng-src="{{item.photoPath}}" />
-        <div class="services-header">{{item.name}}</div>
+<div class="row services-row">
+    <div class="col-xs-12 col-md-6 col-lg-4 spec-col" ng-click="GetDetailed($index)" ng-repeat="item in Services">
+        <div class="service-item">
+            <img ng-src="{{item.photoPath}}" />
+        </div>
+        <div class="services-header">
+            <div>
+                {{item.name}}
+            </div>
+        </div>
     </div>
 </div>
 

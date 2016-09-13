@@ -15,13 +15,17 @@
 
 <!-- Order part -->
 
+<div id="srv-order" class="row" data-toggle="collapse" data-target="#order-ctn">
+    <div>Хочу заказать</div>
+</div>
+
 <div id="order-ctn" class="collapse">
     <div class="row">
         <div class="col-sm-6">
             * Имя:
         </div>
         <div class="col-sm-6">
-            <input type="text" placeholder="Ваше имя"/>
+            <input type="text" ng-model="Order.Name" placeholder="Ваше имя"/>
         </div>
     </div>
 
@@ -30,7 +34,7 @@
             * Телефон: 
         </div>
         <div class="col-sm-6">
-            <input type="text" placeholder="+7 (999) 999-99-99"/>
+            <input type="text" ng-model="Order.Phone" placeholder="+7 (999) 999-99-99"/>
         </div>
     </div>
 
@@ -39,7 +43,7 @@
             * Дата:
         </div>
         <div class="col-sm-6">
-            <input type="text" placeholder="21.08.2016"/>
+            <input type="text" ng-model="Order.Date" ng-model="Test" jqdatepicker placeholder="21.08.2016"/>
         </div>
     </div>
 
@@ -48,28 +52,32 @@
             * Время:
         </div>
         <div class="col-sm-6">
-            <input type="text" placeholder="21:00"/>            
+            <input type="text" ng-model="Order.Time" placeholder="21:00" onkeyup="restrictTime(this,event)" maxlength="5"/>            
+        </div>
+    </div>
+
+    <div class="row sys-row" ng-show="Order.ValError">
+        Не все поля введены правильно!
+    </div>
+
+    <div class="row sys-row" ng-show="Order.ServerError">
+        Не получилось отправить Вашу заявку :С Попробуйте связаться с нами по телефону. Спасибо за понимание!
+    </div>
+
+    <div class="row sys-row" ng-show="Order.Good">
+        Ваша заявка была успешно отправлена. В ближайшее время Вам пеерезвонят для уточнения заявки
+    </div>
+
+    <div class="row">
+        <div id="order-btn">
+            <div ng-click="SendOrder()" ng-show="Order.ShowBtn">Заказать</div>
         </div>
     </div>
 </div>
 
-<div id="srv-order" class="row" data-toggle="collapse" data-target="#order-ctn">
-    <div>Хочу заказать</div>
-</div>
-
 <!-- Photo part -->
 <div id="srv-photos" class="row">
-    <div class="col-sm-6">
-        <img src="~/Content/example/service-detailed-ex.jpg" />
-    </div>
-    <div class="col-sm-6">
-        <img src="~/Content/example/service-detailed-ex.jpg" />
-    </div>
-
-    <div class="col-sm-6">
-        <img src="~/Content/example/service-detailed-ex.jpg" />
-    </div>
-    <div class="col-sm-6">
-        <img src="~/Content/example/service-detailed-ex.jpg" />
+    <div class="col-sm-6 col-md-4" ng-repeat="photo in ServicePhotos">
+        <img ng-src="{{photo.photoPath}}" />
     </div>
 </div>
