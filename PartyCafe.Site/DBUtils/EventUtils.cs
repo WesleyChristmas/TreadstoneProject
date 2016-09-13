@@ -21,7 +21,6 @@ namespace PartyCafe.Site.DBUtils
         public string Description;
         public DateTime DateEvent;
         public TimeSpan TimeEvent;
-        public List<PCEventPhoto> photos;
     }
 
     public static class EventUtils
@@ -29,92 +28,54 @@ namespace PartyCafe.Site.DBUtils
         public static List<PCEvent> GetAll()
         {
             var db = MainUtils.GetDBContext();
-            var events = (from e in db.Events
+            return (from e in db.Events
                           join p in db.Photos on e.IdPhoto equals p.IdRecord
-                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description}).ToList();
+                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description})
+                          .Select(e => new PCEvent()
+                          {
+                              idRecord = e.IdRecord,
+                              name = e.Name,
+                              IdPhoto = e.IdPhoto,
+                              PhotoPath = PhotoUtils.GetRelativeUrl(e.Path),
+                              DateEvent = e.EventDate.Date,
+                              TimeEvent = e.EventDate.TimeOfDay,
+                              Description = e.description
+                          }).ToList();
+        }
 
-            var eventPhotos = (from ep in db.EventPhotos
-                            join p in db.Photos on ep.IdPhoto equals p.IdRecord
-                            select new { ep.IdRecord, ep.IdEvent, p.Path, ep.name }).ToList();
-
-
-            List<PCEvent> resultList = new List<PCEvent>();
-            foreach (var e in events)
-            {
-                PCEvent pcEvent = new PCEvent();
-
-                pcEvent.idRecord = e.IdRecord;
-                pcEvent.name = e.Name;
-                pcEvent.IdPhoto = e.IdPhoto;
-                pcEvent.PhotoPath = PhotoUtils.GetRelativeUrl(e.Path);
-                pcEvent.DateEvent = e.EventDate.Date;
-                pcEvent.TimeEvent = e.EventDate.TimeOfDay;
-                pcEvent.Description = e.description;
-
-                pcEvent.photos = new List<PCEventPhoto>();
-                foreach(var item in eventPhotos)
-                {
-                    if (item.IdEvent == pcEvent.idRecord)
+        public static List<PCEventPhoto> GetEventPhotos(int id)
+        {
+            var db = MainUtils.GetDBContext();
+            return db.EventPhotos
+                .Where(x => x.IdEvent == id)
+                .Join(db.Photos, photo => photo.IdPhoto, eventPhoto => eventPhoto.IdRecord,
+                    (eventPhoto, photo) => new PCEventPhoto()
                     {
-                        var newPhoto = new PCEventPhoto();
-                        newPhoto.idRecord = item.IdRecord;
-                        newPhoto.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
-                        newPhoto.name = item.name;
-                        pcEvent.photos.Add(newPhoto);
-                    }
-                }
-
-                resultList.Add(pcEvent);
-            }
-
-            return resultList;
+                        idRecord = photo.IdRecord,
+                        photoPath = PhotoUtils.GetRelativeUrl(photo.Path),
+                        name = eventPhoto.name
+                    }).ToList();
         }
 
         public static List<PCEvent> GetNearEvents()
         {
-            const int DayInterval = 15;
+            const int dayInterval = 15;
 
             var db = MainUtils.GetDBContext();
-            var events = (from e in db.Events
-                          join p in db.Photos on e.IdPhoto equals p.IdRecord
-                          where e.EventDate <= DateTime.Now.AddDays(DayInterval) && e.EventDate >= DateTime.Now.AddDays(-DayInterval)
-                          select new { e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description }).ToList();
-
-            var eventPhotos = (from ep in db.EventPhotos
-                               join p in db.Photos on ep.IdPhoto equals p.IdRecord
-                               select new { ep.IdRecord, ep.IdEvent, p.Path, ep.name }).ToList();
-
-
-            List<PCEvent> resultList = new List<PCEvent>();
-            foreach (var e in events)
-            {
-                PCEvent pcEvent = new PCEvent();
-
-                pcEvent.idRecord = e.IdRecord;
-                pcEvent.name = e.Name;
-                pcEvent.IdPhoto = e.IdPhoto;
-                pcEvent.PhotoPath = PhotoUtils.GetRelativeUrl(e.Path);
-                pcEvent.DateEvent = e.EventDate.Date;
-                pcEvent.TimeEvent = e.EventDate.TimeOfDay;
-                pcEvent.Description = e.description;
-
-                pcEvent.photos = new List<PCEventPhoto>();
-                foreach (var item in eventPhotos)
-                {
-                    if (item.IdEvent == pcEvent.idRecord)
-                    {
-                        var newPhoto = new PCEventPhoto();
-                        newPhoto.idRecord = item.IdRecord;
-                        newPhoto.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
-                        newPhoto.name = item.name;
-                        pcEvent.photos.Add(newPhoto);
-                    }
-                }
-
-                resultList.Add(pcEvent);
-            }
-
-            return resultList;
+            return (from e in db.Events
+                    join p in db.Photos on e.IdPhoto equals p.IdRecord
+                    where e.EventDate <= DateTime.Now.AddDays(dayInterval) && e.EventDate >= DateTime.Now.AddDays(-dayInterval)
+                    select new { e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description })
+                          .Select(e => new PCEvent()
+                          {
+                              idRecord = e.IdRecord,
+                              name = e.Name,
+                              IdPhoto = e.IdPhoto,
+                              PhotoPath = PhotoUtils.GetRelativeUrl(e.Path),
+                              DateEvent = e.EventDate.Date,
+                              TimeEvent = e.EventDate.TimeOfDay,
+                              Description = e.description
+                          }).ToList();
         }
 
         public static void DelEvent(int idRecord)
@@ -124,6 +85,7 @@ namespace PartyCafe.Site.DBUtils
                           where e.IdRecord == idRecord
                             select e).SingleOrDefault();
 
+            if (curEvent == null) return;
             dbContext.Events.DeleteOnSubmit(curEvent);
             dbContext.SubmitChanges();
 
@@ -137,22 +99,13 @@ namespace PartyCafe.Site.DBUtils
                             where e.IdRecord == partyEvent.idRecord
                             select e).SingleOrDefault();
 
-            curEvent.Name = partyEvent.name != null ? partyEvent.name : "";
-            curEvent.description = partyEvent.Description != null ? partyEvent.Description : String.Empty;
-            
-            if (partyEvent.DateEvent != null)
-            {
-                DateTime newDate = partyEvent.DateEvent;
-                if (partyEvent.TimeEvent != null)
-                {
-                    newDate = newDate.AddSeconds(partyEvent.TimeEvent.TotalSeconds);
-                }
-                curEvent.EventDate = newDate;
-            }
-            else
-            {
-                curEvent.EventDate = DateTime.Now;
-            }
+            if (curEvent == null) return;
+            curEvent.Name = partyEvent.name ?? string.Empty;
+            curEvent.description = partyEvent.Description ?? string.Empty;
+
+            var newDate = partyEvent.DateEvent;
+            newDate = newDate.AddSeconds(partyEvent.TimeEvent.TotalSeconds);
+            curEvent.EventDate = newDate;
 
             curEvent.DateUpdate = DateTime.Now;
             curEvent.UserUpdate = userUpdate;
@@ -168,40 +121,23 @@ namespace PartyCafe.Site.DBUtils
             }
 
             dbContext.SubmitChanges();
-
         }
 
-        public static void InsertEvent(PCEvent partyEvent, string userCreate, PCPhoto image)
+        public static void InsertEvent(PCEvent partyEvent, PCPhoto image, string userCreate)
         {
-            var newEvent = new Events();
-            newEvent.Name = partyEvent.name != null ? partyEvent.name : String.Empty;
-            newEvent.description = partyEvent.Description != null ? partyEvent.Description : String.Empty;
 
-            if (partyEvent.DateEvent != null)
-            {
-                DateTime newDate = partyEvent.DateEvent;
-                if (partyEvent.TimeEvent != null)
-                {
-                   newDate = newDate.AddSeconds(partyEvent.TimeEvent.TotalSeconds);
-                }
-                newEvent.EventDate = newDate;
-            }
-            else
-            {
-                newEvent.EventDate = DateTime.Now;
-            }
+            var newDate = partyEvent.DateEvent;
+            newDate = newDate.AddSeconds(partyEvent.TimeEvent.TotalSeconds);
 
-            if (image != null)
+            var newEvent = new Events
             {
-                newEvent.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
-            }
-            else
-            {
-                newEvent.IdPhoto = 0;
-            }
-
-            newEvent.DateCreate = DateTime.Now;
-            newEvent.UserCreate = userCreate;
+                Name = partyEvent.name ?? string.Empty,
+                description = partyEvent.Description ?? string.Empty,
+                IdPhoto = image != null ? PhotoUtils.InsertImage(image, userCreate) : 0,
+                DateCreate = DateTime.Now,
+                UserCreate = userCreate,
+                EventDate = newDate
+            };
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Events.InsertOnSubmit(newEvent);
@@ -211,10 +147,12 @@ namespace PartyCafe.Site.DBUtils
         public static void AddPhoto(int IdEvent, string name, PCPhoto image, string userCreate)
         {
             var db = MainUtils.GetDBContext();
-            EventPhotos ep = new EventPhotos();
-            ep.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
-            ep.IdEvent = IdEvent;
-            ep.name = name;
+            var ep = new EventPhoto
+            {
+                IdPhoto = PhotoUtils.InsertImage(image, userCreate),
+                IdEvent = IdEvent,
+                name = name
+            };
             db.EventPhotos.InsertOnSubmit(ep);
             db.SubmitChanges();
         }
@@ -225,6 +163,7 @@ namespace PartyCafe.Site.DBUtils
             var x = (from sp in db.EventPhotos
                      where sp.IdPhoto == IdEvent
                      select sp).SingleOrDefault();
+            if (x == null) return;
             db.EventPhotos.DeleteOnSubmit(x);
             db.SubmitChanges();
         }

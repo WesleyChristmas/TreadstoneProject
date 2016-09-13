@@ -209,14 +209,14 @@ namespace PartyCafe.Site.DBUtils
             }
         }
 
-        public static void InsertItem (PCMenuItem partyItem, string userCreate, PCPhoto image)
+        public static void InsertItem (PCMenuItem partyItem, PCPhoto image, string userCreate)
         {
             var newMenuItem = new MenuItems();
-            newMenuItem.Name = partyItem.Name ?? String.Empty;
-            newMenuItem.description = partyItem.Description ?? String.Empty;
+            newMenuItem.Name = partyItem.Name ?? string.Empty;
+            newMenuItem.description = partyItem.Description ?? string.Empty;
             newMenuItem.Platform = partyItem.Platform ?? string.Empty;
             newMenuItem.Price = Convert.ToDecimal(partyItem.Price);
-            newMenuItem.Country = partyItem.Country ?? String.Empty;
+            newMenuItem.Country = partyItem.Country ?? string.Empty;
             newMenuItem.IdGroup = partyItem.IdGroup;
             newMenuItem.Weight = partyItem.Weight;
 
@@ -236,18 +236,19 @@ namespace PartyCafe.Site.DBUtils
             dbContext.MenuItems.InsertOnSubmit(newMenuItem);
             dbContext.SubmitChanges();
         }
-        public static void EditItem(PCMenuItem partyItem, string userUpdate, PCPhoto image)
+
+        public static void EditItem(PCMenuItem partyItem, PCPhoto image, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curMenuItem = (from mi in dbContext.MenuItems
                             where mi.IdRecord == partyItem.IdRecord
                             select mi).SingleOrDefault();
 
-            curMenuItem.Name = partyItem.Name ?? String.Empty;
-            curMenuItem.description = partyItem.Description ?? String.Empty;
+            curMenuItem.Name = partyItem.Name ?? string.Empty;
+            curMenuItem.description = partyItem.Description ?? string.Empty;
             curMenuItem.Platform = partyItem.Platform ?? string.Empty;
             curMenuItem.Price = Convert.ToDecimal(partyItem.Price);
-            curMenuItem.Country = partyItem.Country ?? String.Empty;
+            curMenuItem.Country = partyItem.Country ?? string.Empty;
             curMenuItem.IdGroup = partyItem.IdGroup;
             curMenuItem.Weight = partyItem.Weight;
 
@@ -266,6 +267,7 @@ namespace PartyCafe.Site.DBUtils
 
             dbContext.SubmitChanges();
         }
+
         public static void DelItem(int idRecord)
         {
             var dbContext = MainUtils.GetDBContext();
@@ -279,10 +281,10 @@ namespace PartyCafe.Site.DBUtils
             if (curMenuItem.IdPhoto > 0) { PhotoUtils.DelImage(curMenuItem.IdPhoto); };
         }
 
-        public static void InsertGroup(PCMenuGroup partyGroup, string userCreate, PCPhoto image)
+        public static void InsertGroup(PCMenuGroup partyGroup, PCPhoto image, string userCreate)
         {
             var newMenuGroup = new MenuGroups();
-            newMenuGroup.GroupName = partyGroup.Name ?? String.Empty;
+            newMenuGroup.GroupName = partyGroup.Name ?? string.Empty;
             newMenuGroup.IdParent = partyGroup.IdParent;
 
             if (image != null)
@@ -301,14 +303,15 @@ namespace PartyCafe.Site.DBUtils
             dbContext.MenuGroups.InsertOnSubmit(newMenuGroup);
             dbContext.SubmitChanges();
         }
-        public static void EditGroup(PCMenuGroup partyGroup, string userUpdate, PCPhoto image)
+
+        public static void EditGroup(PCMenuGroup partyGroup, PCPhoto image, string userUpdate)
         {
             var dbContext = MainUtils.GetDBContext();
             var curMenuGroup = (from mg in dbContext.MenuGroups
                                where mg.IdRecord == partyGroup.IdRecord
                                select mg).SingleOrDefault();
 
-            curMenuGroup.GroupName = partyGroup.Name ?? String.Empty;
+            curMenuGroup.GroupName = partyGroup.Name ?? string.Empty;
             curMenuGroup.IdParent = partyGroup.IdParent;
 
             curMenuGroup.DateUpdate = DateTime.Now;
@@ -328,6 +331,7 @@ namespace PartyCafe.Site.DBUtils
 
             dbContext.SubmitChanges();
         }
+
         public static void DelGroup(int idRecord)
         {
             var dbContext = MainUtils.GetDBContext();

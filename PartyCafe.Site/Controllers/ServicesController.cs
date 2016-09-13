@@ -31,6 +31,13 @@ namespace PartyCafe.Site.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetServicePhotos(int serviceId)
+        {
+            var result = ServiceUtils.GetServicePhotos(serviceId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public async Task<JsonResult> NewOrder(string user, string phone, string date, string time, string service)
         {

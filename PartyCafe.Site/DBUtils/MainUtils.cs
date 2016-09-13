@@ -11,7 +11,7 @@ namespace PartyCafe.Site.DBUtils
         public static PartyCafeClassesDataContext GetDBContext()
         {
             ConnectionStringSettings connSettings = ConfigurationManager.ConnectionStrings["PartyCafeDbContext"];
-            if (connSettings == null || String.IsNullOrEmpty(connSettings.ConnectionString))
+            if (connSettings == null || string.IsNullOrEmpty(connSettings.ConnectionString))
             {
                 throw new Exception("Incorrect connection string, please check it in Web.config file!");
             }

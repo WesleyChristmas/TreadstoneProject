@@ -4,32 +4,36 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
+using PartyCafe.Site.Models.Utils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
 {
     [Authorize]
     public class ServicesController : Controller
     {
-        // GET: Admin/Services
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult ServicesHome()
         {
             return View("ServicesHome");
         }
+
         [HttpGet]
         public ActionResult ServicesAdd()
         {
             return View("ServicesAdd");
         }
+
         [HttpGet]
         public ActionResult ServicesEdit()
         {
             return View("ServicesEdit");
         }
+
         [HttpGet]
         public ActionResult ServicesEditPhoto()
         {
@@ -41,46 +45,24 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request;
-                if (request.Files.Count > 0)
-                {
-                    var file = Request.Files[0];
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    ServiceUtils.InsertService(
-                        new PCService()
-                        {
-                            name = name,
-                            description = desc,
-                            serviceType = 0
-                        },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
-                    );
-                    return "ok";
-                }
-                else
-                {
-                    ServiceUtils.InsertService(
-                        new PCService()
-                        {
-                            name = name,
-                            description = desc,
-                            serviceType = 0
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
+                ServiceUtils.InsertService(
+                    new PCService()
+                    {
+                        name = name,
+                        description = desc,
+                        serviceType = 0
+                    },
+                    User.Identity.Name,
+                    ControllerUtils.GetPhotoEntity(Request.Files)
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
                 return "Произошла ошибка! " + ex.Message.ToString();
             }
         }
+
         [HttpPost]
         public string RemoveServices(int id)
         {
@@ -99,92 +81,60 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var request = Request.Files;
-                if (request.Count > 0)
-                {
-                    var file = Request.Files[0];
-
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
-
-                    ServiceUtils.EditService(
-                        new PCService()
-                        {
-                            idRecord = id,
-                            name = name,
-                            description = desc
-                        },
-                        User.Identity.Name,
-                        new PCPhoto() { data = content, fileName = filename }
-                    );
-                    return "ok";
-                }
-                else
-                {
-                    ServiceUtils.EditService(
-                        new PCService()
-                        {
-                            idRecord = id,
-                            name = name,
-                            description = desc
-                        },
-                        User.Identity.Name,
-                        null
-                    );
-                    return "ok";
-                }
+                ServiceUtils.EditService(
+                    new PCService()
+                    {
+                        idRecord = id,
+                        name = name,
+                        description = desc
+                    },
+                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    User.Identity.Name
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
 
         [HttpPost]
-        public string AddPhotoToServices(int id, string name, string desc = "")
+        public string AddPhotoToServices(int id, string name)
         {
             try
             {
-                var request = Request;
-                if (request.Files.Count > 0)
-                {
-                    var file = Request.Files[0];
-                    var content = new byte[file.ContentLength];
-                    var filename = file.FileName;
-                    file.InputStream.Read(content, 0, file.ContentLength);
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                if (photo == null) return "bad";
 
-                    ServiceUtils.AddPhoto(
-                        id,
-                        name,
-                        new PCPhoto() { data = content, fileName = filename },
-                        User.Identity.Name
-                    );
-                    return "ok";
-                }
-                else
-                {
-                    return "bed";
-                }
+                ServiceUtils.AddPhoto(
+                    id,
+                    name,
+                    photo,
+                    User.Identity.Name
+                );
+                return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
+
         [HttpPost]
         public string UpdatePhotoServices(int id, string name)
         {
             try
             {
-                ServiceUtils.EditPhoto(id, name, null, User.Identity.Name);
+                ServiceUtils.EditPhoto(id, name, ControllerUtils.GetPhotoEntity(Request.Files), User.Identity.Name);
                 return "ok";
             }
             catch (Exception ex)
             {
-                return "Произошла ошибка! " + ex.Message.ToString();
+                return "Произошла ошибка! " + ex.Message;
             }
         }
+
         [HttpPost]
         public string RemovePhotoFromServices(int id)
         {
@@ -195,7 +145,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return "bed";
+                return "bad";
             }
         }
 
@@ -204,7 +154,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             try
             {
-                var aboutus = ServiceUtils.GetAll(ServiceType.originService).Where(w => w.idRecord == id).SingleOrDefault();
+                var aboutus = ServiceUtils.GetServicePhotos(id);
                 return Json(aboutus, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -212,6 +162,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
+
         [HttpGet]
         public JsonResult GetAllServices()
         {
