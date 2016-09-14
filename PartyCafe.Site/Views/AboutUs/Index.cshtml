@@ -4,15 +4,17 @@
 }
 
 <link href="~/Content/css/about-us-style.css" rel="stylesheet"/>
+<script src="~/Scripts/AngularControllers/AboutUsController.js"></script>
 
-
-<div id="panoram-ctn" class="row">
-    <img src="~/Content/example/about-us.jpg"/>
-</div>
-<div id="about-header" class="row">
-    Party cafe
-</div>
-<div id="about-us" class="row">
-    Текст Текст Текст очень много текста описание списки блаблабла короче куча всего, будем брать из базы ;)
+<div ng-app="AboutUsApp" ng-controller="AboutUsController">
+    <div id="panoram-ctn" class="row">
+       <img ng-src="{{About.Photo}}"/>
+    </div>
+    <div id="about-header" class="row">
+        {{About.Name}}
+    </div>
+    <div id="about-us" class="row">
+        {{About.Description}}
+    </div>
 </div>
 

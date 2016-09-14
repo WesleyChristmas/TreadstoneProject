@@ -211,6 +211,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="DBUtils\AboutUtils.cs" />
     <Compile Include="DBUtils\EmailUtils.cs" />
     <Compile Include="DBUtils\EventUtils.cs" />
     <Compile Include="DBUtils\GalleryUtils.cs" />

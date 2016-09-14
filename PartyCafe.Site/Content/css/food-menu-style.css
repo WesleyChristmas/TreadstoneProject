@@ -98,3 +98,7 @@ h2{
     padding:0!important;
     margin:0!important;
 }
+
+.fa-ruble:before, .fa-rouble:before, .fa-rub:before{
+    font-size:15px;
+}

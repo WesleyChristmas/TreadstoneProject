@@ -1,5 +1,13 @@
 ﻿var foodmenuapp = new angular.module("foodmenuapp", []);
 
+foodmenuapp.filter("CorrectPrice",function(){
+    return  function(price){
+        var result = parseInt(price);
+        if(result == NaN) return;
+        return result.toFixed(2);
+    };
+})
+
 foodmenuapp.controller("FoodMenuCt", function ($scope, $http) {
     $scope.Menu = [];
     $scope.SubMenu = [];
