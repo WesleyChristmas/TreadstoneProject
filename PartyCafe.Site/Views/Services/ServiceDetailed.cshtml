@@ -4,13 +4,15 @@
 }
 
 <div id="srv-dtl-img" class="row">
-    <img src="~/Content/example/service-detailed-ex.jpg" />
+    <img ng-src="{{Service.Photo}}" />
 </div>
+
+<div id="src-content">
 <div id="srv-dtl-hd" class="row">
-    Заголовок для услуги
+    {{Service.Name}}
 </div>
 <div id="srv-dtl-desc" class="row">
-    Описание для услуги, будет браться из базы
+    {{Service.Description}}
 </div>
 
 <!-- Order part -->
@@ -74,10 +76,11 @@
         </div>
     </div>
 </div>
+</div>
 
 <!-- Photo part -->
 <div id="srv-photos" class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="photo in ServicePhotos">
+    <div class="col-sm-6 col-md-4" ng-repeat="photo in Service.Photos">
         <img ng-src="{{photo.photoPath}}" />
     </div>
 </div>

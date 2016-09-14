@@ -51,20 +51,29 @@
 
 /*Detailed part */
 
+#src-content{
+    position:relative;
+}
+
 #srv-dtl-img{
+    position:fixed;
+    top:0;
     border-top:10px solid #000;
     border-bottom:10px solid #000;
-    height:300px;
+    width:100%;
+    height:100%;
     overflow:hidden;
+    text-align:center;
+    background-color:rgba(0,0,0,0.5);
 }
 
 #srv-dtl-img img{
-    min-width:100%;   
-    min-height:300px;
+    min-width:100%;
+    min-height:100%;
 }
 
 #srv-dtl-hd{
-    background-color:rgba(0,0,0,0.5);
+    background-color:rgba(0,0,0,0.8);
     font-size:35px;
     padding:20px 0;
     text-align:center;
@@ -72,7 +81,7 @@
 }
 
 #srv-dtl-desc{
-    background-color:rgba(0,0,0,0.5);
+    background-color:rgba(0,0,0,0.8);
     color:white;
     font-size:19px;
     padding: 10px 30px;
@@ -101,7 +110,7 @@
     width:calc(100% + 30px);
     margin : 0 -15px;
     padding: 0 15px;
-    background-color:rgba(0,0,0,0.5);
+    background-color:rgba(0,0,0,0.8);
     color:white;
     font-size:19px;
     
@@ -133,7 +142,7 @@
 #srv-photos img{
     width:100%;
     height:100%;
-    border : 2px solid #000;
+    border : 5px solid #000;
 }
 
 #order-btn div{

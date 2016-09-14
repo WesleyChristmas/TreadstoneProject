@@ -40,7 +40,11 @@ h2{
 
 .clnd:hover .img-ctn{
     transition: z-index 0.5s ease;
-    z-index:100;
+    z-index:50;
+}
+
+.clnd:hover .event-name{
+    width:100%;
 }
 
 .clnd .img-ctn{
@@ -79,23 +83,34 @@ h2{
     font-size:20px;
 }
 
+.event-name{
+    position:absolute;
+    width:0;
+    bottom:0;
+    margin-left:-10px;
+    padding-bottom:0;
+    z-index:55;
+    background-color: rgba(0,0,0,0.5);
+    text-align:center;
+    overflow:hidden;
+}
+
+.event-name span{
+    font-size:25px;
+}
+
 /* Order part */
 
 #order{
     width:calc(100% + 30px);
+    height:100%;
     margin : 0 -15px;
     padding: 0 15px;
-    background-color:rgba(0,0,0,0.5);
     color:white;
     font-size:19px;
     
     border-top:5px solid #000;
     border-bottom:5px solid #000;
-}
-
-#order div{
-    padding-top:5px;
-    padding-bottom:5px;
 }
 
 #order input[type="text"]{
@@ -107,6 +122,10 @@ h2{
     padding:5px 10px;
 }
 
+#order-btn{
+    margin-bottom:50px;
+}
+
 #order-btn div{
     position:relative;
     width:200px;
@@ -114,7 +133,7 @@ h2{
     left:50%;
     margin-left:-100px;
 
-    padding-top:15px;
+    padding-top:15px !important;
     text-align:center;
     background-color:#000;
     border: 2px solid #c4c4c4;
@@ -129,18 +148,37 @@ h2{
 }
 
 #order-img{
+    position:absolute;
     width:100%;
-    max-height:300px;
+    max-height:455px;
     overflow:hidden;
     text-align: center;
 }
 
 #order-img img{
-    height:300px;
+    min-width:100%;
+    min-height:100%;
 }
 
 #order-header{
     width:100%;
     text-align:center;
     font-size:25px;
+}
+
+#order-content{
+    position:relative;
+    background-color:rgba(0,0,0,0.7);
+    padding:15px;
+    width:calc(100% + 30px);
+    margin-left:-15px;
+}
+
+#order-content div{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.sys-row{
+    text-align:center;
 }

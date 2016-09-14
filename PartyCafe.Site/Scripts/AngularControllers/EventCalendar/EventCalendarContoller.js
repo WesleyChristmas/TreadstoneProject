@@ -8,7 +8,14 @@ eventcalendarapp.config(function ($routeProvider) {
     });
 });
 
-eventcalendarapp.controller("CalendarController", function ($scope, $http, $location, $anchorScroll) {
+eventcalendarapp.filter("CorrectTime",function(){
+    return function(time){
+        if(!time) return;
+        return CheckTime(time.Hours) + ':' + CheckTime(time.Minutes);
+    }
+})
+
+eventcalendarapp.controller("CalendarController", function ($scope, $http, $location, $anchorScroll,$timeout) {
 
     $scope.Order = new Order();
 
@@ -17,12 +24,46 @@ eventcalendarapp.controller("CalendarController", function ($scope, $http, $loca
     });
 
     $scope.SelectEvent = function(element){
-        if(!element.item) return;
+
+        $scope.Order.ClearValidation();
+        if(!element.item.data.header){
+            return;
+        }
         $scope.Order.Show = true;
         $scope.Order.ServiceImg = element.item.data.photo;
         $scope.Order.ServiceName = element.item.data.header;
-        $location.hash('order');
-        $anchorScroll();
+        $timeout(function(){
+            $location.hash('order');
+            $anchorScroll();
+        },100);
+    }
+
+    $scope.SendOrder = function(){
+
+        $scope.Order.ClearValidationLite();
+
+        if(!$scope.Order.Validation()){
+            $scope.Order.ValError = true;
+            return;
+        }
+
+        var sendData = {
+            username : $scope.Order.Name,
+            phone : $scope.Order.Phone,
+            service: $scope.Order.ServiceName
+        };
+
+        if($scope.Order.Person) sendData.peopleNum = $scope.Order.Person;
+        if($scope.Order.Promo) sendData.promoCode = $scope.Order.Promo;
+
+
+        $http.post("/EventCalendar/Invite",sendData).success(function(response){
+            if(response == "ok"){
+                $scope.Order.Good = true;
+            } else{
+                $scope.Order.ServerError = true;
+            }
+        });
     }
 });
 
@@ -44,11 +85,18 @@ function Order(){
     this.ShowBtn = true;
     
     this.Validation = function(){
-        return ((this.Name)&&(this.Phone)&&(this.Person));
+        return ((this.Name)&&(this.Phone));
     }
 
     this.ClearValidation = function(){
         this.Show = false;
+        this.ValError = false;
+        this.ServerError = false;
+        this.Good = false;
+        this.ShowBtn = true;
+    }
+
+    this.ClearValidationLite = function(){
         this.ValError = false;
         this.ServerError = false;
         this.Good = false;
@@ -129,4 +177,12 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
     }
     console.log(cal);
     $scope.Events = cal;
+}
+
+
+function CheckTime(num) {
+    if (num < 10) {
+        return "0" + num;
+    }
+    return num;
 }

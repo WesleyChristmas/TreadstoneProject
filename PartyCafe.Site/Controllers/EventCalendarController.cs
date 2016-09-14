@@ -1,10 +1,8 @@
-﻿using System.Web.Mvc;
-using PartyCafe.Site.DBUtils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Threading.Tasks;
-
+using System.Web.Mvc;
+using PartyCafe.Site.DBUtils;
 
 namespace PartyCafe.Site.Controllers
 {
@@ -59,7 +57,7 @@ namespace PartyCafe.Site.Controllers
                     ((peopleNum.HasValue) ? "Количество человек: " + peopleNum + Environment.NewLine : string.Empty) +
                     "Промокод:" + promoCode;
 
-                var reader = new System.Configuration.AppSettingsReader();
+                var reader = new AppSettingsReader();
                 var recipient = reader.GetValue("EmailOrdersTo", typeof(string)).ToString();
 
                 EmailUtils.AddEmail(subject, message, recipient);

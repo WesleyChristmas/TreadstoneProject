@@ -4,7 +4,7 @@ servicesapp.controller("ServiceDetailedController",function($scope,$http,$routeP
     $scope.Order = new Order();
 
     $http.get("/Services/GetServicePhotos?serviceId=" + $routeParams.id).success(function(response){
-        $scope.ServicePhotos = response;
+        $scope.Service = new Service(response);
     });
 
     $scope.SendOrder = function(){
@@ -32,6 +32,13 @@ servicesapp.controller("ServiceDetailedController",function($scope,$http,$routeP
         });
     }
 });
+
+function Service(entity){
+    this.Name = entity.name;
+    this.Description = entity.description;
+    this.Photo = entity.photoPath;
+    this.Photos = entity.photos;
+}
 
 function Order(){
     this.Name = null;

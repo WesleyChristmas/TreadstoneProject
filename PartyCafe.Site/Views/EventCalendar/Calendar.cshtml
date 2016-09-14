@@ -15,8 +15,10 @@
             <div class="img-ctn">
                 <img ng-src="{{item.data.photo}}" ng-show="item.data.header" />
             </div>
-            <div class="event-name">
-                {{item.data.name}}
+            <div class="event-name" ng-show="item.data.header">
+                {{item.data.header}}
+                <br/>
+                <span>{{item.data.time | CorrectTime}}</span>
             </div>
         </div>
     </div>
@@ -26,6 +28,7 @@
     <div id="order-img" class="row">
         <img ng-src="{{Order.ServiceImg}}" />
     </div>
+    <div id="order-content">
     <div id="order-header" class="row">
         <div>
             {{Order.ServiceName}}
@@ -51,10 +54,10 @@
 
     <div class="row">
         <div class="col-sm-6">
-            * Количество человек:
+            &#160&#160Количество человек:
         </div>
         <div class="col-sm-6">
-            <input type="text" ng-model="Order.Date" ng-pattern="/[0-9]/" ng-maxlength="2" placeholder="5"/>
+            <input type="text" ng-model="Order.Person"  maxlength="2" placeholder="5"/>
         </div>
     </div>
 
@@ -63,7 +66,7 @@
             &#160&#160Промокод:
         </div>
         <div class="col-sm-6">
-            <input type="text" ng-model="Order.Time" ng-pattern="/[0-9a-zA-Z]/" ng-maxlength="10" placeholder="F145d3"//>            
+            <input type="text" ng-model="Order.Promo" maxlength="10" placeholder="F145d3Ag7j"//>            
         </div>
     </div>
 
@@ -80,8 +83,9 @@
     </div>
 
     <div class="row">
-        <div id="order-btn">
+        <div id="order-btn" ng-show="Order.ShowBtn">
             <div ng-click="SendOrder()">Присоединиться</div>
         </div>
+    </div>
     </div>
 </div>
