@@ -27,6 +27,7 @@ namespace PartyCafe.Site.DBUtils
         public string description;
         public string title;
         public int serviceType;
+        public List<PCServicePhoto> photos;
     }
 
     public static class ServiceUtils
@@ -48,20 +49,36 @@ namespace PartyCafe.Site.DBUtils
             }).ToList();
         }
 
-        public static List<PCServicePhoto> GetServicePhotos(int id)
+        public static PCService GetServicePhotos(int id)
         {
             var db = MainUtils.GetDBContext();
+
+            var service = db.Services
+                .Where(x => x.IdRecord == id)
+                .Join(db.Photos, x => x.IdPhoto, x => x.IdRecord, (s, p) => new PCService()
+                {
+                    description = s.Text,
+                    idRecord = s.IdRecord,
+                    name = s.Name,
+                    photoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                    serviceType = s.serviceType,
+                    title = s.Title
+                }).SingleOrDefault();
+
             var servicePhotos = (from sp in db.ServicePhotos
                                  join p in db.Photos on sp.IdPhoto equals p.IdRecord
                                  where sp.IdService == id
                                  select new { sp.IdRecord, sp.IdService, p.Path, sp.name }).ToList();
 
-            return servicePhotos.Select(p => new PCServicePhoto
+            var photos = servicePhotos.Select(p => new PCServicePhoto
             {
                 idRecord = p.IdRecord,
                 photoPath = PhotoUtils.GetRelativeUrl(p.Path),
                 name = p.name
             }).ToList();
+
+            service.photos = photos;
+            return service;
         }
 
         public static void InsertService(PCService partyService, string userCreate, PCPhoto image)

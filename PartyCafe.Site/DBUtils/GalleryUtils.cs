@@ -32,7 +32,6 @@ namespace PartyCafe.Site.DBUtils
 
         public static List<PCGallery> GetAll(int startPosition, int needCount)
         {
-            startPosition = (startPosition < 1) ? 0 : 0;
             needCount = (needCount < 1) ? 1 : needCount;
 
             var dbContext = MainUtils.GetDBContext();

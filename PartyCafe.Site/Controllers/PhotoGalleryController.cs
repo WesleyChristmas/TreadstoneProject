@@ -14,7 +14,7 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllPhotos(int startPos = 1, int count = 20)
+        public JsonResult GetAllPhotos(int startPos = 0, int count = 20)
         {
             var result = GalleryUtils.GetAll(startPos, count);
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -22,7 +22,7 @@ namespace PartyCafe.Site.Controllers
 
         [HttpGet]
         //Пока исправил на один тэг
-        public JsonResult GetAllByTags(string tag, int startPos = 1, int count = 20)
+        public JsonResult GetAllByTags(string tag, int startPos = 0, int count = 20)
         {
             var result = GalleryUtils.GetAllByTags(new List<string> {tag}, startPos, count);
             return Json(result, JsonRequestBehavior.AllowGet);
