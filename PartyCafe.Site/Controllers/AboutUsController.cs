@@ -29,14 +29,7 @@ namespace PartyCafe.Site.Controllers
         [HttpGet]
         public JsonResult GetAllUs()
         {
-            var result = ServiceUtils.GetAll(1);
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpGet]
-        public JsonResult GetPhotos(int id)
-        {
-            var result = ServiceUtils.GetServicePhotos(id);
+            var result = AboutUtils.GetAbout();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

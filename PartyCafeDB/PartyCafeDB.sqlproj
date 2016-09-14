@@ -76,6 +76,7 @@
     <Build Include="Tables\Services.sql" />
     <Build Include="Tables\GalleryHashtags.sql" />
     <Build Include="Tables\Emails.sql" />
+    <Build Include="Tables\About.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PartyCafeDB.publish.xml" />
