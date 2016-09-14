@@ -46,6 +46,13 @@ namespace PartyCafe.Site.Controllers
             return Json(er, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult GetEventPhotos(int id)
+        {
+            var result = EventUtils.GetEventPhotos(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public string Invite(string username, string phone, int? peopleNum, string promoCode, string service)
         {

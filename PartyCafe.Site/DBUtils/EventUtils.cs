@@ -21,6 +21,7 @@ namespace PartyCafe.Site.DBUtils
         public string Description;
         public DateTime DateEvent;
         public TimeSpan TimeEvent;
+        public List<PCEventPhoto> photos;
     }
 
     public static class EventUtils
@@ -43,10 +44,25 @@ namespace PartyCafe.Site.DBUtils
                           }).ToList();
         }
 
-        public static List<PCEventPhoto> GetEventPhotos(int id)
+        public static PCEvent GetEventPhotos(int id)
         {
             var db = MainUtils.GetDBContext();
-            return db.EventPhotos
+
+            var curEvent = (from e in db.Events
+                where e.IdRecord == id
+                join p in db.Photos on e.IdPhoto equals p.IdRecord
+                select new PCEvent()
+                {
+                    idRecord = e.IdRecord,
+                    name = e.Name,
+                    Description = e.description,
+                    DateEvent = e.EventDate.Date,
+                    TimeEvent = e.EventDate.TimeOfDay,
+                    IdPhoto = e.IdPhoto,
+                    PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                }).SingleOrDefault();
+
+            curEvent.photos = db.EventPhotos
                 .Where(x => x.IdEvent == id)
                 .Join(db.Photos, photo => photo.IdPhoto, eventPhoto => eventPhoto.IdRecord,
                     (eventPhoto, photo) => new PCEventPhoto()
@@ -55,6 +71,8 @@ namespace PartyCafe.Site.DBUtils
                         photoPath = PhotoUtils.GetRelativeUrl(photo.Path),
                         name = eventPhoto.name
                     }).ToList();
+
+            return curEvent;
         }
 
         public static List<PCEvent> GetNearEvents()
