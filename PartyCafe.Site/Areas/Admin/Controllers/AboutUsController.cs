@@ -41,24 +41,21 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetAllAbout()
         {
-            var aboutus = ServiceUtils.GetAll(1);
+            var aboutus = AboutUtils.GetAbout();
             return Json(aboutus, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public string AddAbout(string name, string desc)
+        public string UpdateData(string name, string desc)
         {
             try
             {
-                ServiceUtils.InsertService(
-                    new PCService()
+                AboutUtils.UpdateAbout(
+                    new AboutData()
                     {
-                        name = name,
-                        description = desc,
-                        serviceType = 1
-                    },
-                    User.Identity.Name,
-                    ControllerUtils.GetPhotoEntity(Request.Files)
+                        Name = name,
+                        Description = desc,
+                    }
                 );
                 return "ok";
             }
@@ -69,102 +66,16 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string RemoveAbout(int id)
+        public string UpdateMainPhoto()
         {
             try
             {
-                ServiceUtils.DelService(id);
-                return "ok";
-            }
-            catch (Exception ex)
-            {
-                return "Произошла ошибка! " + ex.Message;
-            }
-        }
-        [HttpPost]
-        public string UpdateAbout(int id, string name, string desc)
-        {
-            try
-            {
-                ServiceUtils.EditService(
-                        new PCService()
-                        {
-                            idRecord = id,
-                            name = name,
-                            description = desc
-                        },
-                        ControllerUtils.GetPhotoEntity(Request.Files),
-                        User.Identity.Name
-                    );
+                AboutUtils.UpdateMainPhoto(ControllerUtils.GetPhotoEntity(Request.Files));
                 return "ok";
             }
             catch (Exception ex)
             {
                 return "Произошла ошибка! " + ex.Message.ToString();
-            }
-        }
-
-        [HttpPost]
-        public string AddPhotoToBlock(int id, string name)
-        {
-            try
-            {
-                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
-                if (photo == null) return "bad";
-
-                ServiceUtils.AddPhoto(
-                    id,
-                    name,
-                    photo,
-                    User.Identity.Name
-                );
-                return "ok";
-            }
-            catch (Exception ex)
-            {
-                return "Произошла ошибка! " + ex.Message;
-            }
-        }
-
-        [HttpPost]
-        public string RemovePhotoFromBlock(int id)
-        {
-            try
-            {
-                ServiceUtils.DelPhoto(id);
-                return "ok";
-            }
-            catch (Exception ex)
-            {
-                return "bed";
-            }
-        }
-
-        [HttpPost]
-        public string UpdatePhotoBlock(int id, string name)
-        {
-            try
-            {
-                ServiceUtils.EditPhoto(id, name, ControllerUtils.GetPhotoEntity(Request.Files), User.Identity.Name);
-                return "ok";
-            }
-            catch (Exception ex)
-            {
-                return "Произошла ошибка! " + ex.Message.ToString();
-            }
-        }
-
-        [HttpPost]
-        public JsonResult GetBlockPhotos(int id)
-        {
-            try
-            {
-                var aboutus = ServiceUtils.GetServicePhotos(id);
-                return Json(aboutus, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
     }

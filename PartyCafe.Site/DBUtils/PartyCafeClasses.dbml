@@ -143,6 +143,7 @@
       <Association Name="Photo_Service" Member="Services" ThisKey="IdRecord" OtherKey="IdPhoto" Type="Service" />
       <Association Name="Photo_ServicePhoto" Member="ServicePhotos" ThisKey="IdRecord" OtherKey="IdPhoto" Type="ServicePhoto" />
       <Association Name="Photo_EventPhoto" Member="EventPhotos" ThisKey="IdRecord" OtherKey="IdPhoto" Type="EventPhoto" />
+      <Association Name="Photo_About" Member="Abouts" ThisKey="IdRecord" OtherKey="IdPhoto" Type="About" />
     </Type>
   </Table>
   <Table Name="dbo.GalleryHashtags" Member="GalleryHashtags">
@@ -161,6 +162,15 @@
       <Column Name="[To]" Member="To" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="DateSend" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.About" Member="Abouts">
+    <Type Name="About">
+      <Column Name="IdRecord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="IdPhoto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Photo_About" Member="Photo" ThisKey="IdPhoto" OtherKey="IdRecord" Type="Photo" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
