@@ -315,7 +315,6 @@
     <Content Include="Content\images\ui-icons_a8a3ae_256x240.png" />
     <Content Include="Content\images\ui-icons_ebccce_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\photo\NoPhoto.jpg" />
     <Content Include="Content\video\video.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\entypo-selected.svg" />
@@ -323,11 +322,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\css\Site.css" />
     <Content Include="Scripts\AngularControllers\AboutUsController.js" />
-    <Content Include="Scripts\AngularControllers\EventCalendarContoller.js" />
+    <Content Include="Scripts\AngularControllers\ContactController.js" />
+    <Content Include="Scripts\AngularControllers\EventCalendar\EventCalendarContoller.js" />
     <Content Include="Scripts\AngularControllers\FoodMenuController.js" />
     <Content Include="Scripts\AngularControllers\InstaGalleryController.js" />
     <Content Include="Scripts\AngularControllers\PhotoGalleryController.js" />
     <Content Include="Scripts\AngularControllers\ServicesContoller.js" />
+    <Content Include="Scripts\AngularControllers\Services\ServicesController.js" />
+    <Content Include="Scripts\AngularControllers\Services\ServicesDetailedController.js" />
+    <Content Include="Scripts\AngularControllers\Services\ServicesListController.js" />
     <Content Include="Scripts\AngularJs\angular-animate.js" />
     <Content Include="Scripts\AngularJs\angular-animate.min.js" />
     <Content Include="Scripts\AngularJs\angular-aria.js" />
@@ -416,6 +419,7 @@
     <Content Include="Areas\Admin\Views\Users\UsersEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
+    <None Include="Properties\PublishProfiles\Physical Path.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\GammaGallery\gamma.js" />
     <Content Include="Scripts\GammaGallery\jquery.history.js" />
@@ -1241,6 +1245,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\photos\" />
     <Folder Include="Scripts\parts\home\" />
   </ItemGroup>
   <ItemGroup>
@@ -1257,6 +1262,9 @@
     <None Include="DBUtils\PartyCafeClasses.dbml.layout">
       <DependentUpon>PartyCafeClasses.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
