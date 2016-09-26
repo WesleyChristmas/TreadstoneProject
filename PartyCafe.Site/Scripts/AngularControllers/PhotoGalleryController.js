@@ -2,6 +2,7 @@
 
 photogalleryapp.controller("PhotoGallery", function ($scope, $http,$timeout) {
     $scope.PhotoGallery = [];
+    $scope.Hashtags = [];
     $scope.Paging = new Paging();
 
     $scope.GetAllPhoto = function(pos,step){
@@ -27,12 +28,18 @@ photogalleryapp.controller("PhotoGallery", function ($scope, $http,$timeout) {
         if($scope.Paging.Tag){
             $scope.Paging.Timeout = $timeout(function(){
                 $scope.GetPhotoByTag($scope.Paging.CurPos,$scope.Paging.PageStep);
-            },1500);
+            },500);
         } else{
             $scope.Paging.Timeout = $timeout(function(){
                 $scope.GetAllPhoto($scope.Paging.CurPos,$scope.Paging.PageStep);
-            },1000);
+            },500);
         }
+    }
+
+    $scope.SelectTag = function(element)
+    {
+        $scope.Paging.Tag = element.tag.Tag;
+        $scope.StartTagProcess();
     }
 
     $scope.MorePhoto = function(){
@@ -48,6 +55,10 @@ photogalleryapp.controller("PhotoGallery", function ($scope, $http,$timeout) {
     //Constructor
 
     $scope.GetAllPhoto($scope.Paging.CurPos,$scope.Paging.PageStep);
+
+    $http.get("PhotoGallery/GellAllHashtags").success(function(response){
+        $scope.Hashtags = response;
+    });
 });
 
 function Paging(){

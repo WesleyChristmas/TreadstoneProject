@@ -16,6 +16,15 @@
     border:none !important;
 }
 
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none !important;
+}
+
 
 .nav li a, .navbar-brand{
     cursor:default;
@@ -27,6 +36,10 @@
     -ms-user-select: none;       /* Internet Explorer/Edge */
     user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
+}
+
+.navbar-brand img{
+    height:25px;
 }
 
 .nav li {
@@ -67,7 +80,7 @@
     background-color:#000 !important;
 }
 
-.fa{
+.navbar-right .fa{
     font-size:25px !important;
     transition: background-color 0.5s ease, color 0.5s ease;
     background-color:#000 !important;
@@ -75,7 +88,7 @@
 }
 
 
-.fa:hover{
+.navbar-right .fa:hover{
     transition: background-color 0.5s ease, color 0.5s ease;
     background-color:#fff !important;
     color:#000 !important;

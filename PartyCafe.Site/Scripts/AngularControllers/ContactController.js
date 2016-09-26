@@ -15,7 +15,7 @@ contactapp.controller("ContactController",function($scope){
         },
         properties: {
             title: 'Zакрытая Территория',
-            description: 'Москва, Большая Черкизовская 24 А, стр. 1<br>Тел +7 916 99999 80<br>Почта hello@partycafe.ru',
+            description: 'Москва, Большая Черкизовская 24 А, стр. 1<br>Тел +7 916 99999 80<br>Email hello@partycafe.ru',
             'marker-size': 'large',
             'marker-color': '#BE9A6B',
             'marker-symbol': 'cafe'

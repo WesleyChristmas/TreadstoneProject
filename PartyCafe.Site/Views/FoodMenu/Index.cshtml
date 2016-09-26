@@ -35,9 +35,9 @@
         </div>
         </nav>
         <div id="food-ctn" class="row">
-            <div class="col-lg-6" ng-repeat="food in CurrentItems">
+            <div class="col-md-4" ng-repeat="food in CurrentItems">
                 <div class="row food-row">
-                    <div class="col-sm-6 spec-col">
+                    <div class="col-lg-6 spec-col">
                         <div class="food-item">
                             <div class="food-photo">
                                 <img ng-src="{{food.photoPath}}"/>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 spec-col">
+                    <div class="col-lg-6 spec-col">
                         <div class="food-desc">
                         <div class="desc">
                             {{food.description}}

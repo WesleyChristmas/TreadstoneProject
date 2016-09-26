@@ -23,6 +23,8 @@ eventcalendarapp.controller("CalendarController", function ($scope, $http, $loca
         Calendar('calendar-wrap', 30, data.Calendar, data.CurDate.replace(/\D+/g, ""), $scope);
     });
 
+    $location.hash('order');
+
     $scope.SelectEvent = function(element){
 
         $scope.Order.ClearValidation();
