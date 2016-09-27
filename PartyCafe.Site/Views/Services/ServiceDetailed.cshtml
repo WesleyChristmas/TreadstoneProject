@@ -81,6 +81,8 @@
 <!-- Photo part -->
 <div id="srv-photos" class="row">
     <div class="col-sm-6 col-md-4" ng-repeat="photo in Service.Photos">
-        <img ng-src="{{photo.photoPath}}" />
+        <a class="fancybox" href="{{photo.photoPath}}" rel="group" data-lightbox="gallery" data-title="{{item.name}}">
+                <img ng-src="{{photo.photoPath}}">
+        </a>
     </div>
 </div>

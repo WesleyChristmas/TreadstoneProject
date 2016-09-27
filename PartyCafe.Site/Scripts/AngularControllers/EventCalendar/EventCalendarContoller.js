@@ -129,8 +129,9 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
         weekFull = ["Воскресенье","Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
         l = dcount;
 
+    var classes=['clnd-pink','clnd-green','clnd-blue', 'clnd-orange'];
     /* формирование календаря */
-    for (var i = 0; i < l; ++i) {
+    for (var i = 0, k=0; i < l; ++i,k++) {
         var d = date.getDate();
 
         if (d >= daysInMonth) {
@@ -152,6 +153,8 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
             cal[i] = obj;
             date.setDate(d + 1);
         }
+        if(k>3) k=0;
+        cal[i].class = classes[k];
     }
 
     /* Заполнение календаря событиями */

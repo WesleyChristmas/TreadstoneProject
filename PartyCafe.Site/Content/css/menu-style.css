@@ -20,7 +20,7 @@
     text-align: center;
 }
 
-.navbar .navbar-nav {
+#menu-container .navbar, #menu-container .navbar-nav {
     display: inline-block;
     float: none !important;
 }

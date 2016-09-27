@@ -40,23 +40,24 @@
 }
 
 #more-photo{
-    width:100%;
+    width:calc(100% - 20px);
     height:60px;
-    background-color:#000;
     margin-top:10px;
+    margin-left:10px;
     text-align:center;
     font-size:20px;
     padding-top:15px;
     text-align:center;
-    background-color:#000;
-    border: 2px solid #c4c4c4;
+    background-color: rgba(0,0,0,0.4);
+    border: 1px solid #c4c4c4;
     color:#c4c4c4;
+    cursor:pointer;
 }
 
 #more-photo:hover{
     transition:border 0.5s ease, color 05.s ease;
     color:#fff;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
 }
 
 .spec-col{
@@ -75,33 +76,22 @@
     height:100%;
 }
 
-.photo-name{
+.photo-ctn div{
     position:absolute;
     width:calc(100% - 20px);
-    height:300px;
-    top:10px;
-    font-size:30px;
-    text-align:center;
-    color:transparent;
-    transition:background-color 0.5s ease;
-    background-color:transparent;
-}
-
-.photo-name div{
-    position:absolute;
-    width:100%;
     padding-bottom:20px;
-    bottom:0;
-    left:0;
-    transition: background-color 0.5s ease;
+    bottom:10px;
+    left:10px;
+    text-align:center;
+    transition: 0.5s background-color ease, 0.5s color ease;
     background-color:transparent;
+    font-size:30px;
+    color:transparent;
 }
 
-.photo-name:hover{
-    transition: color 0.5s ease;
-    color:white;
-}
 
-.photo-name:hover div{
+
+.photo-ctn:hover div{
     background-color:rgba(0,0,0,0.4);
+    color:#fff;
 }

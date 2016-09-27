@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="logo-lg">
+        <img src="~/Content/images/pc-logo-lg.png"/>
+    </div>
+    <div id="about-us" class="row">
+        {{About.Description}}
+    </div>
+
+    <div class="row services-row">
+    <div class="col-xs-12 col-md-4 spec-col" ng-click="GetDetailed($index)" ng-repeat="item in Services">
+        <div class="service-item">
+            <img ng-src="{{item.photoPath}}" />
+        </div>
+        <div class="services-header">
+            <div>
+                {{item.name}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,16 +15,17 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
-        public ActionResult Home()
+        public ActionResult ServiceList()
         {
-            return View("Home");
+            return View("ServiceList");
         }
 
         [HttpGet]
-        public ActionResult Current()
+        public ActionResult ServiceDetailed()
         {
-            return View("Current");
+            return View("ServiceDetailed");
         }
+
 
         [HttpGet]
         public JsonResult GetAllUs()

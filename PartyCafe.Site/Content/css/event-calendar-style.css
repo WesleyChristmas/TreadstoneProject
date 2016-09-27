@@ -21,17 +21,37 @@ h2{
 
 .clnd-ctn{
     margin:0 !important;
-    padding: 0 !important;
+    padding-left: 0 !important; 
+    padding-right: 0 !important;
+    padding-top: 0 !important;
 }
 
 .clnd{
     padding:10px;
-    height:100px;
+    height:120px;
     overflow:hidden;
     z-index:5;
     background-color:rgba(0,0,0,0.4);
     color:#fff;
     text-align:center;
+    padding-bottom:20px;
+    transition: z-index 0.5s ease;
+}
+
+.clnd-pink{
+    border-top:10px solid deeppink;
+}
+
+.clnd-blue{
+    border-top:10px solid deepskyblue;
+}
+
+.clnd-green{
+    border-top:10px solid greenyellow;
+}
+
+.clnd-orange{
+    border-top:10px solid darkorange;
 }
 
 .clnd:hover{
@@ -60,11 +80,13 @@ h2{
 
 .clnd img{
     height:100%;
+    border:1px solid #d3d3d3;
+    cursor:pointer;
 }
 
 .clnd-week{
     position:relative;
-    top:0;
+    top:-10px;
     z-index:5;
     font-size:15px;
 }
@@ -93,6 +115,8 @@ h2{
     background-color: rgba(0,0,0,0.5);
     text-align:center;
     overflow:hidden;
+
+    cursor:pointer;
 }
 
 .event-name span{

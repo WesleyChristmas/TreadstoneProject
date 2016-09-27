@@ -31,6 +31,8 @@
     padding-bottom:10px;
     color:#fff;
     font-size:15px;
+
+    cursor:text;
 }
 
 #social-links{
@@ -48,10 +50,14 @@
     color:#fff !important;
 }
 
-.fa:hover{
+
+
+.fa-spec:hover{
     transition: background-color 0.5s ease, color 0.5s ease;
     background-color:#fff !important;
     color:#000 !important;
+
+    cursor:pointer;
 }
 
 .spec-col{

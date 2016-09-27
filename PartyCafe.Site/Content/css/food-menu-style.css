@@ -6,7 +6,7 @@ h2{
 }
 
 #menu-nav{
-    margin:0 !important;
+    margin-left:0 !important;
 }
 
 #food-ctn{
@@ -57,6 +57,10 @@ h2{
     font-size:20px;
 }
 
+.dropdown-toggle a{
+    cursor:pointer;
+}
+
 .dropdown-menu{
     background-color:#000;
 }
@@ -64,6 +68,10 @@ h2{
 .dropdown-menu li{
     width:100%;
     text-align:center;
+}
+
+.dropdown-menu li a{
+    cursor: pointer;
 }
 
 .dropdown-menu  li:after {

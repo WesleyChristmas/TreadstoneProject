@@ -7,14 +7,6 @@
 <script src="~/Scripts/AngularControllers/AboutUsController.js"></script>
 
 <div ng-app="AboutUsApp" ng-controller="AboutUsController">
-    <div id="panoram-ctn" class="row">
-       <img ng-src="{{About.Photo}}"/>
-    </div>
-    <div id="about-header" class="row">
-        {{About.Name}}
-    </div>
-    <div id="about-us" class="row">
-        {{About.Description}}
-    </div>
+    <div ng-view></div>
 </div>
 
