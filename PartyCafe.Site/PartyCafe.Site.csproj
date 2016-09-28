@@ -258,11 +258,19 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\Admin\Views\Users\UsersHome.cshtml" />
+    <Content Include="Content\css\about-us-style.css" />
     <Content Include="Content\css\animate.min.css" />
+    <Content Include="Content\css\bg-video-style.css" />
+    <Content Include="Content\css\bootstrap-datepicker.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\contact-style.css" />
+    <Content Include="Content\css\event-calendar-style.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\fonts.css" />
+    <Content Include="Content\css\food-menu-style.css" />
+    <Content Include="Content\css\home-index-style.css" />
+    <Content Include="Content\css\insta-gallery-style.css" />
     <Content Include="Content\css\jquery-ui.css" />
     <Content Include="Content\css\jquery-ui.min.css" />
     <Content Include="Content\css\jquery-ui.structure.css" />
@@ -271,9 +279,13 @@
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\css\jquery.ui.css" />
     <Content Include="Content\css\lightbox.css" />
+    <Content Include="Content\css\main-style.css" />
+    <Content Include="Content\css\menu-style.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\owl.transitions.css" />
+    <Content Include="Content\css\photo-gallery-style.css" />
+    <Content Include="Content\css\services-style.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\blog.png" />
@@ -303,6 +315,8 @@
     <Content Include="Content\images\menu.png" />
     <Content Include="Content\images\menu1.png" />
     <Content Include="Content\images\next.png" />
+    <Content Include="Content\images\pc-logo-lg.png" />
+    <Content Include="Content\images\pc-logo-sm.png" />
     <Content Include="Content\images\prev.png" />
     <Content Include="Content\images\ui-bg_gloss-wave_30_3d3644_500x100.png" />
     <Content Include="Content\images\ui-bg_highlight-soft_100_dcd9de_1x100.png" />
@@ -362,6 +376,8 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\Index.cshtml" />
+    <Content Include="Scripts\Datepicker\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\Datepicker\bootstrap-datepicker.ru.min.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\AngularJs\angular-touch.min.js.map" />
     <Content Include="Scripts\AngularJs\angular-sanitize.min.js.map" />
