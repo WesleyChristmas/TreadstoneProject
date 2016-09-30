@@ -76,10 +76,13 @@
     <Build Include="Tables\Services.sql" />
     <Build Include="Tables\GalleryHashtags.sql" />
     <Build Include="Tables\Emails.sql" />
-    <Build Include="Tables\About.sql" />
+    <Build Include="Tables\ServiceVideos.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PartyCafeDB.publish.xml" />
     <None Include="StartUp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="PartyCafeDB.refactorlog" />
   </ItemGroup>
 </Project>

@@ -13,6 +13,14 @@ namespace PartyCafe.Site.DBUtils
         public string photoPath;
     }
 
+    public class PCServiceVideo
+    {
+        public int IdRecord;
+        public string Name;
+        public string Description;
+        public string Url;
+    }
+
     public static class ServiceType
     {
         public static int originService = 0;
@@ -28,6 +36,7 @@ namespace PartyCafe.Site.DBUtils
         public string title;
         public int serviceType;
         public List<PCServicePhoto> photos;
+        public List<PCServiceVideo> videos;
     }
 
     public static class ServiceUtils
@@ -49,7 +58,7 @@ namespace PartyCafe.Site.DBUtils
             }).ToList();
         }
 
-        public static PCService GetServicePhotos(int id)
+        public static PCService GetServiceFull(int id)
         {
             var db = MainUtils.GetDBContext();
 
@@ -68,16 +77,24 @@ namespace PartyCafe.Site.DBUtils
             var servicePhotos = (from sp in db.ServicePhotos
                                  join p in db.Photos on sp.IdPhoto equals p.IdRecord
                                  where sp.IdService == id
-                                 select new { sp.IdRecord, sp.IdService, p.Path, sp.name }).ToList();
+                                 select new PCServicePhoto {
+                                     idRecord = sp.IdRecord,
+                                     name = sp.name,
+                                     photoPath = p.Path
+                                 }).ToList();
 
-            var photos = servicePhotos.Select(p => new PCServicePhoto
-            {
-                idRecord = p.IdRecord,
-                photoPath = PhotoUtils.GetRelativeUrl(p.Path),
-                name = p.name
-            }).ToList();
+            var serviceVideos = (from sv in db.ServiceVideos
+                                    where sv.IdService == id
+                                    select new PCServiceVideo
+                                    {
+                                        Url = sv.Url,
+                                        Description = sv.Description,
+                                        Name = sv.Name,
+                                        IdRecord = sv.IdRecord
+                                    }).ToList();
 
-            service.photos = photos;
+            service.photos = servicePhotos;
+            service.videos = serviceVideos;
             return service;
         }
 
@@ -148,6 +165,15 @@ namespace PartyCafe.Site.DBUtils
                 DelPhoto(item.IdRecord);
             }
 
+            // Delete subvideos
+            var curServiceVideos = (from x in dbContext.ServiceVideos
+                                    where x.IdService == idService
+                                    select x);
+            foreach (var item in curServiceVideos)
+            {
+                DelVideo(item.IdRecord);
+            }
+
             dbContext.Services.DeleteOnSubmit(curService);
             dbContext.SubmitChanges();
 
@@ -196,6 +222,33 @@ namespace PartyCafe.Site.DBUtils
             db.SubmitChanges();
 
             PhotoUtils.DelImage(idPhoto);
+        }
+
+
+        public static void AddVideo(int idService, string name, string description, string url)
+        {
+            var db = MainUtils.GetDBContext();
+            ServiceVideos sp = new ServiceVideos
+            {
+                Name = name,
+                IdService = idService,
+                Description = description,
+                Url = url
+            };
+            db.ServiceVideos.InsertOnSubmit(sp);
+            db.SubmitChanges();
+        }
+
+
+        public static void DelVideo(int idServiceVideo)
+        {
+            var db = MainUtils.GetDBContext();
+            var x = (from sp in db.ServiceVideos
+                     where sp.IdRecord == idServiceVideo
+                     select sp).SingleOrDefault();
+
+            db.ServiceVideos.DeleteOnSubmit(x);
+            db.SubmitChanges();
         }
     }
 }

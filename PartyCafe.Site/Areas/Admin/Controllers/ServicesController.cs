@@ -50,7 +50,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     {
                         name = name,
                         description = desc,
-                        serviceType = 0
+                        serviceType =ServiceType.originService
                     },
                     User.Identity.Name,
                     ControllerUtils.GetPhotoEntity(Request.Files)
@@ -150,11 +150,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetServicesPhotos(int id)
+        public JsonResult GetServicesFull(int id)
         {
             try
             {
-                var aboutus = ServiceUtils.GetServicePhotos(id);
+                var aboutus = ServiceUtils.GetServiceFull(id);
                 return Json(aboutus, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -168,6 +168,39 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             var services = ServiceUtils.GetAll(ServiceType.originService);
             return Json(services, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public string AddVideoToServices(int serviceId, string name, string description, string url)
+        {
+            try
+            {
+                ServiceUtils.AddVideo(
+                    serviceId,
+                    name,
+                    description,
+                    url
+                );
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "Произошла ошибка! " + ex.Message;
+            }
+        }
+
+        [HttpPost]
+        public string RemoveVideoFromServices(int serviceId)
+        {
+            try
+            {
+                ServiceUtils.DelVideo(serviceId);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return "bad";
+            }
         }
     }
 }

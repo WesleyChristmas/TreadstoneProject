@@ -81,7 +81,7 @@ namespace PartyCafe.Site.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             //if (ModelState.IsValid)
             //{

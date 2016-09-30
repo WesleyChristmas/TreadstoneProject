@@ -60,7 +60,7 @@ namespace PartyCafe.Site.Controllers
 
                 var message = "Заказ услуги - " + service + Environment.NewLine +
                     "Имя: " + username + Environment.NewLine +
-                    "Телефона:" + phone + Environment.NewLine +
+                    "Телефон:" + phone + Environment.NewLine +
                     ((peopleNum.HasValue) ? "Количество человек: " + peopleNum + Environment.NewLine : string.Empty) +
                     "Промокод:" + promoCode;
 

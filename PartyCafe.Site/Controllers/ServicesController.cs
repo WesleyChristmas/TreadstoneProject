@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using PartyCafe.Site.DBUtils;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace PartyCafe.Site.Controllers
 {
@@ -27,55 +28,42 @@ namespace PartyCafe.Site.Controllers
         [HttpGet]
         public JsonResult GetAllServices()
         {
-            var result = ServiceUtils.GetAll();
+            var result = ServiceUtils.GetAll(ServiceType.originService);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult GetServicePhotos(int serviceId)
+        public JsonResult GetServiceFull(int serviceId)
         {
-            var result = ServiceUtils.GetServicePhotos(serviceId);
+            var result = ServiceUtils.GetServiceFull(serviceId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<JsonResult> NewOrder(string user, string phone, string date, string time, string service)
+        public string NewOrder(string username, string phone, int? peopleNum, string promoCode, string service)
         {
-            var mess = "Заказ услуги - " + service + "\n";
-            mess += " Имя:" + user + "\n";
-            mess += " Телефона:" + phone + "\n";
-            mess += " Желаемая дата:" + date + "\n";
-            mess += " Желаемое время:" + time + "\n";
-
             try
             {
-                MailMessage mm = new MailMessage("igdevelopment-info@yandex.ru", "dropletofrain@mail.ru");
-                mm.Subject = "Сообщение с контактной формы";
-                mm.Body = mess;
+                var subject = "Заказ услуги с сайта PartyCafe";
 
-                SmtpClient sc = new SmtpClient("smtp.yandex.ru", 25);
-                sc.Credentials = new System.Net.NetworkCredential()
-                {
-                    UserName = "igdevelopment-info@yandex.ru",
-                    Password = "dev89%lopment"
-                };
-                sc.EnableSsl = true;
-                //sc.Send(mm);
+                var message = "Заказ услуги - " + service + Environment.NewLine +
+                    "Имя: " + username + Environment.NewLine +
+                    "Телефон:" + phone + Environment.NewLine +
+                    ((peopleNum.HasValue) ? "Количество человек: " + peopleNum + Environment.NewLine : string.Empty) +
+                    "Промокод:" + promoCode;
 
-                return Json("good", JsonRequestBehavior.AllowGet);
+                var reader = new AppSettingsReader();
+                var recipient = reader.GetValue("EmailOrdersTo", typeof(string)).ToString();
+
+                EmailUtils.AddEmail(subject, message, recipient);
+
+
+                return "ok";
             }
             catch (Exception ex)
             {
-                return Json("error", JsonRequestBehavior.AllowGet);
+                return "bad";
             }
-        }
-
-        public class Order
-        {
-            string user { get; set; }
-            string phone { get; set; }
-            string date { get; set; }
-            string time { get; set; }
         }
     }
 }
