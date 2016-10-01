@@ -12,9 +12,10 @@ using PartyCafe.Site.Models.Utils;
 
 namespace PartyCafe.Site
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
-        private Timer tmr;
+        private Timer _tmr;
+        private int _intervalMinutes = 5;
 
         protected void Application_Start()
         {
@@ -23,35 +24,40 @@ namespace PartyCafe.Site
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            tmr = new Timer(5 * 60 * 1000);
-            tmr.AutoReset = true;
-            tmr.Elapsed += Tmr_Elapsed;
-            tmr.Start();
+            _tmr = new Timer
+            {
+                Interval = 60*1000, // Первый запуск
+                AutoReset = true
+            };
+            _tmr.Elapsed += Tmr_Elapsed;
+            _tmr.Start();
         }
 
         private void Tmr_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
-                tmr.Stop();
+                _tmr.Stop();
                 var reader = new System.Configuration.AppSettingsReader();
                 var username = reader.GetValue("EmailOrdersFromUser", typeof(string)).ToString();
                 var password = reader.GetValue("EmailOrdersFromPassword", typeof(string)).ToString();
                 var host = reader.GetValue("EmailOrdersFromHost", typeof(string)).ToString();
                 var port = reader.GetValue("EmailOrdersFromPort", typeof(string)).ToString();
-
-                Mailer mailer = new Mailer(username, password, host, port);
-
+                
+                var mailer = new Mailer(username, password, host, port);
                 var emails = EmailUtils.GetUnsendedMails();
                 foreach (var mail in emails)
                 {
                     if (!mailer.SendMail(mail)) continue;
                     EmailUtils.SetMailSended(mail.RecordId);
                 }
+
+                _intervalMinutes = (int)reader.GetValue("CheckPeriodMinutes", typeof(int));
+                _tmr.Interval = _intervalMinutes * 60 * 1000;
             }
             finally
             {
-                tmr.Start();
+                _tmr.Start();
             }
         }
     }

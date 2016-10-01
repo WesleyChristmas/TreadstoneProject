@@ -69,7 +69,6 @@ namespace PartyCafe.Site.Controllers
 
                 EmailUtils.AddEmail(subject, message, recipient);
 
-
                 return "ok";
             }
             catch (Exception ex)

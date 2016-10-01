@@ -23,7 +23,8 @@ namespace PartyCafe.Site.DBUtils
                 {
                     To = to,
                     Subject = subject,
-                    Message = message
+                    Message = message,
+                    DateCreate = DateTime.Now
                 };
 
                 var db = MainUtils.GetDBContext();
