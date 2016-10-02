@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h1>Добавление раздела</h1>
+<h2></h2>
+
+<form name="AboutPartForm">
+
+<div class="row admin-row">
+    <div class="col-md-3">
+        <div class="sys-text"><span class="mandatory-field">*</span>Заголовок</div>
+    </div>
+    <div class="col-md-9">
+        <input type="text" class="form-control" ng-model="Service.name" placeholder="Банкетный зал" required/>
+    </div>
+</div>
+
+<div class="row admin-row">
+    <div class="col-md-3">
+        <div class="sys-text">Описание</div>
+    </div>
+    <div class="col-md-9">
+        <textarea class="form-control" ng-model="Service.description" rows=10 placeholder="Введите описание для данного раздела"></textarea>
+    </div>
+</div>
+
+<div class="row admin-row">
+    <div class="col-md-3">
+       <div class="sys-text">Фотография раздела</div>
+    </div>
+    <div class="col-md-9">
+        <input type="file" name="aboutusPhoto" class="form-control" ng-model="PartPhoto"/>
+    </div>
+</div>
+
+</form>
+
+<div class="error-ctn">
+    {{Error}}
+</div>
+
+<div class="help-ctn">
+    Поля отмеченные символом - <span class="mandatory-field">*</span> 
+    <br/>
+    oбязательны для заполнения
+</div>
+
+<div class="row admin-btn-row">
+    <div class="col-sm-6 admin-row">
+        <button class="btn btn-default" ng-click="SaveChanges()">Добавить раздел</button>
+    </div>
+    <div class="col-sm-6 admin-row">
+        <button class="btn btn-default" ng-click="Back()">Вернуться назад</button>
+    </div>
+</div>
+

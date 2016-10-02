@@ -242,6 +242,10 @@
     <Content Include="Areas\Admin\Content\delete.png" />
     <Content Include="Areas\Admin\Content\edit.png" />
     <Content Include="Areas\Admin\Script\AboutController.js" />
+    <Content Include="Areas\Admin\Script\AboutUs\AboutController.js" />
+    <Content Include="Areas\Admin\Script\AboutUs\AboutEditController.js" />
+    <Content Include="Areas\Admin\Script\AboutUs\AboutListController.js" />
+    <Content Include="Areas\Admin\Script\AboutUs\AboutNewController.js" />
     <Content Include="Areas\Admin\Script\CalendarController.js" />
     <Content Include="Areas\Admin\Script\FoodMenuController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuClass.js" />
@@ -418,10 +422,6 @@
     <Content Include="Areas\Admin\Views\Gallery\GalleryEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\AboutUs\AboutHome.cshtml" />
-    <Content Include="Areas\Admin\Views\AboutUs\AboutAdd.cshtml" />
-    <Content Include="Areas\Admin\Views\AboutUs\AboutEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\AboutUs\AboutEditPhoto.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Services\ServicesHome.cshtml" />
     <Content Include="Areas\Admin\Views\Services\ServicesAdd.cshtml" />
@@ -433,6 +433,9 @@
     <Content Include="Areas\Admin\Views\Users\UsersAdd.cshtml" />
     <Content Include="Areas\Admin\Views\Users\UsersEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutList.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\AboutUs\AboutNew.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Properties\PublishProfiles\Physical Path.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />

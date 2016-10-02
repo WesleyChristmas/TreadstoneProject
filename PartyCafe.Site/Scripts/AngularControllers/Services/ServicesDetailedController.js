@@ -3,7 +3,7 @@ servicesapp.controller("ServiceDetailedController",function($scope,$http,$routeP
 
     $scope.Order = new Order();
 
-    $http.get("/Services/GetServicePhotos?serviceId=" + $routeParams.id).success(function(response){
+    $http.get("/Services/GetServiceFull?serviceId=" + $routeParams.id).success(function(response){
         $scope.Service = new Service(response);
     });
 

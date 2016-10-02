@@ -36,7 +36,7 @@ aboutusapp.controller("AboutUsListController", function ($scope, $http) {
     //Methods
 
     $scope.GetAllServices = function() {
-        $http.get("/Services/GetAllServices").success(function (data, status) {
+        $http.get("/AboutUs/GetAllServices").success(function (data, status) {
             $scope.Services = data;
         });
     }

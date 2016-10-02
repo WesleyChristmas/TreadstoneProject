@@ -15,28 +15,25 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         // GET: Admin/AboutUs
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpGet]
-        public ActionResult AboutHome()
+        public ActionResult AboutList()
         {
-            return View("AboutHome");
+            return View("AboutList");
         }
-        [HttpGet]
-        public ActionResult AboutAdd()
-        {
-            return View("AboutAdd");
-        }
+
         [HttpGet]
         public ActionResult AboutEdit()
         {
             return View("AboutEdit");
         }
+
         [HttpGet]
-        public ActionResult AboutEditPhoto()
+        public ActionResult AboutNew()
         {
-            return View("AboutEditPhoto");
+            return View("AboutNew");
         }
 
         [HttpPost]
@@ -62,7 +59,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string RemoveServices(int id)
         {
             try
@@ -99,7 +96,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddPhotoToServices(int id, string name)
+        public string AddPhotoToServices(int id, string name = "fix_it")
         {
             try
             {
@@ -134,7 +131,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string RemovePhotoFromServices(int id)
         {
             try
@@ -148,7 +145,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetServicesFull(int id)
         {
             try
@@ -165,7 +162,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetAllServices()
         {
-            var services = ServiceUtils.GetAll(ServiceType.originService);
+            var services = ServiceUtils.GetAll(ServiceType.aboutService);
             return Json(services, JsonRequestBehavior.AllowGet);
         }
 

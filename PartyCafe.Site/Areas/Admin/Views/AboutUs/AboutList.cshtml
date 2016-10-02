@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h1>Zакрытая территория</h1>
+<h2></h2>
+
+<button class="btn btn-default" ng-click="AddNew()">+ Добавить раздел</button>
+
+<hr/>
+
+<div class="row admin-spec-row" ng-repeat="service in Services" ng-click="Edit($index)">
+    <div class="col-sm-4">
+        <div class="photo-ctn-sm">
+            <img ng-src="{{service.photoPath}}" />
+        </div>
+    </div>
+     <div class="col-sm-8">
+        <div class="row-name">{{service.name}}</diV>
+        <div class="row-desc">{{service.description}}</div>
+    </div>
+</div>
