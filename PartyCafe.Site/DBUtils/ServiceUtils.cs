@@ -80,7 +80,7 @@ namespace PartyCafe.Site.DBUtils
                                  select new PCServicePhoto {
                                      idRecord = sp.IdRecord,
                                      name = sp.name,
-                                     photoPath = p.Path
+                                     photoPath = PhotoUtils.GetRelativeUrl(p.Path)
                                  }).ToList();
 
             var serviceVideos = (from sv in db.ServiceVideos
