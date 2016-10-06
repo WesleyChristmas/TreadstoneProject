@@ -8,6 +8,7 @@
     [DateCreate]  DATETIME       CONSTRAINT [DF_Events_DateCreate] DEFAULT (getdate()) NOT NULL,
     [DateUpdate]  DATETIME       NULL,
     [description] NVARCHAR (255) CONSTRAINT [DF_Events_description] DEFAULT ('') NOT NULL,
+    [isOpen] BIT NOT NULL DEFAULT 1, 
     CONSTRAINT [PK_Events] PRIMARY KEY CLUSTERED ([IdRecord] ASC),
     CONSTRAINT [FK_Events_Photos] FOREIGN KEY ([IdPhoto]) REFERENCES [dbo].[Photos] ([IdRecord])
 );

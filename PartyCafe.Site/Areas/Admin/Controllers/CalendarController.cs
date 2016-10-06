@@ -74,7 +74,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddCalendarEvent(string name, string desc, string date, string time)
+        public string AddCalendarEvent(string name, string desc, string date, string time, bool isOpen)
         {
             try
             {
@@ -84,7 +84,8 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         name = name,
                         Description = desc,
                         DateEvent = DateTime.Parse(date),
-                        TimeEvent = TimeSpan.Parse(time)
+                        TimeEvent = TimeSpan.Parse(time),
+                        IsOpen = isOpen
                     },
                     ControllerUtils.GetPhotoEntity(Request.Files),
                     User.Identity.Name
@@ -98,7 +99,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UpdateCalendarEvent(int id, string name, string desc, string date, string time)
+        public string UpdateCalendarEvent(int id, string name, string desc, string date, string time, bool isOpen)
         {
             try
             {
@@ -109,7 +110,8 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             name = name,
                             Description = desc,
                             DateEvent = DateTime.Parse(date),
-                            TimeEvent = TimeSpan.Parse(time)
+                            TimeEvent = TimeSpan.Parse(time),
+                            IsOpen = isOpen
                         },
                         User.Identity.Name,
                         ControllerUtils.GetPhotoEntity(Request.Files)
