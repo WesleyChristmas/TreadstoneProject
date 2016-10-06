@@ -21,6 +21,7 @@ namespace PartyCafe.Site.DBUtils
         public string Description;
         public DateTime DateEvent;
         public TimeSpan TimeEvent;
+        public bool IsOpen;
         public List<PCEventPhoto> photos;
     }
 
@@ -31,16 +32,16 @@ namespace PartyCafe.Site.DBUtils
             var db = MainUtils.GetDBContext();
             return (from e in db.Events
                           join p in db.Photos on e.IdPhoto equals p.IdRecord
-                          select new {e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description})
-                          .Select(e => new PCEvent()
+                          select new PCEvent()
                           {
                               idRecord = e.IdRecord,
                               name = e.Name,
                               IdPhoto = e.IdPhoto,
-                              PhotoPath = PhotoUtils.GetRelativeUrl(e.Path),
+                              PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
                               DateEvent = e.EventDate.Date,
                               TimeEvent = e.EventDate.TimeOfDay,
-                              Description = e.description
+                              Description = e.description,
+                              IsOpen = e.isOpen
                           }).ToList();
         }
 
@@ -60,6 +61,7 @@ namespace PartyCafe.Site.DBUtils
                     TimeEvent = e.EventDate.TimeOfDay,
                     IdPhoto = e.IdPhoto,
                     PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                    IsOpen = e.isOpen
                 }).SingleOrDefault();
 
             curEvent.photos = db.EventPhotos
@@ -83,16 +85,16 @@ namespace PartyCafe.Site.DBUtils
             return (from e in db.Events
                     join p in db.Photos on e.IdPhoto equals p.IdRecord
                     where e.EventDate <= DateTime.Now.AddDays(dayInterval) && e.EventDate >= DateTime.Now.AddDays(-dayInterval)
-                    select new { e.IdRecord, e.Name, e.IdPhoto, e.EventDate, p.Path, e.description })
-                          .Select(e => new PCEvent()
+                    select new PCEvent()
                           {
                               idRecord = e.IdRecord,
                               name = e.Name,
                               IdPhoto = e.IdPhoto,
-                              PhotoPath = PhotoUtils.GetRelativeUrl(e.Path),
+                              PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
                               DateEvent = e.EventDate.Date,
                               TimeEvent = e.EventDate.TimeOfDay,
-                              Description = e.description
+                              Description = e.description,
+                              IsOpen = e.isOpen
                           }).ToList();
         }
 
@@ -120,6 +122,7 @@ namespace PartyCafe.Site.DBUtils
             if (curEvent == null) return;
             curEvent.Name = partyEvent.name ?? string.Empty;
             curEvent.description = partyEvent.Description ?? string.Empty;
+            curEvent.isOpen = partyEvent.IsOpen;
 
             var newDate = partyEvent.DateEvent;
             newDate = newDate.AddSeconds(partyEvent.TimeEvent.TotalSeconds);
@@ -154,7 +157,8 @@ namespace PartyCafe.Site.DBUtils
                 IdPhoto = image != null ? PhotoUtils.InsertImage(image, userCreate) : 0,
                 DateCreate = DateTime.Now,
                 UserCreate = userCreate,
-                EventDate = newDate
+                EventDate = newDate,
+                isOpen = partyEvent.IsOpen
             };
 
             var dbContext = MainUtils.GetDBContext();
