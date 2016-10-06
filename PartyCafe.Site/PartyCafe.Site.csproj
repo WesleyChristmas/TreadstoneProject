@@ -254,9 +254,6 @@
     <Content Include="Areas\Admin\Script\GalleryController.js" />
     <Content Include="Areas\Admin\Script\UsersController.js" />
     <Content Include="Areas\Admin\Script\ServicesController.js" />
-    <Content Include="Areas\Admin\Views\Services\ServicesEditPhoto.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -423,19 +420,23 @@
     <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Services\ServicesHome.cshtml" />
-    <Content Include="Areas\Admin\Views\Services\ServicesAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\ServicesNew.cshtml" />
     <Content Include="Areas\Admin\Views\Services\ServicesEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Calendar\CalendarHome.cshtml" />
-    <Content Include="Areas\Admin\Views\Calendar\CalendarAdd.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\CalendarList.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\CalendarNew.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\CalendarEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\FoodMenu\FoodMenuHome.cshtml" />
     <Content Include="Areas\Admin\Views\Users\UsersAdd.cshtml" />
     <Content Include="Areas\Admin\Views\Users\UsersEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutList.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutEdit.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutNew.cshtml" />
+    <Content Include="Areas\Admin\Views\Services\ServicesList.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuList.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuSubList.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuItems.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuItemEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuItemNew.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Properties\PublishProfiles\Physical Path.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
@@ -1253,7 +1254,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Services\Index.cshtml" />
     <Content Include="Views\AboutUs\Index.cshtml" />
-    <Content Include="Views\EventCalendar\Invite.cshtml" />
     <Content Include="Views\EventCalendar\Calendar.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
     <Content Include="Views\Services\ServiceList.cshtml" />

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
 using PartyCafe.Site.Models.Utils;
@@ -17,27 +14,21 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult ServicesHome()
+        public ActionResult ServicesList()
         {
-            return View("ServicesHome");
+            return View("ServicesList");
         }
 
         [HttpGet]
-        public ActionResult ServicesAdd()
+        public ActionResult ServicesNew()
         {
-            return View("ServicesAdd");
+            return View("ServicesNew");
         }
 
         [HttpGet]
         public ActionResult ServicesEdit()
         {
             return View("ServicesEdit");
-        }
-
-        [HttpGet]
-        public ActionResult ServicesEditPhoto()
-        {
-            return View("ServicesEditPhoto");
         }
 
         [HttpPost]
@@ -63,7 +54,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string RemoveServices(int id)
         {
             try
@@ -135,7 +126,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string RemovePhotoFromServices(int id)
         {
             try
@@ -149,7 +140,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetServicesFull(int id)
         {
             try

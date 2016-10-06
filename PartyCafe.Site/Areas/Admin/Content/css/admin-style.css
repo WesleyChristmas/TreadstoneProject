@@ -133,6 +133,12 @@ form{
 .row-desc{
     font-size:15px;
     text-align:left;
+    white-space: pre-wrap;
+}
+
+.row-middle{
+    font-size:21px;
+
 }
 
 .error-ctn{

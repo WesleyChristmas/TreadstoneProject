@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+<h1>Основные разделы меню</h1>
+<h2></h2>
+
+<button class="btn btn-default" ng-click="AddNew()">+ Добавить основной раздел</button>
+
+<hr/>
+
+<div class="row admin-spec-row" ng-repeat="item in Menu" ng-click="Select($index)">
+     <div class="col-sm-8">
+        <div class="row-middle">{{item.name}}</div>
+    </div>
+    <div class="col-sm-4">
+        <button class="btn btn-default" ng-click="Edit($index)">Редактировать</button>
+    </div>
+</div>

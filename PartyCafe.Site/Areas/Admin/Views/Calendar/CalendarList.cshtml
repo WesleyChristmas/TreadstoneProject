@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h1>Мероприятия</h1>
+<h2></h2>
+
+<button class="btn btn-default" ng-click="AddNew()">+ Добавить мероприятие</button>
+
+<hr/>
+
+<div class="row admin-spec-row" ng-repeat="event in Events" ng-click="Edit($index)">
+    <div class="col-sm-4">
+        <div class="photo-ctn-sm">
+            <img ng-src="{{event.PhotoPath}}" />
+        </div>
+    </div>
+     <div class="col-sm-8">
+        <div class="row-name">{{event.Name}}</diV>
+        <div class="row-name">{{event.Date}} {{event.Time}} </div>
+    </div>
+</div>

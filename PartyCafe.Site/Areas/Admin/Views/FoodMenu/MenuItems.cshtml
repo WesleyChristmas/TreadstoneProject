@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h1>{{Header}}</h1>
+<h2></h2>
+
+<button class="btn btn-default" ng-click="AddNew()">+ Добавить элемент меню</button>
+
+<hr/>
+
+<div class="row admin-spec-row" ng-repeat="item in MenuItems" ng-click="Edit($index)">
+    <div class="col-sm-4">
+        <div class="photo-ctn-sm">
+            <img ng-src="{{item.photoPath}}" />
+        </div>
+    </div>
+     <div class="col-sm-8">
+        <div class="row-name">{{item.name}}</div>
+        <div class="row-desc">{{item.description}}
+        </div>
+        <hr>
+        <div class="row-desc">Вес: {{item.Weight}} гр.</div>
+        <div class="row-desc">Цена: {{item.price | CorrectPrice}} <i class='fa fa-rub'></i></div>
+    </div>
+</div>

@@ -47,7 +47,7 @@
     <div class="row">
         <div class="col-sm-4 admin-row" ng-repeat="photo in Service.photos">
             <div class="photo-ctn photo-ctn-deletable">
-                <img ng-src="/Content/photos/{{photo.photoPath}}"/>
+                <img ng-src="{{photo.photoPath}}"/>
                 <div class="photo-deletable"><span ng-click="DeletePhoto($index)">X</span></div>
             </div>
         </div>

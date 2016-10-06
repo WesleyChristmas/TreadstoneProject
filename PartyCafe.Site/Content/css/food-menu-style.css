@@ -55,6 +55,7 @@ h2{
     padding-top:10px;
     padding-bottom:15px;
     font-size:20px;
+    white-space: pre-wrap;
 }
 
 .dropdown-toggle a{

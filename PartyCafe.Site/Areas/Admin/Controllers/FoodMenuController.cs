@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web;
+using System.Linq;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
 using PartyCafe.Site.Models.Utils;
@@ -14,16 +14,97 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View("Index");
         }
+
         [HttpGet]
-        public ActionResult FoodMenuHome()
+        public ActionResult MenuList()
         {
-            return View("FoodMenuHome");
+            return View("MenuList");
+        }
+
+        [HttpGet]
+        public ActionResult MenuSubList()
+        {
+            return View("MenuSubList");
+        }
+
+        [HttpGet]
+        public ActionResult MenuItems()
+        {
+            return View("MenuItems");
+        }
+
+        [HttpGet]
+        public ActionResult MenuItemEdit()
+        {
+            return View("MenuItemEdit");
+        }
+
+        [HttpGet]
+        public ActionResult MenuItemNew()
+        {
+            return View("MenuItemNew");
         }
 
         [HttpGet]
         public JsonResult GetAllMenu()
         {
             var result = MenuUtils.GetAll();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetMenuList()
+        {
+            var result = MenuUtils.GetAll().Select(x =>
+                new
+                {
+                    x.idRecord,
+                    x.name,
+                    x.photoPath
+                });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetMenuSubList(int listId)
+        {
+            var result = MenuUtils.GetAll().Where(x => x.idRecord == listId).Select(x => new
+            {
+                x.name,
+                subGroups = x.subGroups.Select(k => new
+                {
+                    k.idRecord,
+                    k.name,
+                    k.photoPath
+                })
+            }).FirstOrDefault();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetMenuItems(int sublistId)
+        {
+            var result =
+                MenuUtils.GetAll()
+                    .SelectMany(x => x.subGroups.Where(k => k.idRecord == sublistId))
+                    .Select(x => new 
+                    {
+                        x.name,
+                        x.items
+                    }).FirstOrDefault();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetMenuItem(int itemId)
+        {
+            var result =
+                MenuUtils.GetAll()
+                    .SelectMany(x => x.subGroups.Where(k => k.items.Any(z => z.idRecord == itemId)))
+                    .SelectMany(x => x.items)
+                    .FirstOrDefault(x => x.idRecord == itemId);
+                    
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -138,7 +219,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string RemoveItem(int id)
         {
             try

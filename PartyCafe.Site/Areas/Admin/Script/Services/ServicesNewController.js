@@ -1,5 +1,5 @@
 
-aboutApp.controller("AboutNewController",function($scope,$http, $location){
+servicesApp.controller("ServicesNewController",function($scope,$http, $location){
 
     $scope.Service = new Service();
 
@@ -8,14 +8,14 @@ aboutApp.controller("AboutNewController",function($scope,$http, $location){
     }
 
     $scope.SaveChanges = function(){
-        if ($scope.CalendarForm.$valid){
+        if ($scope.AboutPartForm.$valid){
 
             var fd = new FormData();
             fd.append('name', $scope.Service.name);
             fd.append('desc', $scope.Service.description);
             fd.append('file', document.getElementsByName('aboutusPhoto')[0].files[0]);
 
-            $http.post('AboutUs/AddServices', fd, {
+            $http.post('Services/AddServices', fd, {
                 transformRequest: angular.identity,
                 headers: { 'Content-Type': undefined }
             }).success(function (response) {
@@ -28,6 +28,5 @@ aboutApp.controller("AboutNewController",function($scope,$http, $location){
         } else {
             $scope.Error = "Одно из обязательных полей не заполнено!"
         }
-        
     }
 });

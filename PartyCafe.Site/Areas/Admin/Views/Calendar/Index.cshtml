@@ -1,9 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Календарь событий";
+    ViewBag.Title = "Услуги";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="~/Areas/Admin/Script/CalendarController.js"></script>
-<div ng-app="CalendarApp">
+
+<script src="~/Areas/Admin/Script/Calendar/CalendarController.js" ></script>
+<script src="~/Areas/Admin/Script/Calendar/CalendarListController.js" ></script>
+<script src="~/Areas/Admin/Script/Calendar/CalendarEditController.js" ></script>
+<script src="~/Areas/Admin/Script/Calendar/CalendarNewController.js" ></script>
+
+<!--Datepicker-->
+<link href="~/Content/css/bootstrap-datepicker.css" rel="stylesheet"/>
+<script src="~/Scripts/Datepicker/bootstrap-datepicker.min.js"></script>
+<script src="~/Scripts/Datepicker/bootstrap-datepicker.ru.min.js"></script>
+
+<div ng-app="CalendarApp" ng-controller="CalendarController">
     <div ng-view></div>
 </div>
 

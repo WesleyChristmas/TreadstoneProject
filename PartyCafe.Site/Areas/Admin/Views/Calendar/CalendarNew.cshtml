@@ -6,10 +6,6 @@
 <h1>Добавление мероприятия</h1>
 <h2></h2>
 
-<div class="photo-ctn">
-    <img ng-src="{{Calendar.PhotoPath}}" />
-</div>
-
 <form name="CalendarForm">
 
 <div class="row admin-row">
@@ -56,18 +52,13 @@
     Поля отмеченные символом - <span class="mandatory-field">*</span> 
     <br/>
     oбязательны для заполнения
-    <br/>
-    Для изменения фоторафии мероприятия, выберите новую фотографию и нажмите на "Сохранить изменения"
 </div>
 
 <div class="row admin-btn-row">
-    <div class="col-sm-4 admin-row">
-        <button class="btn btn-default" ng-click="SaveChanges()">Сохранить изменения</button>
+    <div class="col-sm-6 admin-row">
+        <button class="btn btn-default" ng-click="SaveChanges()">Добавить мероприятие</button>
     </div>
-    <div class="col-sm-4 admin-row">
+    <div class="col-sm-6 admin-row">
         <button class="btn btn-default" ng-click="Back()">Вернуться назад</button>
-    </div>
-    <div class="col-sm-4 admin-row">
-        <button class="btn btn-default" ng-click="Delete()">Удалить раздел</button>
     </div>
 </div>

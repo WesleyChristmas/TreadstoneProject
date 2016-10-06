@@ -27,12 +27,6 @@ namespace PartyCafe.Site.Controllers
         }
 
         [HttpGet]
-        public ActionResult Invite()
-        {
-            return View("Invite");
-        }
-
-        [HttpGet]
         public JsonResult GetCalendar()
         {
             EventResult er = new EventResult

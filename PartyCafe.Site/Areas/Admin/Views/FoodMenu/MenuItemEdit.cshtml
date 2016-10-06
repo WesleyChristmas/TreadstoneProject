@@ -1,0 +1,84 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h1>Редактирование элемента меню</h1>
+<h2></h2>
+
+<div class="photo-ctn">
+    <img ng-src="{{MenuItem.photoPath}}" />
+</div>
+
+<form name="MenuForm">
+
+<div class="row admin-row">
+    <div class="col-md-3">
+        <div class="sys-text"><span class="mandatory-field">*</span>Название</div>
+    </div>
+    <div class="col-md-9">
+        <input type="text" class="form-control" ng-model="MenuItem.name" placeholder="Борщ" required/>
+    </div>
+</div>
+
+<div class="row admin-row">
+    <div class="col-md-3">
+        <div class="sys-text">Описание</div>
+    </div>
+    <div class="col-md-9">
+        <textarea class="form-control" ng-model="MenuItem.description" rows=10 placeholder="Описание элемента меню"></textarea>
+    </div>
+</div>
+
+<div class="row admin-row">
+    <div class="col-md-3">
+        <div class="sys-text"><span class="mandatory-field">*</span>Вес (гр.)</div>
+    </div>
+    <div class="col-md-9">
+        <input type="text" class="form-control" ng-model="MenuItem.Weight" placeholder="300" required/>
+    </div>
+</div>
+
+<div class="row admin-row">
+    <div class="col-md-3">
+        <div class="sys-text"><span class="mandatory-field">*</span>Цена (<i class='fa fa-rub'></i>)</div>
+    </div>
+    <div class="col-md-9">
+        <input type="text" class="form-control" ng-model="MenuItem.price" placeholder="450" required/>
+    </div>
+</div>
+
+<div class="row admin-row">
+    <div class="col-md-3">
+       <div class="sys-text">Фотография</div>
+    </div>
+    <div class="col-md-9">
+        <input type="file" name="menuitemPhoto" class="form-control" ng-model="Calendar.Photo"/>
+    </div>
+</div>
+
+</form>
+
+<div class="error-ctn">
+    {{Error}}
+</div>
+
+<div class="help-ctn">
+    Поля отмеченные символом - <span class="mandatory-field">*</span> 
+    <br/>
+    oбязательны для заполнения
+    <br/>
+    Для изменения фоторафии элемента меню, выберите новую фотографию и нажмите на "Сохранить изменения"
+</div>
+
+<div class="row admin-btn-row">
+    <div class="col-sm-4 admin-row">
+        <button class="btn btn-default" ng-click="SaveChanges()">Сохранить изменения</button>
+    </div>
+    <div class="col-sm-4 admin-row">
+        <button class="btn btn-default" ng-click="Back()">Вернуться назад</button>
+    </div>
+    <div class="col-sm-4 admin-row">
+        <button class="btn btn-default" ng-click="Delete()">Удалить раздел</button>
+    </div>
+</div>

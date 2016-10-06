@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
 using System;
+using System.Linq;
 using PartyCafe.Site.Models.Utils;
 
 namespace PartyCafe.Site.Areas.Admin.Controllers
@@ -15,15 +16,15 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult CalendarHome()
+        public ActionResult CalendarList()
         {
-            return View("CalendarHome");
+            return View("CalendarList");
         }
 
         [HttpGet]
-        public ActionResult CalendarAdd()
+        public ActionResult CalendarNew()
         {
-            return View("CalendarAdd");
+            return View("CalendarNew");
         }
 
         [HttpGet]
@@ -36,7 +37,13 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetAllEvents()
         {
-            return Json(EventUtils.GetAll(), JsonRequestBehavior.AllowGet);
+            return Json(EventUtils.GetAll().OrderByDescending(x=>x.DateEvent), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetEvent(int id)
+        {
+            return Json(EventUtils.GetAll().FirstOrDefault(x=>x.idRecord == id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -122,7 +129,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string RemoveCalendarEvent(int id)
         {
             try
