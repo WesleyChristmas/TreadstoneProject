@@ -10,4 +10,12 @@ foodmenuApp.controller("FoodMenuListController",function($scope,$http,$location)
     $scope.Select = function(index){
         $location.path('/SubMenu/' + $scope.Menu[index].idRecord);
     }
+
+    $scope.Edit = function(index){
+        $location.path('/MenuEdit/' + $scope.Menu[index].idRecord);
+    }
+
+    $scope.AddNew = function(){
+        $location.path('/MenuNew');
+    }
 });

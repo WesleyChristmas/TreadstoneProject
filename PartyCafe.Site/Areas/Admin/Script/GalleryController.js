@@ -1,131 +1,70 @@
-﻿var galleryapp = new angular.module("GalleryApp", ['ngRoute']);
+﻿var galleryApp = new angular.module("GalleryApp",[]);
 
-galleryapp.config(function ($routeProvider) {
-    $routeProvider.when('/',
-    {
-        templateUrl: 'Gallery/GalleryHome',
-        controller: 'GalleryHomeController'
-    }).when('/add', {
-        templateUrl: 'Gallery/GalleryAdd',
-        controller: 'GalleryAddController'
-    }).when('/edit', {
-        templateUrl: 'Gallery/GalleryEdit',
-        controller: 'GalleryEditController'
-    }).otherwise('/');
-});
+galleryApp.controller("GalleryController", function ($scope, $http,$timeout) {
+    $scope.PhotoGallery = [];
+    $scope.Hashtags = [];
+    $scope.Paging = new Paging();
 
-galleryapp.service("sharedDataService", function () {
-    this.rolesItem = {};
-
-    this.setItem = function (item) { this.rolesItem = item; }
-    this.getItem = function () { return this.rolesItem; }
-});
-
-/* Gallery Home Controller */
-galleryapp.controller("GalleryHomeController", function ($scope, $http, $location, sharedDataService) {
-    /*Helpers*/
-    $scope.isActive = function (item) { return $scope.selectForEdit === item; };
-    $scope.HighlightItem = function (item) { $scope.selectForEdit = item; };
-    $scope.addGallery = function () { $location.path('/add'); };
-    $scope.editGallery = function () {
-        sharedDataService.setItem($scope.selectForEdit);
-        $location.path('/edit');
-    };
-    $scope.removeGalleryItem = function () {
-        $http.post('Gallery/DeleteGalleryItem', { id: $scope.selectForEdit.idRecord }).success(function (response) {
-            if (response === 'ok') {
-                GetAllGallery($scope, $http);
-            } else {
-                $scope.error = response;
-            }
+    $scope.GetAllPhoto = function(pos,step){
+        $http.get("Gallery/GetAllGallery?startPos=" + pos + "&count=" + step).success(function (data, status) {
+            $scope.PhotoGallery = $scope.PhotoGallery.concat(data);
+            if(data.length < $scope.Paging.PageStep) $scope.Paging.ShowMore = false;
+            else $scope.Paging.ShowMore = true;
         });
     };
 
-    $scope.Gallery = [];
-    $scope.Header = "Управление фотогалереей";
-    $scope.selectForEdit = '';
+    $scope.GetPhotoByTag = function(pos,step){
+        $http.get("Gallery/GetAllGalleryByTags?tag=" + $scope.Paging.Tag + "&startPos=" + pos + "&count=" + step).success(function(response){
+            $scope.PhotoGallery = $scope.PhotoGallery.concat(response);
+            if(response.length < $scope.Paging.PageStep) $scope.Paging.ShowMore = false;
+            else $scope.Paging.ShowMore = true;
+        })
+    }
 
-    GetAllGallery($scope, $http);
-});
-
-/* Gallery Add Controller */
-galleryapp.controller("GalleryAddController", function ($scope, $http, $location) {
-    /*Helpers*/
-    $scope.Header = "Добавление фото в галлерею";
-    $scope.Back = function () { $location.path('/'); }
-    $scope.addGallery = function () {
-        var fd = new FormData();
-        fd.append('name', $scope.galleryAdd.Name);
-        fd.append('description', $scope.galleryAdd.Desc);
-        fd.append('file', document.getElementsByName('galleryPhoto')[0].files[0]);
-
-        $http.post('Gallery/AddGallery', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
-    };
-});
-
-/* Gallery Edit Controller */
-galleryapp.controller("GalleryEditController", function ($scope, $http, $location, $routeParams, sharedDataService) {
-    /*Helpers*/
-    $scope.Header = "Редактирование фотографии";
-    $scope.itemForEdit = sharedDataService.getItem();
-    $scope.Back = function () { $location.path('/'); }
-
-    $scope.updateGallery = function () {
-        var fd = new FormData();
-        fd.append('id', $scope.itemForEdit.idRecord);
-        fd.append('name', $scope.itemForEdit.name);
-        fd.append('desc', $scope.itemForEdit.description);
-        fd.append('file', document.getElementsByName('galleryPhoto')[0].files[0]);
-        
-        $http.post('Gallery/UpdateGallery', fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).success(function (response) {
-            if (response === 'ok') {
-                $location.path('/');
-            } else {
-                $scope.error = response;
-            }
-        });
-    };
-    $scope.changePhoto = function () {
-        $scope.CurrentPhotoShow = false;
-        $scope.ChangePhotoShow = true;
-    };
-});
-
-function GetAllGallery($scope, $http) {
-    $('#loader').css({ "display": "block" });
-    $('.spinner').show();
-
-    $http.get('Gallery/GetAllGallery').success(function (result) {
-        $scope.Gallery = result;
-    });
-
-    $('#loader').css({ "display": "none" });
-    $('.spinner').hide();
-}
-function uploadFile($scope, $http, obj) {
-    var xhr = new XMLHttpRequest(),
-        fd = new FormData();
-
-    fd.append(0, obj);
-
-    xhr.onreadystatechange = function () {
-        if (xhr.status != 200) {
-            $('.summernote').summernote('insertImage', xhr.response);
+    $scope.StartTagProcess = function(){
+        $scope.Paging.CurPos = 0;
+        $scope.PhotoGallery = [];
+        if($scope.Paging.Timeout != null) $timeout.cancel($scope.Paging.Timeout);
+        if($scope.Paging.Tag){
+            $scope.Paging.Timeout = $timeout(function(){
+                $scope.GetPhotoByTag($scope.Paging.CurPos,$scope.Paging.PageStep);
+            },500);
+        } else{
+            $scope.Paging.Timeout = $timeout(function(){
+                $scope.GetAllPhoto($scope.Paging.CurPos,$scope.Paging.PageStep);
+            },500);
         }
     }
 
-    xhr.open('POST', 'Gallery/UploadFile', true);
-    xhr.send(fd);
+    $scope.SelectTag = function(element)
+    {
+        $scope.Paging.Tag = element.tag.Tag;
+        $scope.StartTagProcess();
+    }
+
+    $scope.MorePhoto = function(){
+        $scope.Paging.CurPos += $scope.Paging.PageStep;
+
+        if($scope.Paging.Tag){
+            $scope.GetPhotoByTag($scope.Paging.CurPos,$scope.Paging.PageStep);
+        } else{
+            $scope.GetAllPhoto($scope.Paging.CurPos,$scope.Paging.PageStep);
+        }
+    }
+
+    //Constructor
+
+    $scope.GetAllPhoto($scope.Paging.CurPos,$scope.Paging.PageStep);
+
+    $http.get("Gallery/GellAllHashtags").success(function(response){
+        $scope.Hashtags = response;
+    });
+});
+
+function Paging(){
+    this.CurPos = 0;
+    this.PageStep = 18;
+    this.Tag = "";
+    this.Timeout = null;
+    this.ShowMore = true;
 }

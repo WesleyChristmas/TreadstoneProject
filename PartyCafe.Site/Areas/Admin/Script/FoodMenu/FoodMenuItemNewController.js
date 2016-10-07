@@ -5,7 +5,7 @@ foodmenuApp.controller("FoodMenuItemNewController",function($scope,$http,$locati
     $scope.MenuItem = {};
 
     $scope.Back = function(){
-        $location.path('/MenuItems/' + $routeParams.subMenuId);
+        $location.path('/MenuItems/' + $routeParams.menuId + '/'+ $routeParams.subMenuId);
     }
 
     $scope.SaveChanges = function(){

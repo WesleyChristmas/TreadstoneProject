@@ -14,6 +14,14 @@ foodmenuApp.controller("FoodMenuSubListController",function($scope,$http,$locati
     }
 
     $scope.Select = function(index){
-       $location.path('/MenuItems/' + $scope.SubMenu[index].idRecord);
+       $location.path('/MenuItems/' + $routeParams.menuId + '/' + $scope.SubMenu[index].idRecord);
+    }
+
+    $scope.Edit = function(index){
+        $location.path('/SubMenuEdit/' + $routeParams.menuId + '/' + $scope.SubMenu[index].idRecord);
+    }
+
+    $scope.AddNew = function(){
+        $location.path('/SubMenuNew/' + $routeParams.menuId);
     }
 });

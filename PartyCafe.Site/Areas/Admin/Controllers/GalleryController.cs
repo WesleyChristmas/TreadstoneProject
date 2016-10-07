@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using PartyCafe.Site.DBUtils;
 using PartyCafe.Site.Models.Utils;
@@ -19,24 +16,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult GalleryHome()
-        {
-            return View("GalleryHome");
-        }
-
-        [HttpGet]
-        public ActionResult GalleryAdd()
-        {
-            return View("GalleryAdd");
-        }
-
-        [HttpGet]
-        public ActionResult GalleryEdit()
-        {
-            return View("GalleryEdit");
-        }
-
-        [HttpGet]
         public JsonResult GetAllGallery(int startPos = 1, int count = 20)
         {
             var gallery = GalleryUtils.GetAll(startPos, count);
@@ -44,9 +23,9 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllGalleryByTags(List<string> hashtags, int startPos = 1, int count = 20)
+        public JsonResult GetAllGalleryByTags(string tag, int startPos = 1, int count = 20)
         {
-            var gallery = GalleryUtils.GetAllByTags(hashtags, startPos, count);
+            var gallery = GalleryUtils.GetAllByTags(new List<string> {tag}, startPos, count);
             return Json(gallery, JsonRequestBehavior.AllowGet);
         }
 
@@ -112,17 +91,24 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        public JsonResult GellAllHashtags()
+        {
+            var result = GalleryUtils.GetAllHashtags();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult GetHashtags(int id)
         {
             return Json(GalleryUtils.GetHashtagsByPhotoId(id), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public string SetHashtags(int id, List<string> hashtags)
+        [HttpGet]
+        public string SetHashtag(int id, string hashtag)
         {
             try
             {
-                GalleryUtils.SetHashtags(id, hashtags);
+                GalleryUtils.SetHashtags(id, new List<string>{hashtag});
                 return "ok";
             }
             catch (Exception ex)

@@ -1,0 +1,19 @@
+
+.er-pg-container{
+    margin-top:100px;
+    padding:20px;
+    color:white;
+    background-color:rgba(0,0,0,0.4);
+    text-align:center;
+    border : 2px solid #000;
+    border-radius: 5px;
+}
+
+.er-pg-header{
+    font-size:25px;
+}
+
+.er-pg-desc{
+    margin-top:15px;
+    font-size:20px;
+}

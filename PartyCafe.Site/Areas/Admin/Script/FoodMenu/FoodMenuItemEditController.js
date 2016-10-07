@@ -9,7 +9,7 @@ foodmenuApp.controller("FoodMenuItemEditController",function($scope,$http,$locat
     });
 
     $scope.Back = function(){
-        $location.path('/MenuItems/' + $routeParams.subMenuId);
+        $location.path('/MenuItems/' + $routeParams.menuId + '/'+ $routeParams.subMenuId);
     }
 
     $scope.SaveChanges = function(){

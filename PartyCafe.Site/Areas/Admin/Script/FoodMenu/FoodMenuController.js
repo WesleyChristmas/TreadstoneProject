@@ -7,19 +7,35 @@ foodmenuApp.config(function($routeProvider){
     templateUrl: 'FoodMenu/MenuList',
     controller: 'FoodMenuListController'
     })
+    .when('/MenuEdit/:menuId',{
+        templateUrl: 'FoodMenu/MenuEdit',
+        controller: 'FoodMenuEditController'
+    })
+    .when('/MenuNew',{
+        templateUrl: 'FoodMenu/MenuNew',
+        controller : 'FoodMenuNewController'
+    })
     .when('/SubMenu/:menuId',{
         templateUrl: 'FoodMenu/MenuSubList',
         controller: 'FoodMenuSubListController'
     })
-    .when('/MenuItems/:subMenuId',{
+    .when('/SubMenuEdit/:menuId/:subMenuId',{
+        templateUrl: 'FoodMenu/MenuEdit',
+        controller: 'FoodMenuSubEditController'
+    })
+    .when('/SubMenuNew/:menuId',{
+        templateUrl: 'FoodMenu/MenuNew',
+        controller : 'FoodMenuSubNewController'
+    })
+    .when('/MenuItems/:menuId/:subMenuId',{
         templateUrl: 'FoodMenu/MenuItems',
         controller: 'FoodMenuItemsController'
     })
-    .when('/MenuItemEdit/:subMenuId/:itemId',{
+    .when('/MenuItemEdit/:menuId/:subMenuId/:itemId',{
         templateUrl: 'FoodMenu/MenuItemEdit',
         controller: 'FoodMenuItemEditController'
     })
-    .when('/MenuItemNew/:subMenuId',{
+    .when('/MenuItemNew/:menuId/:subMenuId',{
         templateUrl: 'FoodMenu/MenuItemNew',
         controller: 'FoodMenuItemNewController'
     })

@@ -37,7 +37,7 @@
         <div id="food-ctn" class="row">
             <div class="col-md-4" ng-repeat="food in CurrentItems">
                 <div class="row food-row">
-                    <div class="col-lg-6 spec-col">
+                    <div class="col-lg-12 spec-col">
                         <div class="food-item">
                             <div class="food-photo">
                                 <img ng-src="{{food.photoPath}}"/>
@@ -47,20 +47,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 spec-col">
+                    <div class="col-lg-12 spec-col">
                         <div class="food-desc">
-                        <div class="desc">
-                            {{food.description}}
-                        </div>
-                        <div class="weight">
-                            <span>Вес:</span>
-                            {{food.Weight}}
-                            <span>гр.</span>
-                        </div>
-                        <div class="price">
-                            <span>Цена:</span>
-                            {{food.price | CorrectPrice}}
-                            <i class='fa fa-rub'></i>
+                        <div class="desc">{{food.description}}</div>
+                        <div class="food-fd">
+                            <div class="weight">
+                                <span>Вес:</span>
+                                {{food.Weight}}
+                                <span>гр.</span>
+                            </div>
+                            <div class="price">
+                                <span>Цена:</span>
+                                {{food.price | CorrectPrice}}
+                                <i class='fa fa-rub'></i>
+                            </div>
                         </div>
                         </div>
                     </div>

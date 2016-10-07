@@ -22,7 +22,7 @@ aboutusapp.config(function($routeProvider){
     })
     .when('/service/:id',{
         templateUrl:'AboutUs/ServiceDetailed',
-        controller: 'ServiceDetailedController'
+        controller: 'AboutUsDetailedController'
     });
 });
 
@@ -30,10 +30,8 @@ aboutusapp.controller("AboutUsController",function($scope){
 
 });
 
-aboutusapp.controller("AboutUsListController", function ($scope, $http) {
+aboutusapp.controller("AboutUsListController", function ($scope, $http,$location) {
     $scope.Services = [];
-
-    //Methods
 
     $scope.GetAllServices = function() {
         $http.get("/AboutUs/GetAllServices").success(function (data, status) {
@@ -45,14 +43,25 @@ aboutusapp.controller("AboutUsListController", function ($scope, $http) {
         $location.path('/service/' + $scope.Services[index].idRecord);
     }
 
-    //Constructor
-
     $scope.GetAllServices();
     $http.get("AboutUs/GetAllUs").success(function(response){
         $scope.About = new About(response);
     });    
 });
 
+aboutusapp.controller("AboutUsDetailedController",function($scope,$http,$routeParams){
+
+    $http.get("/Services/GetServiceFull?serviceId=" + $routeParams.id).success(function(response){
+        $scope.Service = new Service(response);
+    });
+});
+
+function Service(entity){
+    this.Name = entity.name;
+    this.Description = entity.description;
+    this.Photo = entity.photoPath;
+    this.Photos = entity.photos;
+}
 
 function About(entity){
     this.Photo = entity.PhotoPath,

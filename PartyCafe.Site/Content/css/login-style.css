@@ -1,0 +1,15 @@
+
+#loginForm
+{
+    margin-top:50px;
+    padding:20px;
+    border-radius:5px;
+    border:2px solid #000;
+    background-color:rgba(0,0,0,0.4);
+    color:#fff;
+}
+
+.form-control{
+    background-color:transparent !important;
+    border: none !important;
+}

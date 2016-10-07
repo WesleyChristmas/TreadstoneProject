@@ -5,6 +5,64 @@
 
 <script src="~/Areas/Admin/Script/GalleryController.js"></script>
 
-<div ng-app="GalleryApp">
-    <div ng-view></div>
+<h1>Фотогаллерея</h1>
+<h2></h2>
+
+<div ng-app="GalleryApp" ng-controller="GalleryController">
+    <div class="photo-srch-lbl">
+         Поиск #
+    </div>
+    <div>
+       <input type="text" class="form-control" ng-model="Paging.Tag" ng-keyup="StartTagProcess()" placeholder="вечеринка"/>
+    </div>
+
+    <br/>
+
+    <div id="tag-ctn">
+        <div class="tag" ng-repeat="tag in Hashtags" ng-click="SelectTag(this)">
+            <buton class="btn btn-default">#{{tag.Tag}}</buton>
+        </div>
+        <div style="clear:left"></div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-4 admin-row" ng-repeat="photo in PhotoGallery">
+            <div class="photo-ctn photo-ctn-deletable">
+                <img ng-src="{{photo.photoPath}}">
+                <div class="photo-deletable">
+                    <span ng-click="DeletePhoto($index)">X</span>
+                    <div class="admin-photo-ctn">
+                        Название:
+                        <input type="text" ng-model="photo.name"/>
+                        #:
+                        <input type="text" ng-model="photo.tag"/>
+                        <div class="btn-ctn">
+                            <button>Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 admin-row">
+            <div class="photo-add">
+                <form name="photoaddForm">
+                    <input type="file" class="form-control"/>
+                    Название:
+                    <input type="text" class="form-control" ng-model="photo.name" placeholder="вечеринка"/>
+                    #:
+                    <input type="text" class="form-control" ng-model="photo.tag" placeholder="вечеринка"/>
+                    <div class="btn-ctn">
+                        <button class="btn btn-default">Добавить</button>
+                    </div>
+                </form>
+                <div class="error-ctn">{{SubPhotoError}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="more-photo" class="row" ng-click="MorePhoto()" ng-show="Paging.ShowMore">
+        <button class="btn btn-default"> Загрузить еще...</button>
+    </div>
 </div>

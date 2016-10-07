@@ -1,17 +1,25 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
-<!DOCTYPE html>
+<div id="srv-dtl-img" class="row">
+    <img ng-src="{{Service.Photo}}" />
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ServiceDetailed</title>
-</head>
-<body>
-    <div> 
+<div id="src-content">
+    <div id="srv-dtl-hd" class="row">   
+        {{Service.Name}}
     </div>
-</body>
-</html>
+    <div id="srv-dtl-desc" class="row">
+        {{Service.Description}}
+    </div>
+</div>
+
+<!-- Photo part -->
+<div id="srv-photos" class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="photo in Service.Photos">
+        <a class="fancybox" href="{{photo.photoPath}}" rel="group" data-lightbox="gallery" data-title="{{item.name}}">
+                <img ng-src="{{photo.photoPath}}">
+        </a>
+    </div>
+</div>

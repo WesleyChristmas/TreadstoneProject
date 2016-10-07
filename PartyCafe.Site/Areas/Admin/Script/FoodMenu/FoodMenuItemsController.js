@@ -9,11 +9,11 @@ foodmenuApp.controller("FoodMenuItemsController",function($scope,$http,$location
     });
 
     $scope.Edit = function(index){
-        $location.path('/MenuItemEdit/' + $routeParams.subMenuId + '/' + $scope.MenuItems[index].idRecord);
+        $location.path('/MenuItemEdit/' + $routeParams.menuId + '/' + $routeParams.subMenuId + '/' + $scope.MenuItems[index].idRecord);
     }
 
     $scope.AddNew = function(){
-        $location.path('/MenuItemNew/' + $routeParams.subMenuId);
+        $location.path('/MenuItemNew/' + $routeParams.menuId + '/' + $routeParams.subMenuId);
     }
 
     $scope.Back = function(){

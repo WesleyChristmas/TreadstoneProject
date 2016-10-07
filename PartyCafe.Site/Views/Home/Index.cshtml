@@ -11,7 +11,9 @@
 
 
 <script src="~/Scripts/owl.carousel.min.js"></script>
-<script src="~/Scripts/parts/home/index.js"></script>
+<script src="~/Scripts/parts/home-index.js"> </script>
+<script src="~/Scripts/jquery/jquery-scrollto.js" ></script>
+
 
     <div id="logo-lg">
         <img src="~/Content/images/pc-logo-lg.png"/>
@@ -27,4 +29,12 @@
         <p>Мы ждем Вас</p>
     </div>
 
-    @Html.Partial("_InstaGallery")
+    <div class="btn-ctn">
+        <button>#PARTYCAFE ON INSTARGAM</button>
+    </div>
+
+    <div id="inst-ctn">
+        @Html.Partial("_InstaGallery")
+    </div>
+    <br/>
+    <div id="test"></div>

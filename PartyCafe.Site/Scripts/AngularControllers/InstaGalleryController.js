@@ -19,7 +19,7 @@ function getPhoto($scope, $http) {
         console.log(result);
         var photocount = result.data.length;
         if (photocount > 11) { 
-            $scope.Gallery = result.data.slice(0,6);
+            $scope.Gallery = result.data.slice(0,12);
         } else {
             $scope.Gallery = result.data;
         }

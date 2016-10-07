@@ -46,6 +46,18 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        public ActionResult MenuNew()
+        {
+            return View("MenuNew");
+        }
+
+        [HttpGet]
+        public ActionResult MenuEdit()
+        {
+            return View("MenuEdit");
+        }
+
+        [HttpGet]
         public JsonResult GetAllMenu()
         {
             var result = MenuUtils.GetAll();
@@ -66,6 +78,19 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        public JsonResult GetMenu(int menuId)
+        {
+            var result = MenuUtils.GetAll().Select(x =>
+                new
+                {
+                    x.idRecord,
+                    x.name,
+                    x.photoPath
+                }).FirstOrDefault(x => x.idRecord == menuId);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult GetMenuSubList(int listId)
         {
             var result = MenuUtils.GetAll().Where(x => x.idRecord == listId).Select(x => new
@@ -79,6 +104,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 })
             }).FirstOrDefault();
 
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetMenuSub(int submenuId)
+        {
+            var result = MenuUtils.GetAll().Where(x => x.subGroups.Any(k => k.idRecord == submenuId))
+                .SelectMany(x => x.subGroups).FirstOrDefault(x => x.idRecord == submenuId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -151,7 +184,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message;
             }
         }
-        [HttpPost]
+        [HttpGet]
         public string RemoveGroupItem(int id)
         {
             try

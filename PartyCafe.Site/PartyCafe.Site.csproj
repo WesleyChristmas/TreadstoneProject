@@ -241,23 +241,34 @@
     <Content Include="Areas\Admin\Content\css\font-awesome.min.css" />
     <Content Include="Areas\Admin\Content\delete.png" />
     <Content Include="Areas\Admin\Content\edit.png" />
-    <Content Include="Areas\Admin\Script\AboutController.js" />
     <Content Include="Areas\Admin\Script\AboutUs\AboutController.js" />
     <Content Include="Areas\Admin\Script\AboutUs\AboutEditController.js" />
     <Content Include="Areas\Admin\Script\AboutUs\AboutListController.js" />
     <Content Include="Areas\Admin\Script\AboutUs\AboutNewController.js" />
-    <Content Include="Areas\Admin\Script\CalendarController.js" />
-    <Content Include="Areas\Admin\Script\FoodMenuController.js" />
-    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuClass.js" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarController.js" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarEditController.js" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarListController.js" />
+    <Content Include="Areas\Admin\Script\Calendar\CalendarNewController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuController.js" />
-    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuLibrary.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuEditController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuItemEditController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuItemNewController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuItemsController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuListController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuNewController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuSubEditController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuSubListController.js" />
+    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuSubNewController.js" />
     <Content Include="Areas\Admin\Script\GalleryController.js" />
-    <Content Include="Areas\Admin\Script\UsersController.js" />
-    <Content Include="Areas\Admin\Script\ServicesController.js" />
+    <Content Include="Areas\Admin\Script\Services\ServicesController.js" />
+    <Content Include="Areas\Admin\Script\Services\ServicesEditController.js" />
+    <Content Include="Areas\Admin\Script\Services\ServicesListController.js" />
+    <Content Include="Areas\Admin\Script\Services\ServicesNewController.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\Admin\Views\Users\UsersHome.cshtml" />
+    <Content Include="Content\css\404-style.css" />
     <Content Include="Content\css\about-us-style.css" />
     <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\bg-video-style.css" />
@@ -279,6 +290,7 @@
     <Content Include="Content\css\jquery-ui.theme.min.css" />
     <Content Include="Content\css\jquery.ui.css" />
     <Content Include="Content\css\lightbox.css" />
+    <Content Include="Content\css\login-style.css" />
     <Content Include="Content\css\main-style.css" />
     <Content Include="Content\css\menu-style.css" />
     <Content Include="Content\css\owl.carousel.css" />
@@ -341,7 +353,6 @@
     <Content Include="Scripts\AngularControllers\FoodMenuController.js" />
     <Content Include="Scripts\AngularControllers\InstaGalleryController.js" />
     <Content Include="Scripts\AngularControllers\PhotoGalleryController.js" />
-    <Content Include="Scripts\AngularControllers\ServicesContoller.js" />
     <Content Include="Scripts\AngularControllers\Services\ServicesController.js" />
     <Content Include="Scripts\AngularControllers\Services\ServicesDetailedController.js" />
     <Content Include="Scripts\AngularControllers\Services\ServicesListController.js" />
@@ -414,9 +425,6 @@
       <LastGenOutput>PartyCafeClasses.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\Gallery\GalleryHome.cshtml" />
-    <Content Include="Areas\Admin\Views\Gallery\GalleryAdd.cshtml" />
-    <Content Include="Areas\Admin\Views\Gallery\GalleryEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Gallery\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
@@ -437,6 +445,8 @@
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItems.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItemEdit.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItemNew.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\FoodMenu\MenuNew.cshtml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Properties\PublishProfiles\Physical Path.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
@@ -1208,6 +1218,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\parts\home-index.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -1227,8 +1238,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
