@@ -142,7 +142,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddGroupItem(string name, int? parentId = null)
+        public string AddGroupItem(string name, string hashtag, int? parentId = null)
         {
             try
             {
@@ -152,7 +152,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         IdParent = parentId,
                         Name = name
                     },
-                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    ControllerUtils.GetPhotoEntity(Request.Files, hashtag),
                     User.Identity.Name
                 );
                 return "ok";
@@ -163,7 +163,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string EditGroupItem(string name, int id, int? idparent = null)
+        public string EditGroupItem(string name, int id, string hashtag, int? idparent = null)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         Name = name,
                         IdParent = idparent
                     },
-                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    ControllerUtils.GetPhotoEntity(Request.Files, hashtag),
                     User.Identity.Name
                 );
                 return "ok";
@@ -199,7 +199,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddItem(string name, int groupid, string des, string weipla, float price)
+        public string AddItem(string name, int groupid, string des, string weipla, float price, string hashtag)
         {
             try
             {
@@ -214,7 +214,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             Price = price,
                             Country = des
                         },
-                        ControllerUtils.GetPhotoEntity(Request.Files),
+                        ControllerUtils.GetPhotoEntity(Request.Files, hashtag),
                         User.Identity.Name
                     );
                 return "ok";
@@ -225,7 +225,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string EditItem(string name, int groupid, string des, string weipla, float price, int idrecord)
+        public string EditItem(string name, int groupid, string des, string weipla, float price, int idrecord, string hashtag)
         {
             try
             {
@@ -241,7 +241,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             Price = price,
                             Country = des
                         },
-                        ControllerUtils.GetPhotoEntity(Request.Files),
+                        ControllerUtils.GetPhotoEntity(Request.Files, hashtag),
                         User.Identity.Name
                     );
                     return "ok";

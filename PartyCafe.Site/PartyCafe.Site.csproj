@@ -1207,6 +1207,7 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\isotop\isotope.pkgd.min.js" />
     <None Include="Scripts\jquery\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery\jquery-scrollto.js" />
     <Content Include="Scripts\jquery\jquery-ui.js" />
     <Content Include="Scripts\jquery\jquery-ui.min.js" />
     <Content Include="Scripts\jquery\jquery.cycle.min.js" />

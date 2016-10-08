@@ -37,7 +37,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddServices(string name, string desc)
+        public string AddServices(string name, string desc, string hashtag)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         serviceType = ServiceType.aboutService
                     },
                     User.Identity.Name,
-                    ControllerUtils.GetPhotoEntity(Request.Files)
+                    ControllerUtils.GetPhotoEntity(Request.Files, hashtag)
                 );
                 return "ok";
             }
@@ -73,7 +73,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public string UpdateServices(int id, string name, string desc)
+        public string UpdateServices(int id, string name, string desc, string hashtag)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         name = name,
                         description = desc
                     },
-                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    ControllerUtils.GetPhotoEntity(Request.Files, hashtag),
                     User.Identity.Name
                 );
                 return "ok";
@@ -96,11 +96,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddPhotoToServices(int id, string name = "fix_it")
+        public string AddPhotoToServices(int id, string hashtag, string name = "fix_it")
         {
             try
             {
-                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files, hashtag);
                 if (photo == null) return "bad";
 
                 ServiceUtils.AddPhoto(
@@ -118,11 +118,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UpdatePhotoServices(int id, string name)
+        public string UpdatePhotoServices(int id, string name, string hashtag)
         {
             try
             {
-                ServiceUtils.EditPhoto(id, name, ControllerUtils.GetPhotoEntity(Request.Files), User.Identity.Name);
+                ServiceUtils.EditPhoto(id, name, ControllerUtils.GetPhotoEntity(Request.Files, hashtag), User.Identity.Name);
                 return "ok";
             }
             catch (Exception ex)

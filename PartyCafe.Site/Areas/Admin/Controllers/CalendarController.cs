@@ -53,11 +53,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddPhoto(int idEvent, string name)
+        public string AddPhoto(int idEvent, string name, string hashtag)
         {
             try
             {
-                EventUtils.AddPhoto(idEvent, name, ControllerUtils.GetPhotoEntity(Request.Files), User.Identity.Name);
+                EventUtils.AddPhoto(idEvent, name, ControllerUtils.GetPhotoEntity(Request.Files, hashtag), User.Identity.Name);
                 return "ok";
             }
             catch (Exception ex)
@@ -81,7 +81,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddCalendarEvent(string name, string desc, string date, string time, bool isOpen)
+        public string AddCalendarEvent(string name, string desc, string date, string time, bool isOpen, string hashtag)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                         TimeEvent = TimeSpan.Parse(time),
                         IsOpen = isOpen
                     },
-                    ControllerUtils.GetPhotoEntity(Request.Files),
+                    ControllerUtils.GetPhotoEntity(Request.Files, hashtag),
                     User.Identity.Name
                 );
                 return "ok";
@@ -106,7 +106,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UpdateCalendarEvent(int id, string name, string desc, string date, string time, bool isOpen)
+        public string UpdateCalendarEvent(int id, string name, string desc, string date, string time, bool isOpen, string photoHashtag)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                             IsOpen = isOpen
                         },
                         User.Identity.Name,
-                        ControllerUtils.GetPhotoEntity(Request.Files)
+                        ControllerUtils.GetPhotoEntity(Request.Files, photoHashtag)
                     );
                 return "ok";
             }

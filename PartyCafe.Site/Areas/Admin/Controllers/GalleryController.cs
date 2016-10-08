@@ -30,11 +30,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddGallery(string name, string desc)
+        public string AddGallery(string name, string desc, string hashtag)
         {
             try
             {
-                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files, hashtag);
                 if (photo == null) return "bad";
 
                 GalleryUtils.InsertGallery(
@@ -51,11 +51,11 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UpdateGallery(int id, string name, string desc)
+        public string UpdateGallery(int id, string name, string desc, string hashtag)
         {
             try
             {
-                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files, hashtag);
                 if (photo == null) return "bad";
 
                 GalleryUtils.EditGallery(

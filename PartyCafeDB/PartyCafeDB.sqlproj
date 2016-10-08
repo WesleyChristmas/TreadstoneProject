@@ -79,8 +79,9 @@
     <Build Include="Tables\ServiceVideos.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PartyCafeDB.publish.xml" />
+    <None Include="Local.publish.xml" />
     <None Include="StartUp.sql" />
+    <None Include="DataCenter.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="PartyCafeDB.refactorlog" />

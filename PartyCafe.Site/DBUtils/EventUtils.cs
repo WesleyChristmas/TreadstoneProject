@@ -10,6 +10,7 @@ namespace PartyCafe.Site.DBUtils
         public int idRecord;
         public string name;
         public string photoPath;
+        public string hashtag;
     }
 
     public class PCEvent
@@ -18,6 +19,7 @@ namespace PartyCafe.Site.DBUtils
         public string name;
         public int IdPhoto;
         public string PhotoPath;
+        public string Hashtag;
         public string Description;
         public DateTime DateEvent;
         public TimeSpan TimeEvent;
@@ -38,6 +40,7 @@ namespace PartyCafe.Site.DBUtils
                               name = e.Name,
                               IdPhoto = e.IdPhoto,
                               PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                              Hashtag = p.Hashtag,
                               DateEvent = e.EventDate.Date,
                               TimeEvent = e.EventDate.TimeOfDay,
                               Description = e.description,
@@ -61,6 +64,7 @@ namespace PartyCafe.Site.DBUtils
                     TimeEvent = e.EventDate.TimeOfDay,
                     IdPhoto = e.IdPhoto,
                     PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                    Hashtag = p.Hashtag,
                     IsOpen = e.isOpen
                 }).SingleOrDefault();
 
@@ -71,6 +75,7 @@ namespace PartyCafe.Site.DBUtils
                     {
                         idRecord = photo.IdRecord,
                         photoPath = PhotoUtils.GetRelativeUrl(photo.Path),
+                        hashtag = photo.Hashtag,
                         name = eventPhoto.name
                     }).ToList();
 
@@ -91,6 +96,7 @@ namespace PartyCafe.Site.DBUtils
                               name = e.Name,
                               IdPhoto = e.IdPhoto,
                               PhotoPath = PhotoUtils.GetRelativeUrl(p.Path),
+                              Hashtag = p.Hashtag,
                               DateEvent = e.EventDate.Date,
                               TimeEvent = e.EventDate.TimeOfDay,
                               Description = e.description,
@@ -131,7 +137,7 @@ namespace PartyCafe.Site.DBUtils
             curEvent.DateUpdate = DateTime.Now;
             curEvent.UserUpdate = userUpdate;
 
-            if (image != null)
+            if (image.fileName != null)
             { 
                 if (curEvent.IdPhoto > 0)
                 {
@@ -140,6 +146,9 @@ namespace PartyCafe.Site.DBUtils
                     curEvent.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
                 }
             }
+
+            if (image.hashtag != null && curEvent.IdPhoto != 0)
+                PhotoUtils.Edithashtag(curEvent.IdPhoto, image.hashtag);
 
             dbContext.SubmitChanges();
         }
@@ -154,12 +163,15 @@ namespace PartyCafe.Site.DBUtils
             {
                 Name = partyEvent.name ?? string.Empty,
                 description = partyEvent.Description ?? string.Empty,
-                IdPhoto = image != null ? PhotoUtils.InsertImage(image, userCreate) : 0,
+                IdPhoto = image.fileName != null ? PhotoUtils.InsertImage(image, userCreate) : 0,
                 DateCreate = DateTime.Now,
                 UserCreate = userCreate,
                 EventDate = newDate,
                 isOpen = partyEvent.IsOpen
             };
+
+            if (newEvent.IdPhoto != 0 && image.hashtag != null)
+                PhotoUtils.Edithashtag(newEvent.IdPhoto, image.hashtag);
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Events.InsertOnSubmit(newEvent);
@@ -175,6 +187,9 @@ namespace PartyCafe.Site.DBUtils
                 IdEvent = IdEvent,
                 name = name
             };
+            if (image.hashtag != null)
+                PhotoUtils.Edithashtag(ep.IdPhoto, image.hashtag);
+
             db.EventPhotos.InsertOnSubmit(ep);
             db.SubmitChanges();
         }
