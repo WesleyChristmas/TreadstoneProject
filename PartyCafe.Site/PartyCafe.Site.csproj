@@ -211,6 +211,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotoGalleryController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\YoutubeVideoController.cs" />
     <Compile Include="DBUtils\EmailUtils.cs" />
     <Compile Include="DBUtils\EventUtils.cs" />
     <Compile Include="DBUtils\GalleryUtils.cs" />
@@ -1269,10 +1270,12 @@
     <Content Include="Views\Services\ServiceDetailed.cshtml" />
     <Content Include="Views\AboutUs\ServiceList.cshtml" />
     <Content Include="Views\AboutUs\ServiceDetailed.cshtml" />
+    <Content Include="Views\YoutubeVideo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\photos\" />
+    <Folder Include="Scripts\AngularControllers\YoutubeVideo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
