@@ -22,7 +22,6 @@ namespace PartyCafe.Site.DBUtils
         public int idRecord;
         public string name;
         public string photoPath;
-        public string hashtag;
         public List<MenuItemView> items;
         public List<MenuGroupView> subGroups;
     }
@@ -55,7 +54,6 @@ namespace PartyCafe.Site.DBUtils
             public string name;
             public decimal price;
             public string photoPath;
-            public string hashtag;
             public string description;
             public string Weight;
             public string Country;
@@ -68,7 +66,6 @@ namespace PartyCafe.Site.DBUtils
             public string name;
             public int idParent;
             public string photoPath;
-            public string hashtag;
         }
 
         private static List<MenuItemData> itemsData;
@@ -136,18 +133,20 @@ namespace PartyCafe.Site.DBUtils
             var result = new List<MenuItemView>();
             foreach(var item in itemsData)
             {
-                if (item.idGroup != idGroup) continue;
+                if (item.idGroup == idGroup)
+                {
+                    MenuItemView elem = new MenuItemView();
+                    elem.idRecord = item.idRecord;
+                    elem.name = item.name;
+                    elem.photoPath = item.photoPath;
+                    elem.price = item.price.ToString();
+                    elem.Country = item.Country;
+                    elem.description = item.description;
+                    elem.Platform = item.Platform;
+                    elem.Weight = item.Weight;
 
-                MenuItemView elem = new MenuItemView();
-                elem.idRecord = item.idRecord;
-                elem.name = item.name;
-                elem.photoPath = item.photoPath;
-                elem.price = item.price.ToString();
-                elem.Country = item.Country;
-                elem.description = item.description;
-                elem.Platform = item.Platform;
-                elem.Weight = item.Weight;
-                result.Add(elem);
+                    result.Add(elem);
+                }
             }
             return result;
         }
@@ -157,7 +156,7 @@ namespace PartyCafe.Site.DBUtils
             var db = MainUtils.GetDBContext();  
             var items = (from i in db.MenuItems
                          join p in db.Photos on i.IdPhoto equals p.IdRecord
-                         select new { i.IdRecord, i.Name, i.IdGroup, i.description, i.Country, i.Platform, i.Price, i.Weight, p.Path, p.Hashtag }).ToList();
+                         select new { i.IdRecord, i.Name, i.IdGroup, i.description, i.Country, i.Platform, i.Price, i.Weight, p.Path }).ToList();
 
             if (itemsData == null)
             {
@@ -174,7 +173,6 @@ namespace PartyCafe.Site.DBUtils
                 id.idRecord = item.IdRecord;
                 id.name = item.Name;
                 id.photoPath = PhotoUtils.GetRelativeUrl(item.Path);
-                id.hashtag = item.Hashtag;
                 id.Platform = item.Platform; 
                 id.price = item.Price;
                 id.Weight = item.Weight;
@@ -188,7 +186,7 @@ namespace PartyCafe.Site.DBUtils
 
             var groups = (from g in db.MenuGroups
                           join p in db.Photos on g.IdPhoto equals p.IdRecord
-                          select new { g.IdRecord, g.IdParent, g.GroupName, p.Path, p.Hashtag }).ToList();
+                          select new { g.IdRecord, g.IdParent, g.GroupName, p.Path }).ToList();
 
             if (groupsData == null)
             {
@@ -206,7 +204,6 @@ namespace PartyCafe.Site.DBUtils
                 gd.idRecord = group.IdRecord;
                 gd.name = group.GroupName;
                 gd.photoPath = PhotoUtils.GetRelativeUrl(group.Path);
-                gd.hashtag = group.Hashtag;
 
                 groupsData.Add(gd);
             }
@@ -223,7 +220,7 @@ namespace PartyCafe.Site.DBUtils
             newMenuItem.IdGroup = partyItem.IdGroup;
             newMenuItem.Weight = partyItem.Weight;
 
-            if (image.fileName != null)
+            if (image != null)
             {
                 newMenuItem.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
             }
@@ -231,8 +228,6 @@ namespace PartyCafe.Site.DBUtils
             {
                 newMenuItem.IdPhoto = 0;
             }
-            if (image.hashtag != null & newMenuItem.IdPhoto != 0)
-                PhotoUtils.Edithashtag(newMenuItem.IdPhoto, image.hashtag);
 
             newMenuItem.DateCreate = DateTime.Now;
             newMenuItem.UserCreate = userCreate;
@@ -260,7 +255,7 @@ namespace PartyCafe.Site.DBUtils
             curMenuItem.DateUpdate = DateTime.Now;
             curMenuItem.UserUpdate = userUpdate;
 
-            if (image.fileName != null)
+            if (image != null)
             { 
                 if (curMenuItem.IdPhoto > 0)
                 {
@@ -269,8 +264,6 @@ namespace PartyCafe.Site.DBUtils
                     curMenuItem.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
                 }
             }
-            if (image.hashtag != null && curMenuItem.IdPhoto != 0)
-                PhotoUtils.Edithashtag(curMenuItem.IdPhoto, image.hashtag);
 
             dbContext.SubmitChanges();
         }
@@ -294,7 +287,7 @@ namespace PartyCafe.Site.DBUtils
             newMenuGroup.GroupName = partyGroup.Name ?? string.Empty;
             newMenuGroup.IdParent = partyGroup.IdParent;
 
-            if (image.fileName != null)
+            if (image != null)
             {
                 newMenuGroup.IdPhoto = PhotoUtils.InsertImage(image, userCreate);
             }
@@ -302,9 +295,6 @@ namespace PartyCafe.Site.DBUtils
             {
                 newMenuGroup.IdPhoto = 0;
             }
-            if (image.hashtag != null && newMenuGroup.IdPhoto != 0)
-                PhotoUtils.Edithashtag(newMenuGroup.IdPhoto, image.hashtag);
-
 
             newMenuGroup.DateCreate = DateTime.Now;
             newMenuGroup.UserCreate = userCreate;
@@ -327,7 +317,7 @@ namespace PartyCafe.Site.DBUtils
             curMenuGroup.DateUpdate = DateTime.Now;
             curMenuGroup.UserUpdate = userUpdate;
 
-            if (image.fileName != null)
+            if (image != null)
             {
                 if (curMenuGroup.IdPhoto > 0)
                 {
@@ -338,8 +328,6 @@ namespace PartyCafe.Site.DBUtils
                     curMenuGroup.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
                 }
             }
-            if (image.hashtag != null && curMenuGroup.IdPhoto != 0)
-                PhotoUtils.Edithashtag(curMenuGroup.IdPhoto, image.hashtag);
 
             dbContext.SubmitChanges();
         }

@@ -11,7 +11,6 @@ namespace PartyCafe.Site.DBUtils
         public int idRecord;
         public string name;
         public string photoPath;
-        public string hashtag;
     }
 
     public class PCServiceVideo
@@ -33,7 +32,6 @@ namespace PartyCafe.Site.DBUtils
         public int idRecord;
         public string name;
         public string photoPath;
-        public string hashtag;
         public string description;
         public string title;
         public int serviceType;
@@ -49,14 +47,13 @@ namespace PartyCafe.Site.DBUtils
             var services = (from s in db.Services
                             join p in db.Photos on s.IdPhoto equals p.IdRecord
                             where s.serviceType == serviceType
-                            select new { s.IdRecord, s.Name, s.Text, s.Title, p.Path, p.Hashtag }).ToList();
+                            select new { s.IdRecord, s.Name, s.Text, s.Title, p.Path }).ToList();
 
             return services.Select(item => new PCService
             {
                 idRecord = item.IdRecord,
                 name = item.Name,
                 photoPath = PhotoUtils.GetRelativeUrl(item.Path),
-                hashtag = item.Hashtag,
                 description = item.Text, title = item.Title
             }).ToList();
         }
@@ -73,7 +70,6 @@ namespace PartyCafe.Site.DBUtils
                     idRecord = s.IdRecord,
                     name = s.Name,
                     photoPath = PhotoUtils.GetRelativeUrl(p.Path),
-                    hashtag = p.Hashtag,
                     serviceType = s.serviceType,
                     title = s.Title
                 }).SingleOrDefault();
@@ -84,9 +80,7 @@ namespace PartyCafe.Site.DBUtils
                                  select new PCServicePhoto {
                                      idRecord = sp.IdRecord,
                                      name = sp.name,
-                                     photoPath = PhotoUtils.GetRelativeUrl(p.Path),
-                                     hashtag = p.Hashtag
-                                     
+                                     photoPath = PhotoUtils.GetRelativeUrl(p.Path)
                                  }).ToList();
 
             var serviceVideos = (from sv in db.ServiceVideos
@@ -116,8 +110,6 @@ namespace PartyCafe.Site.DBUtils
                 DateCreate = DateTime.Now,
                 UserCreate = userCreate
             };
-            if (image.hashtag != null && newService.IdPhoto != 0)
-                PhotoUtils.Edithashtag(newService.IdPhoto, image.hashtag);
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Services.InsertOnSubmit(newService);
@@ -140,7 +132,7 @@ namespace PartyCafe.Site.DBUtils
                 curService.DateUpdate = DateTime.Now;
                 curService.UserUpdate = userUpdate;
 
-                if (image.fileName != null)
+                if (image != null)
                 {
                     if (curService.IdPhoto > 0)
                     {
@@ -151,8 +143,6 @@ namespace PartyCafe.Site.DBUtils
                         curService.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
                     }
                 }
-                if (image.hashtag != null && curService.IdPhoto != 0)
-                    PhotoUtils.Edithashtag(curService.IdPhoto, image.hashtag);
             } else return;
 
             dbContext.SubmitChanges();
@@ -199,8 +189,6 @@ namespace PartyCafe.Site.DBUtils
                 IdService = IdService,
                 name = name
             };
-            if (image.hashtag != null && sp.IdPhoto != 0)
-                PhotoUtils.Edithashtag(sp.IdPhoto, image.hashtag);
             db.ServicePhotos.InsertOnSubmit(sp);
             db.SubmitChanges();
         }
@@ -212,12 +200,10 @@ namespace PartyCafe.Site.DBUtils
                       where p.IdRecord == idServicePhoto
                       select p).FirstOrDefault();
 
-            if (image.fileName != null)
+            if (image != null)
             {
                 PhotoUtils.EditImage(sp.IdPhoto, image, userUpdate);
             }
-            if (image.hashtag != null && sp.IdPhoto != 0)
-                PhotoUtils.Edithashtag(sp.IdPhoto, image.hashtag);
 
             sp.name = name ?? string.Empty;
             db.SubmitChanges();
