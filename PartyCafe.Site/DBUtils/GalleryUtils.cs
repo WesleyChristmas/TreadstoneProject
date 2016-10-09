@@ -10,7 +10,9 @@ namespace PartyCafe.Site.DBUtils
         public string name;
         public string description;
         public string photoPath;
+        public string hashtag;
         public int idPhoto;
+        public List<string> hashtags;
     }
 
     public class Hashtag
@@ -45,7 +47,7 @@ namespace PartyCafe.Site.DBUtils
                                 e.IdPhoto,
                                 e.Description,
                                 path = PhotoUtils.GetRelativeUrl(p.Path),
-                                e.Tag
+                                hashtags = e.GalleryHashtags.Select(x => x.Hashtag)
                             })
             ).ToList();
 
@@ -66,7 +68,8 @@ namespace PartyCafe.Site.DBUtils
                 name = e.Name,
                 idPhoto = e.IdPhoto,
                 photoPath = PhotoUtils.GetRelativeUrl(e.path),
-                description = e.Description
+                description = e.Description,
+                hashtags = e.hashtags.ToList()
             }).ToList();
         }
 
@@ -94,6 +97,7 @@ namespace PartyCafe.Site.DBUtils
                 idPhoto = x.IdPhoto,
                 photoPath = PhotoUtils.GetRelativeUrl(x.Photo.Path),
                 description = x.Description,
+                hashtags = x.GalleryHashtags.Select(tag => tag.Hashtag).ToList()
             }).ToList();
         }
 
