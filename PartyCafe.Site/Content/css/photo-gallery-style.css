@@ -67,7 +67,6 @@
 .photo-ctn{
     height:300px;
     overflow:hidden;
-    border: 5px solid #000;
 }
 
 .photo-ctn img{
