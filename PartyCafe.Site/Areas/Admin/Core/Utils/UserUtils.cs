@@ -5,6 +5,7 @@ using PartyCafe.Site.Identity;
 using PartyCafe.Site.Models;
 using PartyCafe.Site.Areas.Admin.Models;
 using Microsoft.AspNet.Identity;
+using WebGrease.Css.Extensions;
 
 namespace PartyCafe.Site.Areas.Admin.Core.Utils
 {
@@ -22,7 +23,7 @@ namespace PartyCafe.Site.Areas.Admin.Core.Utils
             return _roleManager.Roles.ToList();
         }
 
-        public static string ChangePassword(RegisterViewModel model, string oldPassword)
+        public static string ChangePassword(RegisterViewModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Password) || string.IsNullOrWhiteSpace(model.ConfirmPassword)) return "Поля не должны быть пустыми!";
             if (model.Password != model.ConfirmPassword) return "Пароли не совпадают!";
@@ -78,6 +79,7 @@ namespace PartyCafe.Site.Areas.Admin.Core.Utils
 
                 if (result.Succeeded)
                 {
+                    if (roles == null) return "ok";
                     foreach (var item in roles)
                     {
                         _userManager.AddToRole(userId: user.UserId.ToString(), role: item);
@@ -85,7 +87,12 @@ namespace PartyCafe.Site.Areas.Admin.Core.Utils
                 }
                 else
                 {
-                    return result.Errors.ToString();
+                    var response = "";
+                    result.Errors.ForEach(x =>
+                    {
+                        response += x + "\n";
+                    });
+                    return response;
                 }
                 return "ok";
             }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using PartyCafe.Site.Areas.Admin.Core.Utils;
 using PartyCafe.Site.Models;
@@ -44,12 +45,20 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return Json(UserUtils.GetUserDetail(username), JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
-        public string ChangePassword(RegisterViewModel model)
+        public string ChangePassword(string userName, string pass, string repeatPass)
         {
+            var model = new RegisterViewModel
+            {
+                UserName = userName,
+                Password = pass,
+                ConfirmPassword = repeatPass
+            };
+
             return UserUtils.ChangePassword(model);
         }
-        [HttpPost]
+        [HttpGet]
         public string DeleteUser(string username)
         {
             return username == "admin" ? "Невозможно удалить данную учетную запись" :  UserUtils.DeleteUser(username);
@@ -60,16 +69,16 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return UserUtils.EditUser(saveedit);
         } */
         [HttpPost]
-        public string AddUser(RegisterViewModel model, string description, List<string> roles)
+        public string AddUser(string userName, string pass, string repeatPass)
         {
-            if (ModelState.IsValid)
+            var model = new RegisterViewModel
             {
-                return UserUtils.AddUser(model, description, roles); 
-            }
-            else
-            {
-                return "bad";
-            }
+                UserName = userName,
+                Password = pass,
+                ConfirmPassword = repeatPass
+            };
+
+            return UserUtils.AddUser(model, "", null);
         }
     }
 }

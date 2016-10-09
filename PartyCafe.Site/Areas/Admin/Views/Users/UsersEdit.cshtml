@@ -11,11 +11,11 @@
         <div class="sys-text"><span class="mandatory-field">*</span>Логин</div>
     </div>
     <div class="col-md-9">
-        <input type="text" class="form-control" ng-model="User.Name" placeholder="SuperAdmin" required/>
+        <input type="text" class="form-control" ng-model="User.Name" placeholder="SuperAdmin" disabled required/>
     </div>
 </div>
 
-<button class="btn btn-default" data-toggle="collapse" data-target="#change-pass">Изменить пароль</button>
+<button class="btn btn-default" data-toggle="collapse" data-target="#change-pass" disabled>Изменить пароль</button>
 
 <div id="change-pass" class="collapse">
     <div class="row admin-row">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <button class="btn btn-default">Изменить пароль</button>
+    <button class="btn btn-default" ng-click="ChangePass()">Изменить пароль</button>
 
 </div>
 
@@ -53,13 +53,10 @@
 </div>
 
 <div class="row admin-btn-row">
-    <div class="col-sm-4 admin-row">
-        <button class="btn btn-default" ng-click="SaveChanges()">Сохранить изменения</button>
-    </div>
-    <div class="col-sm-4 admin-row">
+    <div class="col-sm-6 admin-row">
         <button class="btn btn-default" ng-click="Back()">Вернуться назад</button>
     </div>
-    <div class="col-sm-4 admin-row">
+    <div class="col-sm-6 admin-row">
         <button class="btn btn-default" ng-click="Delete()">Удалить учетную запись</button>
     </div>
 </div>

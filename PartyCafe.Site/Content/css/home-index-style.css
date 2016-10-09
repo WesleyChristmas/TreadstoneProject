@@ -5,24 +5,38 @@
 }
 
 #logo-lg img{
-    width:100px;
+    width:200px;
 }
 
 #inst-ctn{
     position:absolute;
     top:100%;
     left:0;
-    min-height:calc(100% - 50px);
     width:100%;
+    margin-top: -50px;
     overflow:hidden;
+}
+
+#anchor{
+    margin-top:70px;
+}
+
+#animintro {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: -10;
+	display: none;
+	overflow: hidden;
 }
 
 .owl-container {
     margin: 20px auto 0 auto;
-    max-width: 440px;
+    max-width: 800px;
     text-align: center;
     color:#fff;
     overflow:hidden;
+    cursor:default;
 }
 .owl-container h1 { font-size: 40px; margin-bottom: 0px; }
 .owl-container p { margin-top: 20px; }
@@ -34,10 +48,25 @@
 }
 
 .btn-ctn button{
-    width:300px;
-    background-color : rgba(255,255,255,0.1);
-    border: 1px solid #fff;
+    background-color : transparent;
+    border: none;
+    outline:none;
     color:#fff;
     font-size:20px;
     padding:20px;
+}
+
+@media (max-width:800px){
+    .owl-container{
+        max-width:440px;
+    }
+}
+
+@media (max-height:715px){
+    #inst-ctn{
+        position:relative;
+        width:100%;
+        margin-top: 0;
+        overflow:hidden;
+    }
 }

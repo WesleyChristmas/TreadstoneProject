@@ -30,7 +30,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddGallery(string name, string desc)
+        public string AddGallery(string name, string desc,string hashtag)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 if (photo == null) return "bad";
 
                 GalleryUtils.InsertGallery(
-                    new PCGallery() {name = name, description = desc},
+                    new PCGallery {name = name, description = desc, hashtags = new List<string> { hashtag } },
                     photo,
                     User.Identity.Name
                 );
@@ -51,21 +51,23 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UpdateGallery(int id, string name, string desc)
+        public string UpdateGallery(int id, string name, string desc, string hashtag)
         {
             try
             {
-                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
-                if (photo == null) return "bad";
+                //var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                //if (photo == null) return "bad";
 
                 GalleryUtils.EditGallery(
                     new PCGallery()
                     {
                         idRecord = id,
                         name = name,
-                        description = desc
+                        description = desc,
+                        hashtags = new List<string> { hashtag }
                     },
-                    photo,
+                    null,
+                    //photo,
                     User.Identity.Name
                 );
                 return "ok";
@@ -76,7 +78,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public string DeleteGalleryItem(int id)
         {
             try

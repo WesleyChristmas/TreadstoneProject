@@ -155,6 +155,7 @@ h2{
 
 #order-btn{
     margin-bottom:50px;
+    cursor:pointer;
 }
 
 #order-btn div{

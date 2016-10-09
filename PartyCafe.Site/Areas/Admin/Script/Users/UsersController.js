@@ -22,5 +22,9 @@ usrApp.controller("UsersController",function($scope){
 });
 
 function User(entity){
+    if(entity == null){
+        this.Name = '';
+        return;
+    }
     this.Name = entity.user[0].UserName;
 }
