@@ -16,6 +16,7 @@
                 <img ng-src="{{item.data.photo}}" ng-show="item.data.header" />
             </div>
             <div class="event-name" ng-show="item.data.header">
+                <img ng-show="!item.data.isOpen" src="~/Content/images/lock.png" />
                 {{item.data.header}}
                 <br/>
                 <span>{{item.data.time | CorrectTime}}</span>

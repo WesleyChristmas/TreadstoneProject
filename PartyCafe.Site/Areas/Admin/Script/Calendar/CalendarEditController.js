@@ -20,6 +20,7 @@ calendarApp.controller("CalendarEditController",function($scope,$http,$location,
             fd.append('date',$scope.Calendar.Date);
             fd.append('time', $scope.Calendar.Time);
             fd.append('desc', "");
+            fd.append('isOpen',$scope.Calendar.IsOpen);
             fd.append('file', document.getElementsByName('calendarPhoto')[0].files[0]);
 
             $http.post('Calendar/UpdateCalendarEvent', fd, {

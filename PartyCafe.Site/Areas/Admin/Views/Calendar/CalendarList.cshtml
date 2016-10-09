@@ -17,7 +17,7 @@
         </div>
     </div>
      <div class="col-sm-8">
-        <div class="row-name">{{event.Name}}</diV>
+        <div class="row-name"> <img class="lock" ng-show="!event.IsOpen" src="~/Areas/Admin/Content/lock.png" /> {{event.Name}}</div>
         <div class="row-name">{{event.Date}} {{event.Time}} </div>
     </div>
 </div>

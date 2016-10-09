@@ -13,14 +13,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult UsersHome()
+        public ActionResult UsersList()
         {
-            return View("UsersHome");
+            return View("UsersList");
         }
         [HttpGet]
-        public ActionResult UsersAdd()
+        public ActionResult UsersNew()
         {
-            return View("UsersAdd");
+            return View("UsersNew");
         }
         [HttpGet]
         public ActionResult UsersEdit()
@@ -39,7 +39,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(UserUtils.GetAllRoles(), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public JsonResult GetUserDetail(string username)
         {
             return Json(UserUtils.GetUserDetail(username), JsonRequestBehavior.AllowGet);
@@ -52,7 +52,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         [HttpPost]
         public string DeleteUser(string username)
         {
-            return UserUtils.DeleteUser(username);
+            return username == "admin" ? "Невозможно удалить данную учетную запись" :  UserUtils.DeleteUser(username);
         }
         /*[HttpPost]
         public string UpdateUser(UserSaveEdit saveedit)

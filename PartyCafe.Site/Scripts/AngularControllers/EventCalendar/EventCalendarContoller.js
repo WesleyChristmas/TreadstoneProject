@@ -28,7 +28,7 @@ eventcalendarapp.controller("CalendarController", function ($scope, $http, $loca
     $scope.SelectEvent = function(element){
 
         $scope.Order.ClearValidation();
-        if(!element.item.data.header){
+        if(!element.item.data.header || !element.item.data.isOpen){
             return;
         }
         $scope.Order.Show = true;
@@ -173,6 +173,7 @@ function Calendar(obj, dcount, respons, curdate, $scope) {
                     photo: respons[i].PhotoPath,
                     time: respons[i].TimeEvent,
                     desc: respons[i].Description,
+                    isOpen: respons[i].IsOpen,
                     childrenPhoto: respons[i].photos
                 }
                 cal[j].data = _obj;
