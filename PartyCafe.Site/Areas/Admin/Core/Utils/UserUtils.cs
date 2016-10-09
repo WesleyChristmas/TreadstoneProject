@@ -28,7 +28,9 @@ namespace PartyCafe.Site.Areas.Admin.Core.Utils
             if (model.Password != model.ConfirmPassword) return "Пароли не совпадают!";
 
             var user = _userManager.FindByName(model.UserName);
-            var error = _userManager.ChangePassword(user.UserId.ToString(), oldPassword, model.Password);
+            _userManager.RemovePassword(user.UserId.ToString());
+            var error = _userManager.AddPassword(user.UserId.ToString(), model.Password);
+
 
             return error.Succeeded ? "ok" : "bad";
         }

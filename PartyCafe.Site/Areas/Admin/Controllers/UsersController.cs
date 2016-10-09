@@ -45,9 +45,9 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(UserUtils.GetUserDetail(username), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public string ChangePassword(RegisterViewModel model, string oldPassword)
+        public string ChangePassword(RegisterViewModel model)
         {
-            return UserUtils.ChangePassword(model, oldPassword);
+            return UserUtils.ChangePassword(model);
         }
         [HttpPost]
         public string DeleteUser(string username)
@@ -64,7 +64,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                return UserUtils.AddUser(model, description, roles); ;
+                return UserUtils.AddUser(model, description, roles); 
             }
             else
             {
