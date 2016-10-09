@@ -265,6 +265,10 @@
     <Content Include="Areas\Admin\Script\Services\ServicesEditController.js" />
     <Content Include="Areas\Admin\Script\Services\ServicesListController.js" />
     <Content Include="Areas\Admin\Script\Services\ServicesNewController.js" />
+    <Content Include="Areas\Admin\Script\Users\UsersController.js" />
+    <Content Include="Areas\Admin\Script\Users\UsersEditController.js" />
+    <Content Include="Areas\Admin\Script\Users\UsersListController.js" />
+    <Content Include="Areas\Admin\Script\Users\UsersNewController.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -1274,7 +1278,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Script\Users\" />
     <Folder Include="Content\photos\" />
     <Folder Include="Scripts\AngularControllers\YoutubeVideo\" />
   </ItemGroup>

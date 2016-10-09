@@ -47,7 +47,6 @@ iframe{
 .video-ctn{
     height:300px;
     overflow:hidden;
-    border: 5px solid #000;
 }
 
 .video-ctn img{

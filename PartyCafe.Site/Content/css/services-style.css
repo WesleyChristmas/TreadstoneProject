@@ -18,7 +18,6 @@
     width:calc(100%);
     height:300px;
     overflow:hidden;
-    border:5px solid #000;
 }
 
 .services-header{
@@ -143,7 +142,6 @@
 #srv-photos img{
     width:100%;
     height:100%;
-    border : 5px solid #000;
 }
 
 #order-btn div{
