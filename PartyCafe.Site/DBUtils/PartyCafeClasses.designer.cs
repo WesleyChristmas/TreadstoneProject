@@ -54,6 +54,9 @@ namespace PartyCafe.Site.DBUtils
     partial void InsertEventPhoto(EventPhoto instance);
     partial void UpdateEventPhoto(EventPhoto instance);
     partial void DeleteEventPhoto(EventPhoto instance);
+    partial void InsertPhoto(Photo instance);
+    partial void UpdatePhoto(Photo instance);
+    partial void DeletePhoto(Photo instance);
     partial void InsertGalleryHashtag(GalleryHashtag instance);
     partial void UpdateGalleryHashtag(GalleryHashtag instance);
     partial void DeleteGalleryHashtag(GalleryHashtag instance);
@@ -66,13 +69,10 @@ namespace PartyCafe.Site.DBUtils
     partial void InsertEvents(Events instance);
     partial void UpdateEvents(Events instance);
     partial void DeleteEvents(Events instance);
-    partial void InsertPhoto(Photo instance);
-    partial void UpdatePhoto(Photo instance);
-    partial void DeletePhoto(Photo instance);
     #endregion
 		
 		public PartyCafeClassesDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["u0103018_partycafeConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["u0103018_partycafeConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -165,6 +165,14 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
+		public System.Data.Linq.Table<Photo> Photos
+		{
+			get
+			{
+				return this.GetTable<Photo>();
+			}
+		}
+		
 		public System.Data.Linq.Table<GalleryHashtag> GalleryHashtags
 		{
 			get
@@ -194,14 +202,6 @@ namespace PartyCafe.Site.DBUtils
 			get
 			{
 				return this.GetTable<Events>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Photo> Photos
-		{
-			get
-			{
-				return this.GetTable<Photo>();
 			}
 		}
 	}
@@ -2459,9 +2459,9 @@ namespace PartyCafe.Site.DBUtils
 		
 		private string _name;
 		
-		private EntityRef<Events> _Events;
-		
 		private EntityRef<Photo> _Photo;
+		
+		private EntityRef<Events> _Events;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2479,8 +2479,8 @@ namespace PartyCafe.Site.DBUtils
 		
 		public EventPhoto()
 		{
-			this._Events = default(EntityRef<Events>);
 			this._Photo = default(EntityRef<Photo>);
+			this._Events = default(EntityRef<Events>);
 			OnCreated();
 		}
 		
@@ -2572,40 +2572,6 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhoto", Storage="_Events", ThisKey="IdEvent", OtherKey="IdRecord", IsForeignKey=true)]
-		public Events Events
-		{
-			get
-			{
-				return this._Events.Entity;
-			}
-			set
-			{
-				Events previousValue = this._Events.Entity;
-				if (((previousValue != value) 
-							|| (this._Events.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Events.Entity = null;
-						previousValue.EventPhoto.Remove(this);
-					}
-					this._Events.Entity = value;
-					if ((value != null))
-					{
-						value.EventPhoto.Add(this);
-						this._IdEvent = value.IdRecord;
-					}
-					else
-					{
-						this._IdEvent = default(int);
-					}
-					this.SendPropertyChanged("Events");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_EventPhoto", Storage="_Photo", ThisKey="IdPhoto", OtherKey="IdRecord", IsForeignKey=true)]
 		public Photo Photo
 		{
@@ -2640,6 +2606,40 @@ namespace PartyCafe.Site.DBUtils
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Events_EventPhoto", Storage="_Events", ThisKey="IdEvent", OtherKey="IdRecord", IsForeignKey=true)]
+		public Events Events
+		{
+			get
+			{
+				return this._Events.Entity;
+			}
+			set
+			{
+				Events previousValue = this._Events.Entity;
+				if (((previousValue != value) 
+							|| (this._Events.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Events.Entity = null;
+						previousValue.EventPhoto.Remove(this);
+					}
+					this._Events.Entity = value;
+					if ((value != null))
+					{
+						value.EventPhoto.Add(this);
+						this._IdEvent = value.IdRecord;
+					}
+					else
+					{
+						this._IdEvent = default(int);
+					}
+					this.SendPropertyChanged("Events");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2658,6 +2658,436 @@ namespace PartyCafe.Site.DBUtils
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Photos")]
+	public partial class Photo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IdRecord;
+		
+		private string _FileName;
+		
+		private string _Path;
+		
+		private string _UserCreate;
+		
+		private string _UserUpdate;
+		
+		private System.DateTime _DateCreate;
+		
+		private System.Nullable<System.DateTime> _DateUpdate;
+		
+		private EntitySet<Games> _Games;
+		
+		private EntitySet<MenuGroups> _MenuGroups;
+		
+		private EntitySet<MenuItems> _MenuItems;
+		
+		private EntitySet<Gallery> _Galleries;
+		
+		private EntitySet<Service> _Services;
+		
+		private EntitySet<ServicePhoto> _ServicePhotos;
+		
+		private EntitySet<EventPhoto> _EventPhotos;
+		
+		private EntitySet<Events> _Events;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdRecordChanging(int value);
+    partial void OnIdRecordChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    partial void OnPathChanging(string value);
+    partial void OnPathChanged();
+    partial void OnUserCreateChanging(string value);
+    partial void OnUserCreateChanged();
+    partial void OnUserUpdateChanging(string value);
+    partial void OnUserUpdateChanged();
+    partial void OnDateCreateChanging(System.DateTime value);
+    partial void OnDateCreateChanged();
+    partial void OnDateUpdateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateUpdateChanged();
+    #endregion
+		
+		public Photo()
+		{
+			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
+			this._MenuGroups = new EntitySet<MenuGroups>(new Action<MenuGroups>(this.attach_MenuGroups), new Action<MenuGroups>(this.detach_MenuGroups));
+			this._MenuItems = new EntitySet<MenuItems>(new Action<MenuItems>(this.attach_MenuItems), new Action<MenuItems>(this.detach_MenuItems));
+			this._Galleries = new EntitySet<Gallery>(new Action<Gallery>(this.attach_Galleries), new Action<Gallery>(this.detach_Galleries));
+			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
+			this._ServicePhotos = new EntitySet<ServicePhoto>(new Action<ServicePhoto>(this.attach_ServicePhotos), new Action<ServicePhoto>(this.detach_ServicePhotos));
+			this._EventPhotos = new EntitySet<EventPhoto>(new Action<EventPhoto>(this.attach_EventPhotos), new Action<EventPhoto>(this.detach_EventPhotos));
+			this._Events = new EntitySet<Events>(new Action<Events>(this.attach_Events), new Action<Events>(this.detach_Events));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRecord", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdRecord
+		{
+			get
+			{
+				return this._IdRecord;
+			}
+			set
+			{
+				if ((this._IdRecord != value))
+				{
+					this.OnIdRecordChanging(value);
+					this.SendPropertyChanging();
+					this._IdRecord = value;
+					this.SendPropertyChanged("IdRecord");
+					this.OnIdRecordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string FileName
+		{
+			get
+			{
+				return this._FileName;
+			}
+			set
+			{
+				if ((this._FileName != value))
+				{
+					this.OnFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._FileName = value;
+					this.SendPropertyChanged("FileName");
+					this.OnFileNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Path", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
+		public string Path
+		{
+			get
+			{
+				return this._Path;
+			}
+			set
+			{
+				if ((this._Path != value))
+				{
+					this.OnPathChanging(value);
+					this.SendPropertyChanging();
+					this._Path = value;
+					this.SendPropertyChanged("Path");
+					this.OnPathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserCreate", DbType="NVarChar(50)")]
+		public string UserCreate
+		{
+			get
+			{
+				return this._UserCreate;
+			}
+			set
+			{
+				if ((this._UserCreate != value))
+				{
+					this.OnUserCreateChanging(value);
+					this.SendPropertyChanging();
+					this._UserCreate = value;
+					this.SendPropertyChanged("UserCreate");
+					this.OnUserCreateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserUpdate", DbType="NVarChar(50)")]
+		public string UserUpdate
+		{
+			get
+			{
+				return this._UserUpdate;
+			}
+			set
+			{
+				if ((this._UserUpdate != value))
+				{
+					this.OnUserUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._UserUpdate = value;
+					this.SendPropertyChanged("UserUpdate");
+					this.OnUserUpdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreate", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreate
+		{
+			get
+			{
+				return this._DateCreate;
+			}
+			set
+			{
+				if ((this._DateCreate != value))
+				{
+					this.OnDateCreateChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreate = value;
+					this.SendPropertyChanged("DateCreate");
+					this.OnDateCreateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateUpdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateUpdate
+		{
+			get
+			{
+				return this._DateUpdate;
+			}
+			set
+			{
+				if ((this._DateUpdate != value))
+				{
+					this.OnDateUpdateChanging(value);
+					this.SendPropertyChanging();
+					this._DateUpdate = value;
+					this.SendPropertyChanged("DateUpdate");
+					this.OnDateUpdateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Games", Storage="_Games", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<Games> Games
+		{
+			get
+			{
+				return this._Games;
+			}
+			set
+			{
+				this._Games.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_MenuGroups", Storage="_MenuGroups", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<MenuGroups> MenuGroups
+		{
+			get
+			{
+				return this._MenuGroups;
+			}
+			set
+			{
+				this._MenuGroups.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_MenuItems", Storage="_MenuItems", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<MenuItems> MenuItems
+		{
+			get
+			{
+				return this._MenuItems;
+			}
+			set
+			{
+				this._MenuItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Gallery", Storage="_Galleries", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<Gallery> Galleries
+		{
+			get
+			{
+				return this._Galleries;
+			}
+			set
+			{
+				this._Galleries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Service", Storage="_Services", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<Service> Services
+		{
+			get
+			{
+				return this._Services;
+			}
+			set
+			{
+				this._Services.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_ServicePhoto", Storage="_ServicePhotos", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<ServicePhoto> ServicePhotos
+		{
+			get
+			{
+				return this._ServicePhotos;
+			}
+			set
+			{
+				this._ServicePhotos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_EventPhoto", Storage="_EventPhotos", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<EventPhoto> EventPhotos
+		{
+			get
+			{
+				return this._EventPhotos;
+			}
+			set
+			{
+				this._EventPhotos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Events", Storage="_Events", ThisKey="IdRecord", OtherKey="IdPhoto")]
+		public EntitySet<Events> Events
+		{
+			get
+			{
+				return this._Events;
+			}
+			set
+			{
+				this._Events.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_Games(Games entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_MenuGroups(MenuGroups entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_MenuGroups(MenuGroups entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_MenuItems(MenuItems entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_MenuItems(MenuItems entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_Galleries(Gallery entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_Galleries(Gallery entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_ServicePhotos(ServicePhoto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_ServicePhotos(ServicePhoto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_EventPhotos(EventPhoto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_EventPhotos(EventPhoto entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
+		}
+		
+		private void attach_Events(Events entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = this;
+		}
+		
+		private void detach_Events(Events entity)
+		{
+			this.SendPropertyChanging();
+			entity.Photo = null;
 		}
 	}
 	
@@ -3537,460 +3967,6 @@ namespace PartyCafe.Site.DBUtils
 		{
 			this.SendPropertyChanging();
 			entity.Events = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Photos")]
-	public partial class Photo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IdRecord;
-		
-		private string _FileName;
-		
-		private string _Path;
-		
-		private string _Hashtag;
-		
-		private string _UserCreate;
-		
-		private string _UserUpdate;
-		
-		private System.DateTime _DateCreate;
-		
-		private System.Nullable<System.DateTime> _DateUpdate;
-		
-		private EntitySet<Games> _Games;
-		
-		private EntitySet<MenuGroups> _MenuGroups;
-		
-		private EntitySet<MenuItems> _MenuItems;
-		
-		private EntitySet<Gallery> _Galleries;
-		
-		private EntitySet<Service> _Services;
-		
-		private EntitySet<ServicePhoto> _ServicePhotos;
-		
-		private EntitySet<EventPhoto> _EventPhotos;
-		
-		private EntitySet<Events> _Events;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdRecordChanging(int value);
-    partial void OnIdRecordChanged();
-    partial void OnFileNameChanging(string value);
-    partial void OnFileNameChanged();
-    partial void OnPathChanging(string value);
-    partial void OnPathChanged();
-    partial void OnHashtagChanging(string value);
-    partial void OnHashtagChanged();
-    partial void OnUserCreateChanging(string value);
-    partial void OnUserCreateChanged();
-    partial void OnUserUpdateChanging(string value);
-    partial void OnUserUpdateChanged();
-    partial void OnDateCreateChanging(System.DateTime value);
-    partial void OnDateCreateChanged();
-    partial void OnDateUpdateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateUpdateChanged();
-    #endregion
-		
-		public Photo()
-		{
-			this._Games = new EntitySet<Games>(new Action<Games>(this.attach_Games), new Action<Games>(this.detach_Games));
-			this._MenuGroups = new EntitySet<MenuGroups>(new Action<MenuGroups>(this.attach_MenuGroups), new Action<MenuGroups>(this.detach_MenuGroups));
-			this._MenuItems = new EntitySet<MenuItems>(new Action<MenuItems>(this.attach_MenuItems), new Action<MenuItems>(this.detach_MenuItems));
-			this._Galleries = new EntitySet<Gallery>(new Action<Gallery>(this.attach_Galleries), new Action<Gallery>(this.detach_Galleries));
-			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
-			this._ServicePhotos = new EntitySet<ServicePhoto>(new Action<ServicePhoto>(this.attach_ServicePhotos), new Action<ServicePhoto>(this.detach_ServicePhotos));
-			this._EventPhotos = new EntitySet<EventPhoto>(new Action<EventPhoto>(this.attach_EventPhotos), new Action<EventPhoto>(this.detach_EventPhotos));
-			this._Events = new EntitySet<Events>(new Action<Events>(this.attach_Events), new Action<Events>(this.detach_Events));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdRecord", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdRecord
-		{
-			get
-			{
-				return this._IdRecord;
-			}
-			set
-			{
-				if ((this._IdRecord != value))
-				{
-					this.OnIdRecordChanging(value);
-					this.SendPropertyChanging();
-					this._IdRecord = value;
-					this.SendPropertyChanged("IdRecord");
-					this.OnIdRecordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string FileName
-		{
-			get
-			{
-				return this._FileName;
-			}
-			set
-			{
-				if ((this._FileName != value))
-				{
-					this.OnFileNameChanging(value);
-					this.SendPropertyChanging();
-					this._FileName = value;
-					this.SendPropertyChanged("FileName");
-					this.OnFileNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Path", DbType="NVarChar(500) NOT NULL", CanBeNull=false)]
-		public string Path
-		{
-			get
-			{
-				return this._Path;
-			}
-			set
-			{
-				if ((this._Path != value))
-				{
-					this.OnPathChanging(value);
-					this.SendPropertyChanging();
-					this._Path = value;
-					this.SendPropertyChanged("Path");
-					this.OnPathChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hashtag", DbType="NVarChar(256)")]
-		public string Hashtag
-		{
-			get
-			{
-				return this._Hashtag;
-			}
-			set
-			{
-				if ((this._Hashtag != value))
-				{
-					this.OnHashtagChanging(value);
-					this.SendPropertyChanging();
-					this._Hashtag = value;
-					this.SendPropertyChanged("Hashtag");
-					this.OnHashtagChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserCreate", DbType="NVarChar(50)")]
-		public string UserCreate
-		{
-			get
-			{
-				return this._UserCreate;
-			}
-			set
-			{
-				if ((this._UserCreate != value))
-				{
-					this.OnUserCreateChanging(value);
-					this.SendPropertyChanging();
-					this._UserCreate = value;
-					this.SendPropertyChanged("UserCreate");
-					this.OnUserCreateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserUpdate", DbType="NVarChar(50)")]
-		public string UserUpdate
-		{
-			get
-			{
-				return this._UserUpdate;
-			}
-			set
-			{
-				if ((this._UserUpdate != value))
-				{
-					this.OnUserUpdateChanging(value);
-					this.SendPropertyChanging();
-					this._UserUpdate = value;
-					this.SendPropertyChanged("UserUpdate");
-					this.OnUserUpdateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreate", DbType="DateTime NOT NULL")]
-		public System.DateTime DateCreate
-		{
-			get
-			{
-				return this._DateCreate;
-			}
-			set
-			{
-				if ((this._DateCreate != value))
-				{
-					this.OnDateCreateChanging(value);
-					this.SendPropertyChanging();
-					this._DateCreate = value;
-					this.SendPropertyChanged("DateCreate");
-					this.OnDateCreateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateUpdate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateUpdate
-		{
-			get
-			{
-				return this._DateUpdate;
-			}
-			set
-			{
-				if ((this._DateUpdate != value))
-				{
-					this.OnDateUpdateChanging(value);
-					this.SendPropertyChanging();
-					this._DateUpdate = value;
-					this.SendPropertyChanged("DateUpdate");
-					this.OnDateUpdateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Games", Storage="_Games", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<Games> Games
-		{
-			get
-			{
-				return this._Games;
-			}
-			set
-			{
-				this._Games.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_MenuGroups", Storage="_MenuGroups", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<MenuGroups> MenuGroups
-		{
-			get
-			{
-				return this._MenuGroups;
-			}
-			set
-			{
-				this._MenuGroups.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_MenuItems", Storage="_MenuItems", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<MenuItems> MenuItems
-		{
-			get
-			{
-				return this._MenuItems;
-			}
-			set
-			{
-				this._MenuItems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Gallery", Storage="_Galleries", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<Gallery> Galleries
-		{
-			get
-			{
-				return this._Galleries;
-			}
-			set
-			{
-				this._Galleries.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Service", Storage="_Services", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<Service> Services
-		{
-			get
-			{
-				return this._Services;
-			}
-			set
-			{
-				this._Services.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_ServicePhoto", Storage="_ServicePhotos", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<ServicePhoto> ServicePhotos
-		{
-			get
-			{
-				return this._ServicePhotos;
-			}
-			set
-			{
-				this._ServicePhotos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_EventPhoto", Storage="_EventPhotos", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<EventPhoto> EventPhotos
-		{
-			get
-			{
-				return this._EventPhotos;
-			}
-			set
-			{
-				this._EventPhotos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Photo_Events", Storage="_Events", ThisKey="IdRecord", OtherKey="IdPhoto")]
-		public EntitySet<Events> Events
-		{
-			get
-			{
-				return this._Events;
-			}
-			set
-			{
-				this._Events.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Games(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_Games(Games entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_MenuGroups(MenuGroups entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_MenuGroups(MenuGroups entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_MenuItems(MenuItems entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_MenuItems(MenuItems entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_Galleries(Gallery entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_Galleries(Gallery entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_Services(Service entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_Services(Service entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_ServicePhotos(ServicePhoto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_ServicePhotos(ServicePhoto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_EventPhotos(EventPhoto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_EventPhotos(EventPhoto entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
-		}
-		
-		private void attach_Events(Events entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = this;
-		}
-		
-		private void detach_Events(Events entity)
-		{
-			this.SendPropertyChanging();
-			entity.Photo = null;
 		}
 	}
 }

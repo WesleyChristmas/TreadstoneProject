@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Ajax.Utilities;
 
 namespace PartyCafe.Site.DBUtils
 {
@@ -13,6 +12,7 @@ namespace PartyCafe.Site.DBUtils
         public string photoPath;
         public string hashtag;
         public int idPhoto;
+        public List<string> hashtags;
     }
 
     public class Hashtag
@@ -47,8 +47,7 @@ namespace PartyCafe.Site.DBUtils
                                 e.IdPhoto,
                                 e.Description,
                                 path = PhotoUtils.GetRelativeUrl(p.Path),
-                                //p.Hashtag,
-                                e.Tag
+                                hashtags = e.GalleryHashtags.Select(x => x.Hashtag)
                             })
             ).ToList();
 
@@ -69,8 +68,8 @@ namespace PartyCafe.Site.DBUtils
                 name = e.Name,
                 idPhoto = e.IdPhoto,
                 photoPath = PhotoUtils.GetRelativeUrl(e.path),
-                //hashtag = e.Hashtag,
-                description = e.Description
+                description = e.Description,
+                hashtags = e.hashtags.ToList()
             }).ToList();
         }
 
@@ -98,6 +97,7 @@ namespace PartyCafe.Site.DBUtils
                 idPhoto = x.IdPhoto,
                 photoPath = PhotoUtils.GetRelativeUrl(x.Photo.Path),
                 description = x.Description,
+                hashtags = x.GalleryHashtags.Select(tag => tag.Hashtag).ToList()
             }).ToList();
         }
 
@@ -107,13 +107,10 @@ namespace PartyCafe.Site.DBUtils
             {
                 Name = gallery.name ?? string.Empty,
                 Description = gallery.description ?? string.Empty,
-                IdPhoto = (image.fileName != null) ? PhotoUtils.InsertImage(image, userCreate) : 0,
+                IdPhoto = (image != null) ? PhotoUtils.InsertImage(image, userCreate) : 0,
                 DateCreate = DateTime.Now,
                 UserCreate = userCreate
             };
-
-            if (newGallery.IdPhoto != 0 && image.hashtag != null)
-                PhotoUtils.Edithashtag(newGallery.IdPhoto, image.hashtag);
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Gallery.InsertOnSubmit(newGallery);
@@ -134,7 +131,7 @@ namespace PartyCafe.Site.DBUtils
             curGallery.DateUpdate = DateTime.Now;
             curGallery.UserUpdate = string.IsNullOrWhiteSpace(userUpdate) ? "Admin" : userUpdate;
 
-            if (image.fileName != null)
+            if (image != null)
             { 
                 if (curGallery.IdPhoto > 0)
                 {
@@ -145,9 +142,6 @@ namespace PartyCafe.Site.DBUtils
                     curGallery.IdPhoto = PhotoUtils.InsertImage(image, userUpdate);
                 }
             }
-            if (image.hashtag != null && curGallery.IdPhoto != 0)
-                PhotoUtils.Edithashtag(curGallery.IdPhoto, image.hashtag);
-
             dbContext.SubmitChanges();
         }
 

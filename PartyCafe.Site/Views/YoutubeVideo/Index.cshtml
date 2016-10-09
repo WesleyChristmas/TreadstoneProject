@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Видео";
+}
+
+<link href="~/Content/css/youtubevideo-style.css" rel="stylesheet" />
+
+<script src="~/Scripts/AngularControllers/YoutubeVideo/YoutubevideoController.js" ></script>
+
+<div ng-app="YoutubeApp" ng-controller="YoutubeController">
+    <div class="row" ng-show="!ShowPlayer">
+        <div class="col-sm-4 spec-col" ng-repeat="video in Video">
+            <div class="video-ctn">
+                <img ng-src="{{video.Image}}"/>
+            </div>
+            <div class="video-info" ng-click="SelectVideo($index)">
+                <div class="video-play">
+                    <img src="~/Content/images/youtube.png"/>
+                </div>
+                <div class="video-title">
+                    {{video.Title}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="more-video" class="row" ng-click="MoreVideo()" ng-show="Api.NextPage!=null" >
+    Загрузить еще...
+    </div>
+
+    <div class="player" ng-show="ShowPlayer">
+        <iframe id="youtubevideo" frameBorder="0" ng-src="{{SelectedVideo}}" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+        <div class="close" ng-click="CloseVideo()">X</div>
+    </div>
+</div>
+
+

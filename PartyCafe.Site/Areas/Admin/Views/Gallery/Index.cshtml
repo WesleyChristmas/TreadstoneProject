@@ -28,36 +28,38 @@
     <br/>
 
     <div class="row">
+
+        <div class="col-md-4 admin-row">
+            <div class="photo-add">
+                <form name="photoaddForm">
+                    <input type="file" name="newphoto" class="form-control" required/>
+                    Название:
+                    <input type="text" class="form-control" ng-model="NewPhoto.name" placeholder="фотография" required/>
+                    #:
+                    <input type="text" class="form-control" ng-model="NewPhoto.tag" placeholder="хештег"/>
+                    <div class="btn-ctn">
+                        <button class="btn btn-default" ng-click="AddPhoto()">Добавить</button>
+                    </div>
+                </form>
+                <div class="error-ctn">{{SubPhotoError}}</div>
+            </div>
+        </div>
+
         <div class="col-md-4 admin-row" ng-repeat="photo in PhotoGallery">
             <div class="photo-ctn photo-ctn-deletable">
                 <img ng-src="{{photo.photoPath}}">
                 <div class="photo-deletable">
-                    <span ng-click="DeletePhoto($index)">X</span>
+                    <span ng-click="DeletePhoto($index)" ng-click="DeletePhoto($index)">X</span>
                     <div class="admin-photo-ctn">
                         Название:
                         <input type="text" ng-model="photo.name"/>
                         #:
-                        <input type="text" ng-model="photo.tag"/>
+                        <input type="text" ng-model="photo.hashtags[0]"/>
                         <div class="btn-ctn">
-                            <button>Сохранить</button>
+                            <button ng-click="UpdatePhoto($index)">Сохранить</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4 admin-row">
-            <div class="photo-add">
-                <form name="photoaddForm">
-                    <input type="file" class="form-control"/>
-                    Название:
-                    <input type="text" class="form-control" ng-model="photo.name" placeholder="вечеринка"/>
-                    #:
-                    <input type="text" class="form-control" ng-model="photo.tag" placeholder="вечеринка"/>
-                    <div class="btn-ctn">
-                        <button class="btn btn-default">Добавить</button>
-                    </div>
-                </form>
-                <div class="error-ctn">{{SubPhotoError}}</div>
             </div>
         </div>
     </div>

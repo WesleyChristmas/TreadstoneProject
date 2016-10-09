@@ -11,7 +11,6 @@ namespace PartyCafe.Site.DBUtils
     {
         public string fileName;
         public byte[] data;
-        public string hashtag;
     }
 
     public static class PhotoUtils
@@ -61,16 +60,6 @@ namespace PartyCafe.Site.DBUtils
             db.SubmitChanges();
 
             return photo.IdRecord;
-        }
-
-        public static void Edithashtag(int id, string newHashtag)
-        {
-            var db = MainUtils.GetDBContext();
-            var curPhoto = (from p in db.Photos
-                            where p.IdRecord == id
-                            select p).SingleOrDefault();
-            curPhoto.Hashtag = newHashtag;
-            db.SubmitChanges();
         }
 
         public static void EditImage(int id, PCPhoto image, string userUpdate)

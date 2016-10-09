@@ -21,18 +21,19 @@
 #contact-data .sys{
     padding-top:10px;
     padding-bottom:0px;
-    color:#fff;
+    color:#d4d4d4;
     font-weight:bold;
-    font-style: italic;
+    font-size:14px;
 }
 
 #contact-data .data{
     padding-top:0px;
     padding-bottom:10px;
     color:#fff;
-    font-size:15px;
+    font-size:14px;
+    font-weight:bold;
 
-    cursor:text;
+    cursor:pointer;
 }
 
 #social-links{

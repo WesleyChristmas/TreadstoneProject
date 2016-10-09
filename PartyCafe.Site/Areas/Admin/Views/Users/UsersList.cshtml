@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "";
+}
+
+<h1>Учетные записи</h1>
+<h2></h2>
+
+<button class="btn btn-default" ng-click="AddNew()">+ Добавить учетную запись</button>
+<hr />
+<div class="row admin-spec-row" ng-repeat="usr in Users" ng-click="Edit($index)">
+    <div class="row-middle">
+        {{usr.UserName}}
+    </div>
+</div>
+

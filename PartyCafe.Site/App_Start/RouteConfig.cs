@@ -9,6 +9,8 @@ namespace PartyCafe.Site
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            
+
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
