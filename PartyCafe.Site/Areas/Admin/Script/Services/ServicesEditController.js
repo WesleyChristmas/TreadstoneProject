@@ -48,6 +48,7 @@ servicesApp.controller("ServicesEditController",function($scope,$http,$location,
 
         var fd = new FormData();
         fd.append('id',$scope.Service.idRecord);
+        fd.append('name', '');
         fd.append('file', photo);
 
         $http.post('Services/AddPhotoToServices', fd, {

@@ -40,6 +40,7 @@ function Calendar(entity){
     this.Date = CorrectDate(entity.DateEvent);
     this.Time = CorrectTime(entity.TimeEvent);
     this.PhotoPath = entity.PhotoPath;
+    this.IsOpen = entity.IsOpen;
 }
 
 function CorrectDate(date) {
