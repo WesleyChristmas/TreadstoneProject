@@ -452,6 +452,7 @@
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItemNew.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuEdit.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuNew.cshtml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Properties\PublishProfiles\Physical Path.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />
