@@ -30,7 +30,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddGallery(string name, string desc,string hashtag)
+        public string AddGallery(string name, string desc)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 if (photo == null) return "bad";
 
                 GalleryUtils.InsertGallery(
-                    new PCGallery {name = name, description = desc, hashtags = new List<string> { hashtag } },
+                    new PCGallery() {name = name, description = desc},
                     photo,
                     User.Identity.Name
                 );
@@ -51,25 +51,23 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string UpdateGallery(int id, string name, string desc, string hashtag)
+        public string UpdateGallery(int id, string name, string desc)
         {
             try
             {
-                //var photo = ControllerUtils.GetPhotoEntity(Request.Files);
-                //if (photo == null) return "bad";
+                var photo = ControllerUtils.GetPhotoEntity(Request.Files);
+                if (photo == null) return "bad";
 
                 GalleryUtils.EditGallery(
                     new PCGallery()
                     {
                         idRecord = id,
                         name = name,
-                        description = desc,
+                        description = desc
                     },
-                    null,
-                    //photo,
+                    photo,
                     User.Identity.Name
                 );
-                GalleryUtils.SetHashtags(id, new List<string> { hashtag });
                 return "ok";
             }
             catch (Exception ex)
@@ -78,7 +76,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         public string DeleteGalleryItem(int id)
         {
             try

@@ -10,6 +10,6 @@ $(document).ready(function () {
         });
 
         $("button").click(function(){
-            $("#anchor").ScrollTo();
+            $("#test").ScrollTo();
         });
     });

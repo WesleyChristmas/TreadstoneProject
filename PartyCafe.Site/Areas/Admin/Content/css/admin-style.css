@@ -13,12 +13,6 @@ input[type="text"] {
     max-width:100% !important;
 }
 
-input[type="checkbox"]
-{
-    width:20px;
-    height:20px;
-}
-
 textarea{
     resize:none;
     max-width:100% !important;
@@ -239,10 +233,4 @@ footer{
 .tag{
     float:left;
     margin: 0 3px;
-}
-
-.lock{
-    width:25px;
-    height:25px;
-    margin-top:-10px;
 }

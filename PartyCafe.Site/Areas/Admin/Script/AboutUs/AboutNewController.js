@@ -8,7 +8,7 @@ aboutApp.controller("AboutNewController",function($scope,$http, $location){
     }
 
     $scope.SaveChanges = function(){
-        if ($scope.AboutPartForm.$valid){
+        if ($scope.CalendarForm.$valid){
 
             var fd = new FormData();
             fd.append('name', $scope.Service.name);

@@ -1,14 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Учетные записи";
+    ViewBag.Title = "Редактирование учетной записи Администратора";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
-<script src="~/Areas/Admin/Script/Users/UsersController.js" ></script>
-<script src="~/Areas/Admin/Script/Users/UsersListController.js" ></script>
-<script src="~/Areas/Admin/Script/Users/UsersNewController.js" ></script>
-<script src="~/Areas/Admin/Script/Users/UsersEditController.js" ></script>
-
-<div ng-app="UsersApp" ng-controller="UsersController">
+<script src="~/Areas/Admin/Script/UsersController.js"></script>
+<div ng-app="UsersApp">
     <div ng-view></div>
 </div>

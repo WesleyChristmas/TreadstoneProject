@@ -41,6 +41,7 @@ h2{
 
 .food-row{
     background-color:rgba(0,0,0,0.5);
+    border:5px solid #000;
     font-style:italic;
     margin:10px;
 }

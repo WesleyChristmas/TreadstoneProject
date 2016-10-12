@@ -265,14 +265,10 @@
     <Content Include="Areas\Admin\Script\Services\ServicesEditController.js" />
     <Content Include="Areas\Admin\Script\Services\ServicesListController.js" />
     <Content Include="Areas\Admin\Script\Services\ServicesNewController.js" />
-    <Content Include="Areas\Admin\Script\Users\UsersController.js" />
-    <Content Include="Areas\Admin\Script\Users\UsersEditController.js" />
-    <Content Include="Areas\Admin\Script\Users\UsersListController.js" />
-    <Content Include="Areas\Admin\Script\Users\UsersNewController.js" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Admin\Views\Users\UsersList.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\UsersHome.cshtml" />
     <Content Include="Content\css\404-style.css" />
     <Content Include="Content\css\about-us-style.css" />
     <Content Include="Content\css\animate.min.css" />
@@ -438,7 +434,7 @@
     <Content Include="Areas\Admin\Views\Calendar\CalendarList.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\CalendarNew.cshtml" />
     <Content Include="Areas\Admin\Views\Calendar\CalendarEdit.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\UsersNew.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\UsersAdd.cshtml" />
     <Content Include="Areas\Admin\Views\Users\UsersEdit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AboutUs\AboutList.cshtml" />
@@ -452,7 +448,6 @@
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItemNew.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuEdit.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuNew.cshtml" />
-    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\partycafe.pubxml" />
     <None Include="Properties\PublishProfiles\Physical Path.pubxml" />
     <None Include="Scripts\jquery\jquery-2.1.4.intellisense.js" />

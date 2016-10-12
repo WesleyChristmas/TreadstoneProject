@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using PartyCafe.Site.Areas.Admin.Core.Utils;
 using PartyCafe.Site.Models;
@@ -14,14 +13,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult UsersList()
+        public ActionResult UsersHome()
         {
-            return View("UsersList");
+            return View("UsersHome");
         }
         [HttpGet]
-        public ActionResult UsersNew()
+        public ActionResult UsersAdd()
         {
-            return View("UsersNew");
+            return View("UsersAdd");
         }
         [HttpGet]
         public ActionResult UsersEdit()
@@ -40,28 +39,20 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return Json(UserUtils.GetAllRoles(), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult GetUserDetail(string username)
         {
             return Json(UserUtils.GetUserDetail(username), JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
-        public string ChangePassword(string userName, string pass, string repeatPass)
+        public string ChangePassword(RegisterViewModel model)
         {
-            var model = new RegisterViewModel
-            {
-                UserName = userName,
-                Password = pass,
-                ConfirmPassword = repeatPass
-            };
-
             return UserUtils.ChangePassword(model);
         }
-        [HttpGet]
+        [HttpPost]
         public string DeleteUser(string username)
         {
-            return username == "admin" ? "Невозможно удалить данную учетную запись" :  UserUtils.DeleteUser(username);
+            return UserUtils.DeleteUser(username);
         }
         /*[HttpPost]
         public string UpdateUser(UserSaveEdit saveedit)
@@ -69,16 +60,16 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return UserUtils.EditUser(saveedit);
         } */
         [HttpPost]
-        public string AddUser(string userName, string pass, string repeatPass)
+        public string AddUser(RegisterViewModel model, string description, List<string> roles)
         {
-            var model = new RegisterViewModel
+            if (ModelState.IsValid)
             {
-                UserName = userName,
-                Password = pass,
-                ConfirmPassword = repeatPass
-            };
-
-            return UserUtils.AddUser(model, "", null);
+                return UserUtils.AddUser(model, description, roles); 
+            }
+            else
+            {
+                return "bad";
+            }
         }
     }
 }
