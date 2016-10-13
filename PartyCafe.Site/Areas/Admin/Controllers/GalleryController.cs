@@ -63,13 +63,13 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     {
                         idRecord = id,
                         name = name,
-                        description = desc,
-                        hashtags = new List<string> { hashtag }
+                        description = desc
                     },
                     null,
                     //photo,
                     User.Identity.Name
                 );
+                GalleryUtils.SetHashtags(id, new List<string> { hashtag });
                 return "ok";
             }
             catch (Exception ex)
