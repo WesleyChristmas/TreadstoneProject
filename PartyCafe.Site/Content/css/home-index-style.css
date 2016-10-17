@@ -1,7 +1,7 @@
 
 #logo-lg{
     text-align: center;
-    margin-top:60px;
+    margin-top:100px;
 }
 
 #logo-lg img{
@@ -31,16 +31,15 @@
 }
 
 .owl-container {
-    margin: 20px auto 0 auto;
+    margin: 60px auto 0 auto;
     max-width: 800px;
     text-align: center;
     color:#fff;
     overflow:hidden;
     cursor:default;
 }
-.owl-container h1 { font-size: 40px; margin-bottom: 0px; }
 .owl-container p { margin-top: 20px; }
-.owl-carousel h1 { font-size: 30px; margin-bottom: 0; }
+.owl-carousel h1 { font-size: 40px; margin-bottom: 0; }
 
 .btn-ctn{
     width:100%;
@@ -62,7 +61,7 @@
     }
 }
 
-@media (max-height:715px){
+@media (max-height:770px){
     #inst-ctn{
         position:relative;
         width:100%;

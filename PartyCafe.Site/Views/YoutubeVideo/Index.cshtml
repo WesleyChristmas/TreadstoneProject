@@ -10,9 +10,7 @@
 <div ng-app="YoutubeApp" ng-controller="YoutubeController">
     <div class="row" ng-show="!ShowPlayer">
         <div class="col-sm-4 spec-col" ng-repeat="video in Video">
-            <div class="video-ctn">
-                <img ng-src="{{video.Image}}"/>
-            </div>
+
             <div class="video-info" ng-click="SelectVideo($index)">
                 <div class="video-play">
                     <img src="~/Content/images/youtube.png"/>
@@ -20,6 +18,10 @@
                 <div class="video-title">
                     {{video.Title}}
                 </div>
+            </div>
+
+            <div class="video-ctn">
+                <img ng-src="{{video.Image}}"/>
             </div>
         </div>
     </div>

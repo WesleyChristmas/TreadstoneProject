@@ -56,7 +56,8 @@ aboutusapp.controller("AboutUsDetailedController",function($scope,$http,$routePa
 
         $scope.BackgroundStyle = {
             "background-image" : "url(" + $scope.Service.Photo + ")",
-            "background-size" : "100% auto"
+            "background-size" : "100% auto",
+            "background-position" : "center"
         };
 
     });

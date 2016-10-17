@@ -3,8 +3,8 @@
     Layout = null;
 }
 
-<div id="srv-dtl-img" class="row">
-    <img ng-src="{{Service.Photo}}" />
+<div id="srv-dtl-img" ng-style="BackgroundStyle" class="row">
+    <!-- <img ng-src="{{Service.Photo}}" /> -->
 </div>
 
 <div id="src-content">
@@ -80,9 +80,11 @@
 
 <!-- Photo part -->
 <div id="srv-photos" class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="photo in Service.Photos">
-        <a class="fancybox" href="{{photo.photoPath}}" rel="group" data-lightbox="gallery" data-title="{{item.name}}">
+    <div class="col-sm-6 col-md-4 photo-col" ng-repeat="photo in Service.Photos">
+        <div class="photo-ctn">
+            <a class="fancybox" href="{{photo.photoPath}}" rel="group" data-lightbox="gallery" data-title="{{item.name}}">
                 <img ng-src="{{photo.photoPath}}">
-        </a>
+            </a>
+        </div>
     </div>
 </div>

@@ -5,13 +5,13 @@
 
 <div class="row services-row">
     <div class="col-xs-12 col-md-4 spec-col" ng-click="GetDetailed($index)" ng-repeat="item in Services">
-        <div class="service-item">
-            <img ng-src="{{item.photoPath}}" />
-        </div>
         <div class="services-header">
             <div>
                 {{item.name}}
             </div>
+        </div>
+        <div class="service-item">
+            <img ng-src="{{item.photoPath}}" />
         </div>
     </div>
 </div>

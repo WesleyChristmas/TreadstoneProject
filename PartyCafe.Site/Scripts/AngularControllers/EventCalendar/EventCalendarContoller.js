@@ -28,9 +28,20 @@ eventcalendarapp.controller("CalendarController", function ($scope, $http, $loca
     $scope.SelectEvent = function(element){
 
         $scope.Order.ClearValidation();
-        if(!element.item.data.header || !element.item.data.isOpen){
+        if(!element.item.data.header){
             return;
         }
+
+        if(!element.item.data.isOpen)
+        {
+           $scope.Order.ShowClose = true;
+           //$timeout(function(){
+           //     $location.hash('cannot-order');
+           //     $anchorScroll();
+           // },100);
+            return;
+        }
+
         $scope.Order.Show = true;
         $scope.Order.ServiceImg = element.item.data.photo;
         $scope.Order.ServiceName = element.item.data.header;
@@ -67,6 +78,15 @@ eventcalendarapp.controller("CalendarController", function ($scope, $http, $loca
             }
         });
     }
+
+    $scope.GetStyle = function(photo){
+        if(photo == null) return;
+        return {
+            "background-image" :"url(" + photo + ")",
+            "background-size" : "100% auto",
+            "background-position" : "center"
+        }
+    }
 });
 
 
@@ -81,6 +101,7 @@ function Order(){
     this.Promo = null;
 
     this.Show = false;
+    this.ShowClose = false;
     this.ValError = false;
     this.ServerError = false;
     this.Good = false;
@@ -92,6 +113,7 @@ function Order(){
 
     this.ClearValidation = function(){
         this.Show = false;
+        this.ShowClose = false;
         this.ValError = false;
         this.ServerError = false;
         this.Good = false;

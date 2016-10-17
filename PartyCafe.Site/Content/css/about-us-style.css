@@ -36,12 +36,18 @@
     width:100%;
     min-width:400px;
     min-height:300px;
+    transition:transform 0.5s ease;
+    z-index:1;
 }
 
 .service-item{
     width:calc(100%);
     height:300px;
     overflow:hidden;
+}
+
+.service-item:hover img{
+    transform: scale(1.05,1.05);
 }
 
 .services-header{
@@ -54,6 +60,7 @@
     color:white;
     transition:background-color 0.5s ease;
     background-color:rgba(0,0,0,0.4);
+    z-index:10;
 
     cursor:pointer;
 }
@@ -67,9 +74,15 @@
     background-color:rgba(0,0,0,0.4);
 }
 
+
 .services-header:hover{
     transition:background-color 0.5s ease;
     background-color:transparent;
+}
+
+.services-header:hover + .service-item img{
+    transform:scale(1.05,1.05);
+    z-index:1;
 }
 
 /*Detailed part */
@@ -129,16 +142,24 @@
 }
 
 
-#srv-photos div{
-    overflow:hidden;
+#srv-photos .photo-col{
     padding:10px !important;
-    margin-top:10px;
 }
 
-#srv-photos img{
+.photo-ctn{
+    overflow:hidden;
+}
+
+.photo-ctn img{
     width:100%;
     min-width:200px;
     min-height:200px;
+    overflow:hidden;
+    transition:transform 0.5s ease;
+}
+
+.photo-ctn img:hover{
+    transform:scale(1.05,1.05);
 }
 
 .sys-row{

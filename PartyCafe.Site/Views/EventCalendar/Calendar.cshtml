@@ -12,8 +12,8 @@
             <div class="clnd-week" ng-class="item.class">{{item.week}}</div>
             <div class="clnd-day">{{item.day}}</div>
             <div class="clnd-month">{{item.month}}</div>
-            <div class="img-ctn">
-                <img ng-src="{{item.data.photo}}" ng-show="item.data.header" />
+            <div class="img-ctn" ng-style="{{GetStyle(item.data.photo)}}">
+                <!-- <img ng-src="{{item.data.photo}}" ng-show="item.data.header" /> -->
             </div>
             <div class="event-name" ng-show="item.data.header">
                 <img ng-show="!item.data.isOpen" src="~/Content/images/lock.png" />
@@ -24,6 +24,16 @@
         </div>
     </div>
 </div>
+
+<!-- Order part -->
+
+<!-- Cannot order -->
+
+<div id="cannot-order" class="row" ng-show="Order.ShowClose">
+    <div>Это закрытое мероприятие, вы не можете на него зарегистрироваться</div>
+</div>
+
+<!-- Order -->
 
 <div id="order" class="row" ng-show="Order.Show">
     <div id="order-img" class="row">
