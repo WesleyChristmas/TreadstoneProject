@@ -53,6 +53,12 @@ aboutusapp.controller("AboutUsDetailedController",function($scope,$http,$routePa
 
     $http.get("/Services/GetServiceFull?serviceId=" + $routeParams.id).success(function(response){
         $scope.Service = new Service(response);
+
+        $scope.BackgroundStyle = {
+            "background-image" : "url(" + $scope.Service.Photo + ")",
+            "background-size" : "100% auto"
+        };
+
     });
 });
 
