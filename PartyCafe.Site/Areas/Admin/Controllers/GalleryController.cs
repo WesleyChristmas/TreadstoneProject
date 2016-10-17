@@ -63,7 +63,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                     {
                         idRecord = id,
                         name = name,
-                        description = desc,
+                        description = desc
                     },
                     null,
                     //photo,

@@ -111,10 +111,14 @@ namespace PartyCafe.Site.DBUtils
                 DateCreate = DateTime.Now,
                 UserCreate = userCreate
             };
+            
 
             var dbContext = MainUtils.GetDBContext();
             dbContext.Gallery.InsertOnSubmit(newGallery);
             dbContext.SubmitChanges();
+
+            var id = newGallery.IdRecord;
+            GalleryUtils.SetHashtags(id, gallery.hashtags);
         }
 
         public static void EditGallery(PCGallery gallery, PCPhoto image, string userUpdate)
