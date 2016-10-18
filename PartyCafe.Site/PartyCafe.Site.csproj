@@ -275,7 +275,6 @@
     <Content Include="Areas\Admin\Views\Users\UsersList.cshtml" />
     <Content Include="Content\css\404-style.css" />
     <Content Include="Content\css\about-us-style.css" />
-    <Content Include="Content\css\animate.min.css" />
     <Content Include="Content\css\bg-video-style.css" />
     <Content Include="Content\css\bootstrap-datepicker.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -303,24 +302,7 @@
     <Content Include="Content\css\owl.transitions.css" />
     <Content Include="Content\css\photo-gallery-style.css" />
     <Content Include="Content\css\services-style.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\images\ajax-loader.gif" />
-    <Content Include="Content\images\blog.png" />
-    <Content Include="Content\images\blogging1.png" />
-    <Content Include="Content\images\event.png" />
-    <Content Include="Content\images\events.png" />
-    <Content Include="Content\images\gallery.png" />
-    <Content Include="Content\images\gallery\1.jpg" />
-    <Content Include="Content\images\gallery\2.jpg" />
-    <Content Include="Content\images\gallery\3.jpg" />
-    <Content Include="Content\images\gallery\4.jpg" />
-    <Content Include="Content\images\gallery\5.jpg" />
-    <Content Include="Content\images\gallery\6.jpg" />
-    <Content Include="Content\images\gallery\7.jpg" />
-    <Content Include="Content\images\game.png" />
-    <Content Include="Content\images\head_line.jpg" />
-    <Content Include="Content\images\home.png" />
-    <Content Include="Content\images\img01.png" />
+    <Content Include="Content\css\youtubevideo-style.css" />
     <Content Include="Content\images\lightbox\blank.gif" />
     <Content Include="Content\images\lightbox\close.png" />
     <Content Include="Content\images\lightbox\loading.gif" />
@@ -328,30 +310,13 @@
     <Content Include="Content\images\lightbox\next1.png" />
     <Content Include="Content\images\lightbox\prev.png" />
     <Content Include="Content\images\lightbox\prev1.png" />
-    <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\menu.png" />
-    <Content Include="Content\images\menu1.png" />
-    <Content Include="Content\images\next.png" />
     <Content Include="Content\images\pc-logo-lg.png" />
     <Content Include="Content\images\pc-logo-sm.png" />
-    <Content Include="Content\images\prev.png" />
-    <Content Include="Content\images\ui-bg_gloss-wave_30_3d3644_500x100.png" />
-    <Content Include="Content\images\ui-bg_highlight-soft_100_dcd9de_1x100.png" />
-    <Content Include="Content\images\ui-bg_highlight-soft_100_eae6ea_1x100.png" />
-    <Content Include="Content\images\ui-bg_highlight-soft_25_30273a_1x100.png" />
-    <Content Include="Content\images\ui-bg_highlight-soft_45_5f5964_1x100.png" />
-    <Content Include="Content\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\images\ui-icons_734d99_256x240.png" />
-    <Content Include="Content\images\ui-icons_8d78a5_256x240.png" />
-    <Content Include="Content\images\ui-icons_a8a3ae_256x240.png" />
-    <Content Include="Content\images\ui-icons_ebccce_256x240.png" />
-    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\video\video.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\entypo-selected.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\css\Site.css" />
     <Content Include="Scripts\AngularControllers\AboutUsController.js" />
     <Content Include="Scripts\AngularControllers\ContactController.js" />
     <Content Include="Scripts\AngularControllers\EventCalendar\EventCalendarContoller.js" />
@@ -1317,7 +1282,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64898</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

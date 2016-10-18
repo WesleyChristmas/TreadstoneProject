@@ -5,6 +5,12 @@ servicesapp.controller("ServiceDetailedController",function($scope,$http,$routeP
 
     $http.get("/Services/GetServiceFull?serviceId=" + $routeParams.id).success(function(response){
         $scope.Service = new Service(response);
+
+        $scope.BackgroundStyle = {
+            "background-image" : "url(" + $scope.Service.Photo + ")",
+            "background-size" : "100% auto",
+            "background-position" : "center"
+        };
     });
 
     $scope.SendOrder = function(){

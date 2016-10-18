@@ -45,14 +45,15 @@ iframe{
 }
 
 .video-ctn{
-    height:300px;
     overflow:hidden;
 }
 
 .video-ctn img{
     width:100%;
-    min-width:400px;
-    height:100%;
+    min-width:150px;
+    min-height:150px;
+    z-index:1;
+    transition:transform 0.5s ease;
 }
 
 .video-info{
@@ -67,6 +68,7 @@ iframe{
     font-size:20px;
     text-align:center;
     cursor:pointer;
+    z-index:10;
 
     transition: 0.5s ease background-color, 0.5s ease color;
 }
@@ -84,6 +86,11 @@ iframe{
     display:block;
 }
 
+.video-info:hover + .video-ctn img{
+    z-index:1;
+    transform:scale(1.05,1.05);
+}
+
 .video-info .video-play{
     position:absolute;
     top:50%;
@@ -94,8 +101,8 @@ iframe{
 }
 
 .video-info .video-play img{
-    width:100px;
-    height:100px;
+    width:20%;
+    height:20%;
 }
 
 .video-info .video-title{
