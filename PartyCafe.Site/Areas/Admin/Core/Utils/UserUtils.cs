@@ -28,9 +28,18 @@ namespace PartyCafe.Site.Areas.Admin.Core.Utils
             if (string.IsNullOrWhiteSpace(model.Password) || string.IsNullOrWhiteSpace(model.ConfirmPassword)) return "Поля не должны быть пустыми!";
             if (model.Password != model.ConfirmPassword) return "Пароли не совпадают!";
 
-            var user = _userManager.FindByName(model.UserName);
-            _userManager.RemovePassword(user.UserId.ToString());
-            var error = _userManager.AddPassword(user.UserId.ToString(), model.Password);
+            IdentityResult error = null;
+            try
+            {
+                var user = _userManager.FindByName(model.UserName);
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(model.Password);
+                _userManager.Update(user);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
 
 
             return error.Succeeded ? "ok" : "bad";
