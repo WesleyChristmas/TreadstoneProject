@@ -11,7 +11,7 @@ usrApp.controller("UsersNewController", function($scope,$http,$location){
     $scope.SaveChanges = function(){
         if($scope.UserForm.$valid){
 
-            if($scope.User.Pass != $scope.Users.RepeatPass){
+            if($scope.User.Pass != $scope.User.RepeatPass){
                 $scope.Errors = 'Пароли не совпадают!';
             }
 
