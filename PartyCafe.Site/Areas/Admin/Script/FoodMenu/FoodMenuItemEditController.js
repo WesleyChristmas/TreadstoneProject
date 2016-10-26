@@ -9,7 +9,7 @@ foodmenuApp.controller("FoodMenuItemEditController",function($scope,$http,$locat
     });
 
     $scope.Back = function(){
-        $location.path('/MenuItems/' + $routeParams.menuId + '/'+ $routeParams.subMenuId);
+        $location.path('/MenuItems/' + $routeParams.menuId);
     }
 
     $scope.SaveChanges = function(){
@@ -18,10 +18,10 @@ foodmenuApp.controller("FoodMenuItemEditController",function($scope,$http,$locat
             var fd = new FormData();
             fd.append('idrecord',$scope.MenuItem.idRecord);
             fd.append('name', $scope.MenuItem.name);
-            fd.append('des', $scope.MenuItem.description);
+            fd.append('des', $scope.MenuItem.description == null ? "" : $scope.MenuItem.description);
             fd.append('weipla', $scope.MenuItem.Weight);
             fd.append('price',$scope.MenuItem.price);
-            fd.append('groupid', $routeParams.subMenuId)
+            fd.append('menuId', $routeParams.menuId)
             fd.append('file', document.getElementsByName('menuitemPhoto')[0].files[0]);
 
             $http.post('FoodMenu/EditItem', fd, {

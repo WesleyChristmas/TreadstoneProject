@@ -15,27 +15,15 @@ foodmenuApp.config(function($routeProvider){
         templateUrl: 'FoodMenu/MenuNew',
         controller : 'FoodMenuNewController'
     })
-    .when('/SubMenu/:menuId',{
-        templateUrl: 'FoodMenu/MenuSubList',
-        controller: 'FoodMenuSubListController'
-    })
-    .when('/SubMenuEdit/:menuId/:subMenuId',{
-        templateUrl: 'FoodMenu/MenuEdit',
-        controller: 'FoodMenuSubEditController'
-    })
-    .when('/SubMenuNew/:menuId',{
-        templateUrl: 'FoodMenu/MenuNew',
-        controller : 'FoodMenuSubNewController'
-    })
-    .when('/MenuItems/:menuId/:subMenuId',{
+    .when('/MenuItems/:menuId/',{
         templateUrl: 'FoodMenu/MenuItems',
         controller: 'FoodMenuItemsController'
     })
-    .when('/MenuItemEdit/:menuId/:subMenuId/:itemId',{
+    .when('/MenuItemEdit/:menuId/:itemId',{
         templateUrl: 'FoodMenu/MenuItemEdit',
         controller: 'FoodMenuItemEditController'
     })
-    .when('/MenuItemNew/:menuId/:subMenuId',{
+    .when('/MenuItemNew/:menuId',{
         templateUrl: 'FoodMenu/MenuItemNew',
         controller: 'FoodMenuItemNewController'
     })

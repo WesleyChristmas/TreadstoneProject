@@ -16,12 +16,10 @@ foodmenuapp.controller("FoodMenuCt", function ($scope, $http) {
         if(response.length < 1) return;
 
         $scope.Menu = response;
-        $scope.SubMenu = $scope.Menu[0].subGroups;
-        $scope.CurrentItems = $scope.Menu[0].subGroups[0].items;
+        $scope.CurrentItems = $scope.Menu[0].items;
     });
 
     $scope.GetFoodItems = function(element){
-        if(element.sub == null) return;
-        $scope.CurrentItems = element.sub.items;
+        $scope.CurrentItems = element.item.items;
     }
 });

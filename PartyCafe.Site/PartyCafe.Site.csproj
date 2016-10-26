@@ -257,9 +257,6 @@
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuItemsController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuListController.js" />
     <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuNewController.js" />
-    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuSubEditController.js" />
-    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuSubListController.js" />
-    <Content Include="Areas\Admin\Script\FoodMenu\FoodMenuSubNewController.js" />
     <Content Include="Areas\Admin\Script\GalleryController.js" />
     <Content Include="Areas\Admin\Script\Services\ServicesController.js" />
     <Content Include="Areas\Admin\Script\Services\ServicesEditController.js" />
@@ -411,7 +408,6 @@
     <Content Include="Areas\Admin\Views\AboutUs\AboutNew.cshtml" />
     <Content Include="Areas\Admin\Views\Services\ServicesList.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuList.cshtml" />
-    <Content Include="Areas\Admin\Views\FoodMenu\MenuSubList.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItems.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItemEdit.cshtml" />
     <Content Include="Areas\Admin\Views\FoodMenu\MenuItemNew.cshtml" />

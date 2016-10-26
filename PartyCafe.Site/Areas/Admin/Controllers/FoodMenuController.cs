@@ -21,11 +21,6 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
             return View("MenuList");
         }
 
-        [HttpGet]
-        public ActionResult MenuSubList()
-        {
-            return View("MenuSubList");
-        }
 
         [HttpGet]
         public ActionResult MenuItems()
@@ -116,16 +111,10 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetMenuItems(int sublistId)
+        public JsonResult GetMenuItems(int menuId)
         {
             var result =
-                MenuUtils.GetAll()
-                    .SelectMany(x => x.subGroups.Where(k => k.idRecord == sublistId))
-                    .Select(x => new 
-                    {
-                        x.name,
-                        x.items
-                    }).FirstOrDefault();
+                MenuUtils.GetAll().FirstOrDefault(x => x.idRecord == menuId);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -133,10 +122,7 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         public JsonResult GetMenuItem(int itemId)
         {
             var result =
-                MenuUtils.GetAll()
-                    .SelectMany(x => x.subGroups.Where(k => k.items.Any(z => z.idRecord == itemId)))
-                    .SelectMany(x => x.items)
-                    .FirstOrDefault(x => x.idRecord == itemId);
+                MenuUtils.GetAll().SelectMany(x => x.items).FirstOrDefault(x => x.idRecord == itemId);
                     
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -199,14 +185,14 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public string AddItem(string name, int groupid, string des, string weipla, float price)
+        public string AddItem(string name, int menuId, string des, string weipla, float price)
         {
             try
             {
                 MenuUtils.InsertItem(
-                        new PCMenuItem()
+                        new PCMenuItem
                         {
-                            IdGroup = groupid,
+                            IdGroup = menuId,
                             Name = name,
                             Description = des,
                             Weight = weipla,
@@ -224,15 +210,17 @@ namespace PartyCafe.Site.Areas.Admin.Controllers
                 return "Произошла ошибка! " + ex.Message;
             }
         }
+
+        //string name, int menuId, string des, string weipla, float price, int idrecord
         [HttpPost]
-        public string EditItem(string name, int groupid, string des, string weipla, float price, int idrecord)
+        public string EditItem(int menuId,string name,string des, string weipla,float price,int idrecord)
         {
             try
             {
                 MenuUtils.EditItem(
-                        new PCMenuItem()
+                        new PCMenuItem
                         {
-                            IdGroup = groupid,
+                            IdGroup = menuId,
                             IdRecord = idrecord,
                             Name = name,
                             Description = des,

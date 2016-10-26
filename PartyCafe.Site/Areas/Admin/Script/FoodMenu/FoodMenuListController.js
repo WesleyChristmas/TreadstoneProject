@@ -8,7 +8,7 @@ foodmenuApp.controller("FoodMenuListController",function($scope,$http,$location)
     });
 
     $scope.Select = function(index){
-        $location.path('/SubMenu/' + $scope.Menu[index].idRecord);
+        $location.path('/MenuItems/' + $scope.Menu[index].idRecord);
     }
 
     $scope.Edit = function(index){
